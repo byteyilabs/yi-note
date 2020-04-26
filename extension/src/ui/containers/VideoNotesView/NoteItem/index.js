@@ -19,7 +19,7 @@ import { usePlayer } from '../../../hooks'
 import { secondsToTime } from '../../../utils'
 
 const NoteItem = ({ id, content, timestamp }) => {
-  const { t } = useTranslation('notes-view')
+  const { t } = useTranslation('notesView')
   const {
     videoNotes: { edit, removeNote },
     alerts: { showAlerts }
@@ -37,7 +37,7 @@ const NoteItem = ({ id, content, timestamp }) => {
 
   const handleDelete = () =>
     showAlerts({
-      content: t('note.remove.alert-content'),
+      content: t('note.remove.alertContent'),
       onConfirm: removeNote.bind(null, id)
     })
 

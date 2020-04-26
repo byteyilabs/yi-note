@@ -18,11 +18,10 @@ const convertToI18n = resource => {
   const res = {}
   for (const key in resource) {
     const value = resource[key].message
-    const parts = key.split(':')
+    const parts = key.split('_')
     convert(parts, res, value)
   }
 
-  console.log(res)
   return res
 }
 

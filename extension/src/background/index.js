@@ -2,7 +2,7 @@ import { getVersion } from './utils'
 
 browser.browserAction.onClicked.addListener(tab => {
   browser.tabs.sendMessage(tab.id, { action: 'togglePanel', version: getVersion() })
-    .catch(() => window.alert(browser.i18n.getMessage('failed_to_connect')))
+    .catch(() => window.alert(browser.i18n.getMessage('failedToConnect')))
 })
 
 browser.runtime.onInstalled.addListener(({ reason }) => {

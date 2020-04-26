@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 })
 
 const SearchView = () => {
-  const { t } = useTranslation('search-view')
+  const { t } = useTranslation('searchView')
   const classes = useStyles()
   const { query, type, results, bookmarks, notes } = useStoreState(
     state => state.search

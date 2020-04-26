@@ -14,7 +14,7 @@ const StyledStatus = styled.span`
 `
 
 const Editor = () => {
-  const { t } = useTranslation('notes-view')
+  const { t } = useTranslation('notesView')
   const {
     editor: { active, note }
   } = useStoreState(state => state.videoNotes)
@@ -45,7 +45,7 @@ const Editor = () => {
       saveNote({ ...note, type: TYPE_VIDEO_NOTE })
     } else {
       showAlerts({
-        content: t('remove-note.alert-content'),
+        content: t('note.remove.alertContent'),
         onConfirm: removeNote.bind(null, note.id)
       })
     }
@@ -74,9 +74,9 @@ const Editor = () => {
             <Grid container spacing={1}>
               <Grid item>
                 {note.id ? (
-                  <StyledStatus>{t('editor.status-existing')}</StyledStatus>
+                  <StyledStatus>{t('editor.statusExisting')}</StyledStatus>
                 ) : (
-                  <StyledStatus>{t('editor.status-new')}</StyledStatus>
+                  <StyledStatus>{t('editor.statusNew')}</StyledStatus>
                 )}
               </Grid>
               <Grid item>{secondsToTime(note.timestamp)}</Grid>
@@ -85,10 +85,10 @@ const Editor = () => {
           <Grid item xs={6}>
             <Grid container justify="flex-end" spacing={1}>
               <Grid item>
-                <TextButton onClick={reset}>{t('editor.cancel-button')}</TextButton>
+                <TextButton onClick={reset}>{t('editor.cancelButton')}</TextButton>
               </Grid>
               <Grid item>
-                <TextButton onClick={handleSave}>{t('editor.save-button')}</TextButton>
+                <TextButton onClick={handleSave}>{t('editor.saveButton')}</TextButton>
               </Grid>
             </Grid>
           </Grid>

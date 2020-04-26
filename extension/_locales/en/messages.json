@@ -1,72 +1,72 @@
 {
-  "failed_to_connect": {
+  "failedToConnect": {
     "message": "Extension might be updated or reloaded, please refresh current page.",
     "description": "Show in alert when extension disconnected with page"
   },
-  "alerts:primary-button": {
+  "alerts_primaryButton": {
     "message": "Confirm"
   },
-  "alerts:secondary-button": {
+  "alerts_secondaryButton": {
     "message": "Cancel"
   },
-  "search:placeholder": {
+  "search_placeholder": {
     "message": "Search..."
   },
-  "notes-view:title": {
+  "notesView_title": {
     "message": "Notes"
   },
-  "notes-view:bookmark:remove:alert-content": {
+  "notesView_bookmark_remove_alertContent": {
     "message": "Delete the bookmark will also delete all notes in current page. Please confirm to proceed."
   },
-  "notes-view:bookmark:remove:tooltip": {
+  "notesView_bookmark_remove_tooltip": {
     "message": "Remove bookmark"
   },
-  "notes-view:bookmark:add:tooltip": {
+  "notesView_bookmark_add_tooltip": {
     "message": "Bookmark the page"
   },
-  "notes-view:editor:placeholder": {
+  "notesView_editor_placeholder": {
     "message": "Please type the note here..."
   },
-  "notes-view:editor:save-button": {
+  "notesView_editor_saveButton": {
     "message": "Save"
   },
-  "notes-view:editor:cancel-button": {
+  "notesView_editor_cancelButton": {
     "message": "Cancel"
   },
-  "notes-view:editor:status-existing": {
+  "notesView_editor_statusExisting": {
     "message": "EXISTING"
   },
-  "notes-view:editor:status-new": {
+  "notesView_editor_statusNew": {
     "message": "NEW"
   },
-  "notes-view:note:play:tooltip": {
+  "notesView_note_play_tooltip": {
     "message": "Play video at {{formattedTime}}"
   },
-  "notes-view:note:expand:tooltip": {
+  "notesView_note_expand_tooltip": {
     "message": "Expand Note"
   },
-  "notes-view:note:collapse:tooltip": {
+  "notesView_note_collapse_tooltip": {
     "message": "Collapse Note"
   },
-  "notes-view:note:edit:tooltip": {
+  "notesView_note_edit_tooltip": {
     "message": "Edit Note"
   },
-  "notes-view:note:remove:tooltip": {
+  "notesView_note_remove_tooltip": {
     "message": "Remove Note"
   },
-  "notes-view:note:remove:alert-content": {
+  "notesView_note_remove_alertContent": {
     "message": "Please confirm to remove the note."
   },
-  "search-view:tab:bookmarks": {
+  "searchView_tab_bookmarks": {
     "message": "Bookmarks"
   },
-  "search-view:tab:notes": {
+  "searchView_tab_notes": {
     "message": "Notes"
   },
-  "footer:version": {
+  "footer_version": {
     "message": "Version: {{version}}"
   },
-  "footer:github:tooltip": {
+  "footer_github_tooltip": {
     "message": "Visit GitHub repository"
   }
 }

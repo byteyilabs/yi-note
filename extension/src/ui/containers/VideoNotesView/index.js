@@ -14,7 +14,7 @@ export const StyledTitle = styled.div`
 `
 
 const NotesView = () => {
-  const { t } = useTranslation('notes-view')
+  const { t } = useTranslation('notesView')
   const {
     page: { id, notes }
   } = useStoreState(state => state.videoNotes)
@@ -25,7 +25,7 @@ const NotesView = () => {
 
   const handleRemovePage = () => {
     showAlerts({
-      content: t('bookmark.remove.alert-content'),
+      content: t('bookmark.remove.alertContent'),
       onConfirm: removePage.bind(null, id)
     })
   }
