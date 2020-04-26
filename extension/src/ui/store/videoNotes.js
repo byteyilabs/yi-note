@@ -50,7 +50,7 @@ const videoNotesModel = {
   bookmarkPage: thunk(async (actions, _, { getStoreState }) => {
     const { url } = getStoreState().app
     const id = generatePageId(url)
-    const page = await storage.addPage({ id, meta: getMetadata(document, url) })
+    const page = await storage.addPage({ id, meta: getMetadata(document, url), notes: [] })
     actions.setPage(page)
   }),
   removePage: thunk(async (actions, pageId) => {

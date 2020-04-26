@@ -19,10 +19,16 @@ const Editor = () => {
     editor: { active, note }
   } = useStoreState(state => state.videoNotes)
   const {
-    editor: { setNote, reset },
-    edit,
-    saveNote
-  } = useStoreActions(actions => actions.videoNotes)
+    videoNotes: {
+      editor: { setNote, reset },
+      edit,
+      saveNote,
+      removeNote
+    },
+    alerts: {
+      showAlerts
+    }
+  } = useStoreActions(actions => actions)
   const playerRef = usePlayer()
 
   const handleFocus = async () => {
@@ -34,7 +40,16 @@ const Editor = () => {
     edit(timestamp)
   }
 
-  const handleSave = () => saveNote({ ...note, type: TYPE_VIDEO_NOTE })
+  const handleSave = () => {
+    if (note.content) {
+      saveNote({ ...note, type: TYPE_VIDEO_NOTE })
+    } else {
+      showAlerts({
+        content: t('removeNoteAlertContent'),
+        onConfirm: removeNote.bind(null, note.id)
+      })
+    }
+  }
 
   const handleChange = e => {
     const { value } = e.target

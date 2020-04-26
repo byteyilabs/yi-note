@@ -1,4 +1,4 @@
-import { action, thunk } from 'easy-peasy'
+import { action, thunk, actionOn } from 'easy-peasy'
 import { StorageFactory } from '../services/storage'
 import { TYPE_BOOKMARKS, TYPE_NOTES } from '../../constants'
 
@@ -9,6 +9,25 @@ const searchModel = {
   setQuery: action((state, query) => {
     state.query = query
   }),
+  onSetQuery: actionOn(
+    actions => actions.setQuery,
+    state => {
+      const { query, type, bookmarks, notes } = state
+      if (!query) {
+        switch (type) {
+          case TYPE_BOOKMARKS:
+            state.results = [...bookmarks]
+            break
+          case TYPE_NOTES:
+            state.results = [...notes]
+            break
+          default:
+            state.results = []
+            break
+        }
+      }
+    }
+  ),
   type: TYPE_BOOKMARKS,
   setType: action((state, type) => {
     state.type = type
