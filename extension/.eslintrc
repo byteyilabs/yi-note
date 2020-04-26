@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "eslint:recommended", 
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react-hooks",
+    "prettier"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "prettier/prettier": "error",
+    "no-extra-semi": "off"
+  },
+  "globals": {
+    "browser": "readonly",
+    "window": "readonly",
+    "document": "readonly",
+    "logger": "readonly",
+    "Promise": "readonly"
+  }
+}

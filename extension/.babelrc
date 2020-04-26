@@ -1,0 +1,15 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [
+    "js-logger",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-private-methods",
+    "@babel/plugin-transform-runtime",
+    [
+
+      "@quickbaseoss/babel-plugin-styled-components-css-namespace",
+      { "cssNamespace": "#yi-note" }
+    ],
+    "styled-components"
+  ]
+}

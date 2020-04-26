@@ -1,0 +1,51 @@
+{
+  "name": "YiNote",
+  "version": "1.0.0",
+  "description": "Most efficient way to take & share time-stamped notes while watching videos!",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-16.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "file://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "dist/browser-polyfill.js",
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "dist/browser-polyfill.js",
+        "dist/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": []
+  },
+  "web_accessible_resources": [
+    "dist/inject.js",
+    "installed.png"
+  ]
+}
