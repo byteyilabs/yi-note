@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -22,6 +22,8 @@ const Editor = ({
   onSave,
   ...rest
 }) => {
+  const textareaRef = useRef(null)
+
   const onKeyDownHandler = e => {
     if (
       e.nativeEvent.keyCode == 13 &&
@@ -32,12 +34,14 @@ const Editor = ({
     } else if (e.nativeEvent.keyCode == 13) {
       // ENTER for save
       e.preventDefault()
+      textareaRef.current.blur()
       onSave()
     }
   }
 
   return (
     <StyledTextarea
+      ref={textareaRef}
       disabled={disabled}
       placeholder={placeholder}
       value={content}

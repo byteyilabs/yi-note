@@ -41,13 +41,18 @@ const Editor = () => {
   }
 
   const handleSave = () => {
-    if (note.content) {
+    const { id, content } = note
+    if (content.trim()) {
+      // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE })
-    } else {
+    } else if (id) {
+      // Delete note
       showAlerts({
         content: t('note.remove.alertContent'),
         onConfirm: removeNote.bind(null, note.id)
       })
+    } else {
+      reset()
     }
   }
 

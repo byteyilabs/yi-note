@@ -34,6 +34,7 @@ export const StyledNote = styled.div`
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-all;
+  white-space: pre;
   max-height: 60px;
   overflow-y: scroll;
 `
