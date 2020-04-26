@@ -1,14 +1,8 @@
-import i18n from 'i18next'
-import { init as initTranslation } from '../i18n'
 import { getVersion } from './utils'
-
-initTranslation()
 
 browser.browserAction.onClicked.addListener(tab => {
   browser.tabs.sendMessage(tab.id, { action: 'togglePanel', version: getVersion() })
-    .catch(({ message }) => {
-      window.alert(i18n.t('failedToConnect'))
-    })
+    .catch(() => window.alert(browser.i18n.getMessage('failed_to_connect')))
 })
 
 browser.runtime.onInstalled.addListener(({ reason }) => {

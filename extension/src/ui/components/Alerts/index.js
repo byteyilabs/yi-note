@@ -51,7 +51,7 @@ const Alerts = () => {
           color="primary"
           classes={{ label: classes.buttonLabel }}
         >
-          {t('secondaryButton')}
+          {t('secondary-button')}
         </Button>
         <Button
           onClick={handleConfirm}
@@ -59,7 +59,7 @@ const Alerts = () => {
           classes={{ label: classes.buttonLabel }}
           autoFocus
         >
-          {t('primaryButton')}
+          {t('primary-button')}
         </Button>
       </DialogActions>
     </Dialog>

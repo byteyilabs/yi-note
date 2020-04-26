@@ -19,7 +19,7 @@ import { usePlayer } from '../../../hooks'
 import { secondsToTime } from '../../../utils'
 
 const NoteItem = ({ id, content, timestamp }) => {
-  const { t } = useTranslation('noteItem')
+  const { t } = useTranslation('notes-view')
   const {
     videoNotes: { edit, removeNote },
     alerts: { showAlerts }
@@ -37,7 +37,7 @@ const NoteItem = ({ id, content, timestamp }) => {
 
   const handleDelete = () =>
     showAlerts({
-      content: t('removeNoteAlertContent'),
+      content: t('note.remove.alert-content'),
       onConfirm: removeNote.bind(null, id)
     })
 
@@ -55,7 +55,7 @@ const NoteItem = ({ id, content, timestamp }) => {
           <Grid container direction="row" alignItems="center">
             <IconButton
               color="red"
-              tooltip={t('playButtonTooltip', { formattedTime })}
+              tooltip={t('note.play.tooltip', { formattedTime })}
               onClick={handlePlay}
             >
               <PlayIcon />
@@ -67,7 +67,7 @@ const NoteItem = ({ id, content, timestamp }) => {
           <Grid container direction="row" alignItems="center">
             {!expanded && <StyledTimestamp>{formattedTime}</StyledTimestamp>}
             <IconButton
-              tooltip={expanded ? t('collapseTooltip') : t('expandTooltip')}
+              tooltip={expanded ? t('note.collapse.tooltip') : t('note.expand.tooltip')}
               onClick={handleExpand}
             >
               <StyledExpandMoreIcon
@@ -90,14 +90,14 @@ const NoteItem = ({ id, content, timestamp }) => {
               <Grid container direction="row">
                 <IconButton
                   size="small"
-                  tooltip={t('editTooltip')}
+                  tooltip={t('note.edit.tooltip')}
                   onClick={handleEdit}
                 >
                   <EditIcon />
                 </IconButton>
                 <IconButton
                   size="small"
-                  tooltip={t('removeTooltip')}
+                  tooltip={t('note.remove.tooltip')}
                   onClick={handleDelete}
                 >
                   <DeleteIcon />

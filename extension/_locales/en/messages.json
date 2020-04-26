@@ -1,0 +1,72 @@
+{
+  "failed_to_connect": {
+    "message": "Extension might be updated or reloaded, please refresh current page.",
+    "description": "Show in alert when extension disconnected with page"
+  },
+  "alerts:primary-button": {
+    "message": "Confirm"
+  },
+  "alerts:secondary-button": {
+    "message": "Cancel"
+  },
+  "search:placeholder": {
+    "message": "Search..."
+  },
+  "notes-view:title": {
+    "message": "Notes"
+  },
+  "notes-view:bookmark:remove:alert-content": {
+    "message": "Delete the bookmark will also delete all notes in current page. Please confirm to proceed."
+  },
+  "notes-view:bookmark:remove:tooltip": {
+    "message": "Remove bookmark"
+  },
+  "notes-view:bookmark:add:tooltip": {
+    "message": "Bookmark the page"
+  },
+  "notes-view:editor:placeholder": {
+    "message": "Please type the note here..."
+  },
+  "notes-view:editor:save-button": {
+    "message": "Save"
+  },
+  "notes-view:editor:cancel-button": {
+    "message": "Cancel"
+  },
+  "notes-view:editor:status-existing": {
+    "message": "EXISTING"
+  },
+  "notes-view:editor:status-new": {
+    "message": "NEW"
+  },
+  "notes-view:note:play:tooltip": {
+    "message": "Play video at {{formattedTime}}"
+  },
+  "notes-view:note:expand:tooltip": {
+    "message": "Expand Note"
+  },
+  "notes-view:note:collapse:tooltip": {
+    "message": "Collapse Note"
+  },
+  "notes-view:note:edit:tooltip": {
+    "message": "Edit Note"
+  },
+  "notes-view:note:remove:tooltip": {
+    "message": "Remove Note"
+  },
+  "notes-view:note:remove:alert-content": {
+    "message": "Please confirm to remove the note."
+  },
+  "search-view:tab:bookmarks": {
+    "message": "Bookmarks"
+  },
+  "search-view:tab:notes": {
+    "message": "Notes"
+  },
+  "footer:version": {
+    "message": "Version: {{version}}"
+  },
+  "footer:github:tooltip": {
+    "message": "Visit GitHub repository"
+  }
+}

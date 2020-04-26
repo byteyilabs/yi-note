@@ -11,7 +11,7 @@ import Logger from 'js-logger'
 import { storeModel } from './store'
 import App from './containers/App'
 import GlobalStyle from './globalStyle'
-import i18n from '../i18n'
+import i18n from './i18n'
 
 export default class YiNote {
   #id = 'yi-note'

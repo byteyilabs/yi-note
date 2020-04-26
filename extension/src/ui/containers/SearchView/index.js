@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 })
 
 const SearchView = () => {
-  const { t } = useTranslation('searchView')
+  const { t } = useTranslation('search-view')
   const classes = useStyles()
   const { query, type, results, bookmarks, notes } = useStoreState(
     state => state.search
@@ -64,12 +64,12 @@ const SearchView = () => {
       <Tabs value={type} onChange={handleTypeChange} variant="fullWidth">
         <Tab
           classes={{ root: classes.tabRoot }}
-          label={t('bookmarksTab')}
+          label={t('tab.bookmarks')}
           value={TYPE_BOOKMARKS}
         />
         <Tab
           classes={{ root: classes.tabRoot }}
-          label={t('notesTab')}
+          label={t('tab.notes')}
           value={TYPE_NOTES}
         />
       </Tabs>

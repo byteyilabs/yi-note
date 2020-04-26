@@ -29,7 +29,7 @@ const Footer = () => {
     >
       <Grid item>{t('version', { version })}</Grid>
       <Grid item>
-        <IconButton tooltip={t('githubTooltip')} onClick={openGithubRepo}>
+        <IconButton tooltip={t('github.tooltip')} onClick={openGithubRepo}>
           <GitHubIcon />
         </IconButton>
       </Grid>

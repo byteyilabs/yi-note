@@ -14,7 +14,7 @@ export const StyledTitle = styled.div`
 `
 
 const NotesView = () => {
-  const { t } = useTranslation('notesView')
+  const { t } = useTranslation('notes-view')
   const {
     page: { id, notes }
   } = useStoreState(state => state.videoNotes)
@@ -25,7 +25,7 @@ const NotesView = () => {
 
   const handleRemovePage = () => {
     showAlerts({
-      content: t('removeBookmarkAlertContent'),
+      content: t('bookmark.remove.alert-content'),
       onConfirm: removePage.bind(null, id)
     })
   }
@@ -41,13 +41,13 @@ const NotesView = () => {
       <Editor />
       <Grid container direction="row" justify="space-between">
         <Grid item>
-          <StyledTitle>{t('listTitle')}</StyledTitle>
+          <StyledTitle>{t('title')}</StyledTitle>
         </Grid>
         <Grid item>
           <Grid container direction="row" alignItems="center">
             {!id ? (
               <IconButton
-                tooltip={t('addBookmarkTooltip')}
+                tooltip={t('bookmark.add.tooltip')}
                 onClick={bookmarkPage}
               >
                 <BookmarkIcon />
@@ -55,7 +55,7 @@ const NotesView = () => {
             ) : (
               <IconButton
                 color="red"
-                tooltip={t('removeBookmarkTooltip')}
+                tooltip={t('bookmark.remove.tooltip')}
                 onClick={handleRemovePage}
               >
                 <BookmarkIcon />
