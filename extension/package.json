@@ -62,7 +62,6 @@
     "react-router-dom": "^5.1.2",
     "redux-actions": "^2.6.5",
     "styled-components": "^5.0.0-rc.2",
-    "styled-icons": "^9.0.1",
     "throttle-debounce": "^2.1.0",
     "uuidv4": "^6.0.0",
     "webextension-polyfill": "^0.6.0",

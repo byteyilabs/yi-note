@@ -3,7 +3,7 @@ import { useStoreState } from 'easy-peasy'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import Grid from '@material-ui/core/Grid'
-import { Github as GithubIcon } from 'styled-icons/boxicons-logos/Github'
+import GitHubIcon from '@material-ui/icons/GitHub'
 import IconButton from '../../../components/IconButton'
 import { GITHUB_URL } from '../../../../constants'
 
@@ -30,7 +30,7 @@ const Footer = () => {
       <Grid item>{t('version', { version })}</Grid>
       <Grid item>
         <IconButton tooltip={t('githubTooltip')} onClick={openGithubRepo}>
-          <GithubIcon />
+          <GitHubIcon />
         </IconButton>
       </Grid>
     </StyledContainer>

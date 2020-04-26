@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
@@ -10,7 +10,6 @@ import {
 import HTML5Video from './components/HTML5Video'
 import YoutubIframeVideo from './components/YoutubeIframe'
 import YiNote from '../src/ui'
-import { Html5 } from 'styled-icons/boxicons-logos';
 
 const yiNote = new YiNote()
 

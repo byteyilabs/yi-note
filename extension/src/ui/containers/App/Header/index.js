@@ -1,8 +1,8 @@
 import React from 'react'
 import { useStoreActions } from 'easy-peasy'
 import { useHistory, useLocation } from 'react-router-dom'
-import { KeyboardArrowRight } from 'styled-icons/material/KeyboardArrowRight'
-import { Close as CloseIcon } from 'styled-icons/material/Close'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import CloseIcon from '@material-ui/icons/Close'
 import Grid from '@material-ui/core/Grid'
 import { StyledContainer } from './styled'
 import Search from '../Search'
@@ -41,7 +41,7 @@ const Header = () => {
           </IconButton>
         ) : (
           <IconButton onClick={handleClose}>
-            <KeyboardArrowRight />
+            <ChevronRightIcon />
           </IconButton>
         )}
       </Grid>

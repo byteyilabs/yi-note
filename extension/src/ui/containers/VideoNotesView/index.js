@@ -3,8 +3,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import Grid from '@material-ui/core/Grid'
-import { BookmarkPlus as BookmarkPlusIcon } from 'styled-icons/boxicons-regular/BookmarkPlus'
-import { BookmarkMinus as BookmarkMinusIcon } from 'styled-icons/boxicons-regular/BookmarkMinus'
+import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import NoteItem from './NoteItem'
 import Editor from './Editor'
 import IconButton from '../../components/IconButton'
@@ -51,7 +50,7 @@ const NotesView = () => {
                 tooltip={t('addBookmarkTooltip')}
                 onClick={bookmarkPage}
               >
-                <BookmarkPlusIcon />
+                <BookmarkIcon />
               </IconButton>
             ) : (
               <IconButton
@@ -59,7 +58,7 @@ const NotesView = () => {
                 tooltip={t('removeBookmarkTooltip')}
                 onClick={handleRemovePage}
               >
-                <BookmarkMinusIcon />
+                <BookmarkIcon />
               </IconButton>
             )}
           </Grid>

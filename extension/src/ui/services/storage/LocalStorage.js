@@ -54,7 +54,7 @@ export default class LocalStorage extends Storage {
     return new Promise((resolve, reject) => {
       try {
         const page = JSON.parse(window.localStorage.getItem(pageId))
-        page.notes = addNoteToList(page.notes, note)
+        page.notes = addNoteToList(page.notes || [], note)
         window.localStorage.setItem(pageId, JSON.stringify(page))
         resolve(note)
       } catch (e) {

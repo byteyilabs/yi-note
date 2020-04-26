@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Grid from '@material-ui/core/Grid'
-import { KeyboardArrowRight as ExpandIcon } from 'styled-icons/material/KeyboardArrowRight'
+import ExpandIcon from '@material-ui/icons/ChevronRight'
 
 export const StyledMainRow = styled(Grid)`
   background: #f6f6f6;

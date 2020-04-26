@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { useStoreActions } from 'easy-peasy'
 import { useTranslation } from 'react-i18next'
 import Grid from '@material-ui/core/Grid'
-import { PlayCircle as PlayIcon } from 'styled-icons/feather/PlayCircle'
-import { Edit as EditIcon } from 'styled-icons/material/Edit'
-import { Delete as DeleteIcon } from 'styled-icons/material/Delete'
+import PlayIcon from '@material-ui/icons/PlayCircleOutlineOutlined'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 import {
   StyledMainRow,
   StyledSummary,

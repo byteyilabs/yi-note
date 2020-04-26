@@ -30,7 +30,8 @@ module.exports = env => {
     plugins: [
       new HtmlWebPackPlugin({
         template: './playground/index.html',
-        filename: './index.html'
+        filename: './index.html',
+        favicon: './playground/favicon.ico'
       }),
       new webpack.DefinePlugin(envKeys)
     ],
