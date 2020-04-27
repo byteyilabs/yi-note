@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
-import { StyledMainLine, StyledTimestamp, StyledPageInfo } from './styled'
-import { StyledImg, StyledArchor } from '../styled'
+import { StyledTimestamp, StyledPageInfo } from './styled'
+import { StyledImg, StyledArchor, StyledMainLine, StyledAdditionalInfo } from '../styled'
 import BaseItem from '../BaseItem'
 import { secondsToTime } from '../../../utils'
 
@@ -20,10 +20,10 @@ const NoteItem = ({
           </StyledMainLine>
         </Grid>
         <Grid item>
-          <StyledPageInfo>
+          <StyledAdditionalInfo>
             {icon && <StyledImg src={icon} alt="icon" />}
             <span>{title}</span>
-          </StyledPageInfo>
+          </StyledAdditionalInfo>
         </Grid>
       </Grid>
     </StyledArchor>

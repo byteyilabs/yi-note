@@ -3,6 +3,9 @@
     "message": "Extension might be updated or reloaded, please refresh current page.",
     "description": "Show in alert when extension disconnected with page"
   },
+  "reloadView_reload": {
+    "message": "Reload"
+  },
   "alerts_primaryButton": {
     "message": "Confirm"
   },

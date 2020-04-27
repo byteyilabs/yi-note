@@ -16,3 +16,12 @@ export const StyledImg = styled.img`
   height: 20px;
   margin-right: 4px;
 `
+
+export const StyledMainLine = styled.span`
+  font-size: 0.9em;
+`
+
+export const StyledAdditionalInfo = styled.span`
+  font-size: 0.8em;
+  color: grey;
+`
