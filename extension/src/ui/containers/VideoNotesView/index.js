@@ -8,6 +8,7 @@ import NoteItem from './NoteItem'
 import Editor from './Editor'
 import IconButton from '../../components/IconButton'
 import ScrollableList from '../../components/ScrollableList'
+import { generatePageId } from '../../utils'
 
 export const StyledTitle = styled.div`
   font-weight: 500;
@@ -16,8 +17,11 @@ export const StyledTitle = styled.div`
 const NotesView = () => {
   const { t } = useTranslation('notesView')
   const {
-    page: { id, notes }
-  } = useStoreState(state => state.videoNotes)
+    videoNotes: {
+      page: { id, notes }
+    },
+    app: { url }
+  } = useStoreState(state => state)
   const {
     videoNotes: { fetchPage, bookmarkPage, removePage },
     alerts: { showAlerts }
@@ -32,7 +36,8 @@ const NotesView = () => {
 
   useEffect(() => {
     if (!id) {
-      fetchPage()
+      const pageId = generatePageId(url)
+      fetchPage(pageId)
     }
   }, [id, fetchPage])
 

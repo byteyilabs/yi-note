@@ -15,6 +15,14 @@ const storeModel = {
       state.search.bookmarks = []
       state.search.notes = []
     }
+  ),
+  onSetUrl: actionOn(
+    actions => actions.app.setUrl,
+    state => {
+      state.videoNotes.page.id = ''
+      state.videoNotes.editor.active = false
+      state.videoNotes.editor.note = {}
+    }
   )
 }
 

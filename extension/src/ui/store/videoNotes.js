@@ -41,9 +41,7 @@ const videoNotesModel = {
   setPage: action((state, page) => {
     state.page = { ...page }
   }),
-  fetchPage: thunk(async (actions, _, { getStoreState }) => {
-    const { url } = getStoreState().app
-    const pageId = generatePageId(url)
+  fetchPage: thunk(async (actions, pageId) => {
     const page = (await storage.getPage(pageId)) || defaultPage
     actions.setPage({ ...defaultPage, ...page })
   }),

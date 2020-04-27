@@ -14,20 +14,15 @@ import { PlayerFactory } from '../../services/player'
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app)
-  const { 
-    app: { setUrl, setOpen, setVersion }, 
-    videoNotes: { fetchPage, editor: { reset: resetEditor } } 
-  } = useStoreActions(
-    actions => actions
+  const { setOpen, setUrl, setVersion } = useStoreActions(
+    actions => actions.app
   )
   const history = useHistory()
 
   useInterval(() => {
     if (url !== window.location.href) {
-      setUrl(window.location.href)
       PlayerFactory.reset()
-      fetchPage()
-      resetEditor()
+      setUrl(window.location.href)
     }
   }, 100)
 
