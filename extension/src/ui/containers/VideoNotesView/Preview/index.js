@@ -1,38 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useStoreState, useStoreActions } from 'easy-peasy'
-import styled from 'styled-components'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { useTranslation } from 'react-i18next'
+import jsPDF from 'jspdf'
+import { Grid, Backdrop, Fade, CircularProgress } from '@material-ui/core'
+import { StyledModal, StyledPaper } from './styled'
 import NoteItem from './NoteItem'
 import ScrollableList from '../../../components/ScrollableList'
+import TextButton from '../../../components/TextButton'
 import { usePlayer } from '../../../hooks'
-import { delay, takeScreenshot } from '../../../utils'
+import { delay, takeScreenshot, secondsToTime } from '../../../utils'
 import { APP_ID } from '../../../../constants'
 
-const StyledModal = styled(Modal)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const StyledPaper = styled.div`
-  background-color: ${props => props.theme.palette.background.paper};
-  border: 1px solid #000;
-  box-shadow: ${props => props.theme.shadows[2]};
-  padding: ${props => props.theme.spacing(2, 4, 3)};
-  min-width: 200px;
-  max-width: ${props => props.theme.breakpoints.width('md') - 100}px;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
 export default () => {
+  const { t } = useTranslation('notesView')
   const { 
-    page: { notes },
+    page: { id: pageId, notes, meta: { title } = {} },
     preview: { open }
   } = useStoreState(state => state.videoNotes)
   const { 
@@ -42,6 +24,7 @@ export default () => {
   const playerRef = usePlayer()
   const [loading, setLoading] = useState(false)
   const containerRef = useRef(null)
+  const previewContentRef = useRef(null)
 
   useEffect(() => {
     containerRef.current = document.getElementById(APP_ID)
@@ -83,6 +66,41 @@ export default () => {
     setOpen(false)
   }
 
+  const handleGeneratePDF = () => {
+    var doc = new jsPDF();
+    var y = 20;
+    doc.setFontSize(18);
+    doc.setFontType('bold');
+    doc.text(20, y, doc.splitTextToSize(title, 180));
+    y += 10;
+    doc.setFontType('normal');
+
+    doc.setFontSize(14);
+    doc.setFontType('bold');
+    doc.text(20, y, '-- Notes --');
+    y += 10;
+    doc.setFontType('normal');
+    doc.setFontSize(12);
+
+    for (const note of notes) {
+      const content = doc.splitTextToSize(note.content, 180);
+      if (y + 66 + 6 + 6 * content.length > 300) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.addImage(note.dataUri, 'PNG', 20, y, 100, 60, null, 'NONE');
+      y += 66;
+      doc.setTextColor(255, 255, 255);
+      doc.setTextColor(71, 99, 255);
+      doc.text(20, y, secondsToTime(note.timestamp));
+      doc.setTextColor(0, 0, 0);
+      y += 6;
+      doc.text(20, y, content);
+      y += 6 * content.length;
+    }
+    doc.save(`${APP_ID}_${pageId}.pdf`);
+  }
+
   return (
     <StyledModal
       container={containerRef.current}
@@ -96,20 +114,25 @@ export default () => {
     >
       <Fade in={open}>
         <StyledPaper>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <ScrollableList 
-            items={notes}
-            renderItem={({ content, timestamp, dataUri }) => (
-              <NoteItem 
-                content={content} 
-                timestamp={timestamp}
-                dataUri={dataUri}
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <Grid ref={previewContentRef} container direction="column" spacing={6}> 
+              <Grid item container justify="flex-end">
+                <TextButton onClick={handleGeneratePDF}>{t('preview.pdf.button')}</TextButton>
+              </Grid>
+              <ScrollableList 
+                items={notes}
+                renderItem={({ content, timestamp, dataUri }) => (
+                  <NoteItem 
+                    content={content} 
+                    timestamp={timestamp}
+                    dataUri={dataUri}
+                  />
+                )}
               />
-            )}
-          />    
-        )}
+            </Grid>    
+          )}
         </StyledPaper>
       </Fade>
     </StyledModal>

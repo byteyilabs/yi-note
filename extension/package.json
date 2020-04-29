@@ -54,6 +54,7 @@
     "i18next-browser-languagedetector": "^4.0.1",
     "js-logger": "^1.6.0",
     "js-video-url-parser": "^0.4.0",
+    "jspdf": "^1.5.3",
     "lodash.pick": "^4.4.0",
     "page-metadata-parser": "^1.1.4",
     "react": "^16.13.1",

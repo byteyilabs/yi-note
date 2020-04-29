@@ -60,6 +60,9 @@
   "notesView_note_remove_alertContent": {
     "message": "Please confirm to remove the note."
   },
+  "notesView_preview_pdf_button": {
+    "message": "Generate PDF"
+  },
   "searchView_tab_bookmarks": {
     "message": "Bookmarks"
   },
