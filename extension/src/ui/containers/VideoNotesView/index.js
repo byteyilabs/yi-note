@@ -63,12 +63,15 @@ const NotesView = () => {
         </Grid>
         <Grid item>
           <Grid container direction="row" alignItems="center">
+            {id && (
               <IconButton
                 tooltip={t('preview.tooltip')}
                 onClick={handleOpenPreview}
               >
                 <PreviewIcon />
               </IconButton>
+            )}
+              
             {!id ? (
               <IconButton
                 tooltip={t('bookmark.add.tooltip')}
