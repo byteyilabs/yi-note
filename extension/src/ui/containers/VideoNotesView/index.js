@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import Grid from '@material-ui/core/Grid'
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
+import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
+import Preview from './Preview'
 import NoteItem from './NoteItem'
 import Editor from './Editor'
 import IconButton from '../../components/IconButton'
@@ -23,9 +25,23 @@ const NotesView = () => {
     app: { url }
   } = useStoreState(state => state)
   const {
-    videoNotes: { fetchPage, bookmarkPage, removePage },
-    alerts: { showAlerts }
+    videoNotes: { 
+      fetchPage, 
+      bookmarkPage, 
+      removePage,
+      preview: {
+        setOpen: setPreviewOpen
+      }
+    },
+    alerts: { showAlerts },
   } = useStoreActions(actions => actions)
+
+  useEffect(() => {
+    if (!id) {
+      const pageId = generatePageId(url)
+      fetchPage(pageId)
+    }
+  }, [id, fetchPage])
 
   const handleRemovePage = () => {
     showAlerts({
@@ -34,12 +50,9 @@ const NotesView = () => {
     })
   }
 
-  useEffect(() => {
-    if (!id) {
-      const pageId = generatePageId(url)
-      fetchPage(pageId)
-    }
-  }, [id, fetchPage])
+  const handleOpenPreview = () => {
+    setPreviewOpen(true)
+  }
 
   return (
     <>
@@ -50,6 +63,12 @@ const NotesView = () => {
         </Grid>
         <Grid item>
           <Grid container direction="row" alignItems="center">
+              <IconButton
+                tooltip={t('preview.tooltip')}
+                onClick={handleOpenPreview}
+              >
+                <PreviewIcon />
+              </IconButton>
             {!id ? (
               <IconButton
                 tooltip={t('bookmark.add.tooltip')}
@@ -75,6 +94,7 @@ const NotesView = () => {
           <NoteItem id={id} content={content} timestamp={timestamp} />
         )}
       />
+      <Preview />
     </>
   )
 }

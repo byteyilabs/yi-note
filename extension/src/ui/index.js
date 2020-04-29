@@ -12,9 +12,9 @@ import { storeModel } from './store'
 import App from './containers/App'
 import GlobalStyle from './globalStyle'
 import i18n from './i18n'
+import { APP_ID } from '../constants'
 
 export default class YiNote {
-  #id = 'yi-note'
   #store
 
   constructor() {
@@ -29,7 +29,7 @@ export default class YiNote {
 
   render() {
     const container = document.createElement('div')
-    container.id = this.#id
+    container.id = APP_ID
     document.body.appendChild(container)
 
     ReactDOM.render(
@@ -44,7 +44,7 @@ export default class YiNote {
   }
 
   destroy() {
-    const yinoteEl = document.getElementById(this.#id)
+    const yinoteEl = document.getElementById(APP_ID)
     if (yinoteEl) {
       yinoteEl.parentNode.removeChild(yinoteEl)
     }

@@ -19,6 +19,10 @@ export default class HTML5Player extends Player {
     }
   }
 
+  getVideoElement() {
+    return this.video
+  }
+
   play() {
     this.video.play()
   }

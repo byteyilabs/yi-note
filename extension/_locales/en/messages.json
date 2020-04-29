@@ -71,5 +71,8 @@
   },
   "footer_github_tooltip": {
     "message": "Visit GitHub repository"
+  },
+  "preview_tooltip": {
+    "message": "Notes preview"
   }
 }

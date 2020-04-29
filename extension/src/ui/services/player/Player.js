@@ -1,6 +1,10 @@
 export default class Player {
   constructor(options) {}
 
+  getVideoElement() {
+    logger.warn('Method need to be implemented')
+  }
+
   play() {
     logger.warn('Method need to be implemented')
   }

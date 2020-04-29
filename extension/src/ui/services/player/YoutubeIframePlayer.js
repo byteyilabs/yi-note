@@ -45,6 +45,10 @@ export default class YoutubeIframePlayer extends Player {
     )
   }
 
+  getVideoElement() {
+    return this.#videoEl
+  }
+
   play() {
     sendMessage('play')
   }

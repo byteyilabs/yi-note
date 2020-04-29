@@ -32,6 +32,12 @@ const videoNotesModel = {
       state.note = {}
     })
   },
+  preview: {
+    open: false,
+    setOpen: action((state, payload) => {
+      state.open = payload
+    })
+  },
   edit: action((state, timestamp) => {
     const existingNote = state.page.notes.find(n => n.timestamp === timestamp)
     state.editor.active = true
@@ -39,7 +45,7 @@ const videoNotesModel = {
   }),
   page: { ...defaultPage },
   setPage: action((state, page) => {
-    state.page = { ...page }
+    state.page = { ...state.page, ...page }
   }),
   fetchPage: thunk(async (actions, pageId) => {
     const page = (await storage.getPage(pageId)) || defaultPage
