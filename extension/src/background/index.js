@@ -5,6 +5,14 @@ browser.browserAction.onClicked.addListener(tab => {
     .catch(() => window.alert(browser.i18n.getMessage('failedToConnect')))
 })
 
+chrome.runtime.onMessage.addListener(({ action }) => {
+  switch (action) {
+    case 'open-options':
+      browser.runtime.openOptionsPage()
+      return true
+  }
+})
+
 browser.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
     // TODO: handle install, maybe compare version

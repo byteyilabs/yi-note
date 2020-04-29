@@ -75,6 +75,9 @@
   "footer_github_tooltip": {
     "message": "Visit GitHub repository"
   },
+  "footer_management_tooltip": {
+    "message": "Open management page"
+  },
   "preview_tooltip": {
     "message": "Notes preview"
   }

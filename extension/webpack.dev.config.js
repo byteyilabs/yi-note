@@ -1,12 +1,17 @@
 /* eslint-disable */
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
     content: './src/content.js',
     background: './src/background/index.js',
-    inject: './src/inject/index.js'
+    inject: './src/inject/index.js',
+    options: {
+      import: './src/options/index.js',
+      filename: 'options/index.js'
+    }
   },
   module: {
     rules: [
@@ -30,6 +35,12 @@ module.exports = {
       {
         from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js'
       }
-    ])
+    ]),
+    new HtmlWebPackPlugin({
+      template: './src/options/index.html',
+      filename: './options/index.html',
+      browserPolyfill: '../browser-polyfill.js',
+      chunks: ['options']
+    })
   ]
 }
