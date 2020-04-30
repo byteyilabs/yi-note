@@ -7,7 +7,8 @@ import { generatePageId } from '../utils'
 const defaultNote = {
   id: '',
   content: '',
-  timestamp: 0
+  timestamp: 0,
+  image: ''
 }
 
 const defaultPage = {
@@ -38,10 +39,10 @@ const videoNotesModel = {
       state.open = payload
     })
   },
-  edit: action((state, timestamp) => {
-    const existingNote = state.page.notes.find(n => n.timestamp === timestamp)
+  edit: action((state, { timestamp, image }) => {
+    const existingNote = state.page.notes.find(n => n.timestamp === timestamp) || {}
     state.editor.active = true
-    state.editor.note = existingNote || { timestamp }
+    state.editor.note = { ...existingNote, timestamp, image }
   }),
   page: { ...defaultPage },
   setPage: action((state, page) => {

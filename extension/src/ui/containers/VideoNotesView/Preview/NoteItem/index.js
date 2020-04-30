@@ -5,7 +5,7 @@ import TextButton from '../../../../components/TextButton'
 import { usePlayer } from '../../../../hooks'
 import { secondsToTime } from '../../../../utils'
 
-export default ({ content, timestamp, dataUri }) => {
+export default ({ content, timestamp, image }) => {
   const playerRef = usePlayer()
   const { setOpen } = useStoreActions(actions => actions.videoNotes.preview)
 
@@ -20,7 +20,7 @@ export default ({ content, timestamp, dataUri }) => {
     <Grid container>
       <Grid item md={8} sm={12}>
         <Grid container>
-          {dataUri && <img src={dataUri} alt="Failed to take screenshot" /> }
+          {image && <img src={image} alt="Screenshot" /> }
         </Grid>
       </Grid>
       <Grid item md={4} sm={12}>
