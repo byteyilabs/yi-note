@@ -1,7 +1,7 @@
 import { action, thunk } from 'easy-peasy'
 import { getMetadata } from 'page-metadata-parser'
 import { uuid } from 'uuidv4'
-import { StorageFactory } from '../services/storage'
+import { StorageFactory } from '../../common/services/storage'
 import { generatePageId } from '../utils'
 
 const defaultNote = {

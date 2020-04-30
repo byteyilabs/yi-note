@@ -1,5 +1,5 @@
 import { action, thunk, actionOn } from 'easy-peasy'
-import { StorageFactory } from '../services/storage'
+import { StorageFactory } from '../../common/services/storage'
 import { TYPE_BOOKMARKS, TYPE_NOTES } from '../../constants'
 
 const storage = StorageFactory.getStorage()

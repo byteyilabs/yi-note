@@ -1,4 +1,4 @@
-import { sendMessage } from '../common'
+import { sendMessage } from '../common/utils'
 import { APP_ID } from '../constants'
 
 class YoutubeIframe {

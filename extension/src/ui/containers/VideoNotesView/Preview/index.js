@@ -8,7 +8,8 @@ import NoteItem from './NoteItem'
 import ScrollableList from '../../../components/ScrollableList'
 import TextButton from '../../../components/TextButton'
 import { usePlayer } from '../../../hooks'
-import { delay, takeScreenshot, secondsToTime } from '../../../utils'
+import { takeScreenshot, secondsToTime } from '../../../utils'
+import { delay } from '../../../../common/utils'
 import { APP_ID } from '../../../../constants'
 
 export default () => {

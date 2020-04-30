@@ -1,5 +1,3 @@
 export { default as generatePageId } from './generatePageId'
 export { default as secondsToTime } from './secondsToTime'
-export { default as addNoteToList } from './addNoteToList'
-export { default as delay } from './delay'
 export { default as takeScreenshot } from './takeScreenshot'

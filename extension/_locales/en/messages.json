@@ -80,5 +80,11 @@
   },
   "preview_tooltip": {
     "message": "Notes preview"
+  },
+  "options_bookmarks_title": {
+    "message": "Dashboard"
+  },
+  "options_page_title": {
+    "message": "Page Detail"
   }
 }

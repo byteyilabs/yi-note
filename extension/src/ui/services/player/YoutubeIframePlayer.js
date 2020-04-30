@@ -1,6 +1,6 @@
 import Player from './Player'
 import { injectScriptToDOM } from '../dom'
-import { sendMessage } from '../../../common'
+import { sendMessage } from '../../../common/utils'
 import { PAGE } from '../../../constants'
 
 export default class YoutubeIframePlayer extends Player {

@@ -1,13 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { HashRouter as Router } from 'react-router-dom'
+import { StoreProvider, createStore } from 'easy-peasy'
+import { storeModel } from './store'
+import App from './containers/App'
+import i18n from '../common/i18n'
+import GlobalStyle from '../common/globalStyle'
+import { APP_ID } from '../constants'
 
-const App = () => {
-  return (
-    <div>options page111</div>
-  )
-}
+i18n.init()
+const store = createStore(storeModel)
+
+const container = document.createElement('div')
+container.id = APP_ID
+document.body.appendChild(container)
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+  <StoreProvider store={store}>
+    <Router>
+      <GlobalStyle />
+      <App />
+    </Router>
+  </StoreProvider>,
+  container
 )

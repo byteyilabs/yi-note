@@ -10,8 +10,8 @@ import { StoreProvider, createStore } from 'easy-peasy'
 import Logger from 'js-logger'
 import { storeModel } from './store'
 import App from './containers/App'
-import GlobalStyle from './globalStyle'
-import i18n from './i18n'
+import GlobalStyle from '../common/globalStyle'
+import i18n from '../common/i18n'
 import { APP_ID } from '../constants'
 
 export default class YiNote {

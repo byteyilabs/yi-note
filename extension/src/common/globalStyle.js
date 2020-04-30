@@ -6,13 +6,6 @@ export default createGlobalStyle`
     all: unset;
   }
 
-  #${APP_ID} svg {
-    width: 100%;
-    height: 100%;
-    background: unset;
-    color: inherit;
-  }
-
   #${APP_ID} {
     font-size: 16px;
   }

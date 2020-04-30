@@ -1,6 +1,4 @@
-import { APP_ID, PAGE } from '../constants'
-
-export const retry = (
+export default (
   predicate,
   resolve,
   reject = () => {},
@@ -25,9 +23,3 @@ export const retry = (
     }
   }, interval)
 }
-
-export const sendMessage = (action, data, notFromExtension) =>
-  window.postMessage(
-    { action, from: notFromExtension ? PAGE : APP_ID, ...data },
-    '*'
-  )

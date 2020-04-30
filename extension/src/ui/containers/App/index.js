@@ -9,8 +9,8 @@ import VideoNotesView from '../VideoNotesView'
 import SearchView from '../SearchView'
 import ReloadView from '../ReloadView'
 import Alerts from '../../components/Alerts'
-import withTheme from './withTheme'
 import { PlayerFactory } from '../../services/player'
+import withTheme from '../../../common/withTheme'
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app)
