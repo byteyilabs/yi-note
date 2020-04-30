@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
-import { StyledTimestamp, StyledPageInfo } from './styled'
+import { StyledTimestamp } from './styled'
 import { StyledImg, StyledArchor, StyledMainLine, StyledAdditionalInfo } from '../styled'
 import BaseItem from '../BaseItem'
-import { secondsToTime } from '../../../utils'
+import { secondsToTime } from '../../../../common/utils'
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },

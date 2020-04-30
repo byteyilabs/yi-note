@@ -8,7 +8,8 @@ import NoteItem from './NoteItem'
 import ScrollableList from '../../../components/ScrollableList'
 import TextButton from '../../../components/TextButton'
 import { usePlayer } from '../../../hooks'
-import { takeScreenshot, secondsToTime } from '../../../utils'
+import { takeScreenshot } from '../../../utils'
+import { secondsToTime } from '../../../../common/utils'
 import { delay } from '../../../../common/utils'
 import { APP_ID } from '../../../../constants'
 
@@ -34,7 +35,7 @@ export default () => {
   useEffect(() => {
     const maybeLoadImages = async () => {
       const shouldLoadImages = notes.reduce((acc, note) => {
-        return !note.dataUri || acc
+        return !note.image || acc
       }, false)
       if (shouldLoadImages) {
         setLoading(true)
@@ -43,12 +44,12 @@ export default () => {
         const videoEl = player.getVideoElement()
         // Take screenshots
         for (const note of notes) {
-          if (note.dataUri) {
+          if (note.image) {
             continue
           }
           player.seek(note.timestamp)
           await delay(500)
-          note.dataUri = takeScreenshot(videoEl, 426, 240)
+          note.dataUri = takeScreenshot(videoEl)
         }
         // Resume back to start time and pause video
         player.seek(currentTime)
@@ -89,7 +90,7 @@ export default () => {
         doc.addPage();
         y = 20;
       }
-      doc.addImage(note.dataUri, 'PNG', 20, y, 100, 60, null, 'NONE');
+      doc.addImage(note.image, 'PNG', 20, y, 100, 60, null, 'NONE');
       y += 66;
       doc.setTextColor(255, 255, 255);
       doc.setTextColor(71, 99, 255);
@@ -115,7 +116,7 @@ export default () => {
     >
       <Fade in={open}>
         <StyledPaper>
-          {loading ? (
+        {loading ? (
             <CircularProgress />
           ) : (
             <Grid ref={previewContentRef} container direction="column" spacing={6}> 
@@ -124,11 +125,11 @@ export default () => {
               </Grid>
               <ScrollableList 
                 items={notes}
-                renderItem={({ content, timestamp, dataUri }) => (
+                renderItem={({ content, timestamp, image }) => (
                   <NoteItem 
                     content={content} 
                     timestamp={timestamp}
-                    dataUri={dataUri}
+                    image={image}
                   />
                 )}
               />

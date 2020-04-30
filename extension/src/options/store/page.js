@@ -12,14 +12,19 @@ export default {
   setTitle: action((state, payload) => {
     state.title = payload
   }),
+  url: '',
+  setUrl: action((state, payload) => {
+    state.url = payload
+  }),
   notes: [],
   setNotes: action((state, payload) => {
     state.notes = [...payload]
   }),
   fetchPage: thunk(async (actions, pageId) => {
-    const { id, meta: { title } = {}, notes } = await storage.getPage(pageId)
+    const { id, meta: { title, url } = {}, notes } = await storage.getPage(pageId)
     actions.setId(id)
     actions.setTitle(title)
+    actions.setUrl(url)
     actions.setNotes(notes)
   })
 }

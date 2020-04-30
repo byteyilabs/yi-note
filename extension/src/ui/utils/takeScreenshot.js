@@ -1,5 +1,6 @@
 /**
  * Take screenshot for provided dom element with dimensions
+ * Use 240p - 426 * 240 by default
  * 
  * @param element - dom element
  * @param width
@@ -7,7 +8,7 @@
  * 
  * @return image dataUri
  */
-export default (element, width, height) => {
+export default (element, width = 426, height = 240) => {
   var canvas = document.createElement('canvas')
     canvas.width = width
     canvas.height = height

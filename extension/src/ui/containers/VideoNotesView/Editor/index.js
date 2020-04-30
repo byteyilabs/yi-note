@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import GeneralEditor from '../../../components/Editor'
 import TextButton from '../../../components/TextButton'
 import { usePlayer } from '../../../hooks'
-import { secondsToTime } from '../../../utils'
+import { takeScreenshot } from '../../../utils'
+import { secondsToTime } from '../../../../common/utils'
 import { TYPE_VIDEO_NOTE } from '../../../../constants'
 
 const StyledStatus = styled.span`
@@ -36,8 +37,12 @@ const Editor = () => {
       return
     }
 
+    const player = playerRef.current
     const timestamp = await playerRef.current.getCurrentTime()
-    edit(timestamp)
+    const videoEl = player.getVideoElement()
+    const dataUri = takeScreenshot(videoEl)
+    console.log(dataUri)
+    edit({ timestamp, image: dataUri })
   }
 
   const handleSave = () => {
