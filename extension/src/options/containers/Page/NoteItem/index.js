@@ -1,18 +1,38 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { Grid, Link, Typography } from '@material-ui/core'
+import { secondsToTime } from '../../../../common/utils'
 
-const NoteItem = ({ id, content, timestamp, image }) => {
+const getUrlWithTimeQuery = (url, timestamp) => {
+  const parsedUrl = new URL(url)
+  parsedUrl.search = parsedUrl.search 
+    ? `${parsedUrl.search}&yinote-timestamp=${timestamp}` 
+    : `?yinote-timestamp=${timestamp}`
+  return parsedUrl.toString()
+}
+
+const NoteItem = ({ id, content, timestamp, image, url }) => {
   return (
     <Grid container>
-      <Grid item sm={6} xs={12}>
-        <img src={image} alt="" />
+      <Grid item md={6} sm={8} xs={12}>
+        <img src={image} alt="Screenshot" />
       </Grid>
-      <Grid item sm={6} xs={12}>
-        <div>{timestamp}</div>
-        <div>{content}</div>
+      <Grid item md={6} sm={4} xs={12}>
+        <Link href={getUrlWithTimeQuery(url, timestamp)} target="_blank">
+          {secondsToTime(timestamp)}
+        </Link>
+        <Typography variant="body1">{content}</Typography>
       </Grid>
     </Grid>
   )
+}
+
+NoteItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 }
 
 export default NoteItem

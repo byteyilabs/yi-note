@@ -16,7 +16,7 @@ import {
 } from './styled'
 import IconButton from '../../../components/IconButton'
 import { usePlayer } from '../../../hooks'
-import { secondsToTime } from '../../../utils'
+import { secondsToTime } from '../../../../common/utils'
 
 const NoteItem = ({ id, content, timestamp }) => {
   const { t } = useTranslation('notesView')

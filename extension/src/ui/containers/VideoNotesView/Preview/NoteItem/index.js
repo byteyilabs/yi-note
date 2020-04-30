@@ -3,7 +3,7 @@ import { useStoreActions } from 'easy-peasy'
 import Grid from '@material-ui/core/Grid'
 import TextButton from '../../../../components/TextButton'
 import { usePlayer } from '../../../../hooks'
-import { secondsToTime } from '../../../../utils'
+import { secondsToTime } from '../../../../../common/utils'
 
 export default ({ content, timestamp, image }) => {
   const playerRef = usePlayer()
