@@ -10,7 +10,8 @@ import { StoreProvider, createStore } from 'easy-peasy'
 import Logger from 'js-logger'
 import { storeModel } from './store'
 import App from './containers/App'
-import GlobalStyle from '../common/globalStyle'
+import GlobalStyle from './globalStyle'
+import CommonGlobalStyle from '../common/globalStyle'
 import i18n from '../common/i18n'
 import { APP_ID } from '../constants'
 
@@ -35,6 +36,7 @@ export default class YiNote {
     ReactDOM.render(
       <StoreProvider store={this.#store}>
         <MemoryRouter initialEntries={['/video-notes']}>
+          <CommonGlobalStyle />
           <GlobalStyle />
           <App />
         </MemoryRouter>

@@ -1,15 +1,20 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStoreState, useStoreActions } from 'easy-peasy'
+import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography, List, ListItem } from '@material-ui/core'
 import NoteItem from './NoteItem'
+
+const StyledTitle = styled(Grid)`
+  margin: 10px;
+`
 
 const Page = () => {
   const { t } = useTranslation('options')
   const { id } = useParams()
   const { 
-    page: { title, notes }
+    page: { title, url, notes }
   } = useStoreState(state => state)
   const { 
     app: { setTitle: setAppTitle }, 
@@ -22,9 +27,11 @@ const Page = () => {
   }, [])
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" spacing={2}>
       <Grid item>
-        <Typography variant="h5" component="h1">{title}</Typography>
+        <StyledTitle>
+          <Typography variant="h5" component="h1">{title}</Typography>
+        </StyledTitle>
       </Grid>
       <Grid item>
         <List>
@@ -35,6 +42,7 @@ const Page = () => {
                 content={content} 
                 timestamp={timestamp}
                 image={image}
+                url={url}
               />
             </ListItem>
           )}
