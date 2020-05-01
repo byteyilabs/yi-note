@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -40,6 +41,7 @@ const StyledDrawerHeader = styled.div`
 `
 
 const ResponsiveDrawer = () => {
+  const { t } = useTranslation(['options'])
   const history = useHistory()
   const { pathname } = useLocation()
   const containerRef = useRef(null)
@@ -59,7 +61,7 @@ const ResponsiveDrawer = () => {
       <StyledDrawerHeader>
         <Grid container direction="row" alignItems="center" spacing={2}>
           <Grid item>
-            <Typography variant="h6">Yinote</Typography>
+            <Typography variant="h6">{t('appName')}</Typography>
           </Grid>
           <Grid item>
             <Typography
@@ -73,13 +75,13 @@ const ResponsiveDrawer = () => {
       <List>
         {[
           {
-            label: 'Bookmarks',
+            label: t('bookmarks.title'),
             path: '/',
             icon: <BookmarksIcon />,
             onClick: () => history.push('/')
           },
           {
-            label: 'Settings',
+            label: t('settings.title'),
             path: '/settings',
             icon: <SettingsIcon />,
             onClick: () => history.push('/settings')

@@ -19,7 +19,7 @@ import { usePlayer } from '../../../hooks'
 import { secondsToTime } from '../../../../common/utils'
 
 const NoteItem = ({ id, content, timestamp }) => {
-  const { t } = useTranslation('notesView')
+  const { t } = useTranslation(['notesView', 'note'])
   const {
     videoNotes: { edit, removeNote },
     alerts: { showAlerts }
@@ -37,7 +37,7 @@ const NoteItem = ({ id, content, timestamp }) => {
 
   const handleDelete = () =>
     showAlerts({
-      content: t('note.remove.alertContent'),
+      content: t('note:remove.alert'),
       onConfirm: removeNote.bind(null, id)
     })
 
@@ -67,7 +67,9 @@ const NoteItem = ({ id, content, timestamp }) => {
           <Grid container direction="row" alignItems="center">
             {!expanded && <StyledTimestamp>{formattedTime}</StyledTimestamp>}
             <IconButton
-              tooltip={expanded ? t('note.collapse.tooltip') : t('note.expand.tooltip')}
+              tooltip={
+                expanded ? t('note.collapse.tooltip') : t('note.expand.tooltip')
+              }
               onClick={handleExpand}
             >
               <StyledExpandMoreIcon
@@ -90,14 +92,14 @@ const NoteItem = ({ id, content, timestamp }) => {
               <Grid container direction="row">
                 <IconButton
                   size="small"
-                  tooltip={t('note.edit.tooltip')}
+                  tooltip={t('note:edit.tooltip')}
                   onClick={handleEdit}
                 >
                   <EditIcon />
                 </IconButton>
                 <IconButton
                   size="small"
-                  tooltip={t('note.remove.tooltip')}
+                  tooltip={t('note:remove.tooltip')}
                   onClick={handleDelete}
                 >
                   <DeleteIcon />

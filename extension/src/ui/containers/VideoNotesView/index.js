@@ -17,7 +17,7 @@ export const StyledTitle = styled.div`
 `
 
 const NotesView = () => {
-  const { t } = useTranslation('notesView')
+  const { t } = useTranslation(['notesView', 'bookmark'])
   const {
     videoNotes: {
       page: { id, notes }
@@ -25,15 +25,13 @@ const NotesView = () => {
     app: { url }
   } = useStoreState(state => state)
   const {
-    videoNotes: { 
-      fetchPage, 
-      bookmarkPage, 
+    videoNotes: {
+      fetchPage,
+      bookmarkPage,
       removePage,
-      preview: {
-        setOpen: setPreviewOpen
-      }
+      preview: { setOpen: setPreviewOpen }
     },
-    alerts: { showAlerts },
+    alerts: { showAlerts }
   } = useStoreActions(actions => actions)
 
   useEffect(() => {
@@ -41,11 +39,11 @@ const NotesView = () => {
       const pageId = generatePageId(url)
       fetchPage(pageId)
     }
-  }, [id, fetchPage])
+  }, [id, fetchPage, url])
 
   const handleRemovePage = () => {
     showAlerts({
-      content: t('bookmark.remove.alertContent'),
+      content: t('bookmark:remove.alert'),
       onConfirm: removePage.bind(null, id)
     })
   }
@@ -71,10 +69,10 @@ const NotesView = () => {
                 <PreviewIcon />
               </IconButton>
             )}
-              
+
             {!id ? (
               <IconButton
-                tooltip={t('bookmark.add.tooltip')}
+                tooltip={t('bookmark:add.tooltip')}
                 onClick={bookmarkPage}
               >
                 <BookmarkIcon />
@@ -82,7 +80,7 @@ const NotesView = () => {
             ) : (
               <IconButton
                 color="red"
-                tooltip={t('bookmark.remove.tooltip')}
+                tooltip={t('bookmark:remove.tooltip')}
                 onClick={handleRemovePage}
               >
                 <BookmarkIcon />

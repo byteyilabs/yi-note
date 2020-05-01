@@ -8,7 +8,6 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import { useTranslation } from 'react-i18next'
 
-
 const StyledContainer = styled(Grid)`
   cursor: pointer;
   background-color: ${props => props.theme.palette.grey[100]};
@@ -19,7 +18,7 @@ const StyledImg = styled.img`
   height: 90px;
   ${props => props.theme.breakpoints.down('xs')} {
     width: 352px;
-    height: 240px
+    height: 240px;
   }
 `
 
@@ -33,9 +32,9 @@ const StyledDescription = styled.div`
 `
 
 const BookmarkItem = ({ id, title, description, url, image }) => {
-  const { t } = useTranslation('options')
+  const { t } = useTranslation(['common', 'options'])
   const history = useHistory()
-  const { 
+  const {
     bookmarks: { removeBookmark },
     alerts: { showAlerts }
   } = useStoreActions(actions => actions)
@@ -46,7 +45,7 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
 
   const handleOpenPageInNewTab = e => {
     e.stopPropagation()
-    window.open(url, '_blank');
+    window.open(url, '_blank')
   }
 
   const handleDelete = e => {
@@ -58,8 +57,8 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
   }
 
   return (
-    <StyledContainer 
-      container 
+    <StyledContainer
+      container
       direction="row"
       spacing={1}
       onClick={handleOpenPageDetail}
@@ -83,7 +82,7 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
             <OpenInNewIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title={t('bookmark.delete.tooltip')}>
+        <Tooltip title={t('bookmark.remove.tooltip')}>
           <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>

@@ -3,29 +3,41 @@
     "message": "Extension might be updated or reloaded, please refresh current page.",
     "description": "Show in alert when extension disconnected with page"
   },
-  "reloadView_reload": {
-    "message": "Reload"
+  "bookmark_open_tooltip": {
+    "message": "Open bookmark in new tab"
   },
-  "alerts_primaryButton": {
+  "bookmark_remove_tooltip": {
+    "message": "Remove bookmark"
+  },
+  "bookmark_add_tooltip": {
+    "message": "Bookmark the page"
+  },
+  "bookmark_remove_alert": {
+    "message": "Delete the bookmark will also delete all notes in current page. Please confirm to proceed."
+  },
+  "note_edit_tooltip": {
+    "message": "Edit Note"
+  },
+  "note_remove_tooltip": {
+    "message": "Remove Note"
+  },
+  "note_remove_alert": {
+    "message": "Please confirm to remove the note."
+  },
+  "alert_primary": {
     "message": "Confirm"
   },
-  "alerts_secondaryButton": {
+  "alert_secondary": {
     "message": "Cancel"
+  },
+  "reloadView_reload": {
+    "message": "Reload"
   },
   "search_placeholder": {
     "message": "Search..."
   },
   "notesView_title": {
     "message": "Notes"
-  },
-  "notesView_bookmark_remove_alertContent": {
-    "message": "Delete the bookmark will also delete all notes in current page. Please confirm to proceed."
-  },
-  "notesView_bookmark_remove_tooltip": {
-    "message": "Remove bookmark"
-  },
-  "notesView_bookmark_add_tooltip": {
-    "message": "Bookmark the page"
   },
   "notesView_editor_placeholder": {
     "message": "Please type the note here..."
@@ -51,14 +63,8 @@
   "notesView_note_collapse_tooltip": {
     "message": "Collapse Note"
   },
-  "notesView_note_edit_tooltip": {
-    "message": "Edit Note"
-  },
-  "notesView_note_remove_tooltip": {
-    "message": "Remove Note"
-  },
-  "notesView_note_remove_alertContent": {
-    "message": "Please confirm to remove the note."
+  "notesView_preview_tooltip": {
+    "message": "Open notes preview"
   },
   "notesView_preview_pdf_button": {
     "message": "Generate PDF"
@@ -69,22 +75,22 @@
   "searchView_tab_notes": {
     "message": "Notes"
   },
-  "footer_version": {
-    "message": "Version: {{version}}"
-  },
   "footer_github_tooltip": {
     "message": "Visit GitHub repository"
   },
   "footer_management_tooltip": {
     "message": "Open management page"
   },
-  "preview_tooltip": {
-    "message": "Notes preview"
+  "options_appName": {
+    "message": "Yinote"
   },
   "options_bookmarks_title": {
-    "message": "Dashboard"
+    "message": "Bookmarks"
   },
   "options_page_title": {
     "message": "Page Detail"
+  },
+  "options_settings_title": {
+    "message": "Settings"
   }
 }

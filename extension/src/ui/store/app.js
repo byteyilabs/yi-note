@@ -1,7 +1,7 @@
 import { action } from 'easy-peasy'
 
 const appModel = {
-  open: false,
+  open: true,
   setOpen: action(state => {
     state.open = !state.open
   }),

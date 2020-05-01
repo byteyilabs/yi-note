@@ -7,7 +7,7 @@ const convertToI18n = resource => {
   const convert = (parts, res, value) => {
     if (parts.length === 1) {
       res[parts[0]] = value
-      return;
+      return
     }
 
     const part = parts.shift()

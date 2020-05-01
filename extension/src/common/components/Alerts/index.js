@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 })
 
 const Alerts = () => {
-  const { t } = useTranslation('alerts')
+  const { t } = useTranslation('alert')
   const classes = useStyles()
   const { open, title, content, onConfirm } = useStoreState(
     state => state.alerts
@@ -51,7 +51,7 @@ const Alerts = () => {
           color="primary"
           classes={{ label: classes.buttonLabel }}
         >
-          {t('secondaryButton')}
+          {t('secondary')}
         </Button>
         <Button
           onClick={handleConfirm}
@@ -59,7 +59,7 @@ const Alerts = () => {
           classes={{ label: classes.buttonLabel }}
           autoFocus
         >
-          {t('primaryButton')}
+          {t('primary')}
         </Button>
       </DialogActions>
     </Dialog>
