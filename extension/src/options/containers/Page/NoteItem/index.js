@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Link, Typography } from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
+import { 
+  Grid, 
+  Link, 
+  Typography
+} from '@material-ui/core'
 import { secondsToTime } from '../../../../common/utils'
 
 const getUrlWithTimeQuery = (url, timestamp) => {
@@ -12,6 +17,8 @@ const getUrlWithTimeQuery = (url, timestamp) => {
 }
 
 const NoteItem = ({ id, content, timestamp, image, url }) => {
+  const { t } = useTranslation('')
+
   return (
     <Grid container>
       <Grid item md={6} sm={8} xs={12}>

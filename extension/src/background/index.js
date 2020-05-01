@@ -1,11 +1,10 @@
-import { getVersion } from './utils'
-
 browser.browserAction.onClicked.addListener(tab => {
-  browser.tabs.sendMessage(tab.id, { action: 'togglePanel', version: getVersion() })
+  browser.tabs
+    .sendMessage(tab.id, { action: 'togglePanel' })
     .catch(() => window.alert(browser.i18n.getMessage('failedToConnect')))
 })
 
-chrome.runtime.onMessage.addListener(({ action }) => {
+browser.runtime.onMessage.addListener(({ action }) => {
   switch (action) {
     case 'open-options':
       browser.runtime.openOptionsPage()
@@ -24,4 +23,4 @@ browser.runtime.onInstalled.addListener(({ reason }) => {
 })
 
 // NOTE: This is used by the extension to detect updates.
-browser.runtime.onConnect.addListener(port => {})
+browser.runtime.onConnect.addListener(() => {})

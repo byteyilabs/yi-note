@@ -1,8 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
+import { useStoreActions } from 'easy-peasy'
 import styled from 'styled-components'
-import { Grid } from '@material-ui/core'
+import { Grid, IconButton, Tooltip } from '@material-ui/core'
+import OpenInNewIcon from '@material-ui/icons/OpenInNew'
+import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
+import { useTranslation } from 'react-i18next'
+
 
 const StyledContainer = styled(Grid)`
   cursor: pointer;
@@ -28,10 +33,28 @@ const StyledDescription = styled.div`
 `
 
 const BookmarkItem = ({ id, title, description, url, image }) => {
+  const { t } = useTranslation('options')
   const history = useHistory()
+  const { 
+    bookmarks: { removeBookmark },
+    alerts: { showAlerts }
+  } = useStoreActions(actions => actions)
 
   const handleOpenPageDetail = () => {
     history.push(`/pages/${id}`)
+  }
+
+  const handleOpenPageInNewTab = e => {
+    e.stopPropagation()
+    window.open(url, '_blank');
+  }
+
+  const handleDelete = e => {
+    e.stopPropagation()
+    showAlerts({
+      content: t('bookmark.remove.alertContent'),
+      onConfirm: removeBookmark.bind(null, id)
+    })
   }
 
   return (
@@ -46,13 +69,25 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
           <StyledImg src={image} alt="" />
         </Grid>
       </Grid>
-      <Grid item sm={10} xs={12} container spacing={2} direction="column">
+      <Grid item sm={8} xs={12} container spacing={2} direction="column">
         <Grid item>
           <StyledTitle>{title}</StyledTitle>
         </Grid>
         <Grid item>
           <StyledDescription>{description}</StyledDescription>
         </Grid>
+      </Grid>
+      <Grid item sm={2} xs={12}>
+        <Tooltip title={t('bookmark.open.tooltip')}>
+          <IconButton onClick={handleOpenPageInNewTab}>
+            <OpenInNewIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={t('bookmark.delete.tooltip')}>
+          <IconButton onClick={handleDelete}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </Grid>
     </StyledContainer>
   )

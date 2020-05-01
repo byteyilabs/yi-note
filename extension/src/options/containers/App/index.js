@@ -1,56 +1,29 @@
 import React from 'react'
-import {
-  Switch,
-  Route,
-  useHistory
-} from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
-import { useStoreState } from 'easy-peasy'
-import { AppBar, Toolbar, Typography, IconButton, Container }  from '@material-ui/core'
-import SettingsIcon from '@material-ui/icons/Settings'
-import MenuIcon from '@material-ui/icons/Menu'
+import { Container } from '@material-ui/core'
+import Header from './Header'
+import Drawer from './Drawer'
 import Bookmarks from '../Bookmarks'
 import Page from '../Page'
 import Settings from '../Settings'
+import Alerts from '../../../common/components/Alerts'
 import withTheme from '../../../common/withTheme'
+import { headerHeight, drawerWidth } from './constants'
 
 const StyledPageContainer = styled(Container)`
-  margin-top: 64px;
-`
-
-const StyledToolbar = styled(Toolbar)`
-  justify-content: flex-start;
-`
-
-const StyledTitle = styled(Typography)`
-  margin-left: ${props => props.theme.spacing(2)}px;
+  margin-top: ${headerHeight}px;
+  @media (min-width: 600px) {
+    margin-left: ${drawerWidth}px;
+    width: calc(100% - ${drawerWidth}px);
+  }
 `
 
 const App = () => {
-  const { title } = useStoreState(state => state.app)
-  const history = useHistory()
-
-  const handleClickSettings = () => {
-    history.push('/settings')
-  }
-
   return (
     <>
-      <AppBar position="fixed">
-        <StyledToolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <StyledTitle variant="h6">{title}</StyledTitle>
-          {/* <IconButton 
-            color="inherit" 
-            edge="end" 
-            onClick={handleClickSettings}
-          >
-            <SettingsIcon />
-          </IconButton> */}
-        </StyledToolbar>
-      </AppBar>
+      <Header />
+      <Drawer />
       <StyledPageContainer maxWidth="lg">
         <Switch>
           <Route exact path={'/'} component={Bookmarks} />
@@ -58,6 +31,7 @@ const App = () => {
           <Route path={'/pages/:id'} component={Page} />
         </Switch>
       </StyledPageContainer>
+      <Alerts />
     </>
   )
 }

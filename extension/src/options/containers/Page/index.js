@@ -27,10 +27,10 @@ const Page = () => {
   }, [])
 
   return (
-    <Grid container direction="column" spacing={2}>
+    <Grid container direction="column" spacing={1}>
       <Grid item>
         <StyledTitle>
-          <Typography variant="h5" component="h1">{title}</Typography>
+          <Typography variant="subtitle1">{title}</Typography>
         </StyledTitle>
       </Grid>
       <Grid item>

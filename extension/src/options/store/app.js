@@ -4,7 +4,13 @@ const appModel = {
   title: '',
   setTitle: action((state, payload) => {
     state.title = payload
-  })
+  }),
+  drawer: {
+    open: false,
+    setOpen: action((state, payload) => {
+      state.open = payload
+    })
+  }
 }
 
 export default appModel
