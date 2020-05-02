@@ -103,7 +103,6 @@ export default class BrowserStorage extends Storage {
     })
   }
 
-  // return array of page data
   getAllPagesForExport() {
     return this.storageArea.get().then(data => {
       return Object.values(data).reduce((acc, page) => {

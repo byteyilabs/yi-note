@@ -16,7 +16,8 @@ const StyledContainer = styled(Grid)`
 const StyledImg = styled.img`
   width: 120px;
   height: 90px;
-  ${props => props.theme.breakpoints.down('xs')} {
+
+  @media (max-width: 960px) {
     width: 352px;
     height: 240px;
   }
@@ -63,12 +64,12 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
       spacing={1}
       onClick={handleOpenPageDetail}
     >
-      <Grid item sm={2} xs={12}>
+      <Grid item md={2} sm={12}>
         <Grid container justify="center" alignItems="center">
           <StyledImg src={image} alt="" />
         </Grid>
       </Grid>
-      <Grid item sm={8} xs={12} container spacing={2} direction="column">
+      <Grid item md={8} sm={12} container spacing={2} direction="column">
         <Grid item>
           <StyledTitle>{title}</StyledTitle>
         </Grid>
@@ -76,7 +77,7 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
           <StyledDescription>{description}</StyledDescription>
         </Grid>
       </Grid>
-      <Grid item sm={2} xs={12}>
+      <Grid item md={2} sm={12}>
         <Tooltip title={t('bookmark.open.tooltip')}>
           <IconButton onClick={handleOpenPageInNewTab}>
             <OpenInNewIcon />
