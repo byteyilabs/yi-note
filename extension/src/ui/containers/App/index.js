@@ -52,6 +52,7 @@ const App = () => {
     } catch (e) {
       logger.error(new Error('Failed to connect to extension.'))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

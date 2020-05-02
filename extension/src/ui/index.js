@@ -1,8 +1,3 @@
-/**
- * Copyright TurboNote, 2016. All Rights Reserved.
- * @author Shuo Wu
- */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { MemoryRouter } from 'react-router-dom'
