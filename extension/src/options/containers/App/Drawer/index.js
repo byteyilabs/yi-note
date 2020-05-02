@@ -18,8 +18,9 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks'
 import SettingsIcon from '@material-ui/icons/Settings'
 import { drawerWidth, headerHeight } from '../constants'
 import { APP_ID } from '../../../../constants'
+import { getVersion } from '../../../../common/utils'
 
-const { version } = browser.runtime.getManifest()
+const version = getVersion()
 
 const StyledNav = styled.nav`
   width: ${drawerWidth}px;

@@ -10,7 +10,10 @@ const appModel = {
     setOpen: action((state, payload) => {
       state.open = payload
     })
-  }
+  },
+  reset: action(state => {
+    state.title = ''
+  })
 }
 
 export default appModel

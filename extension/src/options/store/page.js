@@ -26,5 +26,11 @@ export default {
     actions.setTitle(title)
     actions.setUrl(url)
     actions.setNotes(notes)
+  }),
+  reset: action(state => {
+    state.id = ''
+    state.title = ''
+    state.url = ''
+    state.notes = []
   })
 }

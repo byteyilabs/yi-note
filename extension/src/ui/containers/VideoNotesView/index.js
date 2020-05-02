@@ -31,7 +31,7 @@ const NotesView = () => {
       removePage,
       preview: { setOpen: setPreviewOpen }
     },
-    alerts: { showAlerts }
+    alerts: { show: showAlerts }
   } = useStoreActions(actions => actions)
 
   useEffect(() => {

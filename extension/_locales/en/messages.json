@@ -82,7 +82,7 @@
     "message": "Open management page"
   },
   "options_appName": {
-    "message": "Yinote"
+    "message": "YiNote"
   },
   "options_bookmarks_title": {
     "message": "Bookmarks"
@@ -92,5 +92,35 @@
   },
   "options_settings_title": {
     "message": "Settings"
+  },
+  "options_settings_exportAndImport_title": {
+    "message": "Export and Import"
+  },
+  "options_settings_exportAndImport_description": {
+    "message": "You can export bookmarks and notes in JSON format as a backup, and restore data by importing the backup file. This functionality can also be used as a poor man version of data sharing."
+  },
+  "options_settings_export_title": {
+    "message": "Export all data in JSON format"
+  },
+  "options_settings_export_button": {
+    "message": "Export"
+  },
+  "options_settings_import_title": {
+    "message": "Import (Imported data will be merged with existing data)"
+  },
+  "options_settings_import_button": {
+    "message": "Import"
+  },
+  "options_settings_import_success": {
+    "message": "Successfully imported data."
+  },
+  "options_settings_import_error": {
+    "message": "Unable to process imported data."
+  },
+  "options_settings_exportAndClear_title": {
+    "message": "Export and Clear (Note: this action will also clear current storage)"
+  },
+  "options_settings_exportAndClear_button": {
+    "message": "Export and clear data"
   }
 }

@@ -36,7 +36,7 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
   const history = useHistory()
   const {
     bookmarks: { removeBookmark },
-    alerts: { showAlerts }
+    alerts: { show: showAlerts }
   } = useStoreActions(actions => actions)
 
   const handleOpenPageDetail = () => {

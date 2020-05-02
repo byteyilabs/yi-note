@@ -21,7 +21,7 @@
     "https://*/*",
     "file://*/*"
   ],
-  "options_page": "dist/options/index.html",
+  "options_page": "dist/options.html",
   "background": {
     "scripts": [
       "dist/browser-polyfill.js",

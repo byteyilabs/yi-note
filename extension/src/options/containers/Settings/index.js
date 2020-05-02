@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useStoreActions } from 'easy-peasy'
+import ExportAndImport from './ExportAndImport'
 
 const Settings = () => {
-  return (
-    <div>Settings</div>
-  )
+  const { t } = useTranslation('options')
+  const {
+    app: { setTitle }
+  } = useStoreActions(actions => actions)
+
+  useEffect(() => {
+    setTitle(t('settings.title'))
+  }, [setTitle, t])
+
+  return <ExportAndImport />
 }
 
-export default  Settings
+export default Settings

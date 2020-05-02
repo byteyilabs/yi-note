@@ -8,24 +8,18 @@ export default class BrowserStorage extends Storage {
   }
 
   getPage(id) {
-    return this.storageArea
-      .get(id)
-      .then(page => page[id])
+    return this.storageArea.get(id).then(page => page[id])
   }
 
   addPage(page) {
     const storeObj = {
       [page.id]: page
     }
-    return this.storageArea
-      .set(storeObj)
-      .then(() => page)
+    return this.storageArea.set(storeObj).then(() => page)
   }
 
   removePage(id) {
-    return this.storageArea
-      .remove(id)
-      .then(() => id)
+    return this.storageArea.remove(id).then(() => id)
   }
 
   addNote(pageId, note) {
@@ -37,7 +31,7 @@ export default class BrowserStorage extends Storage {
         const storeObj = {
           [pageId]: page
         }
-  
+
         return this.storageArea.set(storeObj)
       })
       .then(() => note)
@@ -48,22 +42,50 @@ export default class BrowserStorage extends Storage {
   }
 
   getBookmarks() {
-    return this.storageArea
-      .get()
-      .then(pages => {
-        const bookmarks = Object.values(pages).map(({ id, meta = {} }) => ({
-          id,
-          ...meta
-        }))
-        return bookmarks
-      })
+    return this.storageArea.get().then(pages => {
+      const bookmarks = Object.values(pages).map(({ id, meta = {} }) => ({
+        id,
+        ...meta
+      }))
+      return bookmarks
+    })
   }
 
   getNotes() {
-    return this.storageArea
-      .get()
-      .then(pages => {
-        const notes = Object.values(pages).reduce((acc, curr) => {
+    return this.storageArea.get().then(pages => {
+      const notes = Object.values(pages).reduce((acc, curr) => {
+        if (!curr.notes) {
+          return acc
+        }
+
+        return [
+          ...acc,
+          ...curr.notes.map(note => ({ ...note, page: curr.meta }))
+        ]
+      }, [])
+      return notes
+    })
+  }
+
+  searchBookmarks(query) {
+    return this.storageArea.get().then(pages => {
+      const bookmarks = Object.values(pages)
+        .filter(({ meta: { title = '', description = '' } }) => {
+          const regex = new RegExp(query, 'i')
+          return regex.test(title) || regex.test(description)
+        })
+        .map(({ id, meta = {} }) => ({
+          id,
+          ...meta
+        }))
+      return bookmarks
+    })
+  }
+
+  searchNotes(query) {
+    return this.storageArea.get().then(pages => {
+      const notes = Object.values(pages)
+        .reduce((acc, curr) => {
           if (!curr.notes) {
             return acc
           }
@@ -73,47 +95,27 @@ export default class BrowserStorage extends Storage {
             ...curr.notes.map(note => ({ ...note, page: curr.meta }))
           ]
         }, [])
-        return notes
-      })
+        .filter(({ content }) => {
+          const regex = new RegExp(query, 'i')
+          return regex.test(content)
+        })
+      return notes
+    })
   }
 
-  searchBookmarks(query) {
-    return this.storageArea
-      .get()
-      .then(pages => {
-        const bookmarks = Object.values(pages)
-          .filter(({ meta: { title = '', description = '' } }) => {
-            const regex = new RegExp(query, 'i')
-            return regex.test(title) || regex.test(description)
-          })
-          .map(({ id, meta = {} }) => ({
-            id,
-            ...meta
-          }))
-        return bookmarks
-      })
+  // return array of page data
+  getAllPagesForExport() {
+    return this.storageArea.get().then(data => {
+      return Object.values(data).reduce((acc, page) => {
+        if (page.id) {
+          acc.push(page)
+        }
+        return acc
+      }, [])
+    })
   }
 
-  searchNotes(query) {
-    return this.storageArea
-      .get()
-      .then(pages => {
-        const notes = Object.values(pages)
-          .reduce((acc, curr) => {
-            if (!curr.notes) {
-              return acc
-            }
-
-            return [
-              ...acc,
-              ...curr.notes.map(note => ({ ...note, page: curr.meta }))
-            ]
-          }, [])
-          .filter(({ content }) => {
-            const regex = new RegExp(query, 'i')
-            return regex.test(content)
-          })
-        return notes
-      })
+  clearAll() {
+    return this.storageArea.clear()
   }
 }

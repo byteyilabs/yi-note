@@ -20,14 +20,14 @@ const Alerts = () => {
   const { open, title, content, onConfirm } = useStoreState(
     state => state.alerts
   )
-  const { setOpen } = useStoreActions(actions => actions.alerts)
+  const { hide } = useStoreActions(actions => actions.alerts)
 
   const handleConfirm = () => {
     onConfirm()
-    setOpen(false)
+    hide()
   }
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => hide(false)
 
   return (
     <Dialog
@@ -53,14 +53,16 @@ const Alerts = () => {
         >
           {t('secondary')}
         </Button>
-        <Button
-          onClick={handleConfirm}
-          color="primary"
-          classes={{ label: classes.buttonLabel }}
-          autoFocus
-        >
-          {t('primary')}
-        </Button>
+        {onConfirm && (
+          <Button
+            onClick={handleConfirm}
+            color="primary"
+            classes={{ label: classes.buttonLabel }}
+            autoFocus
+          >
+            {t('primary')}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   )

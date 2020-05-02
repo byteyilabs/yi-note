@@ -12,7 +12,7 @@ import withTheme from '../../../common/withTheme'
 import { headerHeight, drawerWidth } from './constants'
 
 const StyledPageContainer = styled(Container)`
-  margin-top: ${headerHeight}px;
+  margin-top: ${headerHeight + 10}px;
   @media (min-width: 600px) {
     margin-left: ${drawerWidth}px;
     width: calc(100% - ${drawerWidth}px);

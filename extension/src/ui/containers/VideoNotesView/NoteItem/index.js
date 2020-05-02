@@ -22,7 +22,7 @@ const NoteItem = ({ id, content, timestamp }) => {
   const { t } = useTranslation(['notesView', 'note'])
   const {
     videoNotes: { edit, removeNote },
-    alerts: { showAlerts }
+    alerts: { show: showAlerts }
   } = useStoreActions(actions => actions)
   const [expanded, setExpanded] = useState(false)
   const playerRef = usePlayer()

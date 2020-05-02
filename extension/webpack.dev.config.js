@@ -8,10 +8,7 @@ module.exports = {
     content: './src/content.js',
     background: './src/background/index.js',
     inject: './src/inject/index.js',
-    options: {
-      import: './src/options/index.js',
-      filename: 'options/index.js'
-    }
+    options: './src/options/index.js'
   },
   module: {
     rules: [
@@ -38,8 +35,8 @@ module.exports = {
     ]),
     new HtmlWebPackPlugin({
       template: './src/options/index.html',
-      filename: './options/index.html',
-      browserPolyfill: '../browser-polyfill.js',
+      filename: './options.html',
+      browserPolyfill: './browser-polyfill.js',
       chunks: ['options']
     })
   ]
