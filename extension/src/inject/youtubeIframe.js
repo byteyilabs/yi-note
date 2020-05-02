@@ -20,12 +20,13 @@ class YoutubeIframe {
       return
     }
 
+    // eslint-disable-next-line no-undef
     this.player = new YT.Player(this.id, {
       events: {
-        'onReady': this.onPlayerReady,
-        'onStateChange': this.onPlayerStateChange
+        onReady: this.onPlayerReady,
+        onStateChange: this.onPlayerStateChange
       }
-    });
+    })
 
     this.addExtensionEventsListener()
   }

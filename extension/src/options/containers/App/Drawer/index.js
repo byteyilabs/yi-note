@@ -105,7 +105,7 @@ const ResponsiveDrawer = () => {
 
   return (
     <StyledNav>
-      <Hidden smUp implementation="css">
+      <Hidden smUp>
         <StyledDrawer
           variant="temporary"
           container={containerRef.current}
@@ -115,7 +115,7 @@ const ResponsiveDrawer = () => {
           {drawer}
         </StyledDrawer>
       </Hidden>
-      <Hidden xsDown implementation="css">
+      <Hidden xsDown>
         <StyledDrawer variant="permanent" open>
           {drawer}
         </StyledDrawer>

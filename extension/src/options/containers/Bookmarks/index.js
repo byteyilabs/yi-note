@@ -7,26 +7,30 @@ import BookmarkItem from './BookmarkItem'
 const Bookmarks = () => {
   const { t } = useTranslation('options')
   const { bookmarks } = useStoreState(state => state.bookmarks)
-  const { app: { setTitle }, bookmarks: { fetchBookmarks } } = useStoreActions(actions => actions)
+  const {
+    app: { setTitle },
+    bookmarks: { fetchBookmarks }
+  } = useStoreActions(actions => actions)
 
   useEffect(() => {
     setTitle(t('bookmarks.title'))
     if (!bookmarks.length) {
       fetchBookmarks()
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <List>
-      {bookmarks.map(({ id, title, description, url, image }) => {
+      {bookmarks.map(({ id, title, description, url, image, selected }) => {
         return (
           <ListItem key={id}>
-            <BookmarkItem 
-              id={id} 
-              title={title} 
+            <BookmarkItem
+              id={id}
+              title={title}
               description={description}
               url={url}
               image={image}
+              selected={selected}
             />
           </ListItem>
         )

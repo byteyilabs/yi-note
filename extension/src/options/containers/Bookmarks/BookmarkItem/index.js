@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 import styled from 'styled-components'
-import { Grid, IconButton, Tooltip } from '@material-ui/core'
+import { Grid, IconButton, Tooltip, Checkbox } from '@material-ui/core'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import { useTranslation } from 'react-i18next'
@@ -32,15 +32,24 @@ const StyledDescription = styled.div`
   color: grey;
 `
 
-const BookmarkItem = ({ id, title, description, url, image }) => {
-  const { t } = useTranslation(['common', 'options'])
+const BookmarkItem = ({ id, title, description, url, image, selected }) => {
+  const { t } = useTranslation(['bookmark', 'options'])
   const history = useHistory()
+  const { progress } = useStoreState(state => state.bookmarks.toolbar)
   const {
-    bookmarks: { removeBookmark },
+    bookmarks: { setBookmark, removeBookmark },
     alerts: { show: showAlerts }
   } = useStoreActions(actions => actions)
 
+  const setSelect = () => {
+    setBookmark({ id, selected: !selected })
+  }
+
   const handleOpenPageDetail = () => {
+    if (progress) {
+      setSelect()
+      return
+    }
     history.push(`/pages/${id}`)
   }
 
@@ -52,7 +61,7 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
   const handleDelete = e => {
     e.stopPropagation()
     showAlerts({
-      content: t('bookmark.remove.alertContent'),
+      content: t('remove.alert'),
       onConfirm: removeBookmark.bind(null, id)
     })
   }
@@ -78,16 +87,22 @@ const BookmarkItem = ({ id, title, description, url, image }) => {
         </Grid>
       </Grid>
       <Grid item md={2} sm={12}>
-        <Tooltip title={t('bookmark.open.tooltip')}>
-          <IconButton onClick={handleOpenPageInNewTab}>
-            <OpenInNewIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title={t('bookmark.remove.tooltip')}>
-          <IconButton onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        {progress ? (
+          <Checkbox checked={!!selected} onChange={setSelect} />
+        ) : (
+          <>
+            <Tooltip title={t('open.tooltip')}>
+              <IconButton onClick={handleOpenPageInNewTab}>
+                <OpenInNewIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={t('remove.tooltip')}>
+              <IconButton onClick={handleDelete}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </>
+        )}
       </Grid>
     </StyledContainer>
   )
@@ -98,7 +113,8 @@ BookmarkItem.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   description: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
+  selected: PropTypes.bool
 }
 
 export default BookmarkItem

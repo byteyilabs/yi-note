@@ -4,22 +4,18 @@ import { useStoreActions } from 'easy-peasy'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography, Button, Divider } from '@material-ui/core'
 import { readAsJson, exportJsonFile } from '../../../services/file'
-import { getVersion } from '../../../../common/utils'
 import migrate from '../../../../common/migrations'
 import { StorageFactory } from '../../../../common/services/storage'
-
-const EXPORTED_FILE_NAME = 'yinote.json'
 
 const StyledImportInput = styled.input`
   display: none;
 `
 
-const exportData = filename => {
+const exportData = () => {
   return StorageFactory.getStorage()
-    .getAllPagesForExport()
+    .getPagesForExport()
     .then(pages => {
-      const version = getVersion()
-      exportJsonFile({ version, data: pages }, filename)
+      exportJsonFile(pages)
     })
 }
 
@@ -48,11 +44,11 @@ const ExportAndImport = () => {
   }
 
   const handleExportFile = () => {
-    exportData(EXPORTED_FILE_NAME)
+    exportData()
   }
 
   const handleExportAndClear = () => {
-    exportData(EXPORTED_FILE_NAME)
+    exportData()
       .then(() => {
         return StorageFactory.getStorage().clearAll()
       })

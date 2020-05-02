@@ -1,8 +1,17 @@
 import React from 'react'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import styled from 'styled-components'
-import { AppBar, Grid, Typography, IconButton } from '@material-ui/core'
+import {
+  AppBar,
+  Grid,
+  Typography,
+  IconButton,
+  Hidden,
+  useMediaQuery
+} from '@material-ui/core'
+import { useTheme } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from './Toolbar'
 import { drawerWidth, headerHeight } from '../constants'
 
 const StyledAppBar = styled(AppBar)`
@@ -22,9 +31,6 @@ const StyledTitle = styled(Typography)`
 
 const StyledMenuButton = styled(IconButton)`
   margin-left: 15px;
-  @media (min-width: 600px) {
-    display: none;
-  }
 `
 
 const Header = () => {
@@ -35,6 +41,10 @@ const Header = () => {
   const { setOpen: setDrawOpen } = useStoreActions(
     actions => actions.app.drawer
   )
+  const theme = useTheme()
+  const justify = !useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`)
+    ? 'space-between'
+    : 'flex-end'
 
   const handleDrawerToggle = () => {
     setDrawOpen(!drawerOpen)
@@ -42,17 +52,26 @@ const Header = () => {
 
   return (
     <StyledAppBar position="fixed">
-      <Grid container direction="row" alignItems="center">
-        <StyledMenuButton
-          edge="start"
-          color="inherit"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </StyledMenuButton>
-        <StyledTitle variant="h6" noWrap>
-          {title}
-        </StyledTitle>
+      <Grid container direction="row" alignItems="center" justify={justify}>
+        <Grid item>
+          <Hidden smUp>
+            <Grid container direction="row" alignItems="center">
+              <StyledMenuButton
+                edge="start"
+                color="inherit"
+                onClick={handleDrawerToggle}
+              >
+                <MenuIcon />
+              </StyledMenuButton>
+              <StyledTitle variant="h6" noWrap>
+                {title}
+              </StyledTitle>
+            </Grid>
+          </Hidden>
+        </Grid>
+        <Grid item>
+          <Toolbar />
+        </Grid>
       </Grid>
     </StyledAppBar>
   )

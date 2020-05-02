@@ -43,10 +43,13 @@ export default class BrowserStorage extends Storage {
 
   getBookmarks() {
     return this.storageArea.get().then(pages => {
-      const bookmarks = Object.values(pages).map(({ id, meta = {} }) => ({
-        id,
-        ...meta
-      }))
+      const bookmarks = Object.values(pages).map(
+        ({ id, meta = {}, createdAt }) => ({
+          id,
+          createdAt,
+          ...meta
+        })
+      )
       return bookmarks
     })
   }
@@ -103,15 +106,28 @@ export default class BrowserStorage extends Storage {
     })
   }
 
-  getAllPagesForExport() {
-    return this.storageArea.get().then(data => {
-      return Object.values(data).reduce((acc, page) => {
-        if (page.id) {
-          acc.push(page)
-        }
-        return acc
+  getPagesForExport(ids) {
+    let promise
+    if (ids) {
+      promise = this.storageArea.get().then(data => {
+        return Object.values(data).reduce((acc, page) => {
+          if (ids.includes(page.id)) {
+            acc.push(page)
+          }
+          return acc
+        }, [])
+      })
+    } else {
+      promise = this.storageArea.get().then(data => {
+        return Object.values(data).reduce((acc, page) => {
+          if (page.id) {
+            acc.push(page)
+          }
+          return acc
+        })
       }, [])
-    })
+    }
+    return promise
   }
 
   clearAll() {

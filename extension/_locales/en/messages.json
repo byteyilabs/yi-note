@@ -87,8 +87,14 @@
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },
+  "options_bookmarks_export_tooltip": {
+    "message": "Select bookmarks to export"
+  },
   "options_page_title": {
     "message": "Page Detail"
+  },
+  "options_page_open_tooltip": {
+    "message": "Open page in new tab"
   },
   "options_settings_title": {
     "message": "Settings"

@@ -26,9 +26,7 @@ const Editor = () => {
       saveNote,
       removeNote
     },
-    alerts: {
-      showAlerts
-    }
+    alerts: { showAlerts }
   } = useStoreActions(actions => actions)
   const playerRef = usePlayer()
 
@@ -41,7 +39,6 @@ const Editor = () => {
     const timestamp = await playerRef.current.getCurrentTime()
     const videoEl = player.getVideoElement()
     const dataUri = takeScreenshot(videoEl)
-    console.log(dataUri)
     edit({ timestamp, image: dataUri })
   }
 
@@ -95,10 +92,14 @@ const Editor = () => {
           <Grid item xs={6}>
             <Grid container justify="flex-end" spacing={1}>
               <Grid item>
-                <TextButton onClick={reset}>{t('editor.cancelButton')}</TextButton>
+                <TextButton onClick={reset}>
+                  {t('editor.cancelButton')}
+                </TextButton>
               </Grid>
               <Grid item>
-                <TextButton onClick={handleSave}>{t('editor.saveButton')}</TextButton>
+                <TextButton onClick={handleSave}>
+                  {t('editor.saveButton')}
+                </TextButton>
               </Grid>
             </Grid>
           </Grid>

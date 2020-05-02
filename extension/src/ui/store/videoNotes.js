@@ -40,7 +40,8 @@ const videoNotesModel = {
     })
   },
   edit: action((state, { timestamp, image }) => {
-    const existingNote = state.page.notes.find(n => n.timestamp === timestamp) || {}
+    const existingNote =
+      state.page.notes.find(n => n.timestamp === timestamp) || {}
     state.editor.active = true
     state.editor.note = { ...existingNote, timestamp, image }
   }),
@@ -55,7 +56,12 @@ const videoNotesModel = {
   bookmarkPage: thunk(async (actions, _, { getStoreState }) => {
     const { url } = getStoreState().app
     const id = generatePageId(url)
-    const page = await storage.addPage({ id, meta: getMetadata(document, url), notes: [] })
+    const page = await storage.addPage({
+      id,
+      meta: getMetadata(document, url),
+      notes: [],
+      createdAt: +new Date()
+    })
     actions.setPage(page)
   }),
   removePage: thunk(async (actions, pageId) => {
@@ -73,7 +79,8 @@ const videoNotesModel = {
       const pageObj = {
         id: generatePageId(url),
         meta: getMetadata(document, url),
-        notes: [{ id: uuid(), ...note }]
+        notes: [{ id: uuid(), ...note }],
+        createdAt: +new Date()
       }
       updatedPage = await storage.addPage(pageObj)
     } else if (id) {
