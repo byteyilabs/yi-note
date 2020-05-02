@@ -16,8 +16,9 @@ import {
 } from '@material-ui/core'
 import BookmarksIcon from '@material-ui/icons/Bookmarks'
 import SettingsIcon from '@material-ui/icons/Settings'
+import GitHubIcon from '@material-ui/icons/GitHub'
 import { drawerWidth, headerHeight } from '../constants'
-import { APP_ID } from '../../../../constants'
+import { APP_ID, GITHUB_URL } from '../../../../constants'
 import { getVersion } from '../../../../common/utils'
 
 const version = getVersion()
@@ -98,6 +99,12 @@ const ResponsiveDrawer = () => {
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
+        <ListItem button onClick={() => window.open(GITHUB_URL, '_blank')}>
+          <ListItemIcon>
+            <GitHubIcon />
+          </ListItemIcon>
+          <ListItemText primary={t('github')} />
+        </ListItem>
       </List>
       <Divider />
     </>

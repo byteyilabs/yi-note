@@ -84,6 +84,9 @@
   "options_appName": {
     "message": "YiNote"
   },
+  "options_github": {
+    "message": "Visit Repository"
+  },
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },

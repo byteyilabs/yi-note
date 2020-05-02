@@ -1,13 +1,20 @@
 import React from 'react'
 import merge from 'deepmerge'
-import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import {
+  ThemeProvider as MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles'
+import { blue, red } from '@material-ui/core/colors'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-
 
 const muiTheme = createMuiTheme({
   zIndex: {
     modal: 8100,
     tooltip: 8050
+  },
+  palette: {
+    primary: { ...red, main: red[700] },
+    secondary: blue
   }
 })
 

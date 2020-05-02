@@ -1,7 +1,12 @@
+import Logger from 'js-logger'
+
+Logger.useDefaults()
+
 browser.browserAction.onClicked.addListener(tab => {
-  browser.tabs
-    .sendMessage(tab.id, { action: 'togglePanel' })
-    .catch(() => window.alert(browser.i18n.getMessage('failedToConnect')))
+  browser.tabs.sendMessage(tab.id, { action: 'togglePanel' }).catch(e => {
+    logger.error(e)
+    browser.runtime.openOptionsPage()
+  })
 })
 
 browser.runtime.onMessage.addListener(({ action }) => {
