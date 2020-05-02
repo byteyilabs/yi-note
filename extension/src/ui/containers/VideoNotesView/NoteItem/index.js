@@ -33,7 +33,7 @@ const NoteItem = ({ id, content, timestamp }) => {
     playerRef.current.seek(timestamp)
   }
 
-  const handleEdit = () => edit(timestamp)
+  const handleEdit = () => edit({ timestamp })
 
   const handleDelete = () =>
     showAlerts({
