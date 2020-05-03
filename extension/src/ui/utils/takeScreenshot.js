@@ -1,3 +1,5 @@
+import Logger from 'js-logger';
+
 /**
  * Take screenshot for provided dom element with dimensions
  * Use 240p - 426 * 240 by default
@@ -13,6 +15,12 @@ export default (element, width = 426, height = 240) => {
   canvas.width = width;
   canvas.height = height;
   var ctx = canvas.getContext('2d');
-  ctx.drawImage(element, 0, 0, width, height);
-  return canvas.toDataURL('image/jpeg');
+  let imageUri = null;
+  try {
+    ctx.drawImage(element, 0, 0, width, height);
+    imageUri = canvas.toDataURL('image/jpeg');
+  } catch (e) {
+    Logger.error(e);
+  }
+  return imageUri;
 };

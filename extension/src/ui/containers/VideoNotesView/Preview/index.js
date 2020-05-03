@@ -65,6 +65,7 @@ const Preview = () => {
       return !note.image || acc;
     }, false);
     if (open && shouldLoadImages && !triedLoadScreenshots.current) {
+      triedLoadScreenshots.current = true;
       loadScreenshots();
     }
   }, [loadScreenshots, notes, open, playerRef, setPage]);

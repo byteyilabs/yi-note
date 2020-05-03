@@ -1,7 +1,7 @@
 export default () =>
   new Promise(resolve => {
     const script = document.createElement('script');
-    if (globalThis.browser !== undefined) {
+    if (typeof browser !== 'undefined') {
       script.src = browser.extension.getURL('dist/inject.js');
     } else {
       script.src = 'dist/inject.js';
