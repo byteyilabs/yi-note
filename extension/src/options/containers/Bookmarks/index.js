@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import { List, ListItem } from '@material-ui/core'
-import BookmarkItem from './BookmarkItem'
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { List, ListItem } from '@material-ui/core';
+import BookmarkItem from './BookmarkItem';
 
 const Bookmarks = () => {
-  const { t } = useTranslation('options')
-  const { bookmarks } = useStoreState(state => state.bookmarks)
+  const { t } = useTranslation('options');
+  const { bookmarks } = useStoreState(state => state.bookmarks);
   const {
     app: { setTitle },
     bookmarks: { fetchBookmarks }
-  } = useStoreActions(actions => actions)
+  } = useStoreActions(actions => actions);
 
   useEffect(() => {
-    setTitle(t('bookmarks.title'))
+    setTitle(t('bookmarks.title'));
     if (!bookmarks.length) {
-      fetchBookmarks()
+      fetchBookmarks();
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <List>
@@ -33,10 +33,10 @@ const Bookmarks = () => {
               selected={selected}
             />
           </ListItem>
-        )
+        );
       })}
     </List>
-  )
-}
+  );
+};
 
-export default Bookmarks
+export default Bookmarks;

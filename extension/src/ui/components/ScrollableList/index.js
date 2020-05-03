@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import Grid from '@material-ui/core/Grid'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
 
 const StyledContainer = styled(Grid)`
   height: ${props => props.height}px;
   max-height: 100%;
   overflow-y: scroll;
-`
+`;
 
 const ScrollableList = ({ items, renderItem, height }) => {
   return (
@@ -18,13 +18,13 @@ const ScrollableList = ({ items, renderItem, height }) => {
         </Grid>
       ))}
     </StyledContainer>
-  )
-}
+  );
+};
 
 ScrollableList.propTypes = {
   items: PropTypes.array.isRequired,
   renderItem: PropTypes.func.isRequired,
   height: PropTypes.number
-}
+};
 
-export default ScrollableList
+export default ScrollableList;

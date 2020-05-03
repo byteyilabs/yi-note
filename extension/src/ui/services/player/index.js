@@ -1,1 +1,1 @@
-export { default as PlayerFactory } from './PlayerFactory'
+export { default as PlayerFactory } from './PlayerFactory';

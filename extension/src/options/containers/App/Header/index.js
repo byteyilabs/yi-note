@@ -1,6 +1,6 @@
-import React from 'react'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import styled from 'styled-components'
+import React from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import styled from 'styled-components';
 import {
   AppBar,
   Grid,
@@ -8,11 +8,11 @@ import {
   IconButton,
   Hidden,
   useMediaQuery
-} from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import Toolbar from './Toolbar'
-import { drawerWidth, headerHeight } from '../constants'
+} from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from './Toolbar';
+import { drawerWidth, headerHeight } from '../constants';
 
 const StyledAppBar = styled(AppBar)`
   @media (min-width: 600px) {
@@ -23,32 +23,32 @@ const StyledAppBar = styled(AppBar)`
   > div {
     height: ${headerHeight}px;
   }
-`
+`;
 
 const StyledTitle = styled(Typography)`
   margin-left: ${props => props.theme.spacing(2)}px;
-`
+`;
 
 const StyledMenuButton = styled(IconButton)`
   margin-left: 15px;
-`
+`;
 
 const Header = () => {
   const {
     title,
     drawer: { open: drawerOpen }
-  } = useStoreState(state => state.app)
+  } = useStoreState(state => state.app);
   const { setOpen: setDrawOpen } = useStoreActions(
     actions => actions.app.drawer
-  )
-  const theme = useTheme()
+  );
+  const theme = useTheme();
   const justify = !useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`)
     ? 'space-between'
-    : 'flex-end'
+    : 'flex-end';
 
   const handleDrawerToggle = () => {
-    setDrawOpen(!drawerOpen)
-  }
+    setDrawOpen(!drawerOpen);
+  };
 
   return (
     <StyledAppBar position="fixed">
@@ -74,7 +74,7 @@ const Header = () => {
         </Grid>
       </Grid>
     </StyledAppBar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

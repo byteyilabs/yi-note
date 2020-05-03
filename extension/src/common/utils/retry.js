@@ -6,20 +6,20 @@ export default (
   interval = 200
 ) => {
   if (predicate()) {
-    resolve()
-    return
+    resolve();
+    return;
   }
 
-  let counter = 0
+  let counter = 0;
   let timer = window.setInterval(() => {
     if (counter++ >= maxTimes) {
-      window.clearInterval(timer)
-      reject()
+      window.clearInterval(timer);
+      reject();
     }
 
     if (predicate()) {
-      resolve()
-      window.clearInterval(timer)
+      resolve();
+      window.clearInterval(timer);
     }
-  }, interval)
-}
+  }, interval);
+};

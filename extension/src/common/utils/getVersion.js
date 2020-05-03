@@ -1,8 +1,8 @@
 export default () => {
   if (typeof browser === 'undefined') {
-    return ''
+    return '';
   }
 
-  const { version } = browser.runtime.getManifest()
-  return version
-}
+  const { version } = browser.runtime.getManifest();
+  return version;
+};

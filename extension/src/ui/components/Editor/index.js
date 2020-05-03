@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledTextarea = styled.textarea.attrs(props => ({
   disabled: props.disabled
@@ -12,7 +12,7 @@ const StyledTextarea = styled.textarea.attrs(props => ({
   height: 70px;
   border-radius: 2px;
   border-width: 1px;
-`
+`;
 
 const Editor = ({
   disabled,
@@ -22,7 +22,7 @@ const Editor = ({
   onSave,
   ...rest
 }) => {
-  const textareaRef = useRef(null)
+  const textareaRef = useRef(null);
 
   const onKeyDownHandler = e => {
     if (
@@ -30,14 +30,14 @@ const Editor = ({
       (e.nativeEvent.ctrlKey || e.nativeEvent.shiftKey)
     ) {
       // CTRL + ENTER or SHIFT + ENTER for change line
-      e.key = 'Enter'
+      e.key = 'Enter';
     } else if (e.nativeEvent.keyCode == 13) {
       // ENTER for save
-      e.preventDefault()
-      textareaRef.current.blur()
-      onSave()
+      e.preventDefault();
+      textareaRef.current.blur();
+      onSave();
     }
-  }
+  };
 
   return (
     <StyledTextarea
@@ -49,8 +49,8 @@ const Editor = ({
       onKeyUp={onKeyDownHandler}
       {...rest}
     />
-  )
-}
+  );
+};
 
 Editor.propTypes = {
   disabled: PropTypes.bool,
@@ -58,12 +58,12 @@ Editor.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired
-}
+};
 
 Editor.defaultProps = {
   disabled: false,
   content: '',
   placeholder: ''
-}
+};
 
-export default Editor
+export default Editor;

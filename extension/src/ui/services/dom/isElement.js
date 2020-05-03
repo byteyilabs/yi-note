@@ -6,5 +6,5 @@ export default function isElement(o) {
         typeof o === 'object' &&
         o !== null &&
         o.nodeType === 1 &&
-        typeof o.nodeName === 'string'
+        typeof o.nodeName === 'string';
 }

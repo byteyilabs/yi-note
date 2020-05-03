@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import { APP_ID } from '../constants'
+import { createGlobalStyle } from 'styled-components';
+import { APP_ID } from '../constants';
 
 export default createGlobalStyle`
   #${APP_ID} svg {
@@ -8,4 +8,4 @@ export default createGlobalStyle`
     background: unset;
     color: inherit;
   }
-`
+`;

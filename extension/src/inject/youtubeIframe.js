@@ -1,23 +1,23 @@
-import { sendMessage } from '../common/utils'
-import { APP_ID } from '../constants'
+import { sendMessage } from '../common/utils';
+import { APP_ID } from '../constants';
 
 class YoutubeIframe {
   constructor(id) {
-    this.player = null
-    this.id = id
+    this.player = null;
+    this.id = id;
 
-    this.onPlayerReady = this.onPlayerReady.bind(this)
-    this.onPlayerStateChange = this.onPlayerStateChange.bind(this)
+    this.onPlayerReady = this.onPlayerReady.bind(this);
+    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
   }
 
   init() {
     if (!window.YT) {
-      const script = document.createElement('script')
-      script.src = 'https://www.youtube.com/iframe_api'
-      const before = document.getElementsByTagName('script')[0]
-      before.parentNode.insertBefore(script, before)
-      window.onload = () => this.init()
-      return
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      const before = document.getElementsByTagName('script')[0];
+      before.parentNode.insertBefore(script, before);
+      window.onload = () => this.init();
+      return;
     }
 
     // eslint-disable-next-line no-undef
@@ -26,13 +26,13 @@ class YoutubeIframe {
         onReady: this.onPlayerReady,
         onStateChange: this.onPlayerStateChange
       }
-    })
+    });
 
-    this.addExtensionEventsListener()
+    this.addExtensionEventsListener();
   }
 
   onPlayerReady() {
-    console.log('yi-note: iframe youtube player ready')
+    console.log('yi-note: iframe youtube player ready');
   }
 
   onPlayerStateChange() {}
@@ -42,19 +42,19 @@ class YoutubeIframe {
       'message',
       ({ source, data: { from, action, timestamp } = {} }) => {
         if (source !== window || from !== APP_ID) {
-          return
+          return;
         }
 
         switch (action) {
           case 'play':
-            this.player.playVideo()
-            return
+            this.player.playVideo();
+            return;
           case 'pause':
-            this.player.pauseVideo()
-            return
+            this.player.pauseVideo();
+            return;
           case 'seek':
-            this.player.seekTo(timestamp)
-            return
+            this.player.seekTo(timestamp);
+            return;
           case 'currentTime':
             sendMessage(
               'currentTime',
@@ -62,19 +62,19 @@ class YoutubeIframe {
                 data: Math.floor(this.player.getCurrentTime())
               },
               true
-            )
-            return
+            );
+            return;
           case 'duration':
             sendMessage(
               'duration',
               { data: Math.floor(this.player.getDuration()) },
               true
-            )
-            return
+            );
+            return;
         }
       }
-    )
+    );
   }
 }
 
-export default YoutubeIframe
+export default YoutubeIframe;

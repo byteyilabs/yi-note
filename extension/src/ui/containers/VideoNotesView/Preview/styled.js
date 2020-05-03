@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import { Modal } from '@material-ui/core'
+import styled from 'styled-components';
+import { Modal } from '@material-ui/core';
 
 export const StyledModal = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const StyledPaper = styled.div`
   background-color: ${props => props.theme.palette.background.paper};
@@ -22,4 +22,4 @@ export const StyledPaper = styled.div`
   @media (min-width: 960px) {
     width: 750px;
   }
-`
+`;

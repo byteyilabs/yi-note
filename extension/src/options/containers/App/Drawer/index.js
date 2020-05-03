@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import { useHistory, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useHistory, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import {
   Grid,
   Typography,
@@ -13,19 +13,19 @@ import {
   ListItemText,
   Hidden,
   Drawer
-} from '@material-ui/core'
-import BookmarksIcon from '@material-ui/icons/Bookmarks'
-import SettingsIcon from '@material-ui/icons/Settings'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import { drawerWidth, headerHeight } from '../constants'
-import { APP_ID, GITHUB_URL } from '../../../../constants'
-import { getVersion } from '../../../../common/utils'
+} from '@material-ui/core';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import SettingsIcon from '@material-ui/icons/Settings';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import { drawerWidth, headerHeight } from '../constants';
+import { APP_ID, GITHUB_URL } from '../../../../constants';
+import { getVersion } from '../../../../common/utils';
 
-const version = getVersion()
+const version = getVersion();
 
 const StyledNav = styled.nav`
   width: ${drawerWidth}px;
-`
+`;
 
 const StyledDrawer = styled(({ ...rest }) => (
   <Drawer classes={{ paper: 'paper' }} {...rest} />
@@ -33,30 +33,30 @@ const StyledDrawer = styled(({ ...rest }) => (
   & .paper {
     width: ${drawerWidth}px;
   }
-`
+`;
 
 const StyledDrawerHeader = styled.div`
   height: ${headerHeight}px;
   display: flex;
   align-items: center;
   padding-left: 20px;
-`
+`;
 
 const ResponsiveDrawer = () => {
-  const { t } = useTranslation(['options'])
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const containerRef = useRef(null)
-  const { open } = useStoreState(state => state.app.drawer)
-  const { setOpen } = useStoreActions(actions => actions.app.drawer)
+  const { t } = useTranslation(['options']);
+  const history = useHistory();
+  const { pathname } = useLocation();
+  const containerRef = useRef(null);
+  const { open } = useStoreState(state => state.app.drawer);
+  const { setOpen } = useStoreActions(actions => actions.app.drawer);
 
   useEffect(() => {
-    containerRef.current = document.getElementById(APP_ID)
-  }, [])
+    containerRef.current = document.getElementById(APP_ID);
+  }, []);
 
   const handleDrawerToggle = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   const drawer = (
     <>
@@ -108,7 +108,7 @@ const ResponsiveDrawer = () => {
       </List>
       <Divider />
     </>
-  )
+  );
 
   return (
     <StyledNav>
@@ -128,7 +128,7 @@ const ResponsiveDrawer = () => {
         </StyledDrawer>
       </Hidden>
     </StyledNav>
-  )
-}
+  );
+};
 
-export default ResponsiveDrawer
+export default ResponsiveDrawer;

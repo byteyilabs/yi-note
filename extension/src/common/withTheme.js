@@ -1,11 +1,11 @@
-import React from 'react'
-import merge from 'deepmerge'
+import React from 'react';
+import merge from 'deepmerge';
 import {
   ThemeProvider as MuiThemeProvider,
   createMuiTheme
-} from '@material-ui/core/styles'
-import { blue, red } from '@material-ui/core/colors'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+} from '@material-ui/core/styles';
+import { blue, red } from '@material-ui/core/colors';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const muiTheme = createMuiTheme({
   zIndex: {
@@ -16,7 +16,7 @@ const muiTheme = createMuiTheme({
     primary: { ...red, main: red[700] },
     secondary: blue
   }
-})
+});
 
 const styledTheme = {
   header: {
@@ -29,9 +29,9 @@ const styledTheme = {
     width: 380,
     zIndex: 8000
   }
-}
+};
 
-const theme = merge(muiTheme, styledTheme)
+const theme = merge(muiTheme, styledTheme);
 
 export default Component => () => (
   <StyledThemeProvider theme={theme}>
@@ -39,4 +39,4 @@ export default Component => () => (
       <Component />
     </MuiThemeProvider>
   </StyledThemeProvider>
-)
+);

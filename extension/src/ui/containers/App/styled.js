@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -18,11 +18,11 @@ export const StyledContainer = styled.div`
   ::-webkit-scrollbar {
     width: 0;
   }
-`
+`;
 
 export const StyledMain = styled.div`
   flex: 1;
-`
+`;
 
 export const StyledViewWrapper = styled.div`
   display: flex;
@@ -36,4 +36,4 @@ export const StyledViewWrapper = styled.div`
   & > div {
     margin-bottom: 8px;
   }
-`
+`;

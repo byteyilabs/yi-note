@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import { useTranslation } from 'react-i18next'
-import { Grid, Typography, List, ListItem } from '@material-ui/core'
-import VideoNoteItem from './VideoNoteItem'
-import { TYPE_VIDEO_NOTE } from '../../../constants'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useTranslation } from 'react-i18next';
+import { Grid, Typography, List, ListItem } from '@material-ui/core';
+import VideoNoteItem from './VideoNoteItem';
+import { TYPE_VIDEO_NOTE } from '../../../constants';
 
 const Page = () => {
-  const { t } = useTranslation('options')
-  const { id } = useParams()
+  const { t } = useTranslation('options');
+  const { id } = useParams();
   const {
     page: { title, url, notes }
-  } = useStoreState(state => state)
+  } = useStoreState(state => state);
   const {
     app: { setTitle: setAppTitle },
     page: { fetchPage }
-  } = useStoreActions(actions => actions)
+  } = useStoreActions(actions => actions);
 
   useEffect(() => {
-    setAppTitle(t('page.title'))
-    fetchPage(id)
-  }, [fetchPage, id, setAppTitle, t])
+    setAppTitle(t('page.title'));
+    fetchPage(id);
+  }, [fetchPage, id, setAppTitle, t]);
 
   return (
     <Grid container direction="column" spacing={1}>
@@ -47,7 +47,7 @@ const Page = () => {
         </List>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

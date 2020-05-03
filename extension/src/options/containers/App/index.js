@@ -1,15 +1,15 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
-import { Container } from '@material-ui/core'
-import Header from './Header'
-import Drawer from './Drawer'
-import Bookmarks from '../Bookmarks'
-import Page from '../Page'
-import Settings from '../Settings'
-import Alerts from '../../../common/components/Alerts'
-import withTheme from '../../../common/withTheme'
-import { headerHeight, drawerWidth } from './constants'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import { Container } from '@material-ui/core';
+import Header from './Header';
+import Drawer from './Drawer';
+import Bookmarks from '../Bookmarks';
+import Page from '../Page';
+import Settings from '../Settings';
+import Alerts from '../../../common/components/Alerts';
+import withTheme from '../../../common/withTheme';
+import { headerHeight, drawerWidth } from './constants';
 
 const StyledPageContainer = styled(Container)`
   margin-top: ${headerHeight + 10}px;
@@ -17,7 +17,7 @@ const StyledPageContainer = styled(Container)`
     margin-left: ${drawerWidth}px;
     width: calc(100% - ${drawerWidth}px);
   }
-`
+`;
 
 const App = () => {
   return (
@@ -33,7 +33,7 @@ const App = () => {
       </StyledPageContainer>
       <Alerts />
     </>
-  )
-}
+  );
+};
 
-export default withTheme(App)
+export default withTheme(App);

@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Grid from '@material-ui/core/Grid'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import {
   StyledArchor,
   StyledImg,
   StyledMainLine,
   StyledAdditionalInfo
-} from '../styled'
-import BaseItem from '../BaseItem'
+} from '../styled';
+import BaseItem from '../BaseItem';
 
 const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {
   return (
@@ -26,8 +26,8 @@ const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {
         </Grid>
       </Grid>
     </StyledArchor>
-  )
-}
+  );
+};
 
 BookmarkItem.propTypes = {
   item: PropTypes.shape({
@@ -37,6 +37,6 @@ BookmarkItem.propTypes = {
     description: PropTypes.string
   }),
   query: PropTypes.string
-}
+};
 
-export default BookmarkItem
+export default BookmarkItem;

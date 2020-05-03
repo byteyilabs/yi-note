@@ -1,29 +1,29 @@
-import React, { useEffect, useRef } from 'react'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import styled from 'styled-components'
-import { useTranslation } from 'react-i18next'
-import Grid from '@material-ui/core/Grid'
-import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
-import PreviewIcon from '@material-ui/icons/FindInPageOutlined'
-import Preview from './Preview'
-import NoteItem from './NoteItem'
-import Editor from './Editor'
-import IconButton from '../../components/IconButton'
-import ScrollableList from '../../components/ScrollableList'
-import { generatePageId } from '../../../common/utils'
+import React, { useEffect, useRef } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import Grid from '@material-ui/core/Grid';
+import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
+import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
+import Preview from './Preview';
+import NoteItem from './NoteItem';
+import Editor from './Editor';
+import IconButton from '../../components/IconButton';
+import ScrollableList from '../../components/ScrollableList';
+import { generatePageId } from '../../../common/utils';
 
 export const StyledTitle = styled.div`
   font-weight: 500;
-`
+`;
 
 const NotesView = () => {
-  const { t } = useTranslation(['notesView', 'bookmark'])
+  const { t } = useTranslation(['notesView', 'bookmark']);
   const {
     videoNotes: {
       page: { id, notes, meta }
     },
     app: { url }
-  } = useStoreState(state => state)
+  } = useStoreState(state => state);
   const {
     videoNotes: {
       fetchPage,
@@ -32,30 +32,30 @@ const NotesView = () => {
       preview: { setOpen: setPreviewOpen }
     },
     alerts: { show: showAlerts }
-  } = useStoreActions(actions => actions)
-  const tryLoadMeta = useRef(false)
+  } = useStoreActions(actions => actions);
+  const tryLoadMeta = useRef(false);
 
   useEffect(() => {
     if (!id) {
-      const pageId = generatePageId(url)
-      fetchPage(pageId)
+      const pageId = generatePageId(url);
+      fetchPage(pageId);
     } else if ((!meta || !meta.description || !meta.image) && !tryLoadMeta) {
       // Try add more meta info for migrated data
-      tryLoadMeta.current = true
-      bookmarkPage()
+      tryLoadMeta.current = true;
+      bookmarkPage();
     }
-  }, [id, fetchPage, url, meta, bookmarkPage])
+  }, [id, fetchPage, url, meta, bookmarkPage]);
 
   const handleRemovePage = () => {
     showAlerts({
       content: t('bookmark:remove.alert'),
       onConfirm: removePage.bind(null, id)
-    })
-  }
+    });
+  };
 
   const handleOpenPreview = () => {
-    setPreviewOpen(true)
-  }
+    setPreviewOpen(true);
+  };
 
   return (
     <>
@@ -102,7 +102,7 @@ const NotesView = () => {
       />
       <Preview />
     </>
-  )
-}
+  );
+};
 
-export default NotesView
+export default NotesView;

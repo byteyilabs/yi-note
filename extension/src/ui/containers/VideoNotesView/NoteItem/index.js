@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { useStoreActions } from 'easy-peasy'
-import { useTranslation } from 'react-i18next'
-import Grid from '@material-ui/core/Grid'
-import PlayIcon from '@material-ui/icons/PlayCircleOutlineOutlined'
-import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useStoreActions } from 'easy-peasy';
+import { useTranslation } from 'react-i18next';
+import Grid from '@material-ui/core/Grid';
+import PlayIcon from '@material-ui/icons/PlayCircleOutlineOutlined';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {
   StyledMainRow,
   StyledSummary,
@@ -13,35 +13,35 @@ import {
   StyledExpandMoreIcon,
   StyledExpandedSection,
   StyledNote
-} from './styled'
-import IconButton from '../../../components/IconButton'
-import { usePlayer } from '../../../hooks'
-import { secondsToTime } from '../../../../common/utils'
+} from './styled';
+import IconButton from '../../../components/IconButton';
+import { usePlayer } from '../../../hooks';
+import { secondsToTime } from '../../../../common/utils';
 
 const NoteItem = ({ id, content, timestamp }) => {
-  const { t } = useTranslation(['notesView', 'note'])
+  const { t } = useTranslation(['notesView', 'note']);
   const {
     videoNotes: { edit, removeNote },
     alerts: { show: showAlerts }
-  } = useStoreActions(actions => actions)
-  const [expanded, setExpanded] = useState(false)
-  const playerRef = usePlayer()
+  } = useStoreActions(actions => actions);
+  const [expanded, setExpanded] = useState(false);
+  const playerRef = usePlayer();
 
-  const handleExpand = () => setExpanded(!expanded)
+  const handleExpand = () => setExpanded(!expanded);
 
   const handlePlay = () => {
-    playerRef.current.seek(timestamp)
-  }
+    playerRef.current.seek(timestamp);
+  };
 
-  const handleEdit = () => edit({ timestamp })
+  const handleEdit = () => edit({ timestamp });
 
   const handleDelete = () =>
     showAlerts({
       content: t('note:remove.alert'),
       onConfirm: removeNote.bind(null, id)
-    })
+    });
 
-  const formattedTime = secondsToTime(timestamp)
+  const formattedTime = secondsToTime(timestamp);
   return (
     <Grid container>
       <StyledMainRow
@@ -113,13 +113,13 @@ const NoteItem = ({ id, content, timestamp }) => {
         </Grid>
       </StyledExpandedSection>
     </Grid>
-  )
-}
+  );
+};
 
 NoteItem.propTypes = {
   id: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   timestamp: PropTypes.number.isRequired
-}
+};
 
-export default NoteItem
+export default NoteItem;

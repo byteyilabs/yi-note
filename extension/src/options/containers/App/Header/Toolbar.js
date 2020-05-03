@@ -1,22 +1,22 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import BookmarksToolbar from '../../Bookmarks/Toolbar'
-import PageToolbar from '../../Page/Toolbar'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import BookmarksToolbar from '../../Bookmarks/Toolbar';
+import PageToolbar from '../../Page/Toolbar';
 
 const Toolbar = () => {
-  const { pathname } = useLocation()
-  let ToolbarComp = null
+  const { pathname } = useLocation();
+  let ToolbarComp = null;
   if (pathname === '/') {
-    ToolbarComp = BookmarksToolbar
+    ToolbarComp = BookmarksToolbar;
   } else if (pathname.includes('/pages')) {
-    ToolbarComp = PageToolbar
+    ToolbarComp = PageToolbar;
   }
 
   if (!ToolbarComp) {
-    return null
+    return null;
   }
 
-  return <ToolbarComp />
-}
+  return <ToolbarComp />;
+};
 
-export default Toolbar
+export default Toolbar;

@@ -1,62 +1,62 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useStoreActions } from 'easy-peasy'
-import { useTranslation } from 'react-i18next'
-import { Grid, Typography, Button, Divider } from '@material-ui/core'
-import { readAsJson, exportJsonFile } from '../../../../common/services/file'
-import importData from '../../../services/importData'
-import { StorageFactory } from '../../../../common/services/storage'
+import React from 'react';
+import styled from 'styled-components';
+import { useStoreActions } from 'easy-peasy';
+import { useTranslation } from 'react-i18next';
+import { Grid, Typography, Button, Divider } from '@material-ui/core';
+import { readAsJson, exportJsonFile } from '../../../../common/services/file';
+import importData from '../../../services/importData';
+import { StorageFactory } from '../../../../common/services/storage';
 
 const StyledImportInput = styled.input`
   display: none;
-`
+`;
 
 const exportData = () => {
   return StorageFactory.getStorage()
     .getPagesForExport()
     .then(pages => {
-      exportJsonFile(pages)
-    })
-}
+      exportJsonFile(pages);
+    });
+};
 
 const ExportAndImport = () => {
-  const { t } = useTranslation('options')
+  const { t } = useTranslation('options');
   const {
     alerts: { show: showAlerts },
     reset
-  } = useStoreActions(actions => actions)
+  } = useStoreActions(actions => actions);
 
   const handleImportFile = e => {
     readAsJson(e.target.files[0])
       .then(({ version, data }) => {
         if (version !== '1.0.0') {
-          throw new Error(t('settings.import.version.error'))
+          throw new Error(t('settings.import.version.error'));
         }
-        return importData(data)
+        return importData(data);
       })
       .then(() => {
         showAlerts({
           content: t('settings.import.success')
-        })
+        });
       })
       .catch(e => {
         showAlerts({
           content: e.message || t('settings.import.general.error')
-        })
-      })
-  }
+        });
+      });
+  };
 
   const handleExportFile = () => {
-    exportData()
-  }
+    exportData();
+  };
 
   const handleExportAndClear = () => {
     exportData()
       .then(() => {
-        return StorageFactory.getStorage().clearAll()
+        return StorageFactory.getStorage().clearAll();
       })
-      .then(() => reset())
-  }
+      .then(() => reset());
+  };
 
   return (
     <Grid container direction="column" spacing={4}>
@@ -136,7 +136,7 @@ const ExportAndImport = () => {
         </Grid>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default ExportAndImport
+export default ExportAndImport;

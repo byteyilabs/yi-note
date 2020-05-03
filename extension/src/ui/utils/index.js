@@ -1,1 +1,1 @@
-export { default as takeScreenshot } from './takeScreenshot'
+export { default as takeScreenshot } from './takeScreenshot';

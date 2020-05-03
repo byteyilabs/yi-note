@@ -1,13 +1,13 @@
 export default () => {
   if (!document) {
-    return null
+    return null;
   }
 
-  let range
-  const selection = document.getSelection()
+  let range;
+  const selection = document.getSelection();
   if (selection.rangeCount > 0) {
-    range = selection.getRangeAt(0)
+    range = selection.getRangeAt(0);
   }
 
-  return [range, selection.anchorNode, selection.focusNode]
-}
+  return [range, selection.anchorNode, selection.focusNode];
+};

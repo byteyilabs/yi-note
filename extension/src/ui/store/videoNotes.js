@@ -1,79 +1,79 @@
-import { action, thunk } from 'easy-peasy'
-import { getMetadata } from 'page-metadata-parser'
-import { uuid } from 'uuidv4'
-import { StorageFactory } from '../../common/services/storage'
-import { generatePageId } from '../../common/utils'
+import { action, thunk } from 'easy-peasy';
+import { getMetadata } from 'page-metadata-parser';
+import { uuid } from 'uuidv4';
+import { StorageFactory } from '../../common/services/storage';
+import { generatePageId } from '../../common/utils';
 
 const defaultNote = {
   id: '',
   content: '',
   timestamp: 0,
   image: ''
-}
+};
 
 const defaultPage = {
   id: '',
   notes: []
-}
+};
 
-const storage = StorageFactory.getStorage()
+const storage = StorageFactory.getStorage();
 
 const videoNotesModel = {
   editor: {
     active: false,
     note: { ...defaultNote },
     setActive: action((state, active) => {
-      state.active = active
+      state.active = active;
     }),
     setNote: action((state, note) => {
-      state.note = { ...state.note, ...note }
+      state.note = { ...state.note, ...note };
     }),
     reset: action(state => {
-      state.active = false
-      state.note = {}
+      state.active = false;
+      state.note = {};
     })
   },
   preview: {
     open: false,
     setOpen: action((state, payload) => {
-      state.open = payload
+      state.open = payload;
     })
   },
   edit: action((state, { timestamp, image }) => {
     const existingNote =
-      state.page.notes.find(n => n.timestamp === timestamp) || {}
-    state.editor.active = true
-    state.editor.note = { ...existingNote, timestamp, image }
+      state.page.notes.find(n => n.timestamp === timestamp) || {};
+    state.editor.active = true;
+    state.editor.note = { ...existingNote, timestamp, image };
   }),
   page: { ...defaultPage },
   setPage: action((state, page) => {
-    state.page = { ...state.page, ...page }
+    state.page = { ...state.page, ...page };
   }),
   fetchPage: thunk(async (actions, pageId) => {
-    const page = (await storage.getPage(pageId)) || defaultPage
-    actions.setPage({ ...defaultPage, ...page })
+    const page = (await storage.getPage(pageId)) || defaultPage;
+    actions.setPage({ ...defaultPage, ...page });
   }),
   bookmarkPage: thunk(async (actions, _, { getState, getStoreState }) => {
-    const { url } = getStoreState().app
-    const { notes } = getState().page
-    const id = generatePageId(url)
+    const { url } = getStoreState().app;
+    const { notes } = getState().page;
+    const id = generatePageId(url);
     const page = await storage.addPage({
       id,
       meta: getMetadata(document, url),
       notes: notes || [],
       createdAt: +new Date()
-    })
-    actions.setPage(page)
+    });
+    actions.setPage(page);
   }),
   removePage: thunk(async (actions, pageId) => {
-    await storage.removePage(pageId)
-    actions.setPage(defaultPage)
+    await storage.removePage(pageId);
+    actions.setPage(defaultPage);
   }),
   saveNote: thunk(async (actions, note, { getState, getStoreState }) => {
-    const { url } = getStoreState().app
-    const { id } = note
-    const { page } = getState()
-    let updatedPage
+    const { url } = getStoreState().app;
+    const { id } = note;
+    const { page } = getState();
+    let updatedPage;
 
     if (!page.id) {
       // Page has not been bookmarked yet
@@ -82,35 +82,35 @@ const videoNotesModel = {
         meta: getMetadata(document, url),
         notes: [{ id: uuid(), ...note }],
         createdAt: +new Date()
-      }
-      updatedPage = await storage.addPage(pageObj)
+      };
+      updatedPage = await storage.addPage(pageObj);
     } else if (id) {
       // Update note
-      const updatedNote = await storage.updateNote(page.id, note)
+      const updatedNote = await storage.updateNote(page.id, note);
       const notes = page.notes.map(n =>
         n.id !== updatedNote.id ? n : updatedNote
-      )
-      updatedPage = { ...page, notes }
+      );
+      updatedPage = { ...page, notes };
     } else {
       // Add note
-      const addedNote = await storage.addNote(page.id, { id: uuid(), ...note })
+      const addedNote = await storage.addNote(page.id, { id: uuid(), ...note });
       const notes = [...page.notes, addedNote].sort(
         (n1, n2) => n1.timestamp - n2.timestamp
-      )
-      updatedPage = { ...page, notes }
+      );
+      updatedPage = { ...page, notes };
     }
-    actions.setPage(updatedPage)
-    actions.editor.reset()
+    actions.setPage(updatedPage);
+    actions.editor.reset();
   }),
   removeNote: thunk(async (actions, noteId, { getState }) => {
-    const { id: pageId, notes } = getState().page
-    await storage.removeNote(noteId, pageId)
+    const { id: pageId, notes } = getState().page;
+    await storage.removeNote(noteId, pageId);
     const pageObj = {
       id: pageId,
       notes: notes.filter(note => note.id !== noteId)
-    }
-    actions.setPage(pageObj)
+    };
+    actions.setPage(pageObj);
   })
-}
+};
 
-export default videoNotesModel
+export default videoNotesModel;

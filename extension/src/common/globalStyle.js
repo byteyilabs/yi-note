@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import { APP_ID } from '../constants'
+import { createGlobalStyle } from 'styled-components';
+import { APP_ID } from '../constants';
 
 export default createGlobalStyle`
   #${APP_ID} :not(svg|*) {
@@ -15,4 +15,4 @@ export default createGlobalStyle`
     -moz-box-shadow: -6px 9px 11px -2px rgba(0,0,0,0.75);
     box-shadow: -6px 9px 11px -2px rgba(0,0,0,0.75);
   }
-`
+`;

@@ -1,27 +1,27 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useTranslation } from 'react-i18next'
-import Grid from '@material-ui/core/Grid'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import SettingsIcon from '@material-ui/icons/Settings'
-import IconButton from '../../../components/IconButton'
-import { GITHUB_URL } from '../../../../constants'
+import React from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import Grid from '@material-ui/core/Grid';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import SettingsIcon from '@material-ui/icons/Settings';
+import IconButton from '../../../components/IconButton';
+import { GITHUB_URL } from '../../../../constants';
 
 const StyledContainer = styled(Grid)`
   padding: 10px 5px;
   background: #fafafa;
-`
+`;
 
 const Footer = () => {
-  const { t } = useTranslation('footer')
+  const { t } = useTranslation('footer');
 
   const openGithubRepo = () => {
-    window.open(GITHUB_URL, '_blank')
-  }
+    window.open(GITHUB_URL, '_blank');
+  };
 
   const openManagementPage = () => {
-    browser.runtime.sendMessage({ action: 'open-options' })
-  }
+    browser.runtime.sendMessage({ action: 'open-options' });
+  };
 
   return (
     <StyledContainer
@@ -44,7 +44,7 @@ const Footer = () => {
         </IconButton>
       </Grid>
     </StyledContainer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

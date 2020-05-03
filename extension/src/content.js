@@ -1,4 +1,4 @@
-import YiNote from './ui'
+import YiNote from './ui';
 
-const yiNote = new YiNote()
-yiNote.render()
+const yiNote = new YiNote();
+yiNote.render();

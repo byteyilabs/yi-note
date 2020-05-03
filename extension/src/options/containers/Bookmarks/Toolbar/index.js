@@ -1,43 +1,43 @@
-import React from 'react'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import { useTranslation } from 'react-i18next'
-import { Grid, IconButton, Tooltip } from '@material-ui/core'
-import ExportIcon from '@material-ui/icons/GetApp'
-import CheckIcon from '@material-ui/icons/Check'
-import CloseIcon from '@material-ui/icons/Close'
-import { StorageFactory } from '../../../../common/services/storage'
-import { exportJsonFile } from '../../../../common/services/file'
+import React from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useTranslation } from 'react-i18next';
+import { Grid, IconButton, Tooltip } from '@material-ui/core';
+import ExportIcon from '@material-ui/icons/GetApp';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import { StorageFactory } from '../../../../common/services/storage';
+import { exportJsonFile } from '../../../../common/services/file';
 
 const Toolbar = () => {
-  const { t } = useTranslation('options')
+  const { t } = useTranslation('options');
   const {
     toolbar: { progress },
     bookmarks
-  } = useStoreState(state => state.bookmarks)
-  const { setProgress } = useStoreActions(actions => actions.bookmarks.toolbar)
+  } = useStoreState(state => state.bookmarks);
+  const { setProgress } = useStoreActions(actions => actions.bookmarks.toolbar);
 
   const startExport = () => {
-    setProgress(true)
-  }
+    setProgress(true);
+  };
 
   const executeExport = () => {
     const ids = bookmarks.reduce((acc, bookmark) => {
       if (bookmark.selected) {
-        acc.push(bookmark.id)
+        acc.push(bookmark.id);
       }
-      return acc
-    }, [])
+      return acc;
+    }, []);
     return StorageFactory.getStorage()
       .getPagesForExport(ids)
       .then(pages => {
-        exportJsonFile(pages)
+        exportJsonFile(pages);
       })
-      .then(() => setProgress(false))
-  }
+      .then(() => setProgress(false));
+  };
 
   const cancelExport = () => {
-    setProgress(false)
-  }
+    setProgress(false);
+  };
 
   return (
     <Grid>
@@ -58,7 +58,7 @@ const Toolbar = () => {
         </Tooltip>
       )}
     </Grid>
-  )
-}
+  );
+};
 
-export default Toolbar
+export default Toolbar;

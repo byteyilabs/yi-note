@@ -1,84 +1,84 @@
-import Storage from './Storage'
-import { addNoteToList } from '../../utils'
+import Storage from './Storage';
+import { addNoteToList } from '../../utils';
 
 const getAllPages = () =>
   Object.keys(window.localStorage)
     .map(key => {
-      let obj = {}
-      const value = window.localStorage.getItem(key)
+      let obj = {};
+      const value = window.localStorage.getItem(key);
       try {
-        obj = JSON.parse(value)
+        obj = JSON.parse(value);
       } catch {
-        logger.warn('failed to parse', value)
+        logger.warn('failed to parse', value);
       }
 
-      return obj
+      return obj;
     })
-    .filter(({ id }) => !!id)
+    .filter(({ id }) => !!id);
 
 export default class LocalStorage extends Storage {
   getPage(id) {
     return new Promise((resolve, reject) => {
       try {
-        const page = JSON.parse(window.localStorage.getItem(id))
-        resolve(page)
+        const page = JSON.parse(window.localStorage.getItem(id));
+        resolve(page);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   addPage(page) {
     return new Promise((resolve, reject) => {
       try {
-        window.localStorage.setItem(page.id, JSON.stringify(page))
-        resolve(page)
+        window.localStorage.setItem(page.id, JSON.stringify(page));
+        resolve(page);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   removePage(id) {
     return new Promise((resolve, reject) => {
       try {
-        window.localStorage.removeItem(id)
-        resolve(id)
+        window.localStorage.removeItem(id);
+        resolve(id);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   addNote(pageId, note) {
     return new Promise((resolve, reject) => {
       try {
-        const page = JSON.parse(window.localStorage.getItem(pageId))
-        page.notes = addNoteToList(page.notes || [], note)
-        window.localStorage.setItem(pageId, JSON.stringify(page))
-        resolve(note)
+        const page = JSON.parse(window.localStorage.getItem(pageId));
+        page.notes = addNoteToList(page.notes || [], note);
+        window.localStorage.setItem(pageId, JSON.stringify(page));
+        resolve(note);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   updateNote(pageId, note) {
-    return this.addNote(pageId, note)
+    return this.addNote(pageId, note);
   }
 
   removeNote(id, pageId) {
     return new Promise((resolve, reject) => {
       try {
-        const page = JSON.parse(window.localStorage.getItem(pageId))
-        page.notes = page.notes || []
-        page.notes = page.notes.filter(note => note.id !== id)
-        window.localStorage.setItem(pageId, JSON.stringify(page))
-        resolve(id)
+        const page = JSON.parse(window.localStorage.getItem(pageId));
+        page.notes = page.notes || [];
+        page.notes = page.notes.filter(note => note.id !== id);
+        window.localStorage.setItem(pageId, JSON.stringify(page));
+        resolve(id);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   getBookmarks() {
@@ -87,12 +87,12 @@ export default class LocalStorage extends Storage {
         const bookmarks = getAllPages().map(({ id, meta = {} }) => ({
           id,
           ...meta
-        }))
-        resolve(bookmarks)
+        }));
+        resolve(bookmarks);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   getNotes() {
@@ -100,20 +100,20 @@ export default class LocalStorage extends Storage {
       try {
         const notes = getAllPages().reduce((acc, curr) => {
           if (!curr.notes) {
-            return acc
+            return acc;
           }
 
           return [
             ...acc,
             ...curr.notes.map(note => ({ ...note, page: curr.meta }))
-          ]
-        }, [])
+          ];
+        }, []);
 
-        resolve(notes)
+        resolve(notes);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   searchBookmarks(query) {
@@ -121,16 +121,16 @@ export default class LocalStorage extends Storage {
       try {
         const bookmarks = getAllPages()
           .filter(({ meta: { title = '', description = '' } }) => {
-            const regex = new RegExp(query, 'i')
-            return regex.test(title) || regex.test(description)
+            const regex = new RegExp(query, 'i');
+            return regex.test(title) || regex.test(description);
           })
-          .map(({ id, meta = {} }) => ({ id, ...meta }))
+          .map(({ id, meta = {} }) => ({ id, ...meta }));
 
-        resolve(bookmarks)
+        resolve(bookmarks);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 
   searchNotes(query) {
@@ -139,23 +139,23 @@ export default class LocalStorage extends Storage {
         const notes = getAllPages()
           .reduce((acc, curr) => {
             if (!curr.notes) {
-              return acc
+              return acc;
             }
 
             return [
               ...acc,
               ...curr.notes.map(note => ({ ...note, page: curr.meta }))
-            ]
+            ];
           }, [])
           .filter(({ content }) => {
-            const regex = new RegExp(query, 'i')
-            return regex.test(content)
-          })
+            const regex = new RegExp(query, 'i');
+            return regex.test(content);
+          });
 
-        resolve(notes)
+        resolve(notes);
       } catch (e) {
-        reject(e)
+        reject(e);
       }
-    })
+    });
   }
 }

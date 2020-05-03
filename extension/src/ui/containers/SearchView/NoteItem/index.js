@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Grid from '@material-ui/core/Grid'
-import { StyledTimestamp } from './styled'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import { StyledTimestamp } from './styled';
 import {
   StyledImg,
   StyledArchor,
   StyledMainLine,
   StyledAdditionalInfo
-} from '../styled'
-import BaseItem from '../BaseItem'
-import { secondsToTime } from '../../../../common/utils'
+} from '../styled';
+import BaseItem from '../BaseItem';
+import { secondsToTime } from '../../../../common/utils';
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },
@@ -32,8 +32,8 @@ const NoteItem = ({
         </Grid>
       </Grid>
     </StyledArchor>
-  )
-}
+  );
+};
 
 NoteItem.propTypes = {
   item: PropTypes.shape({
@@ -46,6 +46,6 @@ NoteItem.propTypes = {
     })
   }),
   query: PropTypes.string
-}
+};
 
-export default NoteItem
+export default NoteItem;

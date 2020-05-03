@@ -1,24 +1,24 @@
-import YoutubeIframe from './youtubeIframe'
-import { APP_ID } from '../constants'
+import YoutubeIframe from './youtubeIframe';
+import { APP_ID } from '../constants';
 
-let player
+let player;
 
 window.addEventListener(
   'message',
   ({ source, data: { from, action, id } = {} }) => {
     if (source !== window || from !== APP_ID) {
-      return
+      return;
     }
 
     if (player) {
-      return
+      return;
     }
 
     switch (action) {
       case 'initYoutubeIframe':
-        player = new YoutubeIframe(id)
-        player.init()
-        return
+        player = new YoutubeIframe(id);
+        player.init();
+        return;
     }
   }
-)
+);

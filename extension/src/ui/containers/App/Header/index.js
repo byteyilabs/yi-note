@@ -1,31 +1,31 @@
-import React from 'react'
-import { useStoreActions } from 'easy-peasy'
-import { useHistory, useLocation } from 'react-router-dom'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import CloseIcon from '@material-ui/icons/Close'
-import Grid from '@material-ui/core/Grid'
-import { StyledContainer } from './styled'
-import Search from '../Search'
-import IconButton from '../../../components/IconButton'
+import React from 'react';
+import { useStoreActions } from 'easy-peasy';
+import { useHistory, useLocation } from 'react-router-dom';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import CloseIcon from '@material-ui/icons/Close';
+import Grid from '@material-ui/core/Grid';
+import { StyledContainer } from './styled';
+import Search from '../Search';
+import IconButton from '../../../components/IconButton';
 
 const Header = () => {
-  const history = useHistory()
-  const { pathname } = useLocation()
+  const history = useHistory();
+  const { pathname } = useLocation();
   const {
     search: { setQuery },
     app: { setOpen: setAppOpen }
-  } = useStoreActions(actions => actions)
+  } = useStoreActions(actions => actions);
 
   const handleCloseSearch = () => {
     if (history.length > 1) {
-      history.goBack()
+      history.goBack();
     } else {
-      setAppOpen(false)
+      setAppOpen(false);
     }
-    setQuery('')
-  }
+    setQuery('');
+  };
 
-  const handleClose = () => setAppOpen(false)
+  const handleClose = () => setAppOpen(false);
 
   return (
     <StyledContainer
@@ -50,7 +50,7 @@ const Header = () => {
         )}
       </Grid>
     </StyledContainer>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

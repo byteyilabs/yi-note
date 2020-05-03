@@ -1,15 +1,15 @@
 export default (parent, child) => {
   if (!parent || !child) {
-    return false
+    return false;
   }
 
-  let node = child.parentNode
+  let node = child.parentNode;
   while (node != null) {
     if (node == parent) {
-      return true
+      return true;
     }
-    node = node.parentNode
+    node = node.parentNode;
   }
 
-  return false
-}
+  return false;
+};

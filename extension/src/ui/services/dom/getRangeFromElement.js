@@ -1,12 +1,12 @@
-import isElement from './isElement'
+import isElement from './isElement';
 
 export default el => {
   if (!isElement(el)) {
-    return null
+    return null;
   }
 
-  const range = document.createRange()
-  range.selectNodeContents(el)
+  const range = document.createRange();
+  range.selectNodeContents(el);
 
-  return range
-}
+  return range;
+};

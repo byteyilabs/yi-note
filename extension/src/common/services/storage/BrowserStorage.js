@@ -1,44 +1,44 @@
-import Storage from './Storage'
-import { addNoteToList } from '../../utils'
+import Storage from './Storage';
+import { addNoteToList } from '../../utils';
 
 export default class BrowserStorage extends Storage {
   constructor(area = 'local') {
-    super()
-    this.storageArea = browser.storage[area]
+    super();
+    this.storageArea = browser.storage[area];
   }
 
   getPage(id) {
-    return this.storageArea.get(id).then(page => page[id])
+    return this.storageArea.get(id).then(page => page[id]);
   }
 
   addPage(page) {
     const storeObj = {
       [page.id]: page
-    }
-    return this.storageArea.set(storeObj).then(() => page)
+    };
+    return this.storageArea.set(storeObj).then(() => page);
   }
 
   removePage(id) {
-    return this.storageArea.remove(id).then(() => id)
+    return this.storageArea.remove(id).then(() => id);
   }
 
   addNote(pageId, note) {
     return this.storageArea
       .get(pageId)
       .then(page => {
-        page = page[pageId]
-        page.notes = addNoteToList(page.notes, note)
+        page = page[pageId];
+        page.notes = addNoteToList(page.notes, note);
         const storeObj = {
           [pageId]: page
-        }
+        };
 
-        return this.storageArea.set(storeObj)
+        return this.storageArea.set(storeObj);
       })
-      .then(() => note)
+      .then(() => note);
   }
 
   updateNote(pageId, note) {
-    return this.addNote(pageId, note)
+    return this.addNote(pageId, note);
   }
 
   getBookmarks() {
@@ -49,40 +49,40 @@ export default class BrowserStorage extends Storage {
           createdAt,
           ...meta
         })
-      )
-      return bookmarks
-    })
+      );
+      return bookmarks;
+    });
   }
 
   getNotes() {
     return this.storageArea.get().then(pages => {
       const notes = Object.values(pages).reduce((acc, curr) => {
         if (!curr.notes) {
-          return acc
+          return acc;
         }
 
         return [
           ...acc,
           ...curr.notes.map(note => ({ ...note, page: curr.meta }))
-        ]
-      }, [])
-      return notes
-    })
+        ];
+      }, []);
+      return notes;
+    });
   }
 
   searchBookmarks(query) {
     return this.storageArea.get().then(pages => {
       const bookmarks = Object.values(pages)
         .filter(({ meta: { title = '', description = '' } }) => {
-          const regex = new RegExp(query, 'i')
-          return regex.test(title) || regex.test(description)
+          const regex = new RegExp(query, 'i');
+          return regex.test(title) || regex.test(description);
         })
         .map(({ id, meta = {} }) => ({
           id,
           ...meta
-        }))
-      return bookmarks
-    })
+        }));
+      return bookmarks;
+    });
   }
 
   searchNotes(query) {
@@ -90,47 +90,47 @@ export default class BrowserStorage extends Storage {
       const notes = Object.values(pages)
         .reduce((acc, curr) => {
           if (!curr.notes) {
-            return acc
+            return acc;
           }
 
           return [
             ...acc,
             ...curr.notes.map(note => ({ ...note, page: curr.meta }))
-          ]
+          ];
         }, [])
         .filter(({ content }) => {
-          const regex = new RegExp(query, 'i')
-          return regex.test(content)
-        })
-      return notes
-    })
+          const regex = new RegExp(query, 'i');
+          return regex.test(content);
+        });
+      return notes;
+    });
   }
 
   getPagesForExport(ids) {
-    let promise
+    let promise;
     if (ids) {
       promise = this.storageArea.get().then(data => {
         return Object.values(data).reduce((acc, page) => {
           if (ids.includes(page.id)) {
-            acc.push(page)
+            acc.push(page);
           }
-          return acc
-        }, [])
-      })
+          return acc;
+        }, []);
+      });
     } else {
       promise = this.storageArea.get().then(data => {
         return Object.values(data).reduce((acc, curr) => {
           if (curr.id) {
-            acc.push(curr)
+            acc.push(curr);
           }
-          return acc
-        }, [])
-      })
+          return acc;
+        }, []);
+      });
     }
-    return promise
+    return promise;
   }
 
   clearAll() {
-    return this.storageArea.clear()
+    return this.storageArea.clear();
   }
 }

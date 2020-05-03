@@ -1,24 +1,24 @@
-import React from 'react'
-import { useStoreState, useStoreActions } from 'easy-peasy'
-import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
-import Grid from '@material-ui/core/Grid'
-import GeneralEditor from '../../../components/Editor'
-import TextButton from '../../../components/TextButton'
-import { usePlayer } from '../../../hooks'
-import { takeScreenshot } from '../../../utils'
-import { secondsToTime } from '../../../../common/utils'
-import { TYPE_VIDEO_NOTE } from '../../../../constants'
+import React from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
+import GeneralEditor from '../../../components/Editor';
+import TextButton from '../../../components/TextButton';
+import { usePlayer } from '../../../hooks';
+import { takeScreenshot } from '../../../utils';
+import { secondsToTime } from '../../../../common/utils';
+import { TYPE_VIDEO_NOTE } from '../../../../constants';
 
 const StyledStatus = styled.span`
   font-weight: bold;
-`
+`;
 
 const Editor = () => {
-  const { t } = useTranslation('notesView')
+  const { t } = useTranslation('notesView');
   const {
     editor: { active, note }
-  } = useStoreState(state => state.videoNotes)
+  } = useStoreState(state => state.videoNotes);
   const {
     videoNotes: {
       editor: { setNote, reset },
@@ -27,41 +27,41 @@ const Editor = () => {
       removeNote
     },
     alerts: { showAlerts }
-  } = useStoreActions(actions => actions)
-  const playerRef = usePlayer()
+  } = useStoreActions(actions => actions);
+  const playerRef = usePlayer();
 
   const handleFocus = async () => {
     if (active) {
-      return
+      return;
     }
 
-    const player = playerRef.current
-    const timestamp = await playerRef.current.getCurrentTime()
-    const videoEl = player.getVideoElement()
-    const dataUri = takeScreenshot(videoEl)
-    edit({ timestamp, image: dataUri })
-  }
+    const player = playerRef.current;
+    const timestamp = await playerRef.current.getCurrentTime();
+    const videoEl = player.getVideoElement();
+    const dataUri = takeScreenshot(videoEl);
+    edit({ timestamp, image: dataUri });
+  };
 
   const handleSave = () => {
-    const { id, content } = note
+    const { id, content } = note;
     if (content.trim()) {
       // Upsert note
-      saveNote({ ...note, type: TYPE_VIDEO_NOTE })
+      saveNote({ ...note, type: TYPE_VIDEO_NOTE });
     } else if (id) {
       // Delete note
       showAlerts({
         content: t('note.remove.alertContent'),
         onConfirm: removeNote.bind(null, note.id)
-      })
+      });
     } else {
-      reset()
+      reset();
     }
-  }
+  };
 
   const handleChange = e => {
-    const { value } = e.target
-    setNote({ content: value })
-  }
+    const { value } = e.target;
+    setNote({ content: value });
+  };
 
   return (
     <Grid container spacing={1}>
@@ -106,7 +106,7 @@ const Editor = () => {
         </Grid>
       )}
     </Grid>
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;
