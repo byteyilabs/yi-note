@@ -15,7 +15,7 @@ import withTheme from '../../../common/withTheme';
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app);
-  const { setOpen, setUrl } = useStoreActions(actions => actions.app);
+  const { setOpen, setUrl, setShowingAd } = useStoreActions(actions => actions.app);
   const history = useHistory();
   const { pathname } = useLocation();
   const [progress, setProgress] = useState(false);
@@ -55,9 +55,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    const onShowingAd = () => setShowingAd(true);
+    const onHidingAd = () => setShowingAd(false);
+
     if (open && pathname === '/') {
       setProgress(true);
-      PlayerFactory.getPlayer({ url })
+      // First load of player, options needed.
+      PlayerFactory.getPlayer({ url, onShowingAd, onHidingAd })
         .then(player => {
           setProgress(false);
           history.replace(player ? '/video-notes' : '/search');
@@ -67,7 +71,7 @@ const App = () => {
           history.replace('/search');
         });
     }
-  }, [history, open, pathname, url]);
+  }, [history, open, pathname, setShowingAd, url]);
 
   return (
     <StyledContainer open={open} className={open && 'panel-shadow'}>

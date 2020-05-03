@@ -17,8 +17,11 @@ const StyledStatus = styled.span`
 const Editor = () => {
   const { t } = useTranslation('notesView');
   const {
-    editor: { active, note }
-  } = useStoreState(state => state.videoNotes);
+    videoNotes: {
+      editor: { active, note }
+    },
+    app: { showingAd }
+  } = useStoreState(state => state);
   const {
     videoNotes: {
       editor: { setNote, reset },
@@ -43,7 +46,7 @@ const Editor = () => {
   };
 
   const handleSave = () => {
-    const { id, content } = note;
+    const { id, content = '' } = note;
     if (content.trim()) {
       // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE });
@@ -67,7 +70,7 @@ const Editor = () => {
     <Grid container spacing={1}>
       <Grid item container>
         <GeneralEditor
-          disabled={false} // TODO: use playingAds
+          disabled={showingAd}
           content={note.content}
           placeholder={t('editor.placeholder')}
           onChange={handleChange}

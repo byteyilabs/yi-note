@@ -9,7 +9,7 @@ export default () => {
   useEffect(() => {
     const loadPlayer = async () => {
       try {
-        playerRef.current = await PlayerFactory.getPlayer({ url });
+        playerRef.current = await PlayerFactory.getPlayer();
       } catch (e) {
         logger.error(e);
         throw e;

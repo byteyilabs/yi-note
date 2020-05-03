@@ -51,7 +51,7 @@ export default class PlayerFactory {
   }
 
   static getPlayer(options = {}) {
-    const { url } = options;
+    const { url, onShowingAd, onHidingAd } = options;
     const { id, provider } = videoUrlParser.parse(url) || {};
 
     return new Promise((resolve, reject) => {

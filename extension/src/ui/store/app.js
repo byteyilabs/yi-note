@@ -9,9 +9,9 @@ const appModel = {
   setUrl: action((state, payload) => {
     state.url = payload;
   }),
-  version: '',
-  setVersion: action((state, payload) => {
-    state.version = payload;
+  showingAd: false,
+  setShowingAd: action((state, payload) => {
+    state.showingAd = payload;
   })
 };
 
