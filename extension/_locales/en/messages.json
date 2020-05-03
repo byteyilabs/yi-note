@@ -66,8 +66,11 @@
   "notesView_preview_tooltip": {
     "message": "Open notes preview"
   },
-  "notesView_preview_pdf_button": {
+  "notesView_preview_pdf_tooltip": {
     "message": "Generate PDF"
+  },
+  "notesView_preview_reload_tooltip": {
+    "message": "Reload screenshots"
   },
   "searchView_tab_bookmarks": {
     "message": "Bookmarks"

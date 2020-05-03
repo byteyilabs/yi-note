@@ -36,7 +36,10 @@ const Footer = () => {
         </IconButton>
       </Grid>
       <Grid item>
-        <IconButton tooltip={t('management.tooltip')} onClick={openManagementPage}>
+        <IconButton
+          tooltip={t('management.tooltip')}
+          onClick={openManagementPage}
+        >
           <SettingsIcon />
         </IconButton>
       </Grid>

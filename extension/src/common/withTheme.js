@@ -9,7 +9,7 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 const muiTheme = createMuiTheme({
   zIndex: {
-    modal: 8100,
+    modal: 8000,
     tooltip: 8050
   },
   palette: {

@@ -58,15 +58,10 @@ export default class PlayerFactory {
         return
       }
 
-      if (provider === 'youtube') {
-        if (id) {
-          this.#player = new YoutubePlayer(options)
-          resolve(this.#player)
-          return
-        } else {
-          resolve(null)
-          return
-        }
+      if (provider === 'youtube' && id) {
+        this.#player = new YoutubePlayer(options)
+        resolve(this.#player)
+        return
       }
 
       // Generally detect player in dom

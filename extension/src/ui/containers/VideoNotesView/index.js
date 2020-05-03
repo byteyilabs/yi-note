@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import Grid from '@material-ui/core/Grid'
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
-import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
+import PreviewIcon from '@material-ui/icons/FindInPageOutlined'
 import Preview from './Preview'
 import NoteItem from './NoteItem'
 import Editor from './Editor'
@@ -33,13 +33,15 @@ const NotesView = () => {
     },
     alerts: { show: showAlerts }
   } = useStoreActions(actions => actions)
+  const tryLoadMeta = useRef(false)
 
   useEffect(() => {
     if (!id) {
       const pageId = generatePageId(url)
       fetchPage(pageId)
-    } else if (!meta || !meta.description || !meta.image) {
+    } else if ((!meta || !meta.description || !meta.image) && !tryLoadMeta) {
       // Try add more meta info for migrated data
+      tryLoadMeta.current = true
       bookmarkPage()
     }
   }, [id, fetchPage, url, meta, bookmarkPage])
