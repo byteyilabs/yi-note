@@ -28,7 +28,10 @@ const ExportAndImport = () => {
 
   const handleImportFile = e => {
     readAsJson(e.target.files[0])
-      .then(data => {
+      .then(({ version, data }) => {
+        if (version !== '1.0.0') {
+          throw new Error(t('settings.import.version.error'))
+        }
         return importData(data)
       })
       .then(() => {
@@ -36,9 +39,9 @@ const ExportAndImport = () => {
           content: t('settings.import.success')
         })
       })
-      .catch(() => {
+      .catch(e => {
         showAlerts({
-          content: t('settings.import.error')
+          content: e.message || t('settings.import.general.error')
         })
       })
   }

@@ -123,8 +123,11 @@
   "options_settings_import_success": {
     "message": "Successfully imported data."
   },
-  "options_settings_import_error": {
+  "options_settings_import_general_error": {
     "message": "Unable to process imported data."
+  },
+  "options_settings_import_version_error": {
+    "message": "Version is not suppored."
   },
   "options_settings_exportAndClear_title": {
     "message": "Export and Clear (Note: this action will also clear current storage)"

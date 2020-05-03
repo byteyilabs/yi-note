@@ -119,13 +119,13 @@ export default class BrowserStorage extends Storage {
       })
     } else {
       promise = this.storageArea.get().then(data => {
-        return Object.values(data).reduce((acc, page) => {
-          if (page.id) {
-            acc.push(page)
+        return Object.values(data).reduce((acc, curr) => {
+          if (curr.id) {
+            acc.push(curr)
           }
           return acc
-        })
-      }, [])
+        }, [])
+      })
     }
     return promise
   }
