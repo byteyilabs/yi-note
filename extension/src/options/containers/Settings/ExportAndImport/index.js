@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useStoreActions } from 'easy-peasy'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography, Button, Divider } from '@material-ui/core'
-import { readAsJson, exportJsonFile } from '../../../services/file'
+import { readAsJson, exportJsonFile } from '../../../../common/services/file'
 import importData from '../../../services/importData'
 import { StorageFactory } from '../../../../common/services/storage'
 

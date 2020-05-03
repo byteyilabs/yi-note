@@ -1,6 +1,7 @@
 import { uuid } from 'uuidv4'
 import { generatePageId } from '../../common/utils'
 import { StorageFactory } from '../../common/services/storage'
+import { exportJsonFile } from '../../common/services/file'
 
 const storage = StorageFactory.getStorage()
 
@@ -77,6 +78,7 @@ const processLocalStoragePage = async (key, data) => {
 export default async () => {
   // Process data in local storage
   const dataInLocal = await browser.storage.local.get()
+  exportJsonFile(dataInLocal, 'storage_local_0.6.4.json', '0.6.4')
   await browser.storage.local.clear()
   for (const key in dataInLocal) {
     const value = dataInLocal[key]
@@ -88,6 +90,7 @@ export default async () => {
 
   // Process data in sync storage
   const dataInSync = await browser.storage.sync.get()
+  exportJsonFile(dataInSync, 'storage_sync_0.6.4.json', '0.6.4')
   await browser.storage.sync.clear()
   for (const key in dataInSync) {
     if (

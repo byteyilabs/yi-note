@@ -1,5 +1,5 @@
 import { saveAs } from 'file-saver'
-import { getVersion } from '../../common/utils'
+import { getVersion } from '../utils'
 
 const EXPORTED_FILE_NAME = 'yinote.json'
 
@@ -24,8 +24,12 @@ export const readAsJson = file => {
   })
 }
 
-export const exportJsonFile = (data, filename = EXPORTED_FILE_NAME) => {
-  const version = getVersion()
+export const exportJsonFile = (
+  data,
+  filename = EXPORTED_FILE_NAME,
+  version
+) => {
+  version = version || getVersion()
   const dataToExport = { version, data }
 
   // eslint-disable-next-line no-undef

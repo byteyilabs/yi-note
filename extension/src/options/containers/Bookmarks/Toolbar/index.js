@@ -6,7 +6,7 @@ import ExportIcon from '@material-ui/icons/GetApp'
 import CheckIcon from '@material-ui/icons/Check'
 import CloseIcon from '@material-ui/icons/Close'
 import { StorageFactory } from '../../../../common/services/storage'
-import { exportJsonFile } from '../../../services/file'
+import { exportJsonFile } from '../../../../common/services/file'
 
 const Toolbar = () => {
   const { t } = useTranslation('options')
