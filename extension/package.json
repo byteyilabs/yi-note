@@ -10,6 +10,7 @@
     "notes"
   ],
   "scripts": {
+    "build": "webpack --config webpack.config.js",
     "dev": "webpack --config webpack.dev.config.js",
     "playground": "webpack-dev-server --env.NODE_ENV=playground --mode development --config webpack.playground.config.js"
   },
@@ -27,6 +28,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-js-logger": "^1.0.17",
     "babel-plugin-styled-components": "^1.10.6",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.2.1",
     "eslint": "^6.7.1",
@@ -34,6 +36,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "file-loader": "^5.0.2",
+    "filemanager-webpack-plugin": "^2.0.5",
     "html-webpack-plugin": "^4.2.1",
     "prettier": "1.19.1",
     "prop-types": "^15.7.2",
