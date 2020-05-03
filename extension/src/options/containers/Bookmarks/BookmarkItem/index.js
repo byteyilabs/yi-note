@@ -73,11 +73,13 @@ const BookmarkItem = ({ id, title, description, url, image, selected }) => {
       spacing={1}
       onClick={handleOpenPageDetail}
     >
-      <Grid item md={2} sm={12}>
-        <Grid container justify="center" alignItems="center">
-          <StyledImg src={image} alt="" />
+      {image && (
+        <Grid item md={2} sm={12}>
+          <Grid container justify="center" alignItems="center">
+            <StyledImg src={image} />
+          </Grid>
         </Grid>
-      </Grid>
+      )}
       <Grid item md={8} sm={12} container spacing={2} direction="column">
         <Grid item>
           <StyledTitle>{title}</StyledTitle>

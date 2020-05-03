@@ -10,7 +10,7 @@ import NoteItem from './NoteItem'
 import Editor from './Editor'
 import IconButton from '../../components/IconButton'
 import ScrollableList from '../../components/ScrollableList'
-import { generatePageId } from '../../utils'
+import { generatePageId } from '../../../common/utils'
 
 export const StyledTitle = styled.div`
   font-weight: 500;
@@ -20,7 +20,7 @@ const NotesView = () => {
   const { t } = useTranslation(['notesView', 'bookmark'])
   const {
     videoNotes: {
-      page: { id, notes }
+      page: { id, notes, meta }
     },
     app: { url }
   } = useStoreState(state => state)
@@ -38,8 +38,11 @@ const NotesView = () => {
     if (!id) {
       const pageId = generatePageId(url)
       fetchPage(pageId)
+    } else if (!meta || !meta.description || !meta.image) {
+      // Try add more meta info for migrated data
+      bookmarkPage()
     }
-  }, [id, fetchPage, url])
+  }, [id, fetchPage, url, meta, bookmarkPage])
 
   const handleRemovePage = () => {
     showAlerts({

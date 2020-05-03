@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography, List, ListItem } from '@material-ui/core'
-import NoteItem from './NoteItem'
+import VideoNoteItem from './VideoNoteItem'
+import { TYPE_VIDEO_NOTE } from '../../../constants'
 
 const Page = () => {
   const { t } = useTranslation('options')
@@ -28,15 +29,19 @@ const Page = () => {
       </Grid>
       <Grid item>
         <List>
-          {notes.map(({ id, content, timestamp, image }) => (
+          {notes.map(({ id, content, timestamp, image, type }) => (
             <ListItem key={id}>
-              <NoteItem
-                id={id}
-                content={content}
-                timestamp={timestamp}
-                image={image}
-                url={url}
-              />
+              {type === TYPE_VIDEO_NOTE ? (
+                <VideoNoteItem
+                  id={id}
+                  content={content}
+                  timestamp={timestamp}
+                  image={image}
+                  url={url}
+                />
+              ) : (
+                <div>{content}</div>
+              )}
             </ListItem>
           ))}
         </List>

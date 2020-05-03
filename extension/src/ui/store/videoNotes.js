@@ -2,7 +2,7 @@ import { action, thunk } from 'easy-peasy'
 import { getMetadata } from 'page-metadata-parser'
 import { uuid } from 'uuidv4'
 import { StorageFactory } from '../../common/services/storage'
-import { generatePageId } from '../utils'
+import { generatePageId } from '../../common/utils'
 
 const defaultNote = {
   id: '',
@@ -53,13 +53,14 @@ const videoNotesModel = {
     const page = (await storage.getPage(pageId)) || defaultPage
     actions.setPage({ ...defaultPage, ...page })
   }),
-  bookmarkPage: thunk(async (actions, _, { getStoreState }) => {
+  bookmarkPage: thunk(async (actions, _, { getState, getStoreState }) => {
     const { url } = getStoreState().app
+    const { notes } = getState().page
     const id = generatePageId(url)
     const page = await storage.addPage({
       id,
       meta: getMetadata(document, url),
-      notes: [],
+      notes: notes || [],
       createdAt: +new Date()
     })
     actions.setPage(page)

@@ -1,6 +1,6 @@
 // IMPORTANT: update import logic if storage or data structure changed
 
-import { StorageFactory } from '../services/storage'
+import { StorageFactory } from '../../common/services/storage'
 
 export default async pages => {
   const storage = StorageFactory.getStorage()

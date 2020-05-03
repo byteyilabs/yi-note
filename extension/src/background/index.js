@@ -1,4 +1,5 @@
 import Logger from 'js-logger'
+import migration_v_0_6_4 from './migrations/0.6.4'
 
 Logger.useDefaults()
 
@@ -17,13 +18,16 @@ browser.runtime.onMessage.addListener(({ action }) => {
   }
 })
 
-browser.runtime.onInstalled.addListener(({ reason }) => {
+browser.runtime.onInstalled.addListener(detail => {
+  const { reason, previousVersion } = detail
   if (reason === 'install') {
     // TODO: handle install, maybe compare version
   }
 
   if (reason === 'update') {
-    // TODO: handle install
+    if (previousVersion === '0.6.4') {
+      migration_v_0_6_4()
+    }
   }
 })
 

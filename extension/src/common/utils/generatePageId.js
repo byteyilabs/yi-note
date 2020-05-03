@@ -4,6 +4,7 @@ import videoUrlParser from 'js-video-url-parser'
 import { PROVIDER_YOUTUBE } from '../../constants'
 
 const getUrlWithoutHash = url => {
+  // eslint-disable-next-line no-undef
   const parsedUrl = new URL(url)
   parsedUrl.hash = ''
   return parsedUrl.toString()

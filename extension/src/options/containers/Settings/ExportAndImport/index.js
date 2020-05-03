@@ -4,7 +4,7 @@ import { useStoreActions } from 'easy-peasy'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography, Button, Divider } from '@material-ui/core'
 import { readAsJson, exportJsonFile } from '../../../services/file'
-import migrate from '../../../../common/migrations'
+import importData from '../../../services/importData'
 import { StorageFactory } from '../../../../common/services/storage'
 
 const StyledImportInput = styled.input`
@@ -29,7 +29,7 @@ const ExportAndImport = () => {
   const handleImportFile = e => {
     readAsJson(e.target.files[0])
       .then(data => {
-        return migrate(data)
+        return importData(data)
       })
       .then(() => {
         showAlerts({
