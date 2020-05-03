@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { Switch, Route, useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import { useInterval } from 'react-recipes'
+import { Grid, CircularProgress } from '@material-ui/core'
 import { StyledContainer, StyledMain, StyledViewWrapper } from './styled'
 import Header from './Header'
 import Footer from './Footer'
@@ -14,10 +15,10 @@ import withTheme from '../../../common/withTheme'
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app)
-  const { setOpen, setUrl, setVersion } = useStoreActions(
-    actions => actions.app
-  )
+  const { setOpen, setUrl } = useStoreActions(actions => actions.app)
   const history = useHistory()
+  const { pathname } = useLocation()
+  const [progress, setProgress] = useState(false)
 
   useInterval(() => {
     if (url !== window.location.href) {
@@ -29,13 +30,11 @@ const App = () => {
   useEffect(() => {
     // Register message listener
     try {
-      browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        const { action, version } = request
+      browser.runtime.onMessage.addListener(request => {
+        const { action } = request
         switch (action) {
           case 'togglePanel':
-            sendResponse({ message: 'connected' })
             setOpen(!open)
-            setVersion(version)
             return
         }
       })
@@ -55,16 +54,37 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    if (open && pathname === '/') {
+      setProgress(true)
+      PlayerFactory.getPlayer({ url })
+        .then(player => {
+          setProgress(false)
+          history.replace(player ? '/video-notes' : '/search')
+        })
+        .catch(() => {
+          setProgress(false)
+          history.replace('/search')
+        })
+    }
+  }, [history, open, pathname, url])
+
   return (
     <StyledContainer open={open} className={open && 'panel-shadow'}>
       <StyledMain>
         <Header />
         <StyledViewWrapper>
-          <Switch>
-            <Route path="/video-notes" component={VideoNotesView} />
-            <Route path="/search" component={SearchView} />
-            <Route path="/reload" component={ReloadView} />
-          </Switch>
+          {progress ? (
+            <Grid container alignItems="center" justify="center">
+              <CircularProgress />
+            </Grid>
+          ) : (
+            <Switch>
+              <Route path="/video-notes" component={VideoNotesView} />
+              <Route path="/search" component={SearchView} />
+              <Route path="/reload" component={ReloadView} />
+            </Switch>
+          )}
         </StyledViewWrapper>
         <Footer />
       </StyledMain>

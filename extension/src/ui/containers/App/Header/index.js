@@ -17,7 +17,11 @@ const Header = () => {
   } = useStoreActions(actions => actions)
 
   const handleCloseSearch = () => {
-    history.goBack()
+    if (history.length > 1) {
+      history.goBack()
+    } else {
+      setAppOpen(false)
+    }
     setQuery('')
   }
 
@@ -35,7 +39,7 @@ const Header = () => {
         <Search />
       </Grid>
       <Grid item xs={2} container justify="flex-end">
-        {pathname === '/search' ? (
+        {pathname === '/search' && history.length > 1 ? (
           <IconButton onClick={handleCloseSearch}>
             <CloseIcon />
           </IconButton>

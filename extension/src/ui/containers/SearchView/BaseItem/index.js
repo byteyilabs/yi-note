@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const toHighlightedHTML = (origin = '', query = '') => {
-  if (query.length <= 2) {
+  if (query.length < 2) {
     return origin
   }
 

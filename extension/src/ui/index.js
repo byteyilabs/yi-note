@@ -30,7 +30,7 @@ export default class YiNote {
 
     ReactDOM.render(
       <StoreProvider store={this.#store}>
-        <MemoryRouter initialEntries={['/video-notes']}>
+        <MemoryRouter>
           <CommonGlobalStyle />
           <GlobalStyle />
           <App />

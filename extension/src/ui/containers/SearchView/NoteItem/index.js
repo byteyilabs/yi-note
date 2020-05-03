@@ -2,7 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import { StyledTimestamp } from './styled'
-import { StyledImg, StyledArchor, StyledMainLine, StyledAdditionalInfo } from '../styled'
+import {
+  StyledImg,
+  StyledArchor,
+  StyledMainLine,
+  StyledAdditionalInfo
+} from '../styled'
 import BaseItem from '../BaseItem'
 import { secondsToTime } from '../../../../common/utils'
 

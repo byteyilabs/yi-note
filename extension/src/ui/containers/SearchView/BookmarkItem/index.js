@@ -1,7 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
-import { StyledArchor, StyledImg, StyledMainLine, StyledAdditionalInfo } from '../styled'
+import {
+  StyledArchor,
+  StyledImg,
+  StyledMainLine,
+  StyledAdditionalInfo
+} from '../styled'
 import BaseItem from '../BaseItem'
 
 const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {

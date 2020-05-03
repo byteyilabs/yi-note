@@ -48,7 +48,7 @@ export default class PlayerFactory {
     retry(selectorPredicate, playerResolver, playerRejector)
   }
 
-  static getPlayer(options) {
+  static getPlayer(options = {}) {
     const { url } = options
     const { id, provider } = videoUrlParser.parse(url) || {}
 
@@ -58,10 +58,15 @@ export default class PlayerFactory {
         return
       }
 
-      if (provider === 'youtube' && id) {
-        this.#player = new YoutubePlayer(options)
-        resolve(this.#player)
-        return
+      if (provider === 'youtube') {
+        if (id) {
+          this.#player = new YoutubePlayer(options)
+          resolve(this.#player)
+          return
+        } else {
+          resolve(null)
+          return
+        }
       }
 
       // Generally detect player in dom
