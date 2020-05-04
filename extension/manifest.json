@@ -11,7 +11,7 @@
     "default_icon": "icons/icon-16.png"
   },
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' object-src 'self'",
   "default_locale": "en",
   "permissions": [
     "tabs",
