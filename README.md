@@ -23,7 +23,7 @@ YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost onl
 
 ## Introduction
 
-### Purpose
+### Purpose and history
 
 YiNote, aka TurboNote chrome extension, is developed to help online learner and video editor to bookmark thoughts and ideas in a fine-grained way while working or learning with online materials. It was developed in 2016 as a side project, and luckily loved by thousands users all around the world.
 
@@ -46,7 +46,7 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
 
 There are serveral options to use this extension:
 
-- Install extension from [Chrome](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf) or Firefox web store.
+- Install extension from [Chrome](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf) web store.
 - For existing users, Chrome will automatically update the extension when new versions available. Please see [Migrations Guide](/MIGRATING.md) for more information.
 - You can also build the extension, then run it locally. Please see [Development](#development) for more information.
 
