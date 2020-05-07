@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
-import * as jsPDF from 'jspdf';
+import jsPDF from 'jspdf';
 import { Grid, Backdrop, Fade, CircularProgress } from '@material-ui/core';
 import ExportPDFIcon from '@material-ui/icons/GetApp';
 import ReloadIcon from '@material-ui/icons/Autorenew';
@@ -14,9 +14,9 @@ import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
 import { delay } from '../../../../common/utils';
 import { APP_ID } from '../../../../constants';
-import { addfont } from './fonts/msyh-normal';
+import { addFont } from './fonts/msyh-normal';
 
-addfont(jsPDF.API);
+addFont(jsPDF.API);
 
 const Preview = () => {
   const { t } = useTranslation('notesView');
