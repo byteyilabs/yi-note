@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
-import jsPDF from 'jspdf';
+import * as jsPDF from 'jspdf';
 import { Grid, Backdrop, Fade, CircularProgress } from '@material-ui/core';
 import ExportPDFIcon from '@material-ui/icons/GetApp';
 import ReloadIcon from '@material-ui/icons/Autorenew';
@@ -14,6 +14,9 @@ import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
 import { delay } from '../../../../common/utils';
 import { APP_ID } from '../../../../constants';
+import { addfont } from './fonts/heiti-normal';
+
+addfont(jsPDF.API);
 
 const Preview = () => {
   const { t } = useTranslation('notesView');
@@ -76,6 +79,10 @@ const Preview = () => {
 
   const handleGeneratePDF = () => {
     var doc = new jsPDF();
+
+    doc.setFont('msyh');
+    console.log(doc.getFontList())
+
     var y = 20;
     doc.setFontSize(18);
     doc.setFontType('bold');
@@ -129,43 +136,43 @@ const Preview = () => {
           {loading ? (
             <CircularProgress />
           ) : (
-            <Grid
-              ref={previewContentRef}
-              container
-              direction="column"
-              spacing={6}
-            >
-              <Grid item container justify="flex-end" spacing={2}>
-                <Grid item>
-                  <IconButton
-                    tooltip={t('preview.reload.tooltip')}
-                    onClick={handleReloadScreenshots}
-                  >
-                    <ReloadIcon />
-                  </IconButton>
+              <Grid
+                ref={previewContentRef}
+                container
+                direction="column"
+                spacing={6}
+              >
+                <Grid item container justify="flex-end" spacing={2}>
+                  <Grid item>
+                    <IconButton
+                      tooltip={t('preview.reload.tooltip')}
+                      onClick={handleReloadScreenshots}
+                    >
+                      <ReloadIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      tooltip={t('preview.pdf.tooltip')}
+                      onClick={handleGeneratePDF}
+                    >
+                      <ExportPDFIcon />
+                    </IconButton>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <IconButton
-                    tooltip={t('preview.pdf.tooltip')}
-                    onClick={handleGeneratePDF}
-                  >
-                    <ExportPDFIcon />
-                  </IconButton>
-                </Grid>
+                <ScrollableList
+                  height={600}
+                  items={notes}
+                  renderItem={({ content, timestamp, image }) => (
+                    <NoteItem
+                      content={content}
+                      timestamp={timestamp}
+                      image={image}
+                    />
+                  )}
+                />
               </Grid>
-              <ScrollableList
-                height={600}
-                items={notes}
-                renderItem={({ content, timestamp, image }) => (
-                  <NoteItem
-                    content={content}
-                    timestamp={timestamp}
-                    image={image}
-                  />
-                )}
-              />
-            </Grid>
-          )}
+            )}
         </StyledPaper>
       </Fade>
     </StyledModal>
