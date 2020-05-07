@@ -3,6 +3,7 @@ import YoutubePlayer from './YoutubePlayer';
 import YoutubeIframePlayer from './YoutubeIframePlayer';
 import HTML5Player from './HTML5Player';
 import { retry } from '../../../common/utils';
+import isHidden from '../dom/isHidden';
 
 const playersToTry = [
   {
@@ -10,7 +11,7 @@ const playersToTry = [
     player: HTML5Player
   },
   {
-    selector: 'iframe[src*="www.youtube.com/embed"]',
+    selector: 'iframe[src*="youtube"]',
     player: YoutubeIframePlayer
   }
 ];
@@ -26,7 +27,7 @@ export default class PlayerFactory {
 
     const selectorPredicate = () => {
       for (const player of playersToTry) {
-        if (document.querySelectorAll(player.selector).length === 1) {
+        if (document.querySelectorAll(player.selector).length) {
           foundSelector = player.selector;
           return true;
         }
@@ -36,13 +37,25 @@ export default class PlayerFactory {
     };
 
     const playerResolver = () => {
+      // Use first visible element
       const playerClass = playersToTry.find(
         player => player.selector === foundSelector
       ).player;
-      this.#player = new playerClass({
-        videoEl: document.querySelector(foundSelector)
-      });
-      resolve(this.#player);
+      const els = document.querySelectorAll(foundSelector);
+      let videoEl;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!isHidden(el)) {
+          videoEl = el;
+          break;
+        }
+      }
+      if (videoEl) {
+        this.#player = new playerClass({ videoEl });
+        resolve(this.#player);
+        return;
+      }
+      resolve(null);
     };
 
     const playerRejector = () => reject(new Error('Failed to find player'));
@@ -51,7 +64,7 @@ export default class PlayerFactory {
   }
 
   static getPlayer(options = {}) {
-    const { url, onShowingAd, onHidingAd } = options;
+    const { url } = options;
     const { id, provider } = videoUrlParser.parse(url) || {};
 
     return new Promise((resolve, reject) => {
