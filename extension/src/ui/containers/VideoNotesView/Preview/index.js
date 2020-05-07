@@ -14,7 +14,7 @@ import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
 import { delay } from '../../../../common/utils';
 import { APP_ID } from '../../../../constants';
-import { addfont } from './fonts/heiti-normal';
+import { addfont } from './fonts/msyh-normal';
 
 addfont(jsPDF.API);
 
@@ -81,6 +81,7 @@ const Preview = () => {
     var doc = new jsPDF();
 
     doc.setFont('msyh');
+    console.log(doc.getFontList())
     console.log(doc.getFontList())
 
     var y = 20;
