@@ -15,6 +15,9 @@
   "bookmark_remove_alert": {
     "message": "Delete the bookmark will also delete all notes in current page. Please confirm to proceed."
   },
+  "bookmark_nobookmark": {
+    "message": "No Bookmark"
+  },
   "note_edit_tooltip": {
     "message": "Edit Note"
   },
@@ -23,6 +26,9 @@
   },
   "note_remove_alert": {
     "message": "Please confirm to remove the note."
+  },
+  "note_nonote": {
+    "message": "No Note"
   },
   "alert_primary": {
     "message": "Confirm"

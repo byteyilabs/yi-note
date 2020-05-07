@@ -2,6 +2,7 @@
 
 YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost online learning experience.
 
+- [Installation](#installation)
 - [Introduction](#introduction)
   - [Purpose and history](#purpose-and-history)
   - [Features](#features)
@@ -20,6 +21,13 @@ YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost onl
   - [As a developer](#as-a-developer)
 - [Roadmap](#roadmap)
 - [License](#license)
+
+## Installation
+
+YiNote has been published in following platforms. Please download the extension from following links to achieve best user experience and support.
+
+- [Chrome Web Store](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf)
+- [Firefox addons](https://addons.mozilla.org/en-CA/firefox/addon/yinote/)
 
 ## Introduction
 
@@ -46,8 +54,7 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
 
 There are serveral options to use this extension:
 
-- Install extension from [Chrome](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf) web store.
-- For existing users, Chrome will automatically update the extension when new versions available. Please see [Migrations Guide](/MIGRATING.md) for more information.
+- Please see [Installation section](#installation) to install extension from official platform stores. Please see [Migrations Guide](/MIGRATING.md) for more information.
 - You can also build the extension, then run it locally. Please see [Development](#development) for more information.
 
 #### Development
@@ -75,8 +82,16 @@ npm install
 
 To develop `content script`, `background` and `options` page in watch mode. Please run
 
+Start development for chromium platform:
+
 ```bash
-npm run dev
+npm run dev:chromium
+```
+
+Start development for firefox platform (**Recommended** since better support in linking sourcemap):
+
+```bash
+npm run dev:firefox
 ```
 
 For `content script` change, you need to reload the extension in `chrome://extensions` tab.
@@ -125,7 +140,7 @@ YiNote leverages mozilla's [Web extension polyfill](https://github.com/mozilla/w
 
 - Expose YiNote to more people, share it via blog post, facebook, twitter etc.
 - Answer questions in [the issue tracker](https://www.github.com/shuowu/yi-note/issues)
-- Support financially on [Patreon](https://www.patreon.com/yinote)
+- Support financially on [Patreon](https://www.patreon.com/yinote) and [GitHub Sponsor](https://github.com/sponsors/shuowu)
 
 ### As a developer
 
