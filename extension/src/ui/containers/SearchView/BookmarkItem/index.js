@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Highlight from 'react-highlighter';
 import Grid from '@material-ui/core/Grid';
 import {
   StyledArchor,
@@ -7,7 +8,6 @@ import {
   StyledMainLine,
   StyledAdditionalInfo
 } from '../styled';
-import BaseItem from '../BaseItem';
 
 const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {
   return (
@@ -16,12 +16,12 @@ const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {
         <Grid item>
           <StyledMainLine>
             {icon && <StyledImg src={icon} alt="icon" />}
-            <BaseItem origin={title} query={query} />
+            <Highlight search={query}>{description}</Highlight>
           </StyledMainLine>
         </Grid>
         <Grid item>
           <StyledAdditionalInfo>
-            <BaseItem origin={description} query={query} />
+            <Highlight search={query}>{description}</Highlight>
           </StyledAdditionalInfo>
         </Grid>
       </Grid>

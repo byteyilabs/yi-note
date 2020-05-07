@@ -73,6 +73,7 @@
     "page-metadata-parser": "^1.1.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-highlighter": "^0.4.3",
     "react-i18next": "^11.2.6",
     "react-recipes": "^1.0.0",
     "react-router-dom": "^5.1.2",

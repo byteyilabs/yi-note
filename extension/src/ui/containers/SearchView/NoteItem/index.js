@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Highlight from 'react-highlighter';
 import Grid from '@material-ui/core/Grid';
 import { StyledTimestamp } from './styled';
 import {
@@ -8,7 +9,6 @@ import {
   StyledMainLine,
   StyledAdditionalInfo
 } from '../styled';
-import BaseItem from '../BaseItem';
 import { secondsToTime } from '../../../../common/utils';
 
 const NoteItem = ({
@@ -21,7 +21,7 @@ const NoteItem = ({
         <Grid item>
           <StyledMainLine>
             <StyledTimestamp>{secondsToTime(timestamp)}</StyledTimestamp>
-            <BaseItem origin={content} query={query} />
+            <Highlight search={query}>{content}</Highlight>
           </StyledMainLine>
         </Grid>
         <Grid item>
