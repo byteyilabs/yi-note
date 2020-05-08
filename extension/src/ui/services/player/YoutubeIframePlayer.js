@@ -1,11 +1,8 @@
 import Player from './Player';
-import { injectScriptToDOM } from '../dom';
-import { sendMessage } from '../../../common/utils';
-import { PAGE } from '../../../constants';
 
 export default class YoutubeIframePlayer extends Player {
   #videoEl;
-  #callbacks = {};
+  #player;
 
   constructor(options = {}) {
     super(options);
@@ -14,37 +11,21 @@ export default class YoutubeIframePlayer extends Player {
     if (!this.#videoEl.id) {
       this.#videoEl.id = 'yinote-youtube-iframe';
     }
-    this.#enableJSApi();
-    injectScriptToDOM().then(() => {
-      sendMessage('initYoutubeIframe', { id: this.#videoEl.id });
-    });
-    this.#addCallbackListeners();
-  }
-
-  #enableJSApi() {
-    const parsedUrl = new URL(this.#videoEl.src);
-    const { search } = parsedUrl;
-    if (!search.includes('enablejsapi=1')) {
-      parsedUrl.search = search.includes('?')
-        ? `${search}&enablejsapi=1`
-        : '?enablejsapi=1';
-      this.#videoEl.src = parsedUrl.toString();
-    }
-  }
-
-  #addCallbackListeners() {
-    window.addEventListener(
-      'message',
-      ({ source, data: { action, data, from } }) => {
-        if (source !== window || from !== PAGE) {
-          return;
-        }
-
-        if (typeof this.#callbacks[action] === 'function') {
-          this.#callbacks[action](data);
-        }
+    this.#setIframeQueryParams();
+    this.#player = new YT.Player(this.#videoEl.id, {
+      events: {
+        onReady: () => logger.info('youtube iframe player ready')
       }
-    );
+    });
+  }
+
+  #setIframeQueryParams() {
+    const parsedUrl = new URL(this.#videoEl.src);
+    const queryParams = new URLSearchParams(parsedUrl.search);
+    queryParams.set('enablejsapi', '1');
+    queryParams.delete('origin');
+    parsedUrl.search = queryParams.toString();
+    this.#videoEl.src = parsedUrl.toString();
   }
 
   getVideoElement() {
@@ -52,34 +33,28 @@ export default class YoutubeIframePlayer extends Player {
   }
 
   play() {
-    sendMessage('play');
+    this.#player.playVideo();
   }
 
   pause() {
-    sendMessage('pause');
+    this.#player.pauseVideo();
   }
 
   seek(timestamp) {
-    sendMessage('seek', { timestamp });
+    this.#player.seekTo(timestamp);
   }
 
   async getCurrentTime() {
     return new Promise((resolve, reject) => {
-      sendMessage('currentTime');
-      this.#callbacks.currentTime = resolve;
-      window.setTimeout(() => {
-        reject('Get youtube iframe player currentTime overtime.');
-      }, 500);
+      const currentTime = this.#player.getCurrentTime();
+      resolve(Math.floor(currentTime));
     });
   }
 
   async getDuration() {
     return new Promise((resolve, reject) => {
-      sendMessage('duration');
-      this.#callbacks.duration = resolve;
-      window.setTimeout(() => {
-        reject('Get youtube iframe player currentTime overtime.');
-      }, 500);
+      const duration = this.#player.getDuration();
+      resolve(Math.floor(duration));
     });
   }
 }

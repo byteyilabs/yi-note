@@ -11,21 +11,16 @@
     "default_icon": "icons/icon-16.png"
   },
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "default_locale": "en",
   "permissions": [
     "activeTab",
     "storage",
-    "unlimitedStorage",
-    "http://*/*",
-    "https://*/*",
-    "file://*/*"
+    "unlimitedStorage"
   ],
-  "options_page": "dist/options.html",
   "background": {
     "scripts": [
-      "dist/browser-polyfill.js",
-      "dist/background.js"
+      "browser-polyfill.js",
+      "background.js"
     ],
     "persistent": true
   },
@@ -37,14 +32,14 @@
         "file://*/*"
       ],
       "js": [
-        "dist/browser-polyfill.js",
-        "dist/content.js"
+        "youtube-iframe-api.js",
+        "browser-polyfill.js",
+        "content.js"
       ],
       "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
-    "dist/inject.js",
     "installed.png"
   ]
 }
