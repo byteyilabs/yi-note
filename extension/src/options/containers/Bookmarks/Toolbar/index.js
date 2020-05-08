@@ -30,7 +30,7 @@ const Toolbar = () => {
     return StorageFactory.getStorage()
       .getPagesForExport(ids)
       .then(pages => {
-        exportJsonFile(pages);
+        exportJsonFile(pages, 'yi-note.json');
       })
       .then(() => setProgress(false));
   };

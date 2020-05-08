@@ -10,10 +10,19 @@ browser.browserAction.onClicked.addListener(tab => {
   });
 });
 
-browser.runtime.onMessage.addListener(({ action }) => {
+browser.runtime.onMessage.addListener(message => {
+  const { action } = message;
   switch (action) {
     case 'open-options':
       browser.runtime.openOptionsPage();
+      return true;
+    case 'export-file':
+      browser.downloads.download({
+        filename: message.filename,
+        // eslint-disable-next-line no-undef
+        url: URL.createObjectURL(message.blob),
+        saveAs: false
+      });
       return true;
   }
 });

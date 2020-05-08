@@ -11,12 +11,15 @@ const getManifestPlugin = env => {
   const seed = commonManifest;
   if (env === 'chromium') {
     seed.options_page = 'options.html';
+    seed.browser = "chromium";
   } else {
     // Use web extension standard as fallback
     seed.options_ui = {
       page: "options.html",
       browser_style: true
     };
+    seed.browser = "firefox";
+    seed.permissions.push('downloads');
   }
 
   return new ManifestPlugin({
@@ -66,11 +69,6 @@ module.exports = env => {
               { source: "icons/**/*", destination: "dist/icons" },
               { source: "_locales/**/*", destination: "dist/_locales" },
               { source: "installed.png", destination: "dist" }
-            ]
-          },
-          {
-            archive: [
-              { source: 'dist', destination: `${pkg.name}_${env}_${pkg.version}.zip` },
             ]
           }
         ]

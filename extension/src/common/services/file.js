@@ -1,8 +1,6 @@
 import { saveAs } from 'file-saver';
 import { getVersion } from '../utils';
 
-const EXPORTED_FILE_NAME = 'yinote.json';
-
 export const readAsJson = file => {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line no-undef
@@ -24,11 +22,7 @@ export const readAsJson = file => {
   });
 };
 
-export const exportJsonFile = (
-  data,
-  filename = EXPORTED_FILE_NAME,
-  version
-) => {
+export const exportJsonFile = async (data, filename, version) => {
   version = version || getVersion();
   const dataToExport = { version, data };
 
@@ -36,5 +30,18 @@ export const exportJsonFile = (
   const blob = new Blob([JSON.stringify(dataToExport)], {
     type: 'text/json;charset=utf-8'
   });
-  saveAs(blob, filename);
+  await exportFile(blob, filename);
+};
+
+export const exportFile = async (blob, filename) => {
+  const manifest = await browser.runtime.getManifest();
+  if (typeof browser !== 'undefined' && manifest.browser === 'firefox') {
+    browser.runtime.sendMessage({
+      action: 'export-file',
+      blob,
+      filename
+    });
+  } else {
+    saveAs(blob, filename);
+  }
 };

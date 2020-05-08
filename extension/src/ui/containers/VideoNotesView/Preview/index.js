@@ -11,8 +11,8 @@ import ScrollableList from '../../../components/ScrollableList';
 import IconButton from '../../../components/IconButton';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
-import { secondsToTime } from '../../../../common/utils';
-import { delay } from '../../../../common/utils';
+import { secondsToTime, delay } from '../../../../common/utils';
+import { exportFile } from '../../../../common/services/file';
 import { APP_ID } from '../../../../constants';
 
 const Preview = () => {
@@ -74,13 +74,13 @@ const Preview = () => {
     setOpen(false);
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async () => {
     var doc = new jsPDF();
     var y = 20;
     doc.setFontSize(18);
     doc.setFontType('bold');
     doc.text(20, y, doc.splitTextToSize(title, 180));
-    y += 10;
+    y += Math.ceil(title.length / 50) * 10;
     doc.setFontType('normal');
 
     doc.setFontSize(14);
@@ -106,7 +106,9 @@ const Preview = () => {
       doc.text(20, y, content);
       y += 6 * content.length;
     }
-    doc.save(`${APP_ID}_${pageId}.pdf`);
+
+    const blob = doc.output('blob');
+    await exportFile(blob, `${APP_ID}_${pageId}.pdf`);
   };
 
   const handleReloadScreenshots = async () => {

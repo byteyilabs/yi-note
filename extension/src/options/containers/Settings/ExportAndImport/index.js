@@ -15,7 +15,7 @@ const exportData = () => {
   return StorageFactory.getStorage()
     .getPagesForExport()
     .then(pages => {
-      exportJsonFile(pages);
+      exportJsonFile(pages, 'yi-note.json');
     });
 };
 
