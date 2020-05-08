@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useInterval } from 'react-recipes';
@@ -12,13 +12,23 @@ import ReloadView from '../ReloadView';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
 import withTheme from '../../../common/withTheme';
+import { QUERY_AUTO_JUMP } from '../../../constants';
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app);
-  const { setOpen, setUrl, setShowingAd } = useStoreActions(actions => actions.app);
+  const { setOpen, setUrl, setShowingAd } = useStoreActions(
+    actions => actions.app
+  );
   const history = useHistory();
   const { pathname } = useLocation();
   const [progress, setProgress] = useState(false);
+
+  const onShowingAd = useCallback(() => setShowingAd(true), [setShowingAd]);
+  const onHidingAd = useCallback(() => setShowingAd(false), [setShowingAd]);
+
+  const getPlayer = useCallback(() => {
+    return PlayerFactory.getPlayer({ url, onShowingAd, onHidingAd });
+  }, [onHidingAd, onShowingAd, url]);
 
   useInterval(() => {
     if (url !== window.location.href) {
@@ -26,6 +36,24 @@ const App = () => {
       setUrl(window.location.href);
     }
   }, 100);
+
+  useEffect(() => {
+    const jumpToTimestamp = async t => {
+      getPlayer().then(async player => {
+        await player.seek(t);
+        await player.play();
+      });
+    };
+
+    // eslint-disable-next-line no-undef
+    const urlCompinents = new URL(window.location.href);
+    // eslint-disable-next-line no-undef
+    const params = new URLSearchParams(urlCompinents.search);
+    if (params.has(QUERY_AUTO_JUMP)) {
+      const timestamp = +params.get(QUERY_AUTO_JUMP);
+      jumpToTimestamp(timestamp);
+    }
+  }, [getPlayer, url]);
 
   useEffect(() => {
     // Register message listener
@@ -55,13 +83,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const onShowingAd = () => setShowingAd(true);
-    const onHidingAd = () => setShowingAd(false);
-
     if (open && pathname === '/') {
       setProgress(true);
       // First load of player, options needed.
-      PlayerFactory.getPlayer({ url, onShowingAd, onHidingAd })
+      getPlayer()
         .then(player => {
           setProgress(false);
           history.replace(player ? '/video-notes' : '/search');
@@ -71,7 +96,7 @@ const App = () => {
           history.replace('/search');
         });
     }
-  }, [history, open, pathname, setShowingAd, url]);
+  }, [getPlayer, history, open, pathname]);
 
   return (
     <StyledContainer open={open} className={open && 'panel-shadow'}>

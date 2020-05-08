@@ -1,16 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Link, Typography } from '@material-ui/core';
-import { secondsToTime } from '../../../../common/utils';
-
-const getUrlWithTimeQuery = (url, timestamp) => {
-  // eslint-disable-next-line no-undef
-  const parsedUrl = new URL(url);
-  parsedUrl.search = parsedUrl.search
-    ? `${parsedUrl.search}&yinote-timestamp=${timestamp}`
-    : `?yinote-timestamp=${timestamp}`;
-  return parsedUrl.toString();
-};
+import { secondsToTime, addQueryToUrl } from '../../../../common/utils';
+import { QUERY_AUTO_JUMP } from '../../../../constants';
 
 const NoteItem = ({ content, timestamp, image, url }) => {
   return (
@@ -19,7 +11,10 @@ const NoteItem = ({ content, timestamp, image, url }) => {
         <img src={image} alt="Screenshot" />
       </Grid>
       <Grid item lg={6} md={4} sm={12}>
-        <Link href={getUrlWithTimeQuery(url, timestamp)} target="_blank">
+        <Link
+          href={addQueryToUrl(url, QUERY_AUTO_JUMP, timestamp)}
+          target="_blank"
+        >
           {secondsToTime(timestamp)}
         </Link>
         <Typography variant="body1">{content}</Typography>
