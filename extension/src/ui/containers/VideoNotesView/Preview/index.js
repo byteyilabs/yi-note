@@ -11,16 +11,19 @@ import ScrollableList from '../../../components/ScrollableList';
 import IconButton from '../../../components/IconButton';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
-import { secondsToTime, delay } from '../../../../common/utils';
+import { secondsToTime, delay, addQueryToUrl } from '../../../../common/utils';
 import { exportFile } from '../../../../common/services/file';
-import { APP_ID } from '../../../../constants';
+import { APP_ID, QUERY_AUTO_JUMP } from '../../../../constants';
 
 const Preview = () => {
   const { t } = useTranslation('notesView');
   const {
-    page: { id: pageId, notes, meta: { title } = {} },
-    preview: { open }
-  } = useStoreState(state => state.videoNotes);
+    app: { url },
+    videoNotes: {
+      page: { id: pageId, notes, meta: { title } = {} },
+      preview: { open }
+    }
+  } = useStoreState(state => state);
   const {
     preview: { setOpen },
     setPage,
@@ -98,9 +101,12 @@ const Preview = () => {
       }
       doc.addImage(note.image, 'PNG', 20, y, 100, 60, null, 'NONE');
       y += 66;
-      doc.setTextColor(255, 255, 255);
+
       doc.setTextColor(71, 99, 255);
-      doc.text(20, y, secondsToTime(note.timestamp));
+      doc.textWithLink(secondsToTime(note.timestamp), 20, y, {
+        url: addQueryToUrl(url, QUERY_AUTO_JUMP, note.timestamp)
+      });
+
       doc.setTextColor(0, 0, 0);
       y += 6;
       doc.text(20, y, content);

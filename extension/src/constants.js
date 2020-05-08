@@ -11,3 +11,5 @@ export const TYPE_VIDEO_NOTE = 'video';
 export const PROVIDER_YOUTUBE = 'youtube';
 
 export const NODE_ENV_PLAYGROUND = 'playground';
+
+export const QUERY_AUTO_JUMP = 'yinotetimestamp';

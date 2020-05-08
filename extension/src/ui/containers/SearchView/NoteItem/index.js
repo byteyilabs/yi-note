@@ -9,14 +9,19 @@ import {
   StyledMainLine,
   StyledAdditionalInfo
 } from '../styled';
-import { secondsToTime } from '../../../../common/utils';
+import { secondsToTime, addQueryToUrl } from '../../../../common/utils';
+import { QUERY_AUTO_JUMP } from '../../../../constants';
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },
   query
 }) => {
   return (
-    <StyledArchor href={url} target="_blank" rel="noopener noreferrer">
+    <StyledArchor
+      href={addQueryToUrl(url, QUERY_AUTO_JUMP, timestamp)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <Grid container direction="column">
         <Grid item>
           <StyledMainLine>

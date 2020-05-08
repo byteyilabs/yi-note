@@ -16,7 +16,7 @@ const BookmarkItem = ({ item: { title, icon, description, url }, query }) => {
         <Grid item>
           <StyledMainLine>
             {icon && <StyledImg src={icon} alt="icon" />}
-            <Highlight search={query}>{description}</Highlight>
+            <Highlight search={query}>{title}</Highlight>
           </StyledMainLine>
         </Grid>
         <Grid item>
