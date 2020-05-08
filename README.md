@@ -2,25 +2,26 @@
 
 YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost online learning experience.
 
-- [Installation](#installation)
-- [Introduction](#introduction)
-  - [Purpose and history](#purpose-and-history)
-  - [Features](#features)
-- [Get started](#get-started)
-  - [How to use](#how-to-use)
-  - [Development](#development)
-    - [Prerequisite](#prerequisite)
-    - [Install dependencies](#install-dependencies)
-    - [Start development](#start-development)
-- [About the project](#about-the-project)
-  - [Project components](#project-components)
-  - [Tech stack](#tech-stack)
-  - [Browser support](#browser-support)
-- [Contribute](#contribute)
-  - [As a community](#as-a-community)
-  - [As a developer](#as-a-developer)
-- [Roadmap](#roadmap)
-- [License](#license)
+- [YiNote Browser Extension](#yinote-browser-extension)
+  - [Installation](#installation)
+  - [Introduction](#introduction)
+    - [Purpose and history](#purpose-and-history)
+    - [Features](#features)
+    - [Get started](#get-started)
+      - [How to use](#how-to-use)
+      - [Development](#development)
+        - [Prerequisite](#prerequisite)
+        - [Install dependencies](#install-dependencies)
+        - [Start development](#start-development)
+  - [About the project](#about-the-project)
+    - [Project components](#project-components)
+    - [Tech stack](#tech-stack)
+    - [Browser support](#browser-support)
+  - [Contribute](#contribute)
+    - [As a community](#as-a-community)
+    - [As a developer](#as-a-developer)
+  - [Roadmap](#roadmap)
+  - [License](#license)
 
 ## Installation
 
@@ -98,7 +99,7 @@ For `content script` change, you need to reload the extension in `chrome://exten
 
 For `background` and `options` changes, just refresh the page should be able to load the changes.
 
-`playgound` mode is also provided for easy `content script` development. This mode will simulate `content script` to inject UI widget in page served from `webpack dev server`
+`playground` mode is also provided for easy `content script` development. This mode will simulate `content script` to inject UI widget in page served from `webpack dev server`
 
 ```bash
 npm run playground
