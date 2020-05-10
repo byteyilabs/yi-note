@@ -1,9 +1,9 @@
-import jsPDF from 'jspdf';
 import { secondsToTime, addQueryToUrl } from '../../../common/utils';
 import { QUERY_AUTO_JUMP } from '../../../constants';
 
 export default class JspdfGenerator {
   constructor({ url, title, notes }) {
+    // eslint-disable-next-line no-undef
     this.doc = new jsPDF();
     this.url = url;
     this.title = title;
@@ -11,11 +11,12 @@ export default class JspdfGenerator {
   }
 
   getBlobOutput() {
+    this.doc.setFont('msyh');
+    this.doc.setFontType('normal');
     let y = 20;
     this.doc.setFontSize(18);
-    this.doc.setFontType('bold');
     this.doc.text(20, y, this.doc.splitTextToSize(this.title, 180));
-    y += Math.ceil(this.title.length / 50) * 10;
+    y += Math.ceil(this.title.length / 50) * 14;
     this.doc.setFontType('normal');
 
     this.doc.setFontSize(14);
