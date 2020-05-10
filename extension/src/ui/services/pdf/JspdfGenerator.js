@@ -17,13 +17,10 @@ export default class JspdfGenerator {
     this.doc.setFontSize(18);
     this.doc.text(20, y, this.doc.splitTextToSize(this.title, 180));
     y += Math.ceil(this.title.length / 50) * 14;
-    this.doc.setFontType('normal');
 
     this.doc.setFontSize(14);
-    this.doc.setFontType('bold');
     this.doc.text(20, y, '-- Notes --');
     y += 10;
-    this.doc.setFontType('normal');
     this.doc.setFontSize(12);
 
     for (const note of this.notes) {
