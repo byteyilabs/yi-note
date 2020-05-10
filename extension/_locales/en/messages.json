@@ -143,5 +143,20 @@
   },
   "options_settings_exportAndClear_button": {
     "message": "Export and clear data"
+  },
+  "evernote_sync_tooltip": {
+    "message": "Sync notes to Evernote"
+  },
+  "evernote_sync_success": {
+    "message": "Successfully synced notes to Evernote!"
+  },
+  "evernote_sync_failure": {
+    "message": "Failed to sync notes to Evernote."
+  },
+  "evernote_note_origin": {
+    "message": "View notes from original page"
+  },
+  "evernote_note_list": {
+    "message": "Notes List"
   }
 }

@@ -9,6 +9,7 @@ import Footer from './Footer';
 import VideoNotesView from '../VideoNotesView';
 import SearchView from '../SearchView';
 import ReloadView from '../ReloadView';
+import Toast from '../../components/Toast';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
 import withTheme from '../../../common/withTheme';
@@ -45,9 +46,7 @@ const App = () => {
       });
     };
 
-    // eslint-disable-next-line no-undef
     const urlCompinents = new URL(window.location.href);
-    // eslint-disable-next-line no-undef
     const params = new URLSearchParams(urlCompinents.search);
     if (params.has(QUERY_AUTO_JUMP)) {
       const timestamp = +params.get(QUERY_AUTO_JUMP);
@@ -57,7 +56,7 @@ const App = () => {
 
   useEffect(() => {
     // Register message listener
-    try {
+    if (typeof browser !== 'undefined') {
       browser.runtime.onMessage.addListener(request => {
         const { action } = request;
         switch (action) {
@@ -66,18 +65,14 @@ const App = () => {
             return;
         }
       });
-    } catch (e) {
-      logger.error(new Error('Failed to register extension message listener.'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    try {
+    if (typeof browser !== 'undefined') {
       const port = browser.runtime.connect({ name: 'yinote' });
       port.onDisconnect.addListener(() => history.replace('/reload'));
-    } catch (e) {
-      logger.error(new Error('Failed to connect to extension.'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -118,6 +113,7 @@ const App = () => {
         <Footer />
       </StyledMain>
       <Alerts />
+      <Toast />
     </StyledContainer>
   );
 };

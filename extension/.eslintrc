@@ -22,6 +22,7 @@
     "Promise": "readonly",
     "URL": "readonly",
     "URLSearchParams": "readonly",
-    "fetch": "readonly"
+    "fetch": "readonly",
+    "process": "readonly"
   }
 }

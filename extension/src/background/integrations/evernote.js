@@ -1,11 +1,11 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
 import { secondsToTime, addQueryToUrl } from '../../common/utils';
-import { REST_BASE_URL, QUERY_AUTO_JUMP } from '../../constants';
+import { QUERY_AUTO_JUMP } from '../../constants';
 import bufferFrom from 'buffer-from';
 
 const enhancedFetch = (path, request) =>
-  fetch(`${REST_BASE_URL}${path}`, request).then(res => {
+  fetch(`${process.env.REST_BASE_URL}${path}`, request).then(res => {
     if (res.ok) {
       return res.json();
     }
