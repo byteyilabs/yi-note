@@ -1,5 +1,6 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
+import Evernote from './integrations/evernote';
 
 Logger.useDefaults();
 
@@ -10,19 +11,43 @@ browser.browserAction.onClicked.addListener(tab => {
   });
 });
 
-browser.runtime.onMessage.addListener(message => {
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  const openOptions = () => {
+    browser.runtime.openOptionsPage();
+  };
+
+  const exportFile = () => {
+    browser.downloads.download({
+      filename: message.filename,
+      url: URL.createObjectURL(message.blob),
+      saveAs: false
+    });
+  };
+
+  const saveToEvernote = () => {
+    const { data } = message;
+    const evernote = new Evernote();
+    evernote
+      .saveNotes(data)
+      .then(data => {
+        sendResponse({ evernoteId: data.guid });
+      })
+      .catch(e => {
+        logger.error(e);
+        sendResponse(e);
+      });
+  };
+
   const { action } = message;
   switch (action) {
     case 'open-options':
-      browser.runtime.openOptionsPage();
+      openOptions();
       return true;
     case 'export-file':
-      browser.downloads.download({
-        filename: message.filename,
-        // eslint-disable-next-line no-undef
-        url: URL.createObjectURL(message.blob),
-        saveAs: false
-      });
+      exportFile();
+      return true;
+    case 'save-to-evernote':
+      saveToEvernote();
       return true;
   }
 });

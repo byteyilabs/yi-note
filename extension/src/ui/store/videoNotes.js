@@ -4,14 +4,14 @@ import { uuid } from 'uuidv4';
 import { StorageFactory } from '../../common/services/storage';
 import { generatePageId } from '../../common/utils';
 
-const defaultNote = {
+export const defaultNote = {
   id: '',
   content: '',
   timestamp: 0,
   image: ''
 };
 
-const defaultPage = {
+export const defaultPage = {
   id: '',
   notes: []
 };
@@ -64,6 +64,11 @@ const videoNotesModel = {
       createdAt: +new Date()
     });
     actions.setPage(page);
+  }),
+  updatePage: thunk(async (actions, updatedPage, { getState }) => {
+    const page = getState().page;
+    const newPage = await storage.addPage({ ...page, ...updatedPage });
+    actions.setPage(newPage);
   }),
   removePage: thunk(async (actions, pageId) => {
     await storage.removePage(pageId);

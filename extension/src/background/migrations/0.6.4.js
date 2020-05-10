@@ -44,7 +44,6 @@ const processSyncStorageNotes = async (key, data) => {
 };
 
 const processLocalStoragePage = async (key, data) => {
-  // eslint-disable-next-line no-undef
   const { origin, pathname, search } = new URL(`https://${key}`);
   const url = `${origin}${pathname}${search}`;
   const pageId = generatePageId(url);

@@ -17,6 +17,11 @@ const StyledContainer = styled.div`
   cursor: pointer;
   color: ${props => props.color};
   padding: 0 2px;
+
+  svg {
+    width: ${({ size }) => sizeMap[size]}px;
+    height: ${({ size }) => sizeMap[size]}px;
+  }
 `;
 
 const useStyles = makeStyles({

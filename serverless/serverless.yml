@@ -1,0 +1,24 @@
+service: yinote-http-endpoint
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  evernoteAuthorizeUrl:
+    handler: apis/evernote-handler.getAuthorizeUrl
+    events:
+      - http:
+          path: evernote/authorize-url
+          method: get
+  evernoteAccessToken:
+    handler: apis/evernote-handler.getAccessToken
+    events:
+      - http:
+          path: evernote/access-token
+          method: post

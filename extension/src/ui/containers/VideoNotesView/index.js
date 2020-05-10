@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
+import { Evernote as EvernoteIcon } from '@styled-icons/remix-line/Evernote';
 import Preview from './Preview';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
@@ -17,21 +18,23 @@ export const StyledTitle = styled.div`
 `;
 
 const NotesView = () => {
-  const { t } = useTranslation(['notesView', 'bookmark']);
+  const { t } = useTranslation(['notesView', 'bookmark', 'evernote']);
   const {
     videoNotes: {
-      page: { id, notes, meta }
+      page: { id, evernoteId, notes, meta }
     },
     app: { url }
   } = useStoreState(state => state);
   const {
     videoNotes: {
       fetchPage,
+      updatePage,
       bookmarkPage,
       removePage,
       preview: { setOpen: setPreviewOpen }
     },
-    alerts: { show: showAlerts }
+    alerts: { show: showAlerts },
+    toast: { setStatus: setToastStatus }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
 
@@ -57,6 +60,29 @@ const NotesView = () => {
     setPreviewOpen(true);
   };
 
+  const handleSaveToEvernote = () => {
+    browser.runtime
+      .sendMessage({
+        action: 'save-to-evernote',
+        data: { meta, notes, evernoteId }
+      })
+      .then(evernoteData => {
+        updatePage(evernoteData);
+        setToastStatus({
+          open: true,
+          severity: 'success',
+          message: t('evernote:sync.success')
+        });
+      })
+      .catch(() => {
+        setToastStatus({
+          open: true,
+          severity: 'error',
+          message: t('evernote:sync.failure')
+        });
+      });
+  };
+
   return (
     <>
       <Editor />
@@ -67,12 +93,21 @@ const NotesView = () => {
         <Grid item>
           <Grid container direction="row" alignItems="center">
             {id && (
-              <IconButton
-                tooltip={t('preview.tooltip')}
-                onClick={handleOpenPreview}
-              >
-                <PreviewIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  tooltip={t('preview.tooltip')}
+                  onClick={handleOpenPreview}
+                >
+                  <PreviewIcon />
+                </IconButton>
+                <IconButton
+                  color={evernoteId && 'red'}
+                  tooltip={t('evernote:sync.tooltip')}
+                  onClick={handleSaveToEvernote}
+                >
+                  <EvernoteIcon />
+                </IconButton>
+              </>
             )}
 
             {!id ? (

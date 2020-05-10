@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const Dotenv = require('dotenv-webpack');
 const pkg = require('./package.json');
 const commonManifest = require('./manifest.common.json');
 
@@ -20,6 +21,7 @@ const getManifestPlugin = env => {
     };
     seed.browser = "firefox";
     seed.permissions.push('downloads');
+    seed.permissions.push('<all_urls>');
   }
 
   return new ManifestPlugin({
@@ -52,6 +54,7 @@ module.exports = env => {
     },
     plugins: [
       getManifestPlugin(env),
+      new Dotenv(),
       new CopyWebpackPlugin([
         { from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js' },
         { from: 'src/vendors/www-widgetapi.js', to: 'youtube-iframe-api.js' },
