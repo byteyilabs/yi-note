@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
-import jsPDF from 'jspdf';
 import { Grid, Backdrop, Fade, CircularProgress } from '@material-ui/core';
 import ExportPDFIcon from '@material-ui/icons/GetApp';
 import ReloadIcon from '@material-ui/icons/Autorenew';
@@ -11,9 +10,10 @@ import ScrollableList from '../../../components/ScrollableList';
 import IconButton from '../../../components/IconButton';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
-import { secondsToTime, delay, addQueryToUrl } from '../../../../common/utils';
+import { delay } from '../../../../common/utils';
 import { exportFile } from '../../../../common/services/file';
-import { APP_ID, QUERY_AUTO_JUMP } from '../../../../constants';
+import { PdfFactory } from '../../../services/pdf';
+import { APP_ID } from '../../../../constants';
 
 const Preview = () => {
   const { t } = useTranslation('notesView');
@@ -78,42 +78,7 @@ const Preview = () => {
   };
 
   const handleGeneratePDF = async () => {
-    var doc = new jsPDF();
-    var y = 20;
-    doc.setFontSize(18);
-    doc.setFontType('bold');
-    doc.text(20, y, doc.splitTextToSize(title, 180));
-    y += Math.ceil(title.length / 50) * 10;
-    doc.setFontType('normal');
-
-    doc.setFontSize(14);
-    doc.setFontType('bold');
-    doc.text(20, y, '-- Notes --');
-    y += 10;
-    doc.setFontType('normal');
-    doc.setFontSize(12);
-
-    for (const note of notes) {
-      const content = doc.splitTextToSize(note.content, 180);
-      if (y + 66 + 6 + 6 * content.length > 300) {
-        doc.addPage();
-        y = 20;
-      }
-      doc.addImage(note.image, 'PNG', 20, y, 100, 60, null, 'NONE');
-      y += 66;
-
-      doc.setTextColor(71, 99, 255);
-      doc.textWithLink(secondsToTime(note.timestamp), 20, y, {
-        url: addQueryToUrl(url, QUERY_AUTO_JUMP, note.timestamp)
-      });
-
-      doc.setTextColor(0, 0, 0);
-      y += 6;
-      doc.text(20, y, content);
-      y += 6 * content.length;
-    }
-
-    const blob = doc.output('blob');
+    const blob = PdfFactory.getGenerator({ url, title, notes }).getBlobOutput();
     await exportFile(blob, `${APP_ID}_${pageId}.pdf`);
   };
 
