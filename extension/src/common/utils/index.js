@@ -6,3 +6,4 @@ export { default as secondsToTime } from './secondsToTime';
 export { default as getVersion } from './getVersion';
 export { default as generatePageId } from './generatePageId';
 export { default as addQueryToUrl } from './addQueryToUrl';
+export { default as getUrlWithTimestamp } from './getUrlWithTimestamp';

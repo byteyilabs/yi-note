@@ -1,6 +1,6 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
-import Evernote from './integrations/evernote';
+import { Evernote, OneNote } from './integrations';
 
 Logger.useDefaults();
 
@@ -38,6 +38,20 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
   };
 
+  const saveToOneNote = () => {
+    const { data } = message;
+    const oneNote = new OneNote();
+    oneNote
+      .saveNotes(data)
+      .then(data => {
+        sendResponse({ onenoteId: data.guid });
+      })
+      .catch(e => {
+        logger.error(e);
+        sendResponse(e);
+      });
+  };
+
   const { action } = message;
   switch (action) {
     case 'open-options':
@@ -48,6 +62,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return true;
     case 'save-to-evernote':
       saveToEvernote();
+      return true;
+    case 'save-to-onenote':
+      saveToOneNote();
       return true;
   }
 });

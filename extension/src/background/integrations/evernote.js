@@ -1,16 +1,11 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
+import bufferFrom from 'buffer-from';
+import { getRedirectUrl, enhancedFetch } from './utils';
 import { secondsToTime, addQueryToUrl } from '../../common/utils';
 import { QUERY_AUTO_JUMP } from '../../constants';
-import bufferFrom from 'buffer-from';
 
-const enhancedFetch = (path, request) =>
-  fetch(`${process.env.REST_BASE_URL}${path}`, request).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    throw res.text();
-  });
+const PROVIDER = 'evernote';
 
 const escape = url => {
   var tagsToReplace = {
@@ -30,21 +25,17 @@ class Evernote {
     this.storage = browser.storage.local;
   }
 
-  getRedirectURL() {
-    return `${browser.identity.getRedirectURL()}provider_cb`;
-  }
-
   cacheAccessToken(accessToken) {
     return this.storage.set({ evernote: { accessToken } });
   }
 
   clearAccessToken() {
-    return this.storage.remove('evernote');
+    return this.storage.remove(PROVIDER);
   }
 
   getAccessToken() {
     return new Promise((resolve, reject) => {
-      this.storage.get('evernote').then(data => {
+      this.storage.get(PROVIDER).then(data => {
         const { accessToken } = data.evernote || {};
         if (accessToken) {
           resolve(accessToken);
@@ -52,9 +43,9 @@ class Evernote {
         }
 
         // OAuth flow to get accessToken
-        const redirectUrl = this.getRedirectURL();
+        const redirectUrl = getRedirectUrl(PROVIDER);
         enhancedFetch(
-          `/evernote/authorize-url?redirectUrl=${redirectUrl}`
+          `${process.env.REST_BASE_URL}/evernote/authorize-url?redirectUrl=${redirectUrl}`
         ).then(data => {
           const { oauthUrl, oauthToken, oauthSecret } = data;
           browser.identity
@@ -64,10 +55,13 @@ class Evernote {
               const params = new URLSearchParams(parsedUrl.search);
               const verifier = params.get('oauth_verifier');
 
-              enhancedFetch('/evernote/access-token', {
-                method: 'POST',
-                body: JSON.stringify({ oauthToken, oauthSecret, verifier })
-              }).then(({ accessToken }) => {
+              enhancedFetch(
+                `${process.env.REST_BASE_URL}/evernote/access-token`,
+                {
+                  method: 'POST',
+                  body: JSON.stringify({ oauthToken, oauthSecret, verifier })
+                }
+              ).then(({ accessToken }) => {
                 this.cacheAccessToken(accessToken).then(() => {
                   resolve(accessToken);
                 });
@@ -89,7 +83,9 @@ class Evernote {
     nBody += '<en-note>';
     nBody += `<span>Notes are auto-generated from <a style="padding-bottom: 20px;" href="https://github.com/shuowu/yi-note#installation">YiNote browser extension</a></span>`;
     nBody += '<br/><br/>';
-    nBody += `<a style="padding-bottom: 20px;" href="${escape(url)}">${browser.i18n.getMessage('evernote_note_origin')}</a>`;
+    nBody += `<a style="padding-bottom: 20px;" href="${escape(
+      url
+    )}">${browser.i18n.getMessage('evernote_note_origin')}</a>`;
     nBody += '<br/><br/>';
     nBody += `<div>${description}</div>`;
     nBody += '<br/>';
