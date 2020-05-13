@@ -28,6 +28,7 @@ YiNote has been published in following platforms. Please download the extension 
 
 - [Chrome Web Store](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf)
 - [Firefox addons](https://addons.mozilla.org/en-CA/firefox/addon/yinote/)
+- [Microsoft Edge addons](https://microsoftedge.microsoft.com/addons/search/YiNote)
 
 ## Introduction
 
@@ -62,6 +63,7 @@ There are serveral options to use this extension:
 ##### Prerequisite
 
 Node >= 10.0.0
+
 NPM >= 6.0.0
 
 ##### Install dependencies
@@ -98,7 +100,7 @@ For `content script` change, you need to reload the extension in `chrome://exten
 
 For `background` and `options` changes, just refresh the page should be able to load the changes.
 
-`playgound` mode is also provided for easy `content script` development. This mode will simulate `content script` to inject UI widget in page served from `webpack dev server`
+`playground` mode is also provided for easy `content script` development. This mode simulates `content script` to inject UI widget in page served from `webpack dev server`
 
 ```bash
 npm run playground
@@ -116,7 +118,7 @@ This extension inject [content script](https://developer.chrome.com/extensions/c
 
 [Options page](https://developer.chrome.com/extensions/options) is provided to give more webpage real estate for data management and configuring settings.
 
-YiNote store data in `browser.storage` locally.
+YiNote store data in `browser.storage` on user's local device.
 
 ### Tech stack
 
@@ -149,6 +151,8 @@ Please read the [Contribution Guide](/CONTRIBUTING.md)
 All kinds of contributions from anyone are always welcomed!
 
 ## Roadmap
+
+- Integration with popular note / document platforms, like Evernote, onenote, google doc.
 
 - Web article annotation
 
