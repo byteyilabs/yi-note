@@ -57,7 +57,8 @@ module.exports = env => {
       new Dotenv(),
       new CopyWebpackPlugin([
         { from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js' },
-        { from: 'src/vendors/www-widgetapi.js', to: 'youtube-iframe-api.js' },
+        { from: 'src/vendors', to: 'vendors' },
+        { from: 'src/ui/services/pdf/fonts', to: 'jspdf-fonts' }
       ]),
       new HtmlWebPackPlugin({
         template: 'src/options/index.html',
