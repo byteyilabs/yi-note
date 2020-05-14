@@ -1,6 +1,7 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
-import { Evernote, OneNote } from './integrations';
+import * as platforms from './integrations';
+import { capitalize } from '../common/utils';
 
 Logger.useDefaults();
 
@@ -24,27 +25,14 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   };
 
-  const saveToEvernote = () => {
-    const { data } = message;
-    const evernote = new Evernote();
-    evernote
-      .saveNotes(data)
+  const sendNotesToPlatform = () => {
+    const { data, action } = message;
+    const className = capitalize(action.split('-')[2]);
+    const platform = new platforms[className]().sendNotes(data);
+    platform
+      .sendNotes(data)
       .then(data => {
         sendResponse({ evernoteId: data.guid });
-      })
-      .catch(e => {
-        logger.error(e);
-        sendResponse(e);
-      });
-  };
-
-  const saveToOneNote = () => {
-    const { data } = message;
-    const oneNote = new OneNote();
-    oneNote
-      .saveNotes(data)
-      .then(data => {
-        sendResponse({ onenoteId: data.guid });
       })
       .catch(e => {
         logger.error(e);
@@ -61,10 +49,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       exportFile();
       return true;
     case 'save-to-evernote':
-      saveToEvernote();
-      return true;
     case 'save-to-onenote':
-      saveToOneNote();
+    case 'save-to-googledoc':
+      sendNotesToPlatform();
       return true;
   }
 });

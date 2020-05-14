@@ -1,7 +1,6 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
-import bufferFrom from 'buffer-from';
-import { getRedirectUrl, enhancedFetch } from './utils';
+import { getRedirectUrl, enhancedFetch, getBinaryFromBase64 } from './utils';
 import { secondsToTime, addQueryToUrl } from '../../common/utils';
 import { QUERY_AUTO_JUMP } from '../../constants';
 
@@ -105,7 +104,7 @@ class Evernote {
         // Convert image to binary, then save as Evernote resource
         const fileMime = 'image/jpeg';
         const fileName = `${note.timestamp}.jpeg`;
-        const binaryResource = bufferFrom(note.image.split(',')[1], 'base64');
+        const binaryResource = getBinaryFromBase64(note.image);
         const md5Hash = md5(binaryResource);
         const resourceAttributes = new EvernoteSDK.Types.ResourceAttributes({
           fileName
@@ -137,7 +136,7 @@ class Evernote {
     return note;
   }
 
-  saveNotes(data) {
+  sendNotes(data) {
     return this.getAccessToken()
       .then(token => {
         const client = new EvernoteSDK.Client({ token });
@@ -154,7 +153,7 @@ class Evernote {
         if (err.errorCode === EvernoteSDK.Errors.EDAMErrorCode.AUTH_EXPIRED) {
           return this.clearAccessToken().then(() => {
             // Clear cached token and retry
-            return this.saveNotes(data);
+            return this.sendNotes(data);
           });
         }
         throw err;
