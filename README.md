@@ -45,6 +45,9 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
   - Embedded youtube iframe video
   - HTML5 video
   - Local video via browser
+- Send notes to Google Docs
+- Send notes to MS OneNote
+- Generate PDF with video screenshot
 - Bookmark video
 - Search through bookmarks and notes
 - Export and import of data
