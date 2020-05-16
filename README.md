@@ -20,6 +20,7 @@ YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost onl
   - [As a community](#as-a-community)
   - [As a developer](#as-a-developer)
 - [Roadmap](#roadmap)
+- [FAQs](#faqs)
 - [License](#license)
 
 ## Installation
@@ -166,6 +167,17 @@ All kinds of contributions from anyone are always welcomed!
 - Multiple devices support
 
 - Turn UI panel into framework agnositc UI widget
+
+## FAQs
+
+- How to share notes with others?
+
+  YiNote can send notes to MS OneNote and Google Docs since v1.1.0. You can firstly send notes to one of the supported services, then generate share link from there.
+
+- Is YiNote still supporting sending notes to Evernote?
+
+  Evernote integration is on the roadmap, since it's one of the most popular note-taking platform. But seems like Evernote support team is not actively reviewing api key activation request. YiNote's production apiKey is still pending for review. YiNote will be updated with Evernote integration once the apiKey is ready. 
+
 
 ## License
 
