@@ -9,10 +9,15 @@ class OneNote extends Service {
     super(data);
 
     this.provider = 'onenote';
+    const manifest = browser.runtime.getManifest();
+    let clientId =
+      manifest.browser === 'firefox'
+        ? '5a06bf8d-6526-4b65-a85b-221f6dde2639'
+        : 'ab2e71d8-340a-4889-8039-26b70504871c';
     this.oauth2 = new Oauth2({
       provider: this.provider,
       issuer: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-      clientId: 'ab2e71d8-340a-4889-8039-26b70504871c',
+      clientId: clientId,
       scopes: ['notes.create'],
       apiBaseUrl: 'https://graph.microsoft.com/v1.0/me/onenote'
     });
