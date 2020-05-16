@@ -9,7 +9,6 @@ import Footer from './Footer';
 import VideoNotesView from '../VideoNotesView';
 import SearchView from '../SearchView';
 import ReloadView from '../ReloadView';
-import Toast from '../../components/Toast';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
 import withTheme from '../../../common/withTheme';
@@ -113,7 +112,6 @@ const App = () => {
         <Footer />
       </StyledMain>
       <Alerts />
-      <Toast />
     </StyledContainer>
   );
 };

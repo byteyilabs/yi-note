@@ -38,4 +38,8 @@ export default class Storage {
   searchNotes() {
     logger.warn('Method need to be implemented: searchNotes');
   }
+
+  getServiceData() {
+    logger.warn('Method need to be implemented: getServiceData');
+  }
 }

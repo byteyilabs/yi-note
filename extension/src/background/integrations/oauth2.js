@@ -1,5 +1,6 @@
 import { uuid } from 'uuidv4';
-import { getRedirectUrl, enhancedFetch } from './utils';
+import { getRedirectUrl } from './utils';
+import { enhancedFetch } from '../../common/utils';
 
 const getParamsFromCallbackUrl = url => {
   const parsedUrl = new URL(url);
@@ -39,10 +40,10 @@ class Oauth2 {
   }
 
   clearAccessToken() {
-    return browser.storage.local.get(this.provider).then(data => {
+    return this.storage.get(this.provider).then(data => {
       const dataToSave = data[this.provider];
       delete dataToSave.accessToken;
-      return browser.storage.local.set({ [this.provider]: dataToSave });
+      return this.storage.set({ [this.provider]: dataToSave });
     });
   }
 
@@ -86,27 +87,23 @@ class Oauth2 {
 
   callApi(path, request = {}) {
     const url = this.apiBaseUrl ? `${this.apiBaseUrl}${path}` : path;
-    return this.getAccessToken().then(token => {
-      request.headers = request.headers || {};
-      request.headers = {
-        ...request.headers,
-        Authorization: `Bearer ${token}`
-      };
-      return enhancedFetch(url, request).catch(error => {
-        return this.getAccessTokenFromCache().then(token => {
-          if (
-            token &&
-            this.tokenExpiryPredicate &&
-            this.tokenExpiryPredicate(error)
-          ) {
-            return this.clearAccessToken().then(() =>
-              this.callApi(path, request)
-            );
-          }
-          throw error;
-        });
+    return this.getAccessToken()
+      .then(token => {
+        request.headers = request.headers || {};
+        request.headers = {
+          ...request.headers,
+          Authorization: `Bearer ${token}`
+        };
+        return enhancedFetch(url, request);
+      })
+      .catch(error => {
+        if (error.status === 401) {
+          return this.clearAccessToken().then(() =>
+            this.callApi(path, request)
+          );
+        }
+        throw error;
       });
-    });
   }
 }
 

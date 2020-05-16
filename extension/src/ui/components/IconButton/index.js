@@ -18,7 +18,7 @@ const StyledContainer = styled.div`
   color: ${props => props.color};
   padding: 0 2px;
 
-  svg {
+  & svg {
     width: ${({ size }) => sizeMap[size]}px;
     height: ${({ size }) => sizeMap[size]}px;
   }

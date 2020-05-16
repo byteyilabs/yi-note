@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
-import { Evernote as EvernoteIcon } from '@styled-icons/remix-line/Evernote';
+import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
 import Preview from './Preview';
+import SendToServices from './SendToServices';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
 import IconButton from '../../components/IconButton';
@@ -18,23 +19,22 @@ export const StyledTitle = styled.div`
 `;
 
 const NotesView = () => {
-  const { t } = useTranslation(['notesView', 'bookmark', 'evernote']);
+  const { t } = useTranslation(['notesView', 'bookmark']);
   const {
     videoNotes: {
-      page: { id, evernoteId, notes, meta }
+      page: { id, notes, meta }
     },
     app: { url }
   } = useStoreState(state => state);
   const {
     videoNotes: {
       fetchPage,
-      updatePage,
       bookmarkPage,
       removePage,
-      preview: { setOpen: setPreviewOpen }
+      preview: { setOpen: setPreviewOpen },
+      sendToPlatforms: { setOpen: setSendToPlatformsOpen }
     },
-    alerts: { show: showAlerts },
-    toast: { setStatus: setToastStatus }
+    alerts: { show: showAlerts }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
 
@@ -60,27 +60,8 @@ const NotesView = () => {
     setPreviewOpen(true);
   };
 
-  const handleSaveToEvernote = () => {
-    browser.runtime
-      .sendMessage({
-        action: 'save-to-evernote',
-        data: { meta, notes, evernoteId }
-      })
-      .then(evernoteData => {
-        updatePage(evernoteData);
-        setToastStatus({
-          open: true,
-          severity: 'success',
-          message: t('evernote:sync.success')
-        });
-      })
-      .catch(() => {
-        setToastStatus({
-          open: true,
-          severity: 'error',
-          message: t('evernote:sync.failure')
-        });
-      });
+  const handleOpenSendToPlatforms = () => {
+    setSendToPlatformsOpen(true);
   };
 
   return (
@@ -101,15 +82,13 @@ const NotesView = () => {
                   <PreviewIcon />
                 </IconButton>
                 <IconButton
-                  color={evernoteId && 'red'}
-                  tooltip={t('evernote:sync.tooltip')}
-                  onClick={handleSaveToEvernote}
+                  tooltip={t('sendToServices.tooltip')}
+                  onClick={handleOpenSendToPlatforms}
                 >
-                  <EvernoteIcon />
+                  <CloudUploadOIcon />
                 </IconButton>
               </>
             )}
-
             {!id ? (
               <IconButton
                 tooltip={t('bookmark:add.tooltip')}
@@ -136,6 +115,7 @@ const NotesView = () => {
         )}
       />
       <Preview />
+      <SendToServices />
     </>
   );
 };

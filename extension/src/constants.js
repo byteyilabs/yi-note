@@ -2,6 +2,8 @@ export const APP_ID = 'yi-note';
 export const PAGE = 'page';
 
 export const GITHUB_URL = 'https://github.com/shuowu/yi-note';
+export const INSTALLATION_URL =
+  'https://github.com/shuowu/yi-note#installation';
 
 export const TYPE_BOOKMARKS = 'bookmarks';
 export const TYPE_NOTES = 'notes';

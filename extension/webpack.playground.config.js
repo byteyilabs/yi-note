@@ -22,8 +22,8 @@ module.exports = env => {
           }
         },
         {
-          test: /\.mp4$/,
-          use: 'file-loader?name=videos/[name].[ext]'
+          test: /\.(mp4|png)$/,
+          use: 'file-loader'
         }
       ]
     },

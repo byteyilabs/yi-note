@@ -8,3 +8,5 @@ export { default as generatePageId } from './generatePageId';
 export { default as addQueryToUrl } from './addQueryToUrl';
 export { default as getUrlWithTimestamp } from './getUrlWithTimestamp';
 export { default as capitalize } from './capitalize';
+export { default as getFileUrl } from './getFileUrl';
+export { default as enhancedFetch } from './enhancedFetch';

@@ -130,6 +130,10 @@ export default class BrowserStorage extends Storage {
     return promise;
   }
 
+  getServiceData(provider) {
+    return this.storageArea.get(provider).then(data => data[provider]);
+  }
+
   clearAll() {
     return this.storageArea.clear();
   }

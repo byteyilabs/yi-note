@@ -1,8 +1,12 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
-import { getRedirectUrl, enhancedFetch, getBinaryFromBase64 } from './utils';
-import { secondsToTime, addQueryToUrl } from '../../common/utils';
-import { QUERY_AUTO_JUMP } from '../../constants';
+import { getRedirectUrl, getBinaryFromBase64 } from '../utils';
+import {
+  secondsToTime,
+  addQueryToUrl,
+  enhancedFetch
+} from '../../../common/utils';
+import { QUERY_AUTO_JUMP } from '../../../constants';
 
 const PROVIDER = 'evernote';
 

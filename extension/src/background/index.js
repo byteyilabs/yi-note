@@ -1,6 +1,6 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
-import * as platforms from './integrations';
+import * as services from './integrations';
 import { capitalize } from '../common/utils';
 
 Logger.useDefaults();
@@ -25,19 +25,19 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   };
 
-  const sendNotesToPlatform = () => {
+  const sendNotesToService = () => {
     const { data, action } = message;
     const className = capitalize(action.split('-')[2]);
-    const platform = new platforms[className]().sendNotes(data);
-    platform
-      .sendNotes(data)
-      .then(data => {
-        sendResponse({ evernoteId: data.guid });
-      })
-      .catch(e => {
-        logger.error(e);
-        sendResponse(e);
-      });
+    const service = new services[className](data);
+    return service
+      .sendNotes()
+      .then(() => sendResponse({ code: 'success' }))
+      .catch(e =>
+        sendResponse({
+          code: 'error',
+          error: e
+        })
+      );
   };
 
   const { action } = message;
@@ -48,10 +48,10 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     case 'export-file':
       exportFile();
       return true;
-    case 'save-to-evernote':
-    case 'save-to-onenote':
-    case 'save-to-googledoc':
-      sendNotesToPlatform();
+    case 'send-to-evernote':
+    case 'send-to-onenote':
+    case 'send-to-googledocs':
+      sendNotesToService();
       return true;
   }
 });

@@ -43,6 +43,8 @@
     }
   ],
   "web_accessible_resources": [
-    "installed.png"
+    "installed.png",
+    "googledocs-48.png",
+    "onenote-48.png"
   ]
 }
