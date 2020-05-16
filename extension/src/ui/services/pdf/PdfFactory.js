@@ -13,7 +13,7 @@ export default class PdfFactory {
    *
    * @return generator instance
    */
-  static getGenerator(data) {
-    return new JspdfGenerator(data);
+  static getGenerator() {
+    return new JspdfGenerator();
   }
 }

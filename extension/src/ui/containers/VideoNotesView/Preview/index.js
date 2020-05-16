@@ -78,7 +78,7 @@ const Preview = () => {
   };
 
   const handleGeneratePDF = async () => {
-    const blob = PdfFactory.getGenerator({ url, title, notes }).getBlobOutput();
+    const blob = PdfFactory.getGenerator().getBlobOutput({ url, title, notes });
     await exportFile(blob, `${APP_ID}_${pageId}.pdf`);
   };
 

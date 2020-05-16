@@ -53,6 +53,13 @@ module.exports = env => {
           options: {
             name: '[name].[ext]'
           }
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]'
+          }
         }
       ]
     },

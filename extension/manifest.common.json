@@ -34,8 +34,6 @@
       ],
       "js": [
         "vendors/youtube-iframe-api.js",
-        "vendors/jspdf.min.js",
-        "jspdf-fonts/msyh-normal.js",
         "browser-polyfill.js",
         "content.js"
       ],
@@ -45,6 +43,7 @@
   "web_accessible_resources": [
     "installed.png",
     "googledocs-48.png",
-    "onenote-48.png"
+    "onenote-48.png",
+    "fonts/msyh.ttf"
   ]
 }
