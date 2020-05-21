@@ -10,12 +10,16 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { StyledModal, StyledPaper, StyledSpinner } from './styled';
-import onenoteImg from './onenote-48.png';
-import googledocsImg from './googledocs-48.png';
+import * as icons from './icons';
+// import evernoteImg from './evernote-48.png';
+// import onenoteImg from './onenote-48.png';
+// import googledocsImg from './googledocs-48.png';
 import TextButton from '../../../components/TextButton';
 import { StorageFactory } from '../../../../common/services/storage';
 import { getFileUrl } from '../../../../common/utils';
 import { APP_ID } from '../../../../constants';
+
+const services = ['evernote', 'googledocs', 'onenote'];
 
 const SendToServices = () => {
   const { t } = useTranslation('services');
@@ -115,24 +119,19 @@ const SendToServices = () => {
               alignItems="center"
               justify="center"
             >
-              <Grid item>
-                <IconButton
-                  disabled={!!service}
-                  onClick={handleClickService('googledocs')}
-                >
-                  <img src={getFileUrl(googledocsImg)} />
-                </IconButton>
-                <Typography>{t('googledocs')}</Typography>
-              </Grid>
-              <Grid item>
-                <IconButton
-                  disabled={!!service}
-                  onClick={handleClickService('onenote')}
-                >
-                  <img src={getFileUrl(onenoteImg)} />
-                </IconButton>
-                <Typography>{t('onenote')}</Typography>
-              </Grid>
+              {services.map(s => (
+                <Grid item>
+                  <Grid container justify="center">
+                    <IconButton
+                      disabled={!!service}
+                      onClick={handleClickService(s)}
+                    >
+                      <img src={getFileUrl(icons[`${s}Img`])} />
+                    </IconButton>
+                  </Grid>
+                  <Typography>{t(s)}</Typography>
+                </Grid>    
+              ))}
             </Grid>
             {hasExistingNote && !loading && (
               <Grid item container direction="column" spacing={2}>

@@ -1,4 +1,4 @@
-import BaseGenerator from '../generator';
+
 import { b64toBlob } from '../utils';
 import { secondsToTime, getUrlWithTimestamp } from '../../../common/utils';
 import { INSTALLATION_URL } from '../../../constants';
@@ -7,9 +7,9 @@ const GOOGLE_API_BASE_URL = 'https://www.googleapis.com';
 
 const getImageDriveUrl = id => `https://drive.google.com/file/d/${id}/view`;
 
-class Generator extends BaseGenerator {
+class Generator {
   constructor(data, oauth2) {
-    super(data);
+    this.data = data;
     this.oauth2 = oauth2;
     this.trackIndex = 1;
     this.requests = [];

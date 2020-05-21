@@ -16,7 +16,7 @@ export const StyledPaper = styled.div`
   align-items: center;
   justify-content: center;
   outline: none;
-  width: 300px;
+  width: 350px;
 `;
 
 export const StyledSpinner = styled(CircularProgress)`

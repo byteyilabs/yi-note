@@ -27,8 +27,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   const sendNotesToService = () => {
     const { data, action } = message;
-    const className = capitalize(action.split('-')[2]);
-    const service = new services[className](data);
+    const namespace = action.split('-')[2];
+    const className = capitalize(namespace);
+    const service = new services[className](namespace, data);
     return service
       .sendNotes()
       .then(() => sendResponse({ code: 'success' }))

@@ -42,6 +42,7 @@
   ],
   "web_accessible_resources": [
     "installed.png",
+    "evernote-48.png",
     "googledocs-48.png",
     "onenote-48.png",
     "fonts/msyh.ttf"

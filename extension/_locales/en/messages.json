@@ -159,6 +159,9 @@
   "services_template_origin": {
     "message": "View notes from original page"
   },
+  "services_evernote": {
+    "message": "Evernote"
+  },
   "services_googledocs": {
     "message": "Google Docs"
   },

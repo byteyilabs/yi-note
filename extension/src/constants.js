@@ -15,3 +15,5 @@ export const PROVIDER_YOUTUBE = 'youtube';
 export const NODE_ENV_PLAYGROUND = 'playground';
 
 export const QUERY_AUTO_JUMP = 'yinotetimestamp';
+
+export const REST_BASE_URL = process.env.NODE_ENV === 'production' ? process.env.REST_BASE_URL_PROD : process.env.REST_BASE_URL_DEV;

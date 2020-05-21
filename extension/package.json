@@ -63,6 +63,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
     "atob": "^2.1.2",
+    "browser-extension-oauth2": "^1.1.0",
     "buffer-from": "^1.1.1",
     "compose-function": "^3.0.3",
     "deepmerge": "^4.2.2",

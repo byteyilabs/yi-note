@@ -71,8 +71,7 @@ module.exports = env => {
       new Dotenv(),
       new CopyWebpackPlugin([
         { from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js' },
-        { from: 'src/vendors', to: 'vendors' },
-        { from: 'src/ui/services/pdf/fonts', to: 'jspdf-fonts' }
+        { from: 'src/vendors', to: 'vendors' }
       ]),
       new HtmlWebPackPlugin({
         template: 'src/options/index.html',

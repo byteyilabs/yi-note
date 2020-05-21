@@ -1,5 +1,5 @@
+import Oauth2 from 'browser-extension-oauth2';
 import Service from '../service';
-import Oauth2 from '../oauth2';
 import Generator from './generator';
 
 const DRIVE_API_BASE_URL = 'https://www.googleapis.com/drive/v3';
@@ -10,14 +10,13 @@ const SCREENSHOTS_FOLDER_NAME = 'Screenshots';
 const STORAGE_KEY_SCREENSHOTS_FOLDER_ID = 'screenshotsFolderId';
 
 class Googledocs extends Service {
-  constructor(data) {
-    super(data);
+  constructor(namespace, data) {
+    super(namespace, data);
 
-    this.provider = 'googledocs';
     this.oauth2 = new Oauth2({
-      provider: this.provider,
-      issuer: 'https://accounts.google.com/o/oauth2/v2/auth',
-      clientId:
+      provider: this.namespace,
+      authorization_endpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+      client_id:
         '376112093481-4qs1q8b26u0jhqt159j7188hdu505d8v.apps.googleusercontent.com',
       scopes: [
         'https://www.googleapis.com/auth/drive.file',
@@ -55,7 +54,7 @@ class Googledocs extends Service {
   async maybeCreateFolderInDrive(name, storageKey, parentFolderId) {
     let folderId;
     let folder;
-    folderId = await this.getStoredData(storageKey);
+    folderId = await this.storage.get(storageKey);
     if (folderId) {
       try {
         folder = await this.oauth2.callApi(
@@ -83,7 +82,7 @@ class Googledocs extends Service {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      await this.saveMetadataIntoStorage(storageKey, folder.id);
+      await this.storage.set(storageKey, folder.id);
     }
     folderId = folder.id;
     return folderId;
@@ -100,7 +99,7 @@ class Googledocs extends Service {
       `${DRIVE_API_BASE_URL}/files/${doc.documentId}?addParents=${folderId}&removeParents=root`,
       { method: 'PATCH' }
     );
-    await this.saveMetadataIntoStorage(pageId, doc.documentId);
+    await this.storage.set(pageId, doc.documentId);
     return doc.documentId;
   }
 

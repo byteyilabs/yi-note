@@ -1,22 +1,13 @@
-import Generator from './generator';
+import { Storage } from 'browser-extension-oauth2';
 
 class Service {
-  constructor(data) {
+  static KEY_ACCESS_TOKEN = 'accessToken';
+  static YI_NOTEBOOK_NAME = 'YiNotebook';
+
+  constructor(namespace, data) {
     this.data = data;
-    this.generator = new Generator(data);
-  }
-
-  async getStoredData(key) {
-    const data = await browser.storage.local.get(this.provider);
-    const providerData = data[this.provider];
-    return providerData ? providerData[key] : null;
-  }
-
-  async saveMetadataIntoStorage(key, value) {
-    const data = await browser.storage.local.get(this.provider);
-    const dataToSave = data[this.provider];
-    dataToSave[key] = value;
-    await browser.storage.local.set({ [this.provider]: dataToSave });
+    this.namespace = namespace;
+    this.storage = new Storage(namespace);
   }
 
   sendNotes() {

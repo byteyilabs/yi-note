@@ -1,8 +1,11 @@
-import BaseGenerator from '../generator';
 import { secondsToTime, getUrlWithTimestamp } from '../../../common/utils';
 import { INSTALLATION_URL } from '../../../constants';
 
-class Generator extends BaseGenerator {
+class Generator {
+  constructor(data) {
+    this.data = data;
+  }
+
   generatePayload() {
     const { meta: { title, description, url } = {}, notes = [] } = this.data;
 
