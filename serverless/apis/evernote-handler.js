@@ -4,12 +4,13 @@ const getClient = () => {
   return new Evernote.Client({
     consumerKey: process.env.EVERNOTE_CONSUMER_KEY,
     consumerSecret: process.env.EVERNOTE_CONSUMER_SECRET,
-    sandbox: true,
+    sandbox: false,
   });
 };
 
 const getAuthorizeUrl = (event, context, callback) => {
-  const { redirectUrl } = event.queryStringParameters || {};
+  let { redirect_url: redirectUrl } = event.queryStringParameters || {};
+  redirectUrl = decodeURIComponent(redirectUrl);
   const callbackUrlsWhitelist = Object.keys(process.env)
     .filter((key) => key.includes('ALLOWED_REDIRECT_URL'))
     .map((key) => process.env[key]);

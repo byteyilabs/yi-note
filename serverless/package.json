@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "YiNote HTTP Endponts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage production"
   },
   "author": "Shuo Wu",
   "dependencies": {
