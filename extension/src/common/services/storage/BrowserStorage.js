@@ -1,29 +1,30 @@
+import { isUuid } from 'uuidv4';
 import Storage from './Storage';
 import { addNoteToList } from '../../utils';
 
 export default class BrowserStorage extends Storage {
   constructor(area = 'local') {
     super();
-    this.storageArea = browser.storage[area];
+    this.storage = browser.storage[area];
   }
 
   getPage(id) {
-    return this.storageArea.get(id).then(page => page[id]);
+    return this.storage.get(id).then(page => page[id]);
   }
 
   addPage(page) {
     const storeObj = {
       [page.id]: page
     };
-    return this.storageArea.set(storeObj).then(() => page);
+    return this.storage.set(storeObj).then(() => page);
   }
 
   removePage(id) {
-    return this.storageArea.remove(id).then(() => id);
+    return this.storage.remove(id).then(() => id);
   }
 
   addNote(pageId, note) {
-    return this.storageArea
+    return this.storage
       .get(pageId)
       .then(page => {
         page = page[pageId];
@@ -32,7 +33,7 @@ export default class BrowserStorage extends Storage {
           [pageId]: page
         };
 
-        return this.storageArea.set(storeObj);
+        return this.storage.set(storeObj);
       })
       .then(() => note);
   }
@@ -42,20 +43,18 @@ export default class BrowserStorage extends Storage {
   }
 
   getBookmarks() {
-    return this.storageArea.get().then(pages => {
-      const bookmarks = Object.values(pages).map(
-        ({ id, meta = {}, createdAt }) => ({
-          id,
-          createdAt,
-          ...meta
-        })
-      );
-      return bookmarks;
+    return this.storage.get().then(pages => {
+      return Object.keys(pages)
+        .filter(key => isUuid(key))
+        .map(key => {
+          const { id, meta = {}, createdAt } = pages[key];
+          return { id, createdAt, ...meta };
+        });
     });
   }
 
   getNotes() {
-    return this.storageArea.get().then(pages => {
+    return this.storage.get().then(pages => {
       const notes = Object.values(pages).reduce((acc, curr) => {
         if (!curr.notes) {
           return acc;
@@ -71,7 +70,7 @@ export default class BrowserStorage extends Storage {
   }
 
   searchBookmarks(query) {
-    return this.storageArea.get().then(pages => {
+    return this.storage.get().then(pages => {
       const bookmarks = Object.values(pages)
         .filter(({ meta: { title = '', description = '' } }) => {
           const regex = new RegExp(query, 'i');
@@ -86,7 +85,7 @@ export default class BrowserStorage extends Storage {
   }
 
   searchNotes(query) {
-    return this.storageArea.get().then(pages => {
+    return this.storage.get().then(pages => {
       const notes = Object.values(pages)
         .reduce((acc, curr) => {
           if (!curr.notes) {
@@ -109,7 +108,7 @@ export default class BrowserStorage extends Storage {
   getPagesForExport(ids) {
     let promise;
     if (ids) {
-      promise = this.storageArea.get().then(data => {
+      promise = this.storage.get().then(data => {
         return Object.values(data).reduce((acc, page) => {
           if (ids.includes(page.id)) {
             acc.push(page);
@@ -118,7 +117,7 @@ export default class BrowserStorage extends Storage {
         }, []);
       });
     } else {
-      promise = this.storageArea.get().then(data => {
+      promise = this.storage.get().then(data => {
         return Object.values(data).reduce((acc, curr) => {
           if (curr.id) {
             acc.push(curr);
@@ -131,10 +130,10 @@ export default class BrowserStorage extends Storage {
   }
 
   getServiceData(provider) {
-    return this.storageArea.get(provider).then(data => data[provider]);
+    return this.storage.get(provider).then(data => data[provider]);
   }
 
   clearAll() {
-    return this.storageArea.clear();
+    return this.storage.clear();
   }
 }
