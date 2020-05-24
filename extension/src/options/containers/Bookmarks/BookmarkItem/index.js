@@ -13,13 +13,22 @@ const StyledContainer = styled(Grid)`
   background-color: ${props => props.theme.palette.grey[100]};
 `;
 
-const StyledImg = styled.img`
+const StyledImgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #b6d2e0;
+
   width: 120px;
   height: 90px;
-
   @media (max-width: 960px) {
     width: 352px;
     height: 240px;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -73,13 +82,13 @@ const BookmarkItem = ({ id, title, description, url, image, selected }) => {
       spacing={1}
       onClick={handleOpenPageDetail}
     >
-      {image && (
-        <Grid item md={2} sm={12}>
-          <Grid container justify="center" alignItems="center">
-            <StyledImg src={image} />
-          </Grid>
+      <Grid item md={2} sm={12}>
+        <Grid container justify="center" alignItems="center">
+          <StyledImgContainer src={image}>
+            {image ? <img src={image} /> : <div>{t('options:appName')}</div>}
+          </StyledImgContainer>
         </Grid>
-      )}
+      </Grid>
       <Grid item md={8} sm={12} container spacing={2} direction="column">
         <Grid item>
           <StyledTitle>{title}</StyledTitle>

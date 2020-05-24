@@ -42,7 +42,10 @@ const NotesView = () => {
     if (!id) {
       const pageId = generatePageId(url);
       fetchPage(pageId);
-    } else if ((!meta || !meta.description || !meta.image) && !tryLoadMeta) {
+    } else if (
+      (!meta || !meta.description || !meta.image) &&
+      !tryLoadMeta.current
+    ) {
       // Try add more meta info for migrated data
       tryLoadMeta.current = true;
       bookmarkPage();

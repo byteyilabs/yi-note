@@ -120,7 +120,7 @@ const SendToServices = () => {
               justify="center"
             >
               {services.map(s => (
-                <Grid item>
+                <Grid key={s} item>
                   <Grid container justify="center">
                     <IconButton
                       disabled={!!service}
@@ -130,7 +130,7 @@ const SendToServices = () => {
                     </IconButton>
                   </Grid>
                   <Typography>{t(s)}</Typography>
-                </Grid>    
+                </Grid>
               ))}
             </Grid>
             {hasExistingNote && !loading && (
