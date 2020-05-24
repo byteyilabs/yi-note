@@ -11,9 +11,6 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import { StyledModal, StyledPaper, StyledSpinner } from './styled';
 import * as icons from './icons';
-// import evernoteImg from './evernote-48.png';
-// import onenoteImg from './onenote-48.png';
-// import googledocsImg from './googledocs-48.png';
 import TextButton from '../../../components/TextButton';
 import { StorageFactory } from '../../../../common/services/storage';
 import { getFileUrl } from '../../../../common/utils';
@@ -129,7 +126,7 @@ const SendToServices = () => {
                       <img src={getFileUrl(icons[`${s}Img`])} />
                     </IconButton>
                   </Grid>
-                  <Typography>{t(s)}</Typography>
+                  <Typography align="center">{t(s)}</Typography>
                 </Grid>
               ))}
             </Grid>
