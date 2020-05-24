@@ -51,7 +51,7 @@ const getAccessToken = (event, context, callback) => {
   } catch (e) {
     return callback(null, {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid input' })
+      body: JSON.stringify({ message: 'Invalid input' }),
     });
   }
 

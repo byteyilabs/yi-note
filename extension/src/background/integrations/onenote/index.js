@@ -24,7 +24,6 @@ class OneNote extends Service {
   async sendNotes() {
     const { id, meta, notes } = this.data;
     const { value: notebooks } = await this.oauth2.callApi('/notebooks');
-    console.log(notebooks);
     let notebook = notebooks.find(
       ({ displayName }) => displayName === Service.YI_NOTEBOOK_NAME
     );
