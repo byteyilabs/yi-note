@@ -81,6 +81,27 @@
   "notesView_sendToServices_tooltip": {
     "message": "Send notes"
   },
+  "notesView_share_tooltip": {
+    "message": "Share YiNote"
+  },
+  "notesView_share_title": {
+    "message": "Share YiNote"
+  },
+  "notesView_share_text": {
+    "message": "Try YiNote, aka Turbonote extension, for taking & sharing notes while watching videos"
+  },
+  "notesView_share_facebook_label": {
+    "message": "Facebook"
+  },
+  "notesView_share_twitter_label": {
+    "message": "Twitter"
+  },
+  "notesView_share_copylink_label": {
+    "message": "Copy link"
+  },
+  "notesView_share_copylink_success": {
+    "message": "Link copied!"
+  },
   "searchView_tab_bookmarks": {
     "message": "Bookmarks"
   },

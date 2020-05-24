@@ -6,8 +6,10 @@ import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
 import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
+import ShareIcon from '@material-ui/icons/ShareOutlined';
 import Preview from './Preview';
 import SendToServices from './SendToServices';
+import ShareExtension from './ShareExtension';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
 import IconButton from '../../components/IconButton';
@@ -32,7 +34,8 @@ const NotesView = () => {
       bookmarkPage,
       removePage,
       preview: { setOpen: setPreviewOpen },
-      sendToPlatforms: { setOpen: setSendToPlatformsOpen }
+      sendToPlatforms: { setOpen: setSendToPlatformsOpen },
+      share: { setOpen: setShareExtensionOpen }
     },
     alerts: { show: showAlerts }
   } = useStoreActions(actions => actions);
@@ -67,6 +70,10 @@ const NotesView = () => {
     setSendToPlatformsOpen(true);
   };
 
+  const handleOpenShareExtension = () => {
+    setShareExtensionOpen(true);
+  };
+
   return (
     <>
       <Editor />
@@ -78,36 +85,52 @@ const NotesView = () => {
           <Grid container direction="row" alignItems="center">
             {id && (
               <>
-                <IconButton
-                  tooltip={t('preview.tooltip')}
-                  onClick={handleOpenPreview}
-                >
-                  <PreviewIcon />
-                </IconButton>
-                <IconButton
-                  tooltip={t('sendToServices.tooltip')}
-                  onClick={handleOpenSendToPlatforms}
-                >
-                  <CloudUploadOIcon />
-                </IconButton>
+                <Grid item>
+                  <IconButton
+                    tooltip={t('preview.tooltip')}
+                    onClick={handleOpenPreview}
+                  >
+                    <PreviewIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    tooltip={t('sendToServices.tooltip')}
+                    onClick={handleOpenSendToPlatforms}
+                  >
+                    <CloudUploadOIcon />
+                  </IconButton>
+                </Grid>
               </>
             )}
             {!id ? (
-              <IconButton
-                tooltip={t('bookmark:add.tooltip')}
-                onClick={bookmarkPage}
-              >
-                <BookmarkIcon />
-              </IconButton>
+              <Grid item>
+                <IconButton
+                  tooltip={t('bookmark:add.tooltip')}
+                  onClick={bookmarkPage}
+                >
+                  <BookmarkIcon />
+                </IconButton>
+              </Grid>
             ) : (
-              <IconButton
-                color="red"
-                tooltip={t('bookmark:remove.tooltip')}
-                onClick={handleRemovePage}
-              >
-                <BookmarkIcon />
-              </IconButton>
+              <Grid item>
+                <IconButton
+                  color="red"
+                  tooltip={t('bookmark:remove.tooltip')}
+                  onClick={handleRemovePage}
+                >
+                  <BookmarkIcon />
+                </IconButton>
+              </Grid>
             )}
+            <Grid item>
+              <IconButton
+                tooltip={t('share.tooltip')}
+                onClick={handleOpenShareExtension}
+              >
+                <ShareIcon />
+              </IconButton>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -119,6 +142,7 @@ const NotesView = () => {
       />
       <Preview />
       <SendToServices />
+      <ShareExtension />
     </>
   );
 };

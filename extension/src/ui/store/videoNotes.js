@@ -45,6 +45,12 @@ const videoNotesModel = {
       state.open = payload;
     })
   },
+  share: {
+    open: false,
+    setOpen: action((state, payload) => {
+      state.open = payload;
+    })
+  },
   edit: action((state, { timestamp, image }) => {
     const existingNote =
       state.page.notes.find(n => n.timestamp === timestamp) || {};

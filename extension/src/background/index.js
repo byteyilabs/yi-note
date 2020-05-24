@@ -41,6 +41,18 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       );
   };
 
+  const copyToClipboard = () => {
+    const { data: text } = message;
+    const copyFrom = document.createElement('textarea');
+    copyFrom.textContent = text;
+    const body = document.getElementsByTagName('body')[0];
+    body.appendChild(copyFrom);
+    copyFrom.select();
+    document.execCommand('copy');
+    body.removeChild(copyFrom);
+    sendResponse({ code: 'success' });
+  };
+
   const { action } = message;
   switch (action) {
     case 'open-options':
@@ -53,6 +65,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     case 'send-to-onenote':
     case 'send-to-googledocs':
       sendNotesToService();
+      return true;
+    case 'copy':
+      copyToClipboard();
       return true;
   }
 });
