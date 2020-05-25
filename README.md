@@ -1,6 +1,6 @@
 # YiNote Browser Extension
 
-YiNote, aka TurboNote Chrome Extension, is a great open source tool to boost online learning experience.
+YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share notes while watching online videos.
 
 - [Installation](#installation)
 - [Introduction](#introduction)
@@ -46,8 +46,10 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
   - Embedded youtube iframe video
   - HTML5 video
   - Local video via browser
-- Send notes to Google Docs
-- Send notes to MS OneNote
+- Send notes to popular note platforms
+  - Google Docs
+  - MS OneNote
+  - Evernote
 - Generate PDF with video screenshot
 - Bookmark video
 - Search through bookmarks and notes
@@ -59,16 +61,22 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
 
 There are serveral options to use this extension:
 
-- Please see [Installation section](#installation) to install extension from official platform stores. Please see [Migrations Guide](/MIGRATING.md) for more information.
-- You can also build the extension, then run it locally. Please see [Development](#development) for more information.
+- Install extension from web stores
+
+  Please see [Installation section](#installation) to install extension from official platform stores. If you are user before v1.0.0, please checkout [Migrations Guide](/MIGRATING.md) for more information.
+
+- Build and install extension locally
+  
+  You can also build the extension, then run it locally. Please see [Development](#development) for more information.
 
 #### Development
 
 ##### Prerequisite
 
-Node >= 10.0.0
+Suggested environment:
 
-NPM >= 6.0.0
+- Node >= 10.0.0
+- NPM >= 6.0.0
 
 ##### Install dependencies
 
@@ -156,28 +164,23 @@ All kinds of contributions from anyone are always welcomed!
 
 ## Roadmap
 
-- Integration with popular note / document platforms, like Evernote, onenote, google doc.
+- (Done) Integration with popular note / document platforms, like Evernote, onenote, google doc.
+
+- Sync notes from mooc platforms
 
 - Web article annotation
 
-- Cloud support for both public and private groups
+- Cloud support
 
 - Fine grained note sharing
 
-- Multiple devices support
-
-- Turn UI panel into framework agnositc UI widget
+- Multiple devices support (Desktop browser, mobile devices)
 
 ## FAQs
 
 - How to share notes with others?
 
-  YiNote can send notes to MS OneNote and Google Docs since v1.1.0. You can firstly send notes to one of the supported services, then generate share link from there.
-
-- Is YiNote still supporting sending notes to Evernote?
-
-  Evernote integration is on the roadmap, since it's one of the most popular note-taking platform. But seems like Evernote support team is not actively reviewing api key activation request. YiNote's production apiKey is still pending for review. YiNote will be updated with Evernote integration once the apiKey is ready. 
-
+  YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
 
 ## License
 
