@@ -4,7 +4,7 @@ import {
   addQueryToUrl,
   getFileUrl
 } from '../../../common/utils';
-import { QUERY_AUTO_JUMP, INSTALLATION_URL } from '../../../constants';
+import { QUERY_AUTO_JUMP, WEBSITE_URL } from '../../../constants';
 import msyh from '../../../fonts/msyh.ttf';
 
 export default class JspdfGenerator {
@@ -42,7 +42,7 @@ export default class JspdfGenerator {
     this.doc.setFontSize(12);
     this.doc.text(20, y, 'Generated from ');
     this.doc.setTextColor(71, 99, 255);
-    this.doc.textWithLink('YiNote', 53, y, { url: INSTALLATION_URL });
+    this.doc.textWithLink('YiNote', 53, y, { url: WEBSITE_URL });
     y += 10;
     this.doc.setTextColor(0, 0, 0);
 
