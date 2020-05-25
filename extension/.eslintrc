@@ -23,6 +23,7 @@
     "URL": "readonly",
     "URLSearchParams": "readonly",
     "fetch": "readonly",
-    "process": "readonly"
+    "process": "readonly",
+    "FileReader": "readonly"
   }
 }

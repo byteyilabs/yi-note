@@ -1,6 +1,10 @@
 import jsPDF from 'jspdf';
-import { secondsToTime, addQueryToUrl, getFileUrl } from '../../../common/utils';
-import { QUERY_AUTO_JUMP } from '../../../constants';
+import {
+  secondsToTime,
+  addQueryToUrl,
+  getFileUrl
+} from '../../../common/utils';
+import { QUERY_AUTO_JUMP, INSTALLATION_URL } from '../../../constants';
 import msyh from '../../../fonts/msyh.ttf';
 
 export default class JspdfGenerator {
@@ -9,17 +13,22 @@ export default class JspdfGenerator {
   }
 
   init() {
-    return fetch(getFileUrl(msyh)).then(res => res.blob()).then(blob => {
-      const reader = new FileReader();
-      reader.readAsDataURL(blob); 
-      reader.onloadend = () => {
-        const font = reader.result.split(',')[1];
-        jsPDF.API.events.push(['addFonts', function() {
-          this.addFileToVFS('msyh-normal.ttf', font);
-          this.addFont('msyh-normal.ttf', 'msyh', 'normal');
-        }]);
-      }
-    });
+    return fetch(getFileUrl(msyh))
+      .then(res => res.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const font = reader.result.split(',')[1];
+          jsPDF.API.events.push([
+            'addFonts',
+            function() {
+              this.addFileToVFS('msyh-normal.ttf', font);
+              this.addFont('msyh-normal.ttf', 'msyh', 'normal');
+            }
+          ]);
+        };
+      });
   }
 
   getBlobOutput({ url, title, notes }) {
@@ -28,7 +37,14 @@ export default class JspdfGenerator {
     let y = 20;
     this.doc.setFontSize(18);
     this.doc.text(20, y, this.doc.splitTextToSize(title, 180));
-    y += Math.ceil(title.length / 50) * 14;
+    y += Math.ceil(title.length / 50) * 12;
+
+    this.doc.setFontSize(12);
+    this.doc.text(20, y, 'Generated from ');
+    this.doc.setTextColor(71, 99, 255);
+    this.doc.textWithLink('YiNote', 53, y, { url: INSTALLATION_URL });
+    y += 10;
+    this.doc.setTextColor(0, 0, 0);
 
     this.doc.setFontSize(14);
     this.doc.text(20, y, '-- Notes --');
