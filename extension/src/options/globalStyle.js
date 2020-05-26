@@ -6,7 +6,7 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-  #${APP_ID} {
+  .${APP_ID} {
     font-size: 16px;
   }
 `;

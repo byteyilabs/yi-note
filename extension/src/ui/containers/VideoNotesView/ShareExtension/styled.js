@@ -18,10 +18,3 @@ export const StyledPaper = styled.div`
   outline: none;
   width: 350px;
 `;
-
-export const StyledSpinner = styled(CircularProgress)`
-  & svg {
-    width: 40px;
-    height: 40px;
-  }
-`;

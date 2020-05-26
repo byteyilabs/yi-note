@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
-import { Grid, Backdrop, Fade, CircularProgress } from '@material-ui/core';
+import { Grid, Backdrop, Fade } from '@material-ui/core';
 import ExportPDFIcon from '@material-ui/icons/GetApp';
 import ReloadIcon from '@material-ui/icons/Autorenew';
 import { StyledModal, StyledPaper } from './styled';
 import NoteItem from './NoteItem';
+import Spinner from '../../../components/Spinner';
 import ScrollableList from '../../../components/ScrollableList';
 import IconButton from '../../../components/IconButton';
-import { usePlayer } from '../../../hooks';
-import { takeScreenshot } from '../../../utils';
-import { delay } from '../../../../common/utils';
+import { usePlayer, useLoadScreenshots } from '../../../hooks';
 import { exportFile } from '../../../../common/services/file';
 import { PdfFactory } from '../../../services/pdf';
 import { APP_ID } from '../../../../constants';
@@ -26,38 +25,13 @@ const Preview = () => {
   } = useStoreState(state => state);
   const {
     preview: { setOpen },
-    setPage,
-    saveNote
+    setPage
   } = useStoreActions(actions => actions.videoNotes);
   const playerRef = usePlayer();
-  const [loading, setLoading] = useState(false);
+  const { loading, loadScreenshots } = useLoadScreenshots();
   const containerRef = useRef(null);
   const previewContentRef = useRef(null);
   const triedLoadScreenshots = useRef(false);
-
-  const loadScreenshots = useCallback(
-    async (forceLoad = false) => {
-      setLoading(true);
-      const player = playerRef.current;
-      const currentTime = await player.getCurrentTime();
-      const videoEl = player.getVideoElement();
-      // Take screenshots
-      for (const note of notes) {
-        if (note.image && !forceLoad) {
-          continue;
-        }
-        player.seek(note.timestamp);
-        await delay(500);
-        note.image = takeScreenshot(videoEl);
-        saveNote(note);
-      }
-      // Resume back to start time and pause video
-      player.seek(currentTime);
-      playerRef.current.pause();
-      setLoading(false);
-    },
-    [notes, playerRef, saveNote]
-  );
 
   useEffect(() => {
     containerRef.current = document.getElementById(APP_ID);
@@ -69,7 +43,7 @@ const Preview = () => {
     }, false);
     if (open && shouldLoadImages && !triedLoadScreenshots.current) {
       triedLoadScreenshots.current = true;
-      loadScreenshots();
+      loadScreenshots(notes);
     }
   }, [loadScreenshots, notes, open, playerRef, setPage]);
 
@@ -83,7 +57,7 @@ const Preview = () => {
   };
 
   const handleReloadScreenshots = async () => {
-    await loadScreenshots(true);
+    await loadScreenshots(notes, true);
   };
 
   return (
@@ -100,7 +74,7 @@ const Preview = () => {
       <Fade in={open}>
         <StyledPaper>
           {loading ? (
-            <CircularProgress />
+            <Spinner />
           ) : (
             <Grid
               ref={previewContentRef}

@@ -30,6 +30,9 @@
   "note_nonote": {
     "message": "No Note"
   },
+  "note_empty": {
+    "message": "bookmark"
+  },
   "alert_primary": {
     "message": "Confirm"
   },
@@ -80,6 +83,9 @@
   },
   "notesView_sendToServices_tooltip": {
     "message": "Send notes"
+  },
+  "notesView_sync_tooltip": {
+    "message": "Sync notes from {{platform}}"
   },
   "notesView_share_tooltip": {
     "message": "Share YiNote"

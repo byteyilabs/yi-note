@@ -7,6 +7,7 @@ import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
 import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
+import SyncIcon from '@material-ui/icons/Sync';
 import Preview from './Preview';
 import SendToServices from './SendToServices';
 import ShareExtension from './ShareExtension';
@@ -14,10 +15,16 @@ import NoteItem from './NoteItem';
 import Editor from './Editor';
 import IconButton from '../../components/IconButton';
 import ScrollableList from '../../components/ScrollableList';
+import Spinner from '../../components/Spinner';
 import { generatePageId } from '../../../common/utils';
+import { useSyncNotes, useLoadScreenshots } from '../../hooks';
 
 export const StyledTitle = styled.div`
   font-weight: 500;
+`;
+
+export const StyledIconContainer = styled(Grid)`
+  padding-right: 5px;
 `;
 
 const NotesView = () => {
@@ -40,6 +47,8 @@ const NotesView = () => {
     alerts: { show: showAlerts }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
+  const { platform, hasNotesToSync, getNotesToSync } = useSyncNotes();
+  const { loading, loadScreenshots } = useLoadScreenshots();
 
   useEffect(() => {
     if (!id) {
@@ -74,6 +83,11 @@ const NotesView = () => {
     setShareExtensionOpen(true);
   };
 
+  const handleSyncNotes = async () => {
+    const notesToSync = await getNotesToSync();
+    loadScreenshots(notesToSync);
+  };
+
   return (
     <>
       <Editor />
@@ -83,37 +97,17 @@ const NotesView = () => {
         </Grid>
         <Grid item>
           <Grid container direction="row" alignItems="center">
-            {id && (
-              <>
-                <Grid item>
-                  <IconButton
-                    tooltip={t('preview.tooltip')}
-                    onClick={handleOpenPreview}
-                  >
-                    <PreviewIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton
-                    tooltip={t('sendToServices.tooltip')}
-                    onClick={handleOpenSendToPlatforms}
-                  >
-                    <CloudUploadOIcon />
-                  </IconButton>
-                </Grid>
-              </>
-            )}
             {!id ? (
-              <Grid item>
+              <StyledIconContainer item>
                 <IconButton
                   tooltip={t('bookmark:add.tooltip')}
                   onClick={bookmarkPage}
                 >
                   <BookmarkIcon />
                 </IconButton>
-              </Grid>
+              </StyledIconContainer>
             ) : (
-              <Grid item>
+              <StyledIconContainer item>
                 <IconButton
                   color="red"
                   tooltip={t('bookmark:remove.tooltip')}
@@ -121,25 +115,59 @@ const NotesView = () => {
                 >
                   <BookmarkIcon />
                 </IconButton>
-              </Grid>
+              </StyledIconContainer>
             )}
-            <Grid item>
+            {hasNotesToSync && (
+              <StyledIconContainer item>
+                <IconButton
+                  tooltip={t('sync.tooltip', { platform })}
+                  onClick={handleSyncNotes}
+                >
+                  <SyncIcon />
+                </IconButton>
+              </StyledIconContainer>
+            )}
+            {id && (
+              <>
+                <StyledIconContainer item>
+                  <IconButton
+                    tooltip={t('preview.tooltip')}
+                    onClick={handleOpenPreview}
+                  >
+                    <PreviewIcon />
+                  </IconButton>
+                </StyledIconContainer>
+                <StyledIconContainer item>
+                  <IconButton
+                    tooltip={t('sendToServices.tooltip')}
+                    onClick={handleOpenSendToPlatforms}
+                  >
+                    <CloudUploadOIcon />
+                  </IconButton>
+                </StyledIconContainer>
+              </>
+            )}
+            <StyledIconContainer item>
               <IconButton
                 tooltip={t('share.tooltip')}
                 onClick={handleOpenShareExtension}
               >
                 <ShareIcon />
               </IconButton>
-            </Grid>
+            </StyledIconContainer>
           </Grid>
         </Grid>
       </Grid>
-      <ScrollableList
-        items={notes}
-        renderItem={({ id, content, timestamp }) => (
-          <NoteItem id={id} content={content} timestamp={timestamp} />
-        )}
-      />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <ScrollableList
+          items={notes}
+          renderItem={({ id, content, timestamp }) => (
+            <NoteItem id={id} content={content} timestamp={timestamp} />
+          )}
+        />
+      )}
       <Preview />
       <SendToServices />
       <ShareExtension />

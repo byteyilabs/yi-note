@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Modal, CircularProgress } from '@material-ui/core';
+import { Modal } from '@material-ui/core';
 
 export const StyledModal = styled(Modal)`
   display: flex;
@@ -16,12 +16,5 @@ export const StyledPaper = styled.div`
   align-items: center;
   justify-content: center;
   outline: none;
-  width: 350px;
-`;
-
-export const StyledSpinner = styled(CircularProgress)`
-  & svg {
-    width: 40px;
-    height: 40px;
-  }
+  width: 400px;
 `;

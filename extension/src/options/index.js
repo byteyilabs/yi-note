@@ -13,6 +13,7 @@ const store = createStore(storeModel);
 
 const container = document.createElement('div');
 container.id = APP_ID;
+container.classList.add(APP_ID);
 document.body.appendChild(container);
 
 ReactDOM.render(

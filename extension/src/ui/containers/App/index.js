@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useInterval } from 'react-recipes';
-import { Grid, CircularProgress } from '@material-ui/core';
 import { StyledContainer, StyledMain, StyledViewWrapper } from './styled';
 import Header from './Header';
 import Footer from './Footer';
 import VideoNotesView from '../VideoNotesView';
 import SearchView from '../SearchView';
 import ReloadView from '../ReloadView';
+import Spinner from '../../components/Spinner';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
 import withTheme from '../../../common/withTheme';
@@ -98,9 +98,7 @@ const App = () => {
         <Header />
         <StyledViewWrapper>
           {progress ? (
-            <Grid container alignItems="center" justify="center">
-              <CircularProgress />
-            </Grid>
+            <Spinner />
           ) : (
             <Switch>
               <Route path="/video-notes" component={VideoNotesView} />

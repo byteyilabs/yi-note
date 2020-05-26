@@ -8,7 +8,7 @@
     [
 
       "@quickbaseoss/babel-plugin-styled-components-css-namespace",
-      { "cssNamespace": "#yi-note" }
+      { "cssNamespace": ".yi-note" }
     ],
     "styled-components"
   ]

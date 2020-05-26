@@ -9,9 +9,10 @@ import {
   Typography
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { StyledModal, StyledPaper, StyledSpinner } from './styled';
+import { StyledModal, StyledPaper } from './styled';
 import * as icons from './icons';
 import TextButton from '../../../components/TextButton';
+import Spinner from '../../../components/Spinner';
 import { StorageFactory } from '../../../../common/services/storage';
 import { getFileUrl } from '../../../../common/utils';
 import { APP_ID } from '../../../../constants';
@@ -157,13 +158,7 @@ const SendToServices = () => {
                 </Grid>
               </Grid>
             )}
-            {loading && (
-              <Grid container justify="center" alignItems="center">
-                <Grid item>
-                  <StyledSpinner />
-                </Grid>
-              </Grid>
-            )}
+            {loading && <Spinner />}
           </Grid>
         </StyledPaper>
       </Fade>
