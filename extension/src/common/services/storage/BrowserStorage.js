@@ -38,6 +38,18 @@ export default class BrowserStorage extends Storage {
       .then(() => note);
   }
 
+  removeNote(noteId, pageId) {
+    return this.storage.get(pageId).then(page => {
+      page = page[pageId];
+      page.notes = page.notes.filter(note => note.id !== noteId);
+      const storeObj = {
+        [pageId]: page
+      };
+
+      return this.storage.set(storeObj);
+    });
+  }
+
   updateNote(pageId, note) {
     return this.addNote(pageId, note);
   }
