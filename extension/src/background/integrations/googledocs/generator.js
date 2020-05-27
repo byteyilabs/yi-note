@@ -1,6 +1,5 @@
-
 import { b64toBlob } from '../utils';
-import { secondsToTime, getUrlWithTimestamp } from '../../../common/utils';
+import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
 import { INSTALLATION_URL } from '../../../constants';
 
 const GOOGLE_API_BASE_URL = 'https://www.googleapis.com';
@@ -116,7 +115,7 @@ class Generator {
         },
         textStyle: {
           link: {
-            url: getUrlWithTimestamp(url, timestamp)
+            url: buildAutoSeekUrl(url, timestamp)
           },
           fontSize: {
             magnitude: 12,

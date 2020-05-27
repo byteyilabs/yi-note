@@ -13,6 +13,7 @@ import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
 import withTheme from '../../../common/withTheme';
 import { QUERY_AUTO_JUMP } from '../../../constants';
+import { delay } from '../../../common/utils';
 
 const App = () => {
   const { open, url } = useStoreState(state => state.app);
@@ -40,6 +41,7 @@ const App = () => {
   useEffect(() => {
     const jumpToTimestamp = async t => {
       getPlayer().then(async player => {
+        await delay(1500);
         await player.seek(t);
         await player.play();
       });

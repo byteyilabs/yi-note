@@ -1,4 +1,4 @@
-import { secondsToTime, getUrlWithTimestamp } from '../../../common/utils';
+import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
 import { INSTALLATION_URL } from '../../../constants';
 
 class Generator {
@@ -31,7 +31,7 @@ class Generator {
               <div>
                 <img src=${note.image} />
                 <span>
-                  <a href="${getUrlWithTimestamp(url, note.timestamp)}">
+                  <a href="${buildAutoSeekUrl(url, note.timestamp)}">
                     ${secondsToTime(note.timestamp)}
                   </a>
                 </span>

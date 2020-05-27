@@ -1,10 +1,10 @@
 import jsPDF from 'jspdf';
 import {
   secondsToTime,
-  addQueryToUrl,
+  buildAutoSeekUrl,
   getFileUrl
 } from '../../../common/utils';
-import { QUERY_AUTO_JUMP, WEBSITE_URL } from '../../../constants';
+import { WEBSITE_URL } from '../../../constants';
 import msyh from '../../../fonts/msyh.ttf';
 
 export default class JspdfGenerator {
@@ -62,7 +62,7 @@ export default class JspdfGenerator {
 
       this.doc.setTextColor(71, 99, 255);
       this.doc.textWithLink(secondsToTime(note.timestamp), 20, y, {
-        url: addQueryToUrl(url, QUERY_AUTO_JUMP, note.timestamp)
+        url: buildAutoSeekUrl(url, note.timestamp)
       });
 
       this.doc.setTextColor(0, 0, 0);

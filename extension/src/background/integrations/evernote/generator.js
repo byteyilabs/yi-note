@@ -1,8 +1,8 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
 import { getBinaryFromBase64 } from '../utils';
-import { secondsToTime, addQueryToUrl } from '../../../common/utils';
-import { INSTALLATION_URL, QUERY_AUTO_JUMP } from '../../../constants';
+import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
+import { INSTALLATION_URL } from '../../../constants';
 
 const escape = url => {
   var tagsToReplace = {
@@ -34,11 +34,7 @@ class Generator {
     nBody += '<br/>';
     const resources = [];
     notes.forEach(note => {
-      const timestampedUrl = addQueryToUrl(
-        url,
-        QUERY_AUTO_JUMP,
-        note.timestamp
-      );
+      const timestampedUrl = buildAutoSeekUrl(url, note.timestamp);
       if (note.image) {
         // Convert image to binary, then save as Evernote resource
         const fileMime = 'image/jpeg';

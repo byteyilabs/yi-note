@@ -9,8 +9,7 @@ import {
   StyledMainLine,
   StyledAdditionalInfo
 } from '../styled';
-import { secondsToTime, addQueryToUrl } from '../../../../common/utils';
-import { QUERY_AUTO_JUMP } from '../../../../constants';
+import { secondsToTime, buildAutoSeekUrl } from '../../../../common/utils';
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },
@@ -18,7 +17,7 @@ const NoteItem = ({
 }) => {
   return (
     <StyledArchor
-      href={addQueryToUrl(url, QUERY_AUTO_JUMP, timestamp)}
+      href={buildAutoSeekUrl(url, timestamp)}
       target="_blank"
       rel="noopener noreferrer"
     >
