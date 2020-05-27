@@ -100,18 +100,17 @@ const videoNotesModel = {
         createdAt: +new Date()
       };
       page = await storage.addPage(pageObj);
+    } else {
+      // Add note
+      if (!page.notes.find(note => note.id === id)) {
+        const addedNote = await storage.addNote(page.id, { id, ...note });
+        const notes = [...page.notes, addedNote].sort(
+          (n1, n2) => n1.timestamp - n2.timestamp
+        );
+        page = { ...page, notes };
+      }
     }
-
-    // Add note
-    if (!page.notes.find(note => note.id === id)) {
-      const addedNote = await storage.addNote(page.id, { id, ...note });
-      const notes = [...page.notes, addedNote].sort(
-        (n1, n2) => n1.timestamp - n2.timestamp
-      );
-      page = { ...page, notes };
-      actions.setPage(page);
-    }
-
+    actions.setPage(page);
     actions.editor.reset();
   }),
   removeNote: thunk(async (actions, noteId, { getState }) => {
