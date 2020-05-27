@@ -32,7 +32,8 @@ export default class HTML5Player extends Player {
   }
 
   seek(timestamp) {
-    this.video.currentTime = timestamp;
+    const timeToSeek = timestamp - this.seekSeconds;
+    this.video.currentTime = timeToSeek >= 0 ? timeToSeek : 0;
   }
 
   async getCurrentTime() {

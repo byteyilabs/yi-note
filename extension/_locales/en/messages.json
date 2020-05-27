@@ -141,6 +141,15 @@
   "options_settings_title": {
     "message": "Settings"
   },
+  "options_settings_video_title": {
+    "message": "Video"
+  },
+  "options_settings_video_description": {
+    "message": "Settings to customize video playback behaviours"
+  },
+  "options_settings_seek_label": {
+    "message": "Seconds to jump before recoreded time"
+  },
   "options_settings_exportAndImport_title": {
     "message": "Export and Import"
   },

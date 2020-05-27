@@ -41,7 +41,8 @@ export default class YoutubeIframePlayer extends Player {
   }
 
   seek(timestamp) {
-    this.#player.seekTo(timestamp);
+    const timeToSeek = timestamp - this.seekSeconds;
+    this.#player.seekTo(timeToSeek >= 0 ? timeToSeek : 0);
   }
 
   async getCurrentTime() {

@@ -59,7 +59,7 @@ const ExportAndImport = () => {
   };
 
   return (
-    <Grid container direction="column" spacing={4}>
+    <Grid container direction="column" spacing={3}>
       <Grid item container spacing={1} direction="column">
         <Grid item>
           <Typography variant="h6">

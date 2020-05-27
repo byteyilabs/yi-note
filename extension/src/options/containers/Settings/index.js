@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStoreActions } from 'easy-peasy';
+import { Grid } from '@material-ui/core';
+import Video from './Video';
 import ExportAndImport from './ExportAndImport';
 
 const Settings = () => {
@@ -13,7 +15,16 @@ const Settings = () => {
     setTitle(t('settings.title'));
   }, [setTitle, t]);
 
-  return <ExportAndImport />;
+  return (
+    <Grid container spacing={6}>
+      <Grid item container>
+        <Video />
+      </Grid>
+      <Grid item container>
+        <ExportAndImport />
+      </Grid>
+    </Grid>
+  );
 };
 
 export default Settings;

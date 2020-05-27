@@ -1,5 +1,12 @@
+import { KEY_VIDEO_SEEK_SECONDS } from '../../../constants';
+
 export default class Player {
-  constructor(options) {}
+  constructor() {
+    browser.storage.local.get('settings').then(data => {
+      const settings = data.settings || {};
+      this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
+    });
+  }
 
   getVideoElement() {
     logger.warn('Method need to be implemented');
