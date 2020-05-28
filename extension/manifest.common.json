@@ -33,6 +33,7 @@
       ],
       "js": [
         "vendors/youtube-iframe-api.js",
+        "vendors/embedly.js",
         "browser-polyfill.js",
         "content.js"
       ],
