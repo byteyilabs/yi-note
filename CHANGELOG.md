@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.0
+
+### Features
+
+- [#16](https://github.com/shuowu/yi-note/issues/16) Sync notes from Coursera notes
+- [#17](https://github.com/shuowu/yi-note/issues/17) Sync notes from Udemy notes
+- [#8](https://github.com/shuowu/yi-note/issues/8) Support embedly player
+- [#21](https://github.com/shuowu/yi-note/issues/21) Add hook player to expose interface for website to integrate with
+- [#30](https://github.com/shuowu/yi-note/issues/30) Add option for user to customize playback seconds
+
+### Bug fixes
+
+- [#29](https://github.com/shuowu/yi-note/issues/29) Fix PDF link auto seek issue
+
 ## 1.2.0
 
 ### Features
