@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import HTML5Video from './components/HTML5Video';
 import YoutubIframeVideo from './components/YoutubeIframe';
+import EmbedlyVideo from './components/Embedly';
 import YiNote from '../src/ui';
 
 const yiNote = new YiNote();
@@ -32,6 +33,9 @@ const App = () => {
             <li>
               <Link to="/youtube-iframe">Youtube Iframe Video</Link>
             </li>
+            <li>
+              <Link to="/embedly">Embedly Video</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -44,6 +48,11 @@ const App = () => {
             exact
             path="/youtube-iframe"
             render={() => <YoutubIframeVideo onRender={renderYiNote} />}
+          />
+          <Route
+            exact
+            path="/embedly"
+            render={() => <EmbedlyVideo onRender={renderYiNote} />}
           />
         </Switch>
       </Router>

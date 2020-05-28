@@ -1,6 +1,7 @@
 import videoUrlParser from 'js-video-url-parser';
 import YoutubePlayer from './YoutubePlayer';
 import YoutubeIframePlayer from './YoutubeIframePlayer';
+import EmbedlyPlayer from './EmbedlyPlayer';
 import HTML5Player from './HTML5Player';
 import { retry } from '../../../common/utils';
 import isHidden from '../dom/isHidden';
@@ -13,6 +14,10 @@ const playersToTry = [
   {
     selector: 'iframe[src*="youtube"]',
     player: YoutubeIframePlayer
+  },
+  {
+    selector: 'iframe[src*="embedly.com"]',
+    player: EmbedlyPlayer
   }
 ];
 
