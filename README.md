@@ -19,6 +19,7 @@ YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share n
 - [Contribute](#contribute)
   - [As a community](#as-a-community)
   - [As a developer](#as-a-developer)
+- [Support YiNote in your website](#support-yinote-in-your-website)
 - [Roadmap](#roadmap)
 - [FAQs](#faqs)
 - [License](#license)
@@ -161,6 +162,47 @@ YiNote leverages mozilla's [Web extension polyfill](https://github.com/mozilla/w
 Please read the [Contribution Guide](/CONTRIBUTING.md)
 
 All kinds of contributions from anyone are always welcomed!
+
+## Support YiNote in your website
+
+If you have a video website and want to make it work with YiNote, but unfortunately YiNote is not able to properly detect video on your website. There are serveral options you can try.
+
+- Add a new Player to YiNote by following this [pull request](https://github.com/shuowu/yi-note/pull/31)
+
+- Add player hook in your website.
+  
+  1. Add data attribute, `[data-yinote="yinote-hook-player"]`, to your video element. So YiNote can properly locate your video element.
+  2. Add message listener to watch on video action messages from YiNote.
+  
+  ```js
+  window.addEventListener('message', event => {
+    const { data } = event;
+    if (data.from !== 'yi-note') {
+      return;
+    }
+
+    switch (data.action) {
+      case 'play':
+        // handle play video
+        return;
+      case 'pause':
+        // handle pause video
+        return;
+      case 'seek':
+        // get secondsToSeek from data.data
+        // then seek to certain time with your player
+        return;
+      case 'getCurrentTime':
+        // get current time from your player, then
+        window.postMessage({ ...data, data: $currentTime }, *);
+        return;
+      case 'getDuration':
+        // get duration from your player, then
+        window.postMessage({ ...data, data: $duration }, *);
+        return;
+    }
+  }, false);
+  ```
 
 ## Roadmap
 
