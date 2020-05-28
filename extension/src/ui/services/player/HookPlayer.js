@@ -38,7 +38,7 @@ export default class HookPlayer extends Player {
   #getCurrentTimeHandler = event => {
     const { action, data } = event.data;
     if (action === ACTION_GET_CURRENT_TIME) {
-      this.#resolve[action](data);
+      this.#resolves[action](data);
     }
   };
 
@@ -57,7 +57,7 @@ export default class HookPlayer extends Player {
   #getDurationHandler = event => {
     const { action, data } = event.data;
     if (action === ACTION_GET_CURRENT_TIME) {
-      this.#resolve[action](data);
+      this.#resolves[action](data);
     }
   };
 

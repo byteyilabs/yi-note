@@ -3,7 +3,7 @@ import YoutubePlayer from './YoutubePlayer';
 import YoutubeIframePlayer from './YoutubeIframePlayer';
 import EmbedlyPlayer from './EmbedlyPlayer';
 import HTML5Player from './HTML5Player';
-import HookPlayer from 'HookPlayer';
+import HookPlayer from './HookPlayer';
 import { retry } from '../../../common/utils';
 import isHidden from '../dom/isHidden';
 
