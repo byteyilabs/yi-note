@@ -3,6 +3,7 @@ import YoutubePlayer from './YoutubePlayer';
 import YoutubeIframePlayer from './YoutubeIframePlayer';
 import EmbedlyPlayer from './EmbedlyPlayer';
 import HTML5Player from './HTML5Player';
+import HookPlayer from 'HookPlayer';
 import { retry } from '../../../common/utils';
 import isHidden from '../dom/isHidden';
 
@@ -18,6 +19,10 @@ const playersToTry = [
   {
     selector: 'iframe[src*="embedly.com"]',
     player: EmbedlyPlayer
+  },
+  {
+    selector: '[data-yinote="yinote-hook-player"]',
+    player: HookPlayer
   }
 ];
 
