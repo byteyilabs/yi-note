@@ -4,7 +4,14 @@ YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share n
 
 <img src="assets/hero.png" />
 
-- [Installation](#installation)
+## Installation
+
+<a href="https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf"><img src="assets/chrome-48.png"></a>
+<a href="https://addons.mozilla.org/en-CA/firefox/addon/yinote/"><img src="assets/firefox-48.png"></a>
+<a href="https://microsoftedge.microsoft.com/addons/detail/gieehphfgjfjmeejdohpdiajmicjnfbh"><img src="assets/microsoft-edge-48.png"></a>
+
+## Table of Contents
+
 - [Introduction](#introduction)
   - [Purpose and history](#purpose-and-history)
   - [Features](#features)
@@ -25,14 +32,6 @@ YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share n
 - [Roadmap](#roadmap)
 - [FAQs](#faqs)
 - [License](#license)
-
-## Installation
-
-YiNote has been published in following platforms. Please download the extension from following links to achieve best user experience and support.
-
-- [Chrome Web Store](https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf)
-- [Firefox addons](https://addons.mozilla.org/en-CA/firefox/addon/yinote/)
-- [Microsoft Edge addons](https://microsoftedge.microsoft.com/addons/search/YiNote)
 
 ## Introduction
 
