@@ -2,6 +2,8 @@
 
 YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share notes while watching online videos.
 
+<img src="assets/hero.png" />
+
 - [Installation](#installation)
 - [Introduction](#introduction)
   - [Purpose and history](#purpose-and-history)
