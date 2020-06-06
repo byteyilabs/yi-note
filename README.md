@@ -224,6 +224,10 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 - How to share notes with others?
 
   YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
+  
+- What should I prepare if I decide not to use YiNote extension any more?
+
+  YiNote save users data in chrome local storage (per extension), which means delete the extension will also erase saved notes from your browser. YiNote provides a backup strategy in options page to export local data into a json file. Please make sure you backup your data before delete the extension. Cloud support will be provided in the future to achieve better sync and backup.
 
 ## License
 
