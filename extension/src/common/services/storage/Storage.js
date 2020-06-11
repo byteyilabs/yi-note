@@ -23,16 +23,32 @@ export default class Storage {
     logger.warn('Method need to be implemented: removeNote');
   }
 
-  getBookmarks() {
-    logger.warn('Method need to be implemented: getBookmarks');
-  }
-
   getNotes() {
     logger.warn('Method need to be implemented: getNotes');
   }
 
+  addTag() {
+    logger.warn('Method need to be implemented: addTag');
+  }
+
+  removeTag() {
+    logger.warn('Method need to be implemented: removeTag');
+  }
+
+  getTags() {
+    logger.warn('Method need to be implemented: getTags');
+  }
+
+  getBookmarks() {
+    logger.warn('Method need to be implemented: getBookmarks');
+  }
+
   searchBookmarks() {
     logger.warn('Method need to be implemented: searchBookmarks');
+  }
+
+  filterBookmarksByTags() {
+    logger.warn('Method need to be implemented: filterBookmarksByTags');
   }
 
   searchNotes() {

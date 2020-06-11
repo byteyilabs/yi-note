@@ -129,11 +129,17 @@
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },
+  "options_bookmarks_tag_tooltip": {
+    "message": "Filter by tags"
+  },
   "options_bookmarks_export_tooltip": {
     "message": "Select bookmarks to export"
   },
   "options_page_title": {
     "message": "Page Detail"
+  },
+  "options_page_tag_tooltip": {
+    "message": "Add tag"
   },
   "options_page_open_tooltip": {
     "message": "Open page in new tab"
@@ -223,5 +229,8 @@
   },
   "services_template_description": {
     "message": "Description:"
+  },
+  "tagdialog_input_label": {
+    "message": "New tag"
   }
 }

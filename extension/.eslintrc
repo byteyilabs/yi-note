@@ -24,6 +24,7 @@
     "URLSearchParams": "readonly",
     "fetch": "readonly",
     "process": "readonly",
-    "FileReader": "readonly"
+    "FileReader": "readonly",
+    "Set": "readonly"
   }
 }
