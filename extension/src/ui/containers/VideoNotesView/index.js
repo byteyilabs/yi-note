@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Grid } from '@material-ui/core';
+import { Grid, Chip } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
 import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import SyncIcon from '@material-ui/icons/Sync';
+import TagIcon from '@material-ui/icons/LocalOfferOutlined';
 import Preview from './Preview';
 import SendToServices from './SendToServices';
 import ShareExtension from './ShareExtension';
@@ -16,6 +17,7 @@ import Editor from './Editor';
 import IconButton from '../../components/IconButton';
 import ScrollableList from '../../components/ScrollableList';
 import Spinner from '../../components/Spinner';
+import TagDialog from '../../../common/components/TagDialog';
 import { generatePageId } from '../../../common/utils';
 import { useSyncNotes, useLoadScreenshots } from '../../hooks';
 
@@ -31,7 +33,7 @@ const NotesView = () => {
   const { t } = useTranslation(['notesView', 'bookmark']);
   const {
     videoNotes: {
-      page: { id, notes, meta }
+      page: { id, notes, meta, tags }
     },
     app: { url }
   } = useStoreState(state => state);
@@ -40,11 +42,14 @@ const NotesView = () => {
       fetchPage,
       bookmarkPage,
       removePage,
+      addTag,
+      removeTag,
       preview: { setOpen: setPreviewOpen },
       sendToPlatforms: { setOpen: setSendToPlatformsOpen },
       share: { setOpen: setShareExtensionOpen }
     },
-    alerts: { show: showAlerts }
+    alerts: { show: showAlerts },
+    tagDialog: { setOpen: setTagDialogOpen }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
   const { platform, hasNotesToSync, getNotesToSync } = useSyncNotes();
@@ -69,6 +74,10 @@ const NotesView = () => {
       content: t('bookmark:remove.alert'),
       onConfirm: removePage.bind(null, id)
     });
+  };
+
+  const handleOpenTagDialog = () => {
+    setTagDialogOpen(true);
   };
 
   const handleOpenPreview = () => {
@@ -131,6 +140,14 @@ const NotesView = () => {
               <>
                 <StyledIconContainer item>
                   <IconButton
+                    tooltip={t('tag.tooltip')}
+                    onClick={handleOpenTagDialog}
+                  >
+                    <TagIcon />
+                  </IconButton>
+                </StyledIconContainer>
+                <StyledIconContainer item>
+                  <IconButton
                     tooltip={t('preview.tooltip')}
                     onClick={handleOpenPreview}
                   >
@@ -158,6 +175,13 @@ const NotesView = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Grid container spacing={1}>
+        {tags.map(tag => (
+          <Grid item key={tag}>
+            <Chip label={tag} color="default" />
+          </Grid>
+        ))}
+      </Grid>
       {loading ? (
         <Spinner />
       ) : (
@@ -171,6 +195,7 @@ const NotesView = () => {
       <Preview />
       <SendToServices />
       <ShareExtension />
+      <TagDialog tags={tags} onAddTag={addTag} onRemoveTag={removeTag} />
     </>
   );
 };

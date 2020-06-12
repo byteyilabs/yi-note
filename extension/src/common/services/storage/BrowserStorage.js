@@ -1,6 +1,6 @@
 import { isUuid } from 'uuidv4';
 import Storage from './Storage';
-import { addNoteToList } from '../../utils';
+import { addNoteToList, addTagToList } from '../../utils';
 
 export default class BrowserStorage extends Storage {
   constructor(area = 'local') {
@@ -54,17 +54,6 @@ export default class BrowserStorage extends Storage {
     return this.addNote(pageId, note);
   }
 
-  getBookmarks() {
-    return this.storage.get().then(pages => {
-      return Object.keys(pages)
-        .filter(key => isUuid(key))
-        .map(key => {
-          const { id, meta = {}, createdAt } = pages[key];
-          return { id, createdAt, ...meta };
-        });
-    });
-  }
-
   getNotes() {
     return this.storage.get().then(pages => {
       const notes = Object.values(pages).reduce((acc, curr) => {
@@ -81,12 +70,80 @@ export default class BrowserStorage extends Storage {
     });
   }
 
+  addTag(pageId, tag) {
+    return this.storage
+      .get(pageId)
+      .then(page => {
+        page = page[pageId];
+        page.tags = addTagToList(page.tags || [], tag);
+        const storeObj = {
+          [pageId]: page
+        };
+
+        return this.storage.set(storeObj);
+      })
+      .then(() => tag);
+  }
+
+  removeTag(pageId, tag) {
+    return this.storage.get(pageId).then(page => {
+      page = page[pageId];
+      page.tags = (page.tags || []).filter(t => t !== tag);
+      const storeObj = {
+        [pageId]: page
+      };
+
+      return this.storage.set(storeObj);
+    });
+  }
+
+  getTags() {
+    return this.storage.get().then(pages => {
+      const tagsSet = Object.values(pages).reduce((acc, curr) => {
+        if (!curr.tags) {
+          return acc;
+        }
+
+        curr.tags.forEach(tag => acc.add(tag));
+        return acc;
+      }, new Set());
+      return Array.from(tagsSet);
+    });
+  }
+
+  getBookmarks() {
+    return this.storage.get().then(pages => {
+      return Object.keys(pages)
+        .filter(key => isUuid(key))
+        .map(key => {
+          const { id, meta = {}, createdAt } = pages[key];
+          return { id, createdAt, ...meta };
+        });
+    });
+  }
+
   searchBookmarks(query) {
     return this.storage.get().then(pages => {
       const bookmarks = Object.values(pages)
         .filter(({ meta: { title = '', description = '' } }) => {
           const regex = new RegExp(query, 'i');
           return regex.test(title) || regex.test(description);
+        })
+        .map(({ id, meta = {} }) => ({
+          id,
+          ...meta
+        }));
+      return bookmarks;
+    });
+  }
+
+  filterBookmarksByTags(tags) {
+    return this.storage.get().then(pages => {
+      const bookmarks = Object.values(pages)
+        .filter(({ tags: tagsInPage }) => {
+          return tags.reduce((acc, curr) => {
+            return acc && tagsInPage.includes(curr);
+          }, true);
         })
         .map(({ id, meta = {} }) => ({
           id,

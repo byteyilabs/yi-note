@@ -2,6 +2,7 @@ import app from './app';
 import bookmarks from './bookmarks';
 import page from './page';
 import alerts from '../../common/components/Alerts/store';
+import tagDialog from '../../common/components/TagDialog/store';
 import { thunk } from 'easy-peasy';
 
 const storeModel = {
@@ -9,6 +10,7 @@ const storeModel = {
   bookmarks,
   page,
   alerts,
+  tagDialog,
   reset: thunk(actions => {
     for (const model in actions) {
       if (typeof actions[model].reset === 'undefined') {
