@@ -4,7 +4,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, List, ListItem, Chip } from '@material-ui/core';
 import VideoNoteItem from './VideoNoteItem';
-import TagDialog from '../../../common/Components/TagDialog';
+import TagDialog from '../../../common/components/TagDialog';
 import { TYPE_VIDEO_NOTE } from '../../../constants';
 
 const Page = () => {
