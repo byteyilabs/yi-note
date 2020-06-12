@@ -125,9 +125,9 @@ export default class BrowserStorage extends Storage {
   searchBookmarks(query) {
     return this.storage.get().then(pages => {
       const bookmarks = Object.values(pages)
-        .filter(({ meta: { title = '', description = '' } }) => {
+        .filter(({ meta: { title = '' } }) => {
           const regex = new RegExp(query, 'i');
-          return regex.test(title) || regex.test(description);
+          return regex.test(title);
         })
         .map(({ id, meta = {} }) => ({
           id,

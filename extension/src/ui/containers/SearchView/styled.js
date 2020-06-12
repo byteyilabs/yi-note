@@ -17,11 +17,18 @@ export const StyledImg = styled.img`
   margin-right: 4px;
 `;
 
-export const StyledMainLine = styled.span`
-  font-size: 0.9em;
+export const StyledMainLine = styled.div`
+  font-size: 0.8em;
+  & > * {
+    font-size: inherit;
+  }
 `;
 
-export const StyledAdditionalInfo = styled.span`
+export const StyledAdditionalInfo = styled.div`
+  width: 100%;
   font-size: 0.8em;
   color: grey;
+  & > * {
+    font-size: inherit;
+  }
 `;
