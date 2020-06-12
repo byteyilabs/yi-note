@@ -72,6 +72,9 @@
   "notesView_note_collapse_tooltip": {
     "message": "Collapse Note"
   },
+  "notesView_tag_tooltip": {
+    "message": "Add tag"
+  },
   "notesView_preview_tooltip": {
     "message": "Open notes preview"
   },

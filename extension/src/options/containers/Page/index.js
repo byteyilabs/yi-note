@@ -4,7 +4,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, List, ListItem, Chip } from '@material-ui/core';
 import VideoNoteItem from './VideoNoteItem';
-import TagDialog from './TagDialog';
+import TagDialog from '../../../common/Components/TagDialog';
 import { TYPE_VIDEO_NOTE } from '../../../constants';
 
 const Page = () => {
@@ -15,7 +15,7 @@ const Page = () => {
   } = useStoreState(state => state);
   const {
     app: { setTitle: setAppTitle },
-    page: { fetchPage }
+    page: { fetchPage, addTag, removeTag }
   } = useStoreActions(actions => actions);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Page = () => {
           </List>
         </Grid>
       </Grid>
-      <TagDialog />
+      <TagDialog tags={tags} onAddTag={addTag} onRemoveTag={removeTag} />
     </>
   );
 };

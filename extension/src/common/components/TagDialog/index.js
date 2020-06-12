@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import {
@@ -8,19 +9,22 @@ import {
   TextField,
   Chip
 } from '@material-ui/core';
+import { APP_ID } from '../../../constants';
 
-const TagDialog = () => {
-  const { t} = useTranslation('tagdialog');
+const TagDialog = ({ tags, onAddTag, onRemoveTag }) => {
+  const { t } = useTranslation('tagdialog');
   const {
-    tagDialog: { open },
-    tags
-  } = useStoreState(state => state.page);
+    tagDialog: { open }
+  } = useStoreState(state => state);
   const {
-    tagDialog: { setOpen },
-    addTag,
-    removeTag
-  } = useStoreActions(actions => actions.page);
+    tagDialog: { setOpen }
+  } = useStoreActions(actions => actions);
   const [input, setInput] = useState('');
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    containerRef.current = document.getElementById(APP_ID);
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -32,17 +36,17 @@ const TagDialog = () => {
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      addTag(input);
+      onAddTag(input);
       setInput('');
     }
   };
 
   const handleDelete = tag => {
-    removeTag(tag);
+    onRemoveTag(tag);
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog onClose={handleClose} open={open} container={containerRef.current}>
       <DialogContent>
         <Grid container direction="column" spacing={3}>
           <Grid item>
@@ -68,6 +72,12 @@ const TagDialog = () => {
       </DialogContent>
     </Dialog>
   );
+};
+
+TagDialog.propTypes = {
+  tags: PropTypes.array.isRequired,
+  onAddTag: PropTypes.func.isRequired,
+  onRemoveTag: PropTypes.func.isRequired
 };
 
 export default TagDialog;

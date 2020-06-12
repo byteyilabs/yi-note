@@ -2,7 +2,7 @@ import { action, thunk } from 'easy-peasy';
 import { getMetadata } from 'page-metadata-parser';
 import { fromString } from 'uuidv4';
 import { StorageFactory } from '../../common/services/storage';
-import { generatePageId } from '../../common/utils';
+import { generatePageId, addTagToList } from '../../common/utils';
 
 export const defaultNote = {
   id: '',
@@ -13,7 +13,8 @@ export const defaultNote = {
 
 export const defaultPage = {
   id: '',
-  notes: []
+  notes: [],
+  tags: []
 };
 
 const storage = StorageFactory.getStorage();
@@ -121,6 +122,18 @@ const videoNotesModel = {
       notes: notes.filter(note => note.id !== noteId)
     };
     actions.setPage(pageObj);
+  }),
+  addTag: thunk(async (actions, tag, { getState }) => {
+    const { page } = getState();
+    const { id, tags } = page;
+    await storage.addTag(id, tag);
+    actions.setPage({ ...page, tags: addTagToList(tags, tag) });
+  }),
+  removeTag: thunk(async (actions, tag, { getState }) => {
+    const { page } = getState();
+    const { id, tags } = page;
+    await storage.removeTag(id, tag);
+    actions.setPage({ ...page, tags: tags.filter(t => t !== tag) });
   })
 };
 

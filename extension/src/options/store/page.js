@@ -53,11 +53,5 @@ export default {
     state.title = '';
     state.url = '';
     state.notes = [];
-  }),
-  tagDialog: {
-    open: false,
-    setOpen: action((state, payload) => {
-      state.open = payload;
-    })
-  }
+  })
 };

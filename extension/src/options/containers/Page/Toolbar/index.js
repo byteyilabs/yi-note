@@ -8,7 +8,7 @@ import TagIcon from '@material-ui/icons/LocalOfferOutlined';
 const Toolbar = () => {
   const { t } = useTranslation('options');
   const { url } = useStoreState(state => state.page);
-  const { setOpen } = useStoreActions(actions => actions.page.tagDialog);
+  const { setOpen } = useStoreActions(actions => actions.tagDialog);
 
   const handleAddTag = () => {
     setOpen(true);

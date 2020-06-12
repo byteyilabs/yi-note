@@ -3,10 +3,12 @@ import app from './app';
 import videoNotes, { defaultPage, defaultNote } from './videoNotes';
 import search from './search';
 import alerts from '../../common/components/Alerts/store';
+import tagDialog from '../../common/components/TagDialog/store';
 
 const storeModel = {
   app,
   alerts,
+  tagDialog,
   videoNotes,
   search,
   onSetPage: actionOn(
