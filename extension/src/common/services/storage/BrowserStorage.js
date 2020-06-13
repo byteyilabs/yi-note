@@ -202,6 +202,12 @@ export default class BrowserStorage extends Storage {
     return this.storage.get(provider).then(data => data[provider]);
   }
 
+  getSettings() {
+    return this.storage.get('settings').then(data => {
+      return data.settings || {};
+    });
+  }
+
   clearAll() {
     return this.storage.clear();
   }

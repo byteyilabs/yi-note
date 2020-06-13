@@ -58,4 +58,8 @@ export default class Storage {
   getServiceData() {
     logger.warn('Method need to be implemented: getServiceData');
   }
+
+  getSettings() {
+    logger.warn('Method need to be implemented: getSettings');
+  }
 }

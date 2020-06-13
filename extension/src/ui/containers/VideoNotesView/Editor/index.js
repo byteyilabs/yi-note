@@ -41,7 +41,7 @@ const Editor = () => {
     const player = playerRef.current;
     const timestamp = await playerRef.current.getCurrentTime();
     const videoEl = player.getVideoElement();
-    const dataUri = takeScreenshot(videoEl);
+    const dataUri = await takeScreenshot(videoEl);
     edit({ timestamp, image: dataUri });
   };
 

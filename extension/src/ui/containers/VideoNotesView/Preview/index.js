@@ -11,7 +11,7 @@ import ScrollableList from '../../../components/ScrollableList';
 import IconButton from '../../../components/IconButton';
 import { usePlayer, useLoadScreenshots } from '../../../hooks';
 import { exportFile } from '../../../../common/services/file';
-import { PdfFactory } from '../../../services/pdf';
+import PDFGenerator from '../../../../common/services/pdf';
 import { APP_ID } from '../../../../constants';
 
 const Preview = () => {
@@ -52,7 +52,8 @@ const Preview = () => {
   };
 
   const handleGeneratePDF = async () => {
-    const blob = PdfFactory.getGenerator().getBlobOutput({ url, title, notes });
+    const generator = new PDFGenerator();
+    const blob = await generator.getBlobOutput({ url, title, notes });
     await exportFile(blob, `${APP_ID}_${pageId}.pdf`);
   };
 

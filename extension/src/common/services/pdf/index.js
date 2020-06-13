@@ -4,16 +4,21 @@ import {
   buildAutoSeekUrl,
   getFileUrl
 } from '../../../common/utils';
-import { WEBSITE_URL } from '../../../constants';
+import { StorageFactory } from '../../../common/services/storage';
+import {
+  WEBSITE_URL,
+  KEY_APPLY_SEEK_SEC_ON_URL,
+  KEY_VIDEO_SEEK_SECONDS
+} from '../../../constants';
 import msyh from '../../../fonts/msyh.ttf';
 
-export default class JspdfGenerator {
+export default class PDFGenerator {
   constructor() {
     this.doc = new jsPDF();
   }
 
-  init() {
-    return fetch(getFileUrl(msyh))
+  static init() {
+    fetch(getFileUrl(msyh))
       .then(res => res.blob())
       .then(blob => {
         const reader = new FileReader();
@@ -31,13 +36,17 @@ export default class JspdfGenerator {
       });
   }
 
-  getBlobOutput({ url, title, notes }) {
+  async getBlobOutput({ url, title, notes }) {
+    const settings = await StorageFactory.getStorage().getSettings();
+    this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
+    this.shouldApplySeekSecondsOnUrl = settings[KEY_APPLY_SEEK_SEC_ON_URL];
+
     this.doc.setFont('msyh');
     this.doc.setFontType('normal');
     let y = 20;
     this.doc.setFontSize(18);
     this.doc.text(20, y, this.doc.splitTextToSize(title, 180));
-    y += Math.ceil(title.length / 50) * 12;
+    y += Math.ceil(title.length / 50) * 18;
 
     this.doc.setFontSize(12);
     this.doc.text(20, y, 'Generated from ');
@@ -57,12 +66,17 @@ export default class JspdfGenerator {
         this.doc.addPage();
         y = 20;
       }
-      this.doc.addImage(note.image, 'PNG', 20, y, 100, 60, null, 'NONE');
-      y += 66;
+      this.doc.addImage(note.image, 'PNG', 20, y, 160, 90, null, 'NONE');
+      y += 100;
 
       this.doc.setTextColor(71, 99, 255);
       this.doc.textWithLink(secondsToTime(note.timestamp), 20, y, {
-        url: buildAutoSeekUrl(url, note.timestamp)
+        url: buildAutoSeekUrl(
+          url,
+          this.shouldApplySeekSecondsOnUrl
+            ? note.timestamp - this.seekSeconds
+            : note.timestamp
+        )
       });
 
       this.doc.setTextColor(0, 0, 0);

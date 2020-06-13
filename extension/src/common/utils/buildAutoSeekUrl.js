@@ -2,6 +2,10 @@ import videoUrlParser from 'js-video-url-parser';
 import { QUERY_AUTO_JUMP } from '../../constants';
 
 export default (url, timestamp) => {
+  if (timestamp < 0) {
+    timestamp = 0;
+  }
+
   const { provider } = videoUrlParser.parse(url) || {};
   const parsedUrl = new URL(url);
   const params = new URLSearchParams(parsedUrl.search);

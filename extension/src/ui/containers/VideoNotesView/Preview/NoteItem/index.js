@@ -31,7 +31,11 @@ const NoteItem = ({ content, timestamp, image }) => {
   return (
     <Grid container direction="row" spacing={2}>
       <Grid item>
-        <Grid container>{image && <img src={image} alt="Screenshot" />}</Grid>
+        <Grid container>
+          {image && (
+            <img src={image} width="426" height="240" alt="Screenshot" />
+          )}
+        </Grid>
       </Grid>
       <Grid item>
         <TextButton onClick={handlePlayNote}>

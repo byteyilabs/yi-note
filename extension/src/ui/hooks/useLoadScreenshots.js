@@ -22,7 +22,7 @@ export default () => {
         }
         player.seek(note.timestamp);
         await delay(500);
-        note.image = takeScreenshot(videoEl);
+        note.image = await takeScreenshot(videoEl);
         saveNote(note);
       }
       // Resume back to start time and pause video

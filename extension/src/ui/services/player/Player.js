@@ -1,11 +1,13 @@
+import { StorageFactory } from '../../../common/services/storage';
 import { KEY_VIDEO_SEEK_SECONDS } from '../../../constants';
 
 export default class Player {
   constructor() {
-    browser.storage.local.get('settings').then(data => {
-      const settings = data.settings || {};
-      this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
-    });
+    StorageFactory.getStorage()
+      .getSettings()
+      .then(settings => {
+        this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
+      });
   }
 
   getVideoElement() {
