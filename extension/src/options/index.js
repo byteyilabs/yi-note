@@ -8,6 +8,7 @@ import i18n from '../common/i18n';
 import PDFGenerator from '../common/services/pdf';
 import GlobalStyle from './globalStyle';
 import { APP_ID } from '../constants';
+import './github-markdown.css';
 
 i18n.init();
 const store = createStore(storeModel);

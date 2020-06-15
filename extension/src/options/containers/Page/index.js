@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
-import { Grid, Typography, List, ListItem, Chip } from '@material-ui/core';
+import { Grid, Typography, Chip } from '@material-ui/core';
 import VideoNoteItem from './VideoNoteItem';
 import TagDialog from '../../../common/components/TagDialog';
 import { TYPE_VIDEO_NOTE } from '../../../constants';
@@ -11,8 +11,12 @@ const Page = () => {
   const { t } = useTranslation('options');
   const { id } = useParams();
   const {
-    page: { title, url, notes, tags }
-  } = useStoreState(state => state);
+    page: {
+      meta: { title, url },
+      notes,
+      tags
+    }
+  } = useStoreState(state => state.page);
   const {
     app: { setTitle: setAppTitle },
     page: { fetchPage, addTag, removeTag }
@@ -25,7 +29,7 @@ const Page = () => {
 
   return (
     <>
-      <Grid container direction="column" spacing={1}>
+      <Grid container direction="column" spacing={3}>
         <Grid item>
           <Typography variant="subtitle1">{title}</Typography>
         </Grid>
@@ -36,24 +40,16 @@ const Page = () => {
             </Grid>
           ))}
         </Grid>
-        <Grid item>
-          <List>
-            {notes.map(({ id, content, timestamp, image, type }) => (
-              <ListItem key={id}>
-                {type === TYPE_VIDEO_NOTE ? (
-                  <VideoNoteItem
-                    id={id}
-                    content={content}
-                    timestamp={timestamp}
-                    image={image}
-                    url={url}
-                  />
-                ) : (
-                  <div>{content}</div>
-                )}
-              </ListItem>
-            ))}
-          </List>
+        <Grid item container spacing={6}>
+          {notes.map(note => (
+            <Grid key={note.id} item container>
+              {note.type === TYPE_VIDEO_NOTE ? (
+                <VideoNoteItem note={note} url={url} />
+              ) : (
+                <div>{note.content}</div>
+              )}
+            </Grid>
+          ))}
         </Grid>
       </Grid>
       <TagDialog tags={tags} onAddTag={addTag} onRemoveTag={removeTag} />

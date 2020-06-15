@@ -150,6 +150,21 @@
   "options_page_open_tooltip": {
     "message": "Open page in new tab"
   },
+  "options_page_annotation_tooltip": {
+    "message": "Annotate screenshot"
+  },
+  "options_page_edit_note_tooltip": {
+    "message": "Edit Note"
+  },
+  "options_page_delete_note_tooltip": {
+    "message": "Delete Note"
+  },
+  "options_page_save_tooltip": {
+    "message": "Save"
+  },
+  "options_page_cancel_tooltip": {
+    "message": "Cancel"
+  },
   "options_settings_title": {
     "message": "Settings"
   },

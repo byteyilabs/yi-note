@@ -11,7 +11,13 @@ import { APP_ID } from '../../../../constants';
 
 const Toolbar = () => {
   const { t } = useTranslation('options');
-  const { id, url, title, notes } = useStoreState(state => state.page);
+  const {
+    page: {
+      id,
+      meta: { url, title },
+      notes
+    }
+  } = useStoreState(state => state.page);
   const { setOpen } = useStoreActions(actions => actions.tagDialog);
 
   const handleAddTag = () => {

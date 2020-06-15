@@ -1,0 +1,104 @@
+import { action, thunk } from 'easy-peasy';
+import { getMetadata } from 'page-metadata-parser';
+import { fromString } from 'uuidv4';
+import { StorageFactory } from '../services/storage';
+import { generatePageId, addTagToList, addNoteToList } from '../utils';
+
+export const defaultNote = {
+  id: '',
+  content: '',
+  timestamp: 0,
+  image: ''
+};
+
+export const defaultPage = {
+  id: '',
+  meta: {},
+  notes: [],
+  tags: []
+};
+
+const storage = StorageFactory.getStorage();
+
+const pageModel = {
+  page: { ...defaultPage },
+  setPage: action((state, page) => {
+    state.page = { ...state.page, ...page };
+  }),
+  fetchPage: thunk(async (actions, pageId) => {
+    const page = (await storage.getPage(pageId)) || defaultPage;
+    actions.setPage({ ...defaultPage, ...page });
+  }),
+  bookmarkPage: thunk(async (actions, _, { getState, getStoreState }) => {
+    const { url } = getStoreState().app;
+    const { notes } = getState().page;
+    const id = generatePageId(url);
+    const page = await storage.addPage({
+      id,
+      meta: getMetadata(document, url),
+      notes: notes || [],
+      createdAt: +new Date()
+    });
+    actions.setPage(page);
+  }),
+  updatePage: thunk(async (actions, updatedPage, { getState }) => {
+    const page = getState().page;
+    const newPage = await storage.addPage({ ...page, ...updatedPage });
+    actions.setPage(newPage);
+  }),
+  removePage: thunk(async (actions, pageId) => {
+    await storage.removePage(pageId);
+    actions.setPage(defaultPage);
+  }),
+  saveNote: thunk(async (actions, note, { getState, getStoreState }) => {
+    const { url } = getStoreState().app;
+    const id = note.id || fromString(note.content + note.timestamp);
+    let { page } = getState();
+
+    if (!page.id) {
+      // Page has not been bookmarked yet
+      const pageObj = {
+        id: generatePageId(url),
+        meta: getMetadata(document, url),
+        notes: [{ id, ...note }],
+        createdAt: +new Date()
+      };
+      page = await storage.addPage(pageObj);
+    } else {
+      // Add note
+      const noteFromPage = page.notes.find(note => note.id === id);
+      let noteFromResponse;
+      if (noteFromPage) {
+        noteFromResponse = await storage.updateNote(page.id, { id, ...note });
+      } else {
+        noteFromResponse = await storage.addNote(page.id, { id, ...note });
+      }
+      const notes = addNoteToList(page.notes, noteFromResponse);
+      page = { ...page, notes };
+    }
+    actions.setPage(page);
+  }),
+  removeNote: thunk(async (actions, noteId, { getState }) => {
+    const { id: pageId, notes } = getState().page;
+    await storage.removeNote(noteId, pageId);
+    const pageObj = {
+      id: pageId,
+      notes: notes.filter(note => note.id !== noteId)
+    };
+    actions.setPage(pageObj);
+  }),
+  addTag: thunk(async (actions, tag, { getState }) => {
+    const { page } = getState();
+    const { id, tags } = page;
+    await storage.addTag(id, tag);
+    actions.setPage({ ...page, tags: addTagToList(tags, tag) });
+  }),
+  removeTag: thunk(async (actions, tag, { getState }) => {
+    const { page } = getState();
+    const { id, tags } = page;
+    await storage.removeTag(id, tag);
+    actions.setPage({ ...page, tags: tags.filter(t => t !== tag) });
+  })
+};
+
+export default pageModel;
