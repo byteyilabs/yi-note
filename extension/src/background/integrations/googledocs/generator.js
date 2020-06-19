@@ -1,4 +1,5 @@
 import { b64toBlob } from '../utils';
+import Markdown from '../../../common/services/markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
 import { INSTALLATION_URL } from '../../../constants';
 
@@ -206,9 +207,10 @@ class Generator {
   }
 
   addNoteContent(note) {
+    const content = Markdown.toText(note.content);
     this.requests.push({
       insertText: {
-        text: note.content + '\n',
+        text: content + '\n',
         location: {
           index: this.trackIndex
         }
@@ -218,7 +220,7 @@ class Generator {
       updateTextStyle: {
         range: {
           startIndex: this.trackIndex,
-          endIndex: this.trackIndex + note.content.length
+          endIndex: this.trackIndex + content.length
         },
         textStyle: {
           fontSize: {
@@ -229,7 +231,7 @@ class Generator {
         fields: '*'
       }
     });
-    this.trackIndex += note.content.length + 1;
+    this.trackIndex += content.length + 1;
   }
 
   async addNotes(screenshotsFolderId, pageId) {

@@ -45,7 +45,7 @@ const NotesView = () => {
       addTag,
       removeTag,
       preview: { setOpen: setPreviewOpen },
-      sendToPlatforms: { setOpen: setSendToPlatformsOpen },
+      sendToServices: { setOpen: setSendToServicesOpen },
       share: { setOpen: setShareExtensionOpen }
     },
     alerts: { show: showAlerts },
@@ -84,8 +84,8 @@ const NotesView = () => {
     setPreviewOpen(true);
   };
 
-  const handleOpenSendToPlatforms = () => {
-    setSendToPlatformsOpen(true);
+  const handleOpenSendToServices = () => {
+    setSendToServicesOpen(true);
   };
 
   const handleOpenShareExtension = () => {
@@ -156,8 +156,8 @@ const NotesView = () => {
                 </StyledIconContainer>
                 <StyledIconContainer item>
                   <IconButton
-                    tooltip={t('sendToServices.tooltip')}
-                    onClick={handleOpenSendToPlatforms}
+                    tooltip={t('services:send.tooltip')}
+                    onClick={handleOpenSendToServices}
                   >
                     <CloudUploadOIcon />
                   </IconButton>

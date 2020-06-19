@@ -24,10 +24,10 @@ const SendToServices = () => {
   const containerRef = useRef(null);
   const {
     page: { id, meta, notes },
-    sendToPlatforms: { open }
+    sendToServices: { open }
   } = useStoreState(state => state.videoNotes);
   const {
-    sendToPlatforms: { setOpen }
+    sendToServices: { setOpen }
   } = useStoreActions(actions => actions.videoNotes);
   const [hasExistingNote, setHasExistingNote] = useState(false);
   const [service, setService] = useState('');

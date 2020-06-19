@@ -84,9 +84,6 @@
   "notesView_preview_reload_tooltip": {
     "message": "Reload screenshots"
   },
-  "notesView_sendToServices_tooltip": {
-    "message": "Send notes"
-  },
   "notesView_sync_tooltip": {
     "message": "Sync notes from {{platform}}"
   },
@@ -215,6 +212,9 @@
   },
   "options_settings_exportAndClear_button": {
     "message": "Export and clear data"
+  },
+  "services_send_tooltip": {
+    "message": "Send notes"
   },
   "services_send_title": {
     "message": "Send notes to:"

@@ -13,7 +13,8 @@ class OneNote extends Service {
         : 'ab2e71d8-340a-4889-8039-26b70504871c';
     this.oauth2 = new Oauth2({
       provider: this.namespace,
-      authorization_endpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      authorization_endpoint:
+        'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
       client_id: clientId,
       scopes: ['notes.create'],
       api_base_url: 'https://graph.microsoft.com/v1.0/me/onenote'
