@@ -87,7 +87,8 @@ const App = () => {
           setProgress(false);
           history.replace(player ? '/video-notes' : '/search');
         })
-        .catch(() => {
+        .catch(err => {
+          logger.info(err);
           setProgress(false);
           history.replace('/search');
         });

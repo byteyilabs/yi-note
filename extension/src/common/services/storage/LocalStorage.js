@@ -158,4 +158,8 @@ export default class LocalStorage extends Storage {
       }
     });
   }
+
+  getSettings() {
+    return Promise.resolve({});
+  }
 }
