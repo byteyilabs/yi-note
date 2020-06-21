@@ -8,6 +8,14 @@ export default class BrowserStorage extends Storage {
     this.storage = browser.storage[area];
   }
 
+  _getPages() {
+    return this.storage.get().then(pages => {
+      return Object.keys(pages)
+        .filter(key => isUuid(key))
+        .map(key => pages[key]);
+    });
+  }
+
   getPage(id) {
     return this.storage.get(id).then(page => page[id]);
   }
@@ -55,7 +63,7 @@ export default class BrowserStorage extends Storage {
   }
 
   getNotes() {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const notes = Object.values(pages).reduce((acc, curr) => {
         if (!curr.notes) {
           return acc;
@@ -98,7 +106,7 @@ export default class BrowserStorage extends Storage {
   }
 
   getTags() {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const tagsSet = Object.values(pages).reduce((acc, curr) => {
         if (!curr.tags) {
           return acc;
@@ -112,7 +120,7 @@ export default class BrowserStorage extends Storage {
   }
 
   getBookmarks() {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       return Object.keys(pages)
         .filter(key => isUuid(key))
         .map(key => {
@@ -123,7 +131,7 @@ export default class BrowserStorage extends Storage {
   }
 
   searchBookmarks(query) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const bookmarks = Object.values(pages)
         .filter(({ meta: { title = '' } }) => {
           const regex = new RegExp(query, 'i');
@@ -138,9 +146,9 @@ export default class BrowserStorage extends Storage {
   }
 
   filterBookmarksByTags(tags) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const bookmarks = Object.values(pages)
-        .filter(({ tags: tagsInPage }) => {
+        .filter(({ tags: tagsInPage = [] }) => {
           return tags.reduce((acc, curr) => {
             return acc && tagsInPage.includes(curr);
           }, true);
@@ -154,7 +162,7 @@ export default class BrowserStorage extends Storage {
   }
 
   searchNotes(query) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const notes = Object.values(pages)
         .reduce((acc, curr) => {
           if (!curr.notes) {
@@ -177,7 +185,7 @@ export default class BrowserStorage extends Storage {
   getPagesForExport(ids) {
     let promise;
     if (ids) {
-      promise = this.storage.get().then(data => {
+      promise = this._getPages().then(data => {
         return Object.values(data).reduce((acc, page) => {
           if (ids.includes(page.id)) {
             acc.push(page);
@@ -186,7 +194,7 @@ export default class BrowserStorage extends Storage {
         }, []);
       });
     } else {
-      promise = this.storage.get().then(data => {
+      promise = this._getPages().then(data => {
         return Object.values(data).reduce((acc, curr) => {
           if (curr.id) {
             acc.push(curr);
@@ -206,6 +214,24 @@ export default class BrowserStorage extends Storage {
     return this.storage.get('settings').then(data => {
       return data.settings || {};
     });
+  }
+
+  setStates(states) {
+    return this.storage.get('states').then(data => {
+      const existingStates = data.states || {};
+      const newStates = { ...existingStates, ...states };
+      return this.storage.set({ states: newStates });
+    });
+  }
+
+  getStates() {
+    return this.storage.get('states').then(data => {
+      return data.states || {};
+    });
+  }
+
+  clearStates() {
+    return this.storage.set({ states: {} });
   }
 
   clearAll() {

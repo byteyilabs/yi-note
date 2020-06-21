@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useStoreActions } from 'easy-peasy';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container } from '@material-ui/core';
@@ -20,6 +21,12 @@ const StyledPageContainer = styled(Container)`
 `;
 
 const App = () => {
+  const { loadPresetStates } = useStoreActions(actions => actions.presetStates);
+
+  useEffect(() => {
+    loadPresetStates();
+  }, [loadPresetStates]);
+
   return (
     <>
       <Header />

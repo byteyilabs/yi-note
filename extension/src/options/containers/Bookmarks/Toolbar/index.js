@@ -17,8 +17,7 @@ const Toolbar = () => {
   } = useStoreState(state => state.bookmarks);
   const {
     toolbar: { setExporting, setFiltering },
-    unSelectTags,
-    fetchBookmarks
+    unSelectTags
   } = useStoreActions(actions => actions.bookmarks);
 
   const startExport = () => {
@@ -48,7 +47,6 @@ const Toolbar = () => {
     if (filtering) {
       // Clear selected tags if cancel filter
       unSelectTags();
-      fetchBookmarks();
     }
     setFiltering(!filtering);
   };

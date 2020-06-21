@@ -11,25 +11,24 @@ const StyledContainer = styled(Grid)`
 
 const Bookmarks = () => {
   const {
-    bookmarks,
-    tags,
-    toolbar: { filtering }
-  } = useStoreState(state => state.bookmarks);
-  const {
-    fetchBookmarks,
-    fetchTags,
-    selectTag,
-    filterBookmarksByTags
-  } = useStoreActions(actions => actions.bookmarks);
+    bookmarks: {
+      bookmarks,
+      tags,
+      toolbar: { filtering }
+    },
+    presetStates: { tags: presetTags }
+  } = useStoreState(state => state);
+  const { fetchBookmarks, fetchTags, selectTag } = useStoreActions(
+    actions => actions.bookmarks
+  );
 
   useEffect(() => {
     fetchBookmarks();
-    fetchTags();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchTags(presetTags);
+  }, [fetchBookmarks, fetchTags, presetTags]);
 
   const handleSelectTag = tag => {
     selectTag(tag);
-    filterBookmarksByTags();
   };
 
   return (

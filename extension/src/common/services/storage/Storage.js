@@ -1,65 +1,71 @@
 export default class Storage {
   getPage() {
-    logger.warn('Method need to be implemented: getPage');
+    return Promise.reject('Method need to be implemented: getPage');
   }
 
   addPage() {
-    logger.warn('Method need to be implemented: addPage');
+    return Promise.reject('Method need to be implemented: addPage');
   }
 
   removePage() {
-    logger.warn('Method need to be implemented: removePage');
+    return Promise.reject('Method need to be implemented: removePage');
   }
 
   addNote() {
-    logger.warn('Method need to be implemented: addNote');
+    return Promise.reject('Method need to be implemented: addNote');
   }
 
   updateNote() {
-    logger.warn('Method need to be implemented: updateNote');
+    return Promise.reject('Method need to be implemented: updateNote');
   }
 
   removeNote() {
-    logger.warn('Method need to be implemented: removeNote');
+    return Promise.reject('Method need to be implemented: removeNote');
   }
 
   getNotes() {
-    logger.warn('Method need to be implemented: getNotes');
+    return Promise.reject('Method need to be implemented: getNotes');
   }
 
   addTag() {
-    logger.warn('Method need to be implemented: addTag');
+    return Promise.reject('Method need to be implemented: addTag');
   }
 
   removeTag() {
-    logger.warn('Method need to be implemented: removeTag');
+    return Promise.reject('Method need to be implemented: removeTag');
   }
 
   getTags() {
-    logger.warn('Method need to be implemented: getTags');
+    return Promise.reject('Method need to be implemented: getTags');
   }
 
   getBookmarks() {
-    logger.warn('Method need to be implemented: getBookmarks');
+    return Promise.reject('Method need to be implemented: getBookmarks');
   }
 
   searchBookmarks() {
-    logger.warn('Method need to be implemented: searchBookmarks');
+    return Promise.reject('Method need to be implemented: searchBookmarks');
   }
 
   filterBookmarksByTags() {
-    logger.warn('Method need to be implemented: filterBookmarksByTags');
+    return Promise.reject(
+      'Method need to be implemented: filterBookmarksByTags'
+    );
   }
 
   searchNotes() {
-    logger.warn('Method need to be implemented: searchNotes');
+    return Promise.reject('Method need to be implemented: searchNotes');
   }
 
   getServiceData() {
-    logger.warn('Method need to be implemented: getServiceData');
+    return Promise.reject('Method need to be implemented: getServiceData');
   }
 
   getSettings() {
-    logger.warn('Method need to be implemented: getSettings');
+    return Promise.reject('Method need to be implemented: getSettings');
+  }
+
+  setStates() {
+    return Promise.reject('Method need to be implemented: setStates');
   }
 }
