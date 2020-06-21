@@ -30,7 +30,7 @@ const Page = () => {
   return (
     <>
       <Grid container direction="column" spacing={3}>
-        <Grid item container justify="center">
+        <Grid item container>
           <Typography variant="subtitle1">{title}</Typography>
         </Grid>
         <Grid item container spacing={1}>

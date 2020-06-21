@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
+export const StyledImgContainer = styled.div`
+  position: relative;
+`;
+
 export const StyledImg = styled.img`
   @media (max-width: 960px) {
     width: 426px;

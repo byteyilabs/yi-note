@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
-import { StyledImg, StyledNoteContainer } from './styled';
+import { StyledImgContainer, StyledImg, StyledNoteContainer } from './styled';
 import MarkdownViewer from '../../../../common/components/MarkdownViewer';
 import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { MarkerArea } from 'markerjs';
@@ -25,14 +25,17 @@ const NoteItem = ({ note, url }) => {
     alerts: { show: showAlerts }
   } = useStoreActions(actions => actions);
   const imgRef = useRef(null);
+  const imgContainerRef = useRef(null);
   const markerRef = useRef(null);
   const [editing, setEditing] = useState(false);
   const [contentInEdit, setContentInEdit] = useState(content);
   const [currentAction, setCurrentAction] = useState('');
 
   useEffect(() => {
-    if (imgRef.current) {
-      markerRef.current = new MarkerArea(imgRef.current);
+    if (imgRef.current && imgContainerRef.current) {
+      markerRef.current = new MarkerArea(imgRef.current, {
+        targetRoot: imgContainerRef.current
+      });
     }
     return () => {
       try {
@@ -105,11 +108,13 @@ const NoteItem = ({ note, url }) => {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item lg={8} md={12} container justify="center">
-        <StyledImg ref={imgRef} src={image} alt="Screenshot" />
+    <Grid container>
+      <Grid item lg={8} md={12} container>
+        <StyledImgContainer ref={imgContainerRef}>
+          <StyledImg ref={imgRef} src={image} alt="Screenshot" />
+        </StyledImgContainer>
       </Grid>
-      <Grid item lg={4} md={12} container justify="center">
+      <Grid item lg={4} md={12} container>
         <StyledNoteContainer
           item
           container
