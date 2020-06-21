@@ -3,8 +3,8 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import GeneralEditor from '../../../components/Editor';
 import TextButton from '../../../components/TextButton';
+import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
@@ -25,11 +25,9 @@ const Editor = () => {
   const {
     videoNotes: {
       editor: { setNote, reset },
-      edit,
-      saveNote,
-      removeNote
+      edit
     },
-    alerts: { showAlerts }
+    page: { saveNote }
   } = useStoreActions(actions => actions);
   const playerRef = usePlayer();
 
@@ -46,35 +44,26 @@ const Editor = () => {
   };
 
   const handleSave = () => {
-    const { id, content = '' } = note;
+    const { content = '' } = note;
     if (content.trim()) {
       // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE });
-    } else if (id) {
-      // Delete note
-      showAlerts({
-        content: t('note.remove.alertContent'),
-        onConfirm: removeNote.bind(null, note.id)
-      });
-    } else {
       reset();
     }
   };
 
-  const handleChange = e => {
-    const { value } = e.target;
+  const handleChange = value => {
     setNote({ content: value });
   };
 
   return (
     <Grid container spacing={1}>
       <Grid item container>
-        <GeneralEditor
+        <MarkdownEditor
           disabled={showingAd}
           content={note.content}
           placeholder={t('editor.placeholder')}
           onChange={handleChange}
-          onSave={handleSave}
           onFocus={handleFocus}
         />
       </Grid>

@@ -18,8 +18,10 @@ const Preview = () => {
   const { t } = useTranslation('notesView');
   const {
     app: { url },
+    page: {
+      data: { id: pageId, notes, meta: { title } = {} }
+    },
     videoNotes: {
-      page: { id: pageId, notes, meta: { title } = {} },
       preview: { open }
     }
   } = useStoreState(state => state);

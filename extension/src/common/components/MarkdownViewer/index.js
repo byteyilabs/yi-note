@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { StyledMarkdownBody } from './styled';
 import Markdown from '../../services/markdown';
 
-const StyledMarkdownBody = styled.div`
-  font-size: 14px;
-`;
-
-const MarkdownViewer = ({ content }) => {
+const MarkdownViewer = ({ content = '' }) => {
   return (
     <StyledMarkdownBody
       className="markdown-body"

@@ -67,7 +67,7 @@ export default class LocalStorage extends Storage {
     return this.addNote(pageId, note);
   }
 
-  removeNote(id, pageId) {
+  removeNote(pageId, id) {
     return new Promise((resolve, reject) => {
       try {
         const page = JSON.parse(window.localStorage.getItem(pageId));

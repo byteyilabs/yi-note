@@ -11,7 +11,7 @@ const Page = () => {
   const { t } = useTranslation('options');
   const { id } = useParams();
   const {
-    page: {
+    data: {
       meta: { title, url },
       notes,
       tags
@@ -30,7 +30,7 @@ const Page = () => {
   return (
     <>
       <Grid container direction="column" spacing={3}>
-        <Grid item>
+        <Grid item container justify="center">
           <Typography variant="subtitle1">{title}</Typography>
         </Grid>
         <Grid item container spacing={1}>

@@ -6,7 +6,7 @@ import { delay } from '../../common/utils';
 
 export default () => {
   const [loading, setLoading] = useState(false);
-  const { saveNote } = useStoreActions(actions => actions.videoNotes);
+  const { saveNote } = useStoreActions(actions => actions.page);
   const playerRef = usePlayer();
 
   const loadScreenshots = useCallback(

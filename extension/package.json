@@ -48,6 +48,7 @@
     "html-webpack-plugin": "^4.2.1",
     "prettier": "1.19.1",
     "prop-types": "^15.7.2",
+    "react-svg-loader": "^3.0.3",
     "style-loader": "^1.0.1",
     "uglify-js": "*",
     "web-ext": "^4.2.0",

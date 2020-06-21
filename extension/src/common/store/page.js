@@ -21,9 +21,9 @@ export const defaultPage = {
 const storage = StorageFactory.getStorage();
 
 const pageModel = {
-  page: { ...defaultPage },
+  data: { ...defaultPage },
   setPage: action((state, page) => {
-    state.page = { ...state.page, ...page };
+    state.data = { ...state.data, ...page };
   }),
   fetchPage: thunk(async (actions, pageId) => {
     const page = (await storage.getPage(pageId)) || defaultPage;
@@ -31,7 +31,7 @@ const pageModel = {
   }),
   bookmarkPage: thunk(async (actions, _, { getState, getStoreState }) => {
     const { url } = getStoreState().app;
-    const { notes } = getState().page;
+    const { notes } = getState().data;
     const id = generatePageId(url);
     const page = await storage.addPage({
       id,
@@ -42,8 +42,8 @@ const pageModel = {
     actions.setPage(page);
   }),
   updatePage: thunk(async (actions, updatedPage, { getState }) => {
-    const page = getState().page;
-    const newPage = await storage.addPage({ ...page, ...updatedPage });
+    const { data } = getState();
+    const newPage = await storage.addPage({ ...data, ...updatedPage });
     actions.setPage(newPage);
   }),
   removePage: thunk(async (actions, pageId) => {
@@ -53,7 +53,7 @@ const pageModel = {
   saveNote: thunk(async (actions, note, { getState, getStoreState }) => {
     const { url } = getStoreState().app;
     const id = note.id || fromString(note.content + note.timestamp);
-    let { page } = getState();
+    let { data: page } = getState();
 
     if (!page.id) {
       // Page has not been bookmarked yet
@@ -79,8 +79,8 @@ const pageModel = {
     actions.setPage(page);
   }),
   removeNote: thunk(async (actions, noteId, { getState }) => {
-    const { id: pageId, notes } = getState().page;
-    await storage.removeNote(noteId, pageId);
+    const { id: pageId, notes } = getState().data;
+    await storage.removeNote(pageId, noteId);
     const pageObj = {
       id: pageId,
       notes: notes.filter(note => note.id !== noteId)
@@ -88,16 +88,16 @@ const pageModel = {
     actions.setPage(pageObj);
   }),
   addTag: thunk(async (actions, tag, { getState }) => {
-    const { page } = getState();
-    const { id, tags } = page;
+    const { data } = getState();
+    const { id, tags } = data;
     await storage.addTag(id, tag);
-    actions.setPage({ ...page, tags: addTagToList(tags, tag) });
+    actions.setPage({ ...data, tags: addTagToList(tags, tag) });
   }),
   removeTag: thunk(async (actions, tag, { getState }) => {
-    const { page } = getState();
-    const { id, tags } = page;
+    const { data } = getState();
+    const { id, tags } = data;
     await storage.removeTag(id, tag);
-    actions.setPage({ ...page, tags: tags.filter(t => t !== tag) });
+    actions.setPage({ ...data, tags: tags.filter(t => t !== tag) });
   })
 };
 

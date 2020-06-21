@@ -13,10 +13,12 @@ export const StyledImg = styled.img`
 
 export const StyledNoteContainer = styled(Grid)`
   @media (max-width: 960px) {
-    max-width: 426px;
+    width: 426px;
   }
 
-  max-width: 640px;
+  @media (min-width: 961px) and (max-width: 1280px) {
+    width: 640px !important;
+  }
 `;
 
 export const StyledEditorContainer = styled(Grid)`

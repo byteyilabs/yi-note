@@ -23,9 +23,13 @@ const SendToServices = () => {
   const { t } = useTranslation('services');
   const containerRef = useRef(null);
   const {
-    page: { id, meta, notes },
-    sendToServices: { open }
-  } = useStoreState(state => state.videoNotes);
+    page: {
+      data: { id, meta, notes }
+    },
+    videoNotes: {
+      sendToServices: { open }
+    }
+  } = useStoreState(state => state);
   const {
     sendToServices: { setOpen }
   } = useStoreActions(actions => actions.videoNotes);

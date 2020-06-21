@@ -17,12 +17,16 @@ import {
 import IconButton from '../../../components/IconButton';
 import { usePlayer } from '../../../hooks';
 import { secondsToTime } from '../../../../common/utils';
+import Markdown from '../../../../common/services/markdown';
+import MarkdownViewer from '../../../../common/components/MarkdownViewer';
 
-const NoteItem = ({ id, content, timestamp }) => {
+const NoteItem = ({ note }) => {
+  const { id, content, timestamp } = note;
   const { t } = useTranslation(['notesView', 'note']);
   const {
-    videoNotes: { edit, removeNote },
-    alerts: { show: showAlerts }
+    videoNotes: { edit },
+    alerts: { show: showAlerts },
+    page: { removeNote }
   } = useStoreActions(actions => actions);
   const [expanded, setExpanded] = useState(false);
   const playerRef = usePlayer();
@@ -33,7 +37,7 @@ const NoteItem = ({ id, content, timestamp }) => {
     playerRef.current.seek(timestamp);
   };
 
-  const handleEdit = () => edit({ timestamp });
+  const handleEdit = () => edit(note);
 
   const handleDelete = () =>
     showAlerts({
@@ -60,7 +64,7 @@ const NoteItem = ({ id, content, timestamp }) => {
             >
               <PlayIcon />
             </IconButton>
-            <StyledSummary>{content}</StyledSummary>
+            <StyledSummary>{Markdown.toText(content)}</StyledSummary>
           </Grid>
         </Grid>
         <Grid item>
@@ -108,7 +112,9 @@ const NoteItem = ({ id, content, timestamp }) => {
             </Grid>
           </Grid>
           <Grid item>
-            <StyledNote>{content}</StyledNote>
+            <StyledNote>
+              <MarkdownViewer content={content} />
+            </StyledNote>
           </Grid>
         </Grid>
       </StyledExpandedSection>
@@ -117,9 +123,7 @@ const NoteItem = ({ id, content, timestamp }) => {
 };
 
 NoteItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  timestamp: PropTypes.number.isRequired
+  note: PropTypes.object.isRequired
 };
 
 export default NoteItem;

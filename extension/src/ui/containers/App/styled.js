@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const StyledDrawer = styled.div`
   display: flex;
   position: fixed;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -18,10 +18,6 @@ export const StyledContainer = styled.div`
   ::-webkit-scrollbar {
     width: 0;
   }
-`;
-
-export const StyledMain = styled.div`
-  flex: 1;
 `;
 
 export const StyledViewWrapper = styled.div`

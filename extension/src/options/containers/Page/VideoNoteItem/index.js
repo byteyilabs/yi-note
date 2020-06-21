@@ -2,24 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useStoreActions } from 'easy-peasy';
-import { Grid, Link, Tabs, Tab, IconButton, Tooltip } from '@material-ui/core';
+import { Grid, Link, IconButton, Tooltip } from '@material-ui/core';
 import DrawIcon from '@material-ui/icons/GestureOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
-import {
-  StyledImg,
-  StyledNoteContainer,
-  StyledEditorContainer,
-  StyledTextArea
-} from './styled';
+import { StyledImg, StyledNoteContainer } from './styled';
 import MarkdownViewer from '../../../../common/components/MarkdownViewer';
+import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { MarkerArea } from 'markerjs';
 import { secondsToTime, buildAutoSeekUrl } from '../../../../common/utils';
 
-const EDIT_MODE_WRITE = 'WRITE';
-const EDIT_MODE_PREVIEW = 'PREVIEW';
 const ACTION_EDIT = 'EDIT';
 const ACTION_ANNOTATE = 'ANNOTATE';
 
@@ -32,7 +26,7 @@ const NoteItem = ({ note, url }) => {
   } = useStoreActions(actions => actions);
   const imgRef = useRef(null);
   const markerRef = useRef(null);
-  const [editMode, setEditMode] = useState(null);
+  const [editing, setEditing] = useState(false);
   const [contentInEdit, setContentInEdit] = useState(content);
   const [currentAction, setCurrentAction] = useState('');
 
@@ -50,11 +44,9 @@ const NoteItem = ({ note, url }) => {
   }, []);
 
   const handleStartEditing = () => {
-    setEditMode(EDIT_MODE_WRITE);
+    setEditing(true);
     setCurrentAction(ACTION_EDIT);
   };
-
-  const handleEditModeChange = (e, type) => setEditMode(type);
 
   const handleStartAnnotation = () => {
     if (markerRef.current) {
@@ -70,10 +62,7 @@ const NoteItem = ({ note, url }) => {
     setCurrentAction(ACTION_ANNOTATE);
   };
 
-  const handleEditorChange = e => {
-    const { value } = e.target;
-    setContentInEdit(value);
-  };
+  const handleEditorChange = value => setContentInEdit(value);
 
   const handleDelete = e => {
     e.stopPropagation();
@@ -87,7 +76,7 @@ const NoteItem = ({ note, url }) => {
     if (currentAction === ACTION_EDIT) {
       const newNote = { ...note, content: contentInEdit };
       saveNote(newNote);
-      setEditMode(null);
+      setEditing(false);
     } else if (currentAction === ACTION_ANNOTATE) {
       try {
         markerRef.current.render(dataUri => {
@@ -104,7 +93,7 @@ const NoteItem = ({ note, url }) => {
 
   const handleActionCanceled = () => {
     if (currentAction === ACTION_EDIT) {
-      setEditMode(null);
+      setEditing(false);
     } else if (currentAction === ACTION_ANNOTATE) {
       try {
         markerRef.current.close();
@@ -116,126 +105,111 @@ const NoteItem = ({ note, url }) => {
   };
 
   return (
-    <Grid container>
-      <Grid item lg={8} md={12}>
+    <Grid container spacing={1}>
+      <Grid item lg={8} md={12} container justify="center">
         <StyledImg ref={imgRef} src={image} alt="Screenshot" />
       </Grid>
-      <StyledNoteContainer
-        item
-        lg={4}
-        md={12}
-        container
-        direction="column"
-        justify="flex-start"
-        spacing={1}
-      >
-        <Grid
+      <Grid item lg={4} md={12} container justify="center">
+        <StyledNoteContainer
           item
           container
-          justify="space-between"
-          direction="row"
-          spacing={2}
+          direction="column"
+          justify="flex-start"
+          spacing={1}
         >
-          <Grid item container xs={4} alignItems="center">
-            <Link href={buildAutoSeekUrl(url, timestamp)} target="_blank">
-              {secondsToTime(timestamp)}
-            </Link>
-          </Grid>
-          <Grid item xs={8}>
-            <Grid container direction="row" spacing={1} justify="flex-end">
-              {currentAction ? (
-                <>
-                  <Grid item>
-                    <Tooltip title={t('page.save.tooltip')}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        onClick={handleActionFinished}
-                      >
-                        <DoneIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                  <Grid item>
-                    <Tooltip title={t('page.cancel.tooltip')}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        onClick={handleActionCanceled}
-                      >
-                        <CloseIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                </>
-              ) : (
-                <>
-                  <Grid item>
-                    <Tooltip title={t('page.annotation.tooltip')}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        onClick={handleStartAnnotation}
-                      >
-                        <DrawIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                  <Grid item>
-                    <Tooltip title={t('page.edit.note.tooltip')}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        onClick={handleStartEditing}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                  <Grid item>
-                    <Tooltip title={t('page.delete.note.tooltip')}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        onClick={handleDelete}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                </>
-              )}
-            </Grid>
-          </Grid>
-        </Grid>
-        {editMode ? (
-          <StyledEditorContainer
+          <Grid
             item
             container
-            spacing={1}
-            direction="column"
-            justify="flex-start"
+            justify="space-between"
+            direction="row"
+            spacing={2}
           >
-            <Grid item container>
-              <Tabs value={editMode} onChange={handleEditModeChange}>
-                <Tab label="Write" value={EDIT_MODE_WRITE} />
-                <Tab label="Preview" value={EDIT_MODE_PREVIEW} />
-              </Tabs>
+            <Grid item container xs={4} alignItems="center">
+              <Link href={buildAutoSeekUrl(url, timestamp)} target="_blank">
+                {secondsToTime(timestamp)}
+              </Link>
             </Grid>
-            <StyledTextArea item container>
-              {editMode === EDIT_MODE_WRITE ? (
-                <textarea value={contentInEdit} onChange={handleEditorChange} />
-              ) : (
-                <MarkdownViewer content={contentInEdit} />
-              )}
-            </StyledTextArea>
-          </StyledEditorContainer>
-        ) : (
-          <Grid item>
-            <MarkdownViewer content={content} />
+            <Grid item xs={8}>
+              <Grid container direction="row" spacing={1} justify="flex-end">
+                {currentAction ? (
+                  <>
+                    <Grid item>
+                      <Tooltip title={t('page.save.tooltip')}>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          onClick={handleActionFinished}
+                        >
+                          <DoneIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={t('page.cancel.tooltip')}>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          onClick={handleActionCanceled}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                  </>
+                ) : (
+                  <>
+                    <Grid item>
+                      <Tooltip title={t('page.annotation.tooltip')}>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          onClick={handleStartAnnotation}
+                        >
+                          <DrawIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={t('page.edit.note.tooltip')}>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          onClick={handleStartEditing}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={t('page.delete.note.tooltip')}>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          onClick={handleDelete}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
-        )}
-      </StyledNoteContainer>
+          {editing ? (
+            <Grid item container>
+              <MarkdownEditor
+                content={contentInEdit}
+                onChange={handleEditorChange}
+              />
+            </Grid>
+          ) : (
+            <Grid item container>
+              <MarkdownViewer content={content} />
+            </Grid>
+          )}
+        </StyledNoteContainer>
+      </Grid>
     </Grid>
   );
 };

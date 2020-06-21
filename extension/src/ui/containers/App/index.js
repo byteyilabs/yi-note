@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useInterval } from 'react-recipes';
-import { StyledContainer, StyledMain, StyledViewWrapper } from './styled';
+import { Grid } from '@material-ui/core';
+import { StyledDrawer, StyledViewWrapper } from './styled';
 import Header from './Header';
 import Footer from './Footer';
 import VideoNotesView from '../VideoNotesView';
@@ -96,8 +97,8 @@ const App = () => {
   }, [getPlayer, history, open, pathname]);
 
   return (
-    <StyledContainer open={open} className={open && 'panel-shadow'}>
-      <StyledMain>
+    <StyledDrawer open={open} className={open && 'panel-shadow'}>
+      <Grid container>
         <Header />
         <StyledViewWrapper>
           {progress ? (
@@ -111,9 +112,9 @@ const App = () => {
           )}
         </StyledViewWrapper>
         <Footer />
-      </StyledMain>
+      </Grid>
       <Alerts />
-    </StyledContainer>
+    </StyledDrawer>
   );
 };
 

@@ -259,5 +259,14 @@
   },
   "tagdialog_input_label": {
     "message": "New tag"
+  },
+  "editor_mode_write": {
+    "message": "Write"
+  },
+  "editor_mode_preview": {
+    "message": "Preview"
+  },
+  "editor_markdown_tooltip": {
+    "message": "Styling with Markdown is supported"
   }
 }
