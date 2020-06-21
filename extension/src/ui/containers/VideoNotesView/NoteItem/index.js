@@ -14,7 +14,7 @@ import {
   StyledExpandedSection,
   StyledNote
 } from './styled';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../../common/components/IconButton';
 import { usePlayer } from '../../../hooks';
 import { secondsToTime } from '../../../../common/utils';
 import Markdown from '../../../../common/services/markdown';

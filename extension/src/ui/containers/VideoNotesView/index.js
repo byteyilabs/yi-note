@@ -36,7 +36,7 @@ const NotesView = () => {
     page: { fetchPage, bookmarkPage, addTag, removeTag }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
-  const { loading, loadScreenshots } = useLoadScreenshots();
+  const { loading } = useLoadScreenshots();
 
   useEffect(() => {
     if (!id) {
@@ -55,7 +55,7 @@ const NotesView = () => {
   return (
     <>
       <Grid container spacing={2} direction="column" justify="flex-start">
-        <Grid item container>
+        <Grid item>
           <Editor />
         </Grid>
         <Grid item container direction="row" justify="space-between">
@@ -71,17 +71,15 @@ const NotesView = () => {
             <Tags />
           </Grid>
         )}
-        <Grid item container>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <ScrollableList
-              items={notes}
-              renderItem={note => <NoteItem note={note} />}
-            />
-          )}
-        </Grid>
       </Grid>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <ScrollableList
+          items={notes}
+          renderItem={note => <NoteItem note={note} />}
+        />
+      )}
       <Preview />
       <SendToServices />
       <ShareExtension />

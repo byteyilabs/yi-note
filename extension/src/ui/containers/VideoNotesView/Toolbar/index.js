@@ -2,14 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Grid, Chip } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
 import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import SyncIcon from '@material-ui/icons/Sync';
 import TagIcon from '@material-ui/icons/LocalOfferOutlined';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../../common/components/IconButton';
 import { useSyncNotes, useLoadScreenshots } from '../../../hooks';
 
 export const StyledIconContainer = styled(Grid)`
@@ -25,12 +25,12 @@ const Toolbar = () => {
       sendToServices: { setOpen: setSendToServicesOpen },
       share: { setOpen: setShareExtensionOpen }
     },
-    page: { fetchPage, bookmarkPage, removePage, addTag, removeTag },
+    page: { bookmarkPage, removePage },
     alerts: { show: showAlerts },
     tagDialog: { setOpen: setTagDialogOpen }
   } = useStoreActions(actions => actions);
   const { platform, hasNotesToSync, getNotesToSync } = useSyncNotes();
-  const { loading, loadScreenshots } = useLoadScreenshots();
+  const { loadScreenshots } = useLoadScreenshots();
 
   const handleRemovePage = () => {
     showAlerts({

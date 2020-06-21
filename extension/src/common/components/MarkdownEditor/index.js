@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { Grid, Divider, IconButton, Tooltip } from '@material-ui/core';
+import { Grid, Divider, Tooltip } from '@material-ui/core';
 import MarkdownViewer from '../MarkdownViewer';
+import IconButton from '../IconButton';
 import MarkdownIcon from '../../../icons/markdown.svg';
+
+const EDITOR_MIN_WIDTH = 100;
 
 export const StyledEditorContainer = styled(Grid)`
   flex: 1;
@@ -19,7 +22,7 @@ export const StyledTextArea = styled(Grid)`
     font-size: 14px;
     padding: 0 10px;
     flex: 1;
-    min-height: 150px;
+    min-height: ${EDITOR_MIN_WIDTH}px;
     border: none;
     outline: none;
   }
@@ -27,7 +30,7 @@ export const StyledTextArea = styled(Grid)`
   & div.markdown-body {
     font-size: 14px;
     padding: 0 10px;
-    min-height: 150px;
+    min-height: ${EDITOR_MIN_WIDTH}px;
   }
 `;
 
@@ -42,7 +45,7 @@ const EDIT_MODE_PREVIEW = 'PREVIEW';
 
 const MarkdownEditor = ({
   disabled,
-  content,
+  content = '',
   placeholder,
   onChange,
   ...rest
@@ -92,11 +95,12 @@ const MarkdownEditor = ({
           </Grid>
         </Grid>
         <Grid item>
-          <Tooltip title={t('markdown.tooltip')}>
-            <IconButton size="small" onClick={handleOpenMarkdownGuide}>
-              <MarkdownIcon />
-            </IconButton>
-          </Tooltip>
+          <IconButton
+            tooltip={t('markdown.tooltip')}
+            onClick={handleOpenMarkdownGuide}
+          >
+            <MarkdownIcon />
+          </IconButton>
         </Grid>
       </Grid>
       <Grid item>

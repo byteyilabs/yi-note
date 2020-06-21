@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 import TextButton from '../../../../components/TextButton';
 import { usePlayer } from '../../../../hooks';
 import { secondsToTime } from '../../../../../common/utils';
+import Markdown from '../../../../../common/services/markdown';
 
 const StyledNote = styled.div`
   white-space: pre;
@@ -41,7 +42,7 @@ const NoteItem = ({ content, timestamp, image }) => {
         <TextButton onClick={handlePlayNote}>
           {secondsToTime(timestamp)}
         </TextButton>
-        <StyledNote>{content}</StyledNote>
+        <StyledNote>{Markdown.toText(content)}</StyledNote>
       </Grid>
     </Grid>
   );

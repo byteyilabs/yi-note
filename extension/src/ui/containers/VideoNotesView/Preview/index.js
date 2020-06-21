@@ -8,7 +8,7 @@ import { StyledModal, StyledPaper } from './styled';
 import NoteItem from './NoteItem';
 import Spinner from '../../../components/Spinner';
 import ScrollableList from '../../../components/ScrollableList';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../../common/components/IconButton';
 import { usePlayer, useLoadScreenshots } from '../../../hooks';
 import { exportFile } from '../../../../common/services/file';
 import PDFGenerator from '../../../../common/services/pdf';

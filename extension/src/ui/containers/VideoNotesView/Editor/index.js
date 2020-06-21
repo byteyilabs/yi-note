@@ -20,7 +20,7 @@ const Editor = () => {
     videoNotes: {
       editor: { active, note }
     },
-    app: { showingAd }
+    app: { showingAd: disabled }
   } = useStoreState(state => state);
   const {
     videoNotes: {
@@ -58,9 +58,9 @@ const Editor = () => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item container>
+      <Grid item xs={12}>
         <MarkdownEditor
-          disabled={showingAd}
+          disabled={disabled}
           content={note.content}
           placeholder={t('editor.placeholder')}
           onChange={handleChange}
