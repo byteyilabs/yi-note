@@ -7,6 +7,7 @@ import ShareExtension from './ShareExtension';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
 import Toolbar from './Toolbar';
+import Tags from './Tags';
 import ScrollableList from '../../components/ScrollableList';
 import Spinner from '../../components/Spinner';
 import { generatePageId } from '../../../common/utils';
