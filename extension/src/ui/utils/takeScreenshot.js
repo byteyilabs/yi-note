@@ -6,7 +6,7 @@ import {
 
 /**
  * Take screenshot for provided dom element with dimensions
- * Use 240p - 426 * 240 by default
+ * Use 360p - 640 * 360 by default
  *
  * @param element - dom element
  * @param width

@@ -117,6 +117,9 @@
   "options_github": {
     "message": "Visit Repository"
   },
+  "options_faq": {
+    "message": "FAQs"
+  },
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },
@@ -176,9 +179,6 @@
   },
   "options_settings_seek_generated_url_label": {
     "message": "Apply preset seconds to seek to generated URLs (URLs in generated PDF, notes sent to third party platforms)"
-  },
-  "options_settings_screenshot_resolution_label": {
-    "message": "Screenshot Resolution"
   },
   "options_settings_exportAndImport_title": {
     "message": "Export and Import"
