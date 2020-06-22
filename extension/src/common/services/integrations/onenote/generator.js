@@ -1,6 +1,6 @@
-import Markdown from '../../../common/services/markdown';
-import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
-import { INSTALLATION_URL } from '../../../constants';
+import Markdown from '../../markdown';
+import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
+import { INSTALLATION_URL } from '../../../../constants';
 
 class Generator {
   constructor(data) {

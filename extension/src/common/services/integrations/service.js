@@ -11,7 +11,11 @@ class Service {
   }
 
   sendNotes() {
-    logger.warn('Method not implemented');
+    return Promise.reject('Method not implemented');
+  }
+
+  getExistingId() {
+    return this.storage.get(this.data.id);
   }
 }
 

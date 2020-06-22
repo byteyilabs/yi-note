@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { Grid, Divider, Tooltip } from '@material-ui/core';
+import { Grid, Divider } from '@material-ui/core';
 import MarkdownViewer from '../MarkdownViewer';
 import IconButton from '../IconButton';
-import MarkdownIcon from '../../../icons/markdown.svg';
+import MarkdownIcon from '../../../assets/icons/markdown.svg';
 
 const EDITOR_MIN_WIDTH = 100;
 

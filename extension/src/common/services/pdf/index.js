@@ -11,7 +11,7 @@ import {
   KEY_APPLY_SEEK_SEC_ON_URL,
   KEY_VIDEO_SEEK_SECONDS
 } from '../../../constants';
-import msyh from '../../../fonts/msyh.ttf';
+import msyh from '../../../assets/fonts/msyh.ttf';
 
 export default class PDFGenerator {
   constructor() {

@@ -3,16 +3,12 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@material-ui/core';
-import Preview from './Preview';
-import SendToServices from './SendToServices';
 import ShareExtension from './ShareExtension';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
 import Toolbar from './Toolbar';
-import Tags from './Tags';
 import ScrollableList from '../../components/ScrollableList';
 import Spinner from '../../components/Spinner';
-import TagDialog from '../../../common/components/TagDialog';
 import { generatePageId } from '../../../common/utils';
 import { useLoadScreenshots } from '../../hooks';
 
@@ -33,7 +29,7 @@ const NotesView = () => {
     app: { url }
   } = useStoreState(state => state);
   const {
-    page: { fetchPage, bookmarkPage, addTag, removeTag }
+    page: { fetchPage, bookmarkPage }
   } = useStoreActions(actions => actions);
   const tryLoadMeta = useRef(false);
   const { loading } = useLoadScreenshots();
@@ -80,10 +76,7 @@ const NotesView = () => {
           renderItem={note => <NoteItem note={note} />}
         />
       )}
-      <Preview />
-      <SendToServices />
       <ShareExtension />
-      <TagDialog tags={tags} onAddTag={addTag} onRemoveTag={removeTag} />
     </>
   );
 };

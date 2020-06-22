@@ -24,13 +24,20 @@ class OneNote extends Service {
 
   async sendNotes() {
     const { id, meta, notes } = this.data;
-    const { value: notebooks } = await this.oauth2.callApi('/notebooks');
+    const { value: notebooks } = await this.oauth2.callApi('/notebooks', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     let notebook = notebooks.find(
       ({ displayName }) => displayName === Service.YI_NOTEBOOK_NAME
     );
     if (!notebook) {
       notebook = await this.oauth2.callApi('/notebooks', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ displayName: Service.YI_NOTEBOOK_NAME })
       });
     }
@@ -41,6 +48,9 @@ class OneNote extends Service {
         `/notebooks/${notebook.id}/sections`,
         {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({ displayName: 'YiNote' })
         }
       );
@@ -52,8 +62,8 @@ class OneNote extends Service {
       },
       body: this.generator.generatePayload(meta, notes)
     });
-    const noteId = note.id;
-    return this.storage.set(id, noteId);
+    await this.storage.set(id, note.id);
+    return note;
   }
 }
 

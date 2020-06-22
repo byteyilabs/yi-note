@@ -75,15 +75,6 @@
   "notesView_detail_tooltip": {
     "message": "Manage notes in options page"
   },
-  "notesView_preview_tooltip": {
-    "message": "Open notes preview"
-  },
-  "notesView_preview_pdf_tooltip": {
-    "message": "Generate PDF"
-  },
-  "notesView_preview_reload_tooltip": {
-    "message": "Reload screenshots"
-  },
   "notesView_sync_tooltip": {
     "message": "Sync notes from {{platform}}"
   },
@@ -139,10 +130,19 @@
     "message": "Page Detail"
   },
   "options_page_tag_tooltip": {
-    "message": "Add tag"
+    "message": "Add tags"
   },
   "options_page_pdf_tooltip": {
     "message": "Generate PDF"
+  },
+  "options_page_evernote_tooltip": {
+    "message": "Send notes to Evernote"
+  },
+  "options_page_googledocs_tooltip": {
+    "message": "Send notes to Google Docs"
+  },
+  "options_page_onenote_tooltip": {
+    "message": "Send notes to OneNote"
   },
   "options_page_open_tooltip": {
     "message": "Open page in new tab"

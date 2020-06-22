@@ -1,7 +1,5 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
-import * as services from './integrations';
-import { capitalize } from '../common/utils';
 
 Logger.useDefaults();
 
@@ -42,22 +40,6 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   };
 
-  const sendNotesToService = () => {
-    const { data, action } = message;
-    const namespace = action.split('-')[2];
-    const className = capitalize(namespace);
-    const service = new services[className](namespace, data);
-    return service
-      .sendNotes()
-      .then(() => sendResponse({ code: 'success' }))
-      .catch(e =>
-        sendResponse({
-          code: 'error',
-          error: e
-        })
-      );
-  };
-
   const copyToClipboard = () => {
     const { data: text } = message;
     const copyFrom = document.createElement('textarea');
@@ -77,11 +59,6 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return true;
     case 'export-file':
       exportFile();
-      return true;
-    case 'send-to-evernote':
-    case 'send-to-onenote':
-    case 'send-to-googledocs':
-      sendNotesToService();
       return true;
     case 'copy':
       copyToClipboard();

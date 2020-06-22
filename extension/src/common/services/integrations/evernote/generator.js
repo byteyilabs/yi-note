@@ -1,9 +1,9 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
 import { getBinaryFromBase64 } from '../utils';
-import Markdown from '../../../common/services/markdown';
-import { secondsToTime, buildAutoSeekUrl } from '../../../common/utils';
-import { INSTALLATION_URL } from '../../../constants';
+import Markdown from '../../markdown';
+import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
+import { INSTALLATION_URL } from '../../../../constants';
 
 const escape = url => {
   var tagsToReplace = {

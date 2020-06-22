@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 import { StoreProvider, createStore } from 'easy-peasy';
+import Logger from 'js-logger';
 import { storeModel } from './store';
 import App from './containers/App';
 import i18n from '../common/i18n';
@@ -10,6 +11,8 @@ import GlobalStyle from './globalStyle';
 import { APP_ID } from '../constants';
 
 i18n.init();
+Logger.useDefaults();
+
 const store = createStore(storeModel);
 
 PDFGenerator.init();
