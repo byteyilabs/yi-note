@@ -1,6 +1,5 @@
 import app from './app';
 import bookmarks from './bookmarks';
-import presetStates from './presetStates';
 import page from '../../common/store/page';
 import alerts from '../../common/components/Alerts/store';
 import tagDialog from '../../common/components/TagDialog/store';
@@ -12,7 +11,6 @@ const storeModel = {
   page,
   alerts,
   tagDialog,
-  presetStates,
   reset: thunk(actions => {
     for (const model in actions) {
       if (typeof actions[model].reset === 'undefined') {

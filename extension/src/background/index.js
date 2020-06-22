@@ -13,8 +13,25 @@ browser.browserAction.onClicked.addListener(tab => {
 });
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  const openOptions = () => {
-    browser.runtime.openOptionsPage();
+  const openOptions = options => {
+    let timer;
+    let counter = 10;
+    const sendMessage = () => {
+      return browser.runtime
+        .sendMessage(options)
+        .then(() => {
+          window.clearTimeout(timer);
+        })
+        .catch(err => {
+          window.clearTimeout(timer);
+          if (counter-- === 0) {
+            logger.error(err);
+            return;
+          }
+          timer = window.setTimeout(sendMessage, 200);
+        });
+    };
+    browser.runtime.openOptionsPage().then(sendMessage);
   };
 
   const exportFile = () => {
@@ -56,7 +73,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const { action } = message;
   switch (action) {
     case 'open-options':
-      openOptions();
+      openOptions(message.data);
       return true;
     case 'export-file':
       exportFile();

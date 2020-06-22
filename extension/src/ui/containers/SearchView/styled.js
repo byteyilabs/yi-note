@@ -19,7 +19,7 @@ export const StyledImg = styled.img`
 
 export const StyledMainLine = styled.div`
   font-size: 0.8em;
-  & > * {
+  & * {
     font-size: inherit;
   }
 `;

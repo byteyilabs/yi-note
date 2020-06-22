@@ -72,8 +72,8 @@
   "notesView_note_collapse_tooltip": {
     "message": "Collapse Note"
   },
-  "notesView_tag_tooltip": {
-    "message": "Add tag"
+  "notesView_detail_tooltip": {
+    "message": "Manage notes in options page"
   },
   "notesView_preview_tooltip": {
     "message": "Open notes preview"

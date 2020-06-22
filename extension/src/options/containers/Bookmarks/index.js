@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Grid, List, ListItem, Chip } from '@material-ui/core';
 import BookmarkItem from './BookmarkItem';
@@ -10,22 +11,27 @@ const StyledContainer = styled(Grid)`
 `;
 
 const Bookmarks = () => {
+  const { search } = useLocation();
   const {
     bookmarks: {
       bookmarks,
       tags,
       toolbar: { filtering }
-    },
-    presetStates: { tags: presetTags }
+    }
   } = useStoreState(state => state);
   const { fetchBookmarks, fetchTags, selectTag } = useStoreActions(
     actions => actions.bookmarks
   );
 
   useEffect(() => {
+    let tagsFromUrl = [];
+    const tagsStr = new URLSearchParams(search).get('tags');
+    if (tagsStr) {
+      tagsFromUrl = tagsStr.split(',');
+    }
     fetchBookmarks();
-    fetchTags(presetTags);
-  }, [fetchBookmarks, fetchTags, presetTags]);
+    fetchTags(tagsFromUrl);
+  }, [fetchBookmarks, fetchTags, search]);
 
   const handleSelectTag = tag => {
     selectTag(tag);

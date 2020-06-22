@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useStoreActions } from 'easy-peasy';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container } from '@material-ui/core';
 import Header from './Header';
@@ -21,11 +20,21 @@ const StyledPageContainer = styled(Container)`
 `;
 
 const App = () => {
-  const { loadPresetStates } = useStoreActions(actions => actions.presetStates);
+  const history = useHistory();
 
   useEffect(() => {
-    loadPresetStates();
-  }, [loadPresetStates]);
+    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      const { action, data } = message;
+      switch (action) {
+        case 'open-page':
+          history.push(`/pages/${data}`);
+          return true;
+        case 'filter-by-tags':
+          history.push(`/?tags=${data.join(',')}`);
+          return true;
+      }
+    });
+  }, [history]);
 
   return (
     <>

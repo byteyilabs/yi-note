@@ -1,15 +1,15 @@
 import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import { Grid, Chip } from '@material-ui/core';
-import { StorageFactory } from '../../../../common/services/storage';
 
 const Tags = () => {
   const { tags } = useStoreState(state => state.page.data);
 
   const handleTagClick = tag => {
-    StorageFactory.getStorage()
-      .setStates({ tags: [tag] })
-      .then(() => browser.runtime.sendMessage({ action: 'open-options' }));
+    browser.runtime.sendMessage({
+      action: 'open-options',
+      data: { action: 'filter-by-tags', data: [tag] }
+    });
   };
 
   return (

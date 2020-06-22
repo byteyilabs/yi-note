@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
-import PreviewIcon from '@material-ui/icons/FindInPageOutlined';
-import CloudUploadOIcon from '@material-ui/icons/CloudUploadOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import SyncIcon from '@material-ui/icons/Sync';
-import TagIcon from '@material-ui/icons/LocalOfferOutlined';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import IconButton from '../../../../common/components/IconButton';
 import { useSyncNotes, useLoadScreenshots } from '../../../hooks';
 
@@ -21,13 +19,10 @@ const Toolbar = () => {
   const { id } = useStoreState(state => state.page.data);
   const {
     videoNotes: {
-      preview: { setOpen: setPreviewOpen },
-      sendToServices: { setOpen: setSendToServicesOpen },
       share: { setOpen: setShareExtensionOpen }
     },
     page: { bookmarkPage, removePage },
-    alerts: { show: showAlerts },
-    tagDialog: { setOpen: setTagDialogOpen }
+    alerts: { show: showAlerts }
   } = useStoreActions(actions => actions);
   const { platform, hasNotesToSync, getNotesToSync } = useSyncNotes();
   const { loadScreenshots } = useLoadScreenshots();
@@ -39,16 +34,11 @@ const Toolbar = () => {
     });
   };
 
-  const handleOpenTagDialog = () => {
-    setTagDialogOpen(true);
-  };
-
-  const handleOpenPreview = () => {
-    setPreviewOpen(true);
-  };
-
-  const handleOpenSendToServices = () => {
-    setSendToServicesOpen(true);
+  const handleOpenInDetailPage = () => {
+    browser.runtime.sendMessage({
+      action: 'open-options',
+      data: { action: 'open-page', data: id }
+    });
   };
 
   const handleOpenShareExtension = () => {
@@ -93,32 +83,14 @@ const Toolbar = () => {
         </StyledIconContainer>
       )}
       {id && (
-        <>
-          <StyledIconContainer item>
-            <IconButton
-              tooltip={t('tag.tooltip')}
-              onClick={handleOpenTagDialog}
-            >
-              <TagIcon />
-            </IconButton>
-          </StyledIconContainer>
-          <StyledIconContainer item>
-            <IconButton
-              tooltip={t('preview.tooltip')}
-              onClick={handleOpenPreview}
-            >
-              <PreviewIcon />
-            </IconButton>
-          </StyledIconContainer>
-          <StyledIconContainer item>
-            <IconButton
-              tooltip={t('services:send.tooltip')}
-              onClick={handleOpenSendToServices}
-            >
-              <CloudUploadOIcon />
-            </IconButton>
-          </StyledIconContainer>
-        </>
+        <StyledIconContainer item>
+          <IconButton
+            tooltip={t('detail.tooltip')}
+            onClick={handleOpenInDetailPage}
+          >
+            <OpenInNewIcon />
+          </IconButton>
+        </StyledIconContainer>
       )}
       <StyledIconContainer item>
         <IconButton

@@ -121,12 +121,10 @@ export default class BrowserStorage extends Storage {
 
   getBookmarks() {
     return this._getPages().then(pages => {
-      return Object.keys(pages)
-        .filter(key => isUuid(key))
-        .map(key => {
-          const { id, meta = {}, createdAt } = pages[key];
-          return { id, createdAt, ...meta };
-        });
+      return Object.values(pages).map(page => {
+        const { id, meta = {}, createdAt } = page;
+        return { id, createdAt, ...meta };
+      });
     });
   }
 
@@ -214,24 +212,6 @@ export default class BrowserStorage extends Storage {
     return this.storage.get('settings').then(data => {
       return data.settings || {};
     });
-  }
-
-  setStates(states) {
-    return this.storage.get('states').then(data => {
-      const existingStates = data.states || {};
-      const newStates = { ...existingStates, ...states };
-      return this.storage.set({ states: newStates });
-    });
-  }
-
-  getStates() {
-    return this.storage.get('states').then(data => {
-      return data.states || {};
-    });
-  }
-
-  clearStates() {
-    return this.storage.set({ states: {} });
   }
 
   clearAll() {
