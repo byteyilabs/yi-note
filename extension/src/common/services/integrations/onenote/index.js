@@ -25,6 +25,7 @@ class OneNote extends Service {
   async sendNotes() {
     const { id, meta, notes } = this.data;
     const { value: notebooks } = await this.oauth2.callApi('/notebooks', {
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       }
@@ -35,6 +36,7 @@ class OneNote extends Service {
     if (!notebook) {
       notebook = await this.oauth2.callApi('/notebooks', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -48,6 +50,7 @@ class OneNote extends Service {
         `/notebooks/${notebook.id}/sections`,
         {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -57,6 +60,7 @@ class OneNote extends Service {
     }
     const note = await this.oauth2.callApi(`/sections/${section.id}/pages`, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'text/html'
       },

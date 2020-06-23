@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import { useStoreState } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { Container, Grid, LinearProgress } from '@material-ui/core';
 import Header from './Header';
@@ -28,6 +28,9 @@ const StyledProgress = styled(LinearProgress)`
 const App = () => {
   const history = useHistory();
   const { progress } = useStoreState(state => state.app);
+  const {
+    settings: { fetchSettings }
+  } = useStoreActions(actions => actions);
 
   useEffect(() => {
     browser.runtime.onMessage.addListener(message => {
@@ -42,6 +45,10 @@ const App = () => {
       }
     });
   }, [history]);
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
 
   return (
     <>

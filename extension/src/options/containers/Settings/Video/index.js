@@ -1,75 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import {
   Grid,
   Typography,
   Divider,
   Select,
   MenuItem,
-  Switch
+  Switch,
+  TextField,
+  IconButton
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import {
   KEY_VIDEO_SEEK_SECONDS,
   KEY_APPLY_SEEK_SEC_ON_URL,
-  KEY_RELOAD_TAB
+  KEY_RELOAD_TAB,
+  KEY_RELOAD_TAB_ALLOWED_DOMAINS
 } from '../../../../constants';
 
 const Video = () => {
   const { t } = useTranslation('options');
-  const [seekSecond, setSeekSecond] = useState(0);
-  const [applySeekSecondsOnUrl, setApplySeekSecondsOnUrl] = useState(false);
-  const [reloadTab, setReloadTab] = useState(false);
-
-  useEffect(() => {
-    browser.storage.local.get('settings').then(data => {
-      const settings = data.settings || {};
-      setSeekSecond(settings[KEY_VIDEO_SEEK_SECONDS] || 0);
-      setApplySeekSecondsOnUrl(settings[KEY_APPLY_SEEK_SEC_ON_URL] || false);
-      setReloadTab(settings[KEY_RELOAD_TAB] || false);
-    });
-  }, []);
+  const {
+    data: {
+      [KEY_VIDEO_SEEK_SECONDS]: seekSecond = 0,
+      [KEY_APPLY_SEEK_SEC_ON_URL]: applySeekSecondsOnUrl = false,
+      [KEY_RELOAD_TAB]: reloadTab = false,
+      [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: reloadTabDomains = []
+    }
+  } = useStoreState(state => state.settings);
+  const { setSetting } = useStoreActions(actions => actions.settings);
+  const [domain, setDomain] = useState('');
 
   const handleSecondChange = e => {
     const { value } = e.target;
-    browser.storage.local
-      .get('settings')
-      .then(data => {
-        const settings = data.settings || {};
-        settings[KEY_VIDEO_SEEK_SECONDS] = value;
-        return browser.storage.local.set({ settings });
-      })
-      .then(() => {
-        setSeekSecond(value);
-      });
+    setSetting({ [KEY_VIDEO_SEEK_SECONDS]: value });
   };
 
   const handleApplySeekSecondsOnUrlChange = e => {
     const { checked } = e.target;
-    browser.storage.local
-      .get('settings')
-      .then(data => {
-        const settings = data.settings || {};
-        settings[KEY_APPLY_SEEK_SEC_ON_URL] = checked;
-        return browser.storage.local.set({ settings });
-      })
-      .then(() => {
-        setApplySeekSecondsOnUrl(checked);
-      });
+    setSetting({ [KEY_APPLY_SEEK_SEC_ON_URL]: checked });
   };
 
   const handleReloadTabChange = e => {
     const { checked } = e.target;
-    browser.storage.local
-      .get('settings')
-      .then(data => {
-        const settings = data.settings || {};
-        settings[KEY_RELOAD_TAB] = checked;
-        return browser.storage.local.set({ settings });
-      })
-      .then(() => {
-        setReloadTab(checked);
-      });
+    setSetting({ [KEY_RELOAD_TAB]: checked });
   };
+
+  const handleAddDomain = e => {
+    e.preventDefault();
+    setSetting({
+      [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: [
+        ...reloadTabDomains.filter(d => d !== domain),
+        domain
+      ]
+    });
+    setDomain('');
+  };
+
+  const handleDomainChange = e => {
+    const { value } = e.target;
+    setDomain(value);
+  };
+
+  const handleDeleteDomain = domain => {
+    const domains = reloadTabDomains.filter(d => d !== domain);
+    setSetting({ [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: domains });
+  }
 
   return (
     <Grid container direction="column" spacing={3}>
@@ -115,19 +112,55 @@ const Video = () => {
           />
         </Grid>
       </Grid>
-      <Grid item container spacing={4} alignItems="center">
-        <Grid item>
-          <Typography variant="subtitle1">
-            {t('settings.reload.tab.label')}
-          </Typography>
+      <Grid item container direction="column" spacing={1}>
+        <Grid item container direction="row" alignItems="center">
+          <Grid item>
+            <Typography variant="subtitle1">
+              {t('settings.reload.tab.label')}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Switch
+              checked={reloadTab}
+              onChange={handleReloadTabChange}
+              name="reloadTab"
+            />
+          </Grid>
         </Grid>
-        <Grid item>
-          <Switch
-            checked={reloadTab}
-            onChange={handleReloadTabChange}
-            name="reloadTab"
-          />
-        </Grid>
+        {reloadTab &&
+          reloadTabDomains.map(domain => (
+            <Grid
+              key={domain}
+              item
+              container
+              direction="row"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography>{domain}</Typography>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  size="small"
+                  onClick={handleDeleteDomain.bind(null, domain)}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          ))}
+        {reloadTab && (
+          <Grid item>
+            <form onSubmit={handleAddDomain}>
+              <TextField
+                label="Allowed domain"
+                required
+                value={domain}
+                onChange={handleDomainChange}
+              />
+            </form>
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );

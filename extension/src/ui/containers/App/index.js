@@ -12,16 +12,23 @@ import ReloadView from '../ReloadView';
 import Spinner from '../../components/Spinner';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
-import { StorageFactory } from '../../../common/services/storage';
 import withTheme from '../../../common/withTheme';
-import { QUERY_AUTO_JUMP, KEY_RELOAD_TAB } from '../../../constants';
+import {
+  QUERY_AUTO_JUMP,
+  KEY_RELOAD_TAB,
+  KEY_RELOAD_TAB_ALLOWED_DOMAINS
+} from '../../../constants';
 import { delay } from '../../../common/utils';
 
 const App = () => {
-  const { open, url } = useStoreState(state => state.app);
-  const { setOpen, setUrl, setShowingAd } = useStoreActions(
-    actions => actions.app
-  );
+  const {
+    app: { open, url },
+    settings: { data: settings }
+  } = useStoreState(state => state);
+  const {
+    app: { setOpen, setUrl, setShowingAd },
+    settings: { fetchSettings }
+  } = useStoreActions(actions => actions);
   const history = useHistory();
   const { pathname } = useLocation();
   const [progress, setProgress] = useState(false);
@@ -35,18 +42,19 @@ const App = () => {
 
   useInterval(() => {
     if (url !== window.location.href) {
-      StorageFactory.getStorage()
-        .getSettings()
-        .then(data => {
-          if (data[KEY_RELOAD_TAB]) {
-            window.location.reload();
-          } else {
-            PlayerFactory.reset();
-            setUrl(window.location.href);
-          }
-        });
+      if (
+        settings[KEY_RELOAD_TAB] &&
+        (settings[KEY_RELOAD_TAB_ALLOWED_DOMAINS] || []).some(domain =>
+          window.location.hostname.includes(domain)
+        )
+      ) {
+        window.location.reload();
+      } else {
+        setUrl(window.location.href);
+        PlayerFactory.reset();
+      }
     }
-  }, 100);
+  }, 300);
 
   useEffect(() => {
     const jumpToTimestamp = async t => {
@@ -87,6 +95,10 @@ const App = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
 
   useEffect(() => {
     if (open && pathname === '/') {

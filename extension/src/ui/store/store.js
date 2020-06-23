@@ -3,6 +3,7 @@ import app from './app';
 import videoNotes, { defaultPage, defaultNote } from './videoNotes';
 import search from './search';
 import page from '../../common/store/page';
+import settings from '../../common/store/settings';
 import alerts from '../../common/components/Alerts/store';
 import tagDialog from '../../common/components/TagDialog/store';
 
@@ -13,6 +14,7 @@ const storeModel = {
   videoNotes,
   search,
   page,
+  settings,
   onSetPage: actionOn(
     actions => actions.page.setPage,
     state => {

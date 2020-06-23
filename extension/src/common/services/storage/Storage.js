@@ -64,4 +64,8 @@ export default class Storage {
   getSettings() {
     return Promise.reject('Method need to be implemented: getSettings');
   }
+
+  setSetting() {
+    return Promise.reject('Method need to be implemented: setSetting');
+  }
 }

@@ -214,6 +214,14 @@ export default class BrowserStorage extends Storage {
     });
   }
 
+  setSetting(setting) {
+    return this.storage.get('settings').then(data => {
+      let settings = data.settings || {};
+      settings = { ...settings, ...setting };
+      return this.storage.set({ settings }).then(() => settings);
+    });
+  }
+
   clearAll() {
     return this.storage.clear();
   }

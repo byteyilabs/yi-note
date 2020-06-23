@@ -1,1 +1,1 @@
-export default ms => new Promise(res => setTimeout(res, ms));
+export default ms => new Promise(res => window.setTimeout(res, ms));

@@ -51,6 +51,7 @@ const TagDialog = ({ tags, onAddTag, onRemoveTag }) => {
         <Grid container direction="column" spacing={3}>
           <Grid item>
             <TextField
+              autoFocus
               label={t('input.label')}
               value={input}
               onChange={handleInputChange}
