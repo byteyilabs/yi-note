@@ -52,8 +52,11 @@ During the COVID-19 pandemic, I rewrote the extension in a more scalable and mai
   - Google Docs
   - MS OneNote
   - Evernote
+- Support markdown styling in editor
 - Generate PDF with video screenshot
+- Annotate screenshot
 - Bookmark video
+- Tag bookmarks
 - Search through bookmarks and notes
 - Export and import of data
 
@@ -229,6 +232,10 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 - What should I prepare if I decide not to use YiNote extension any more?
 
   YiNote save users data in chrome local storage (per extension), which means delete the extension will also erase saved notes from your browser. YiNote provides a backup strategy in options page to export local data into a json file. Please make sure you backup your data before delete the extension. Cloud support will be provided in the future to achieve better sync and backup.
+
+- Why I bookmarked same title and thumbnail for different videos on Youtube?
+
+  Youtube don't update page metas, like title and thumbnails, when video changed in page. So reload page is needed to make sure YiNote can capture proper metadata for the video. YiNote also enabled settings in options page to enable auto reload when video change.
 
 ## License
 

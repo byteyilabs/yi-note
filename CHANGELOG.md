@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.0
+
+### Features
+
+- Support markdown in note editor
+- Support screenshot annotation in options page
+- Add video settings in options page
+- Support tags to manage bookmarks
+
 ## 1.3.0
 
 ### Features
