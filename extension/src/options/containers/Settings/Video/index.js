@@ -10,19 +10,22 @@ import {
 } from '@material-ui/core';
 import {
   KEY_VIDEO_SEEK_SECONDS,
-  KEY_APPLY_SEEK_SEC_ON_URL
+  KEY_APPLY_SEEK_SEC_ON_URL,
+  KEY_RELOAD_TAB
 } from '../../../../constants';
 
 const Video = () => {
   const { t } = useTranslation('options');
   const [seekSecond, setSeekSecond] = useState(0);
   const [applySeekSecondsOnUrl, setApplySeekSecondsOnUrl] = useState(false);
+  const [reloadTab, setReloadTab] = useState(false);
 
   useEffect(() => {
     browser.storage.local.get('settings').then(data => {
       const settings = data.settings || {};
       setSeekSecond(settings[KEY_VIDEO_SEEK_SECONDS] || 0);
       setApplySeekSecondsOnUrl(settings[KEY_APPLY_SEEK_SEC_ON_URL] || false);
+      setReloadTab(settings[KEY_RELOAD_TAB] || false);
     });
   }, []);
 
@@ -51,6 +54,20 @@ const Video = () => {
       })
       .then(() => {
         setApplySeekSecondsOnUrl(checked);
+      });
+  };
+
+  const handleReloadTabChange = e => {
+    const { checked } = e.target;
+    browser.storage.local
+      .get('settings')
+      .then(data => {
+        const settings = data.settings || {};
+        settings[KEY_RELOAD_TAB] = checked;
+        return browser.storage.local.set({ settings });
+      })
+      .then(() => {
+        setReloadTab(checked);
       });
   };
 
@@ -95,6 +112,20 @@ const Video = () => {
             checked={applySeekSecondsOnUrl}
             onChange={handleApplySeekSecondsOnUrlChange}
             name="applySeekSecondsOnUrl"
+          />
+        </Grid>
+      </Grid>
+      <Grid item container spacing={4} alignItems="center">
+        <Grid item>
+          <Typography variant="subtitle1">
+            {t('settings.reload.tab.label')}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Switch
+            checked={reloadTab}
+            onChange={handleReloadTabChange}
+            name="reloadTab"
           />
         </Grid>
       </Grid>

@@ -165,6 +165,9 @@
   "options_settings_seek_generated_url_label": {
     "message": "Apply preset seconds to seek to generated URLs (URLs in generated PDF, notes sent to third party platforms)"
   },
+  "options_settings_reload_tab_label": {
+    "message": "Reload tab when url change"
+  },
   "options_settings_exportAndImport_title": {
     "message": "Export and Import"
   },

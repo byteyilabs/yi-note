@@ -12,8 +12,9 @@ import ReloadView from '../ReloadView';
 import Spinner from '../../components/Spinner';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
+import { StorageFactory } from '../../../common/services/storage';
 import withTheme from '../../../common/withTheme';
-import { QUERY_AUTO_JUMP } from '../../../constants';
+import { QUERY_AUTO_JUMP, KEY_RELOAD_TAB } from '../../../constants';
 import { delay } from '../../../common/utils';
 
 const App = () => {
@@ -34,8 +35,16 @@ const App = () => {
 
   useInterval(() => {
     if (url !== window.location.href) {
-      PlayerFactory.reset();
-      setUrl(window.location.href);
+      StorageFactory.getStorage()
+        .getSettings()
+        .then(data => {
+          if (data[KEY_RELOAD_TAB]) {
+            window.location.reload();
+          } else {
+            PlayerFactory.reset();
+            setUrl(window.location.href);
+          }
+        });
     }
   }, 100);
 
