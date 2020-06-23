@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Grid, List, ListItem, Chip } from '@material-ui/core';
 import BookmarkItem from './BookmarkItem';
@@ -10,26 +11,30 @@ const StyledContainer = styled(Grid)`
 `;
 
 const Bookmarks = () => {
+  const { search } = useLocation();
   const {
-    bookmarks,
-    tags,
-    toolbar: { filtering }
-  } = useStoreState(state => state.bookmarks);
-  const {
-    fetchBookmarks,
-    fetchTags,
-    selectTag,
-    filterBookmarksByTags
-  } = useStoreActions(actions => actions.bookmarks);
+    bookmarks: {
+      bookmarks,
+      tags,
+      toolbar: { filtering }
+    }
+  } = useStoreState(state => state);
+  const { fetchBookmarks, fetchTags, selectTag } = useStoreActions(
+    actions => actions.bookmarks
+  );
 
   useEffect(() => {
+    let tagsFromUrl = [];
+    const tagsStr = new URLSearchParams(search).get('tags');
+    if (tagsStr) {
+      tagsFromUrl = tagsStr.split(',');
+    }
     fetchBookmarks();
-    fetchTags();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchTags(tagsFromUrl);
+  }, [fetchBookmarks, fetchTags, search]);
 
   const handleSelectTag = tag => {
     selectTag(tag);
-    filterBookmarksByTags();
   };
 
   return (

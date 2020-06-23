@@ -42,12 +42,9 @@
   ],
   "web_accessible_resources": [
     "installed.png",
-    "images/evernote-48.png",
-    "images/googledocs-48.png",
-    "images/onenote-48.png",
     "images/facebook-48.png",
     "images/twitter-48.png",
     "images/copylink-48.png",
-    "fonts/msyh.ttf"
+    "assets/fonts/msyh.ttf"
   ]
 }

@@ -3,11 +3,12 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import GeneralEditor from '../../../components/Editor';
 import TextButton from '../../../components/TextButton';
+import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
+import { StorageFactory } from '../../../../common/services/storage';
 import { TYPE_VIDEO_NOTE } from '../../../../constants';
 
 const StyledStatus = styled.span`
@@ -20,16 +21,15 @@ const Editor = () => {
     videoNotes: {
       editor: { active, note }
     },
-    app: { showingAd }
+    app: { showingAd: disabled }
   } = useStoreState(state => state);
   const {
     videoNotes: {
       editor: { setNote, reset },
       edit,
-      saveNote,
-      removeNote
+      support: { setOpen: setSupportOpen }
     },
-    alerts: { showAlerts }
+    page: { saveNote }
   } = useStoreActions(actions => actions);
   const playerRef = usePlayer();
 
@@ -46,35 +46,34 @@ const Editor = () => {
   };
 
   const handleSave = () => {
-    const { id, content = '' } = note;
+    const { content = '' } = note;
     if (content.trim()) {
       // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE });
-    } else if (id) {
-      // Delete note
-      showAlerts({
-        content: t('note.remove.alertContent'),
-        onConfirm: removeNote.bind(null, note.id)
-      });
-    } else {
       reset();
+      StorageFactory.getStorage()
+        .getNotes()
+        .then(notes => {
+          const count = notes.length;
+          if (count && count % 50 === 0) {
+            setSupportOpen(true);
+          }
+        });
     }
   };
 
-  const handleChange = e => {
-    const { value } = e.target;
+  const handleChange = value => {
     setNote({ content: value });
   };
 
   return (
     <Grid container spacing={1}>
-      <Grid item container>
-        <GeneralEditor
-          disabled={showingAd}
+      <Grid item xs={12}>
+        <MarkdownEditor
+          disabled={disabled}
           content={note.content}
           placeholder={t('editor.placeholder')}
           onChange={handleChange}
-          onSave={handleSave}
           onFocus={handleFocus}
         />
       </Grid>

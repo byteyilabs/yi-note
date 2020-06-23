@@ -72,44 +72,17 @@
   "notesView_note_collapse_tooltip": {
     "message": "Collapse Note"
   },
-  "notesView_tag_tooltip": {
-    "message": "Add tag"
-  },
-  "notesView_preview_tooltip": {
-    "message": "Open notes preview"
-  },
-  "notesView_preview_pdf_tooltip": {
-    "message": "Generate PDF"
-  },
-  "notesView_preview_reload_tooltip": {
-    "message": "Reload screenshots"
-  },
-  "notesView_sendToServices_tooltip": {
-    "message": "Send notes"
+  "notesView_detail_tooltip": {
+    "message": "Manage notes in options page"
   },
   "notesView_sync_tooltip": {
     "message": "Sync notes from {{platform}}"
   },
-  "notesView_share_tooltip": {
-    "message": "Share YiNote"
+  "notesView_support_tooltip": {
+    "message": "Support YiNote"
   },
-  "notesView_share_title": {
-    "message": "Share YiNote"
-  },
-  "notesView_share_text": {
-    "message": "Try YiNote, aka Turbonote extension, for taking & sharing notes while watching videos"
-  },
-  "notesView_share_facebook_label": {
-    "message": "Facebook"
-  },
-  "notesView_share_twitter_label": {
-    "message": "Twitter"
-  },
-  "notesView_share_copylink_label": {
-    "message": "Copy link"
-  },
-  "notesView_share_copylink_success": {
-    "message": "Link copied!"
+  "notesView_support_text": {
+    "message": "As an open source project, YiNote extension need your help to grow. Please support this project in following approaches:"
   },
   "searchView_tab_bookmarks": {
     "message": "Bookmarks"
@@ -129,6 +102,9 @@
   "options_github": {
     "message": "Visit Repository"
   },
+  "options_faq": {
+    "message": "FAQs"
+  },
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },
@@ -142,13 +118,37 @@
     "message": "Page Detail"
   },
   "options_page_tag_tooltip": {
-    "message": "Add tag"
+    "message": "Add tags"
   },
   "options_page_pdf_tooltip": {
     "message": "Generate PDF"
   },
+  "options_page_evernote_tooltip": {
+    "message": "Send notes to Evernote"
+  },
+  "options_page_googledocs_tooltip": {
+    "message": "Send notes to Google Docs"
+  },
+  "options_page_onenote_tooltip": {
+    "message": "Send notes to OneNote"
+  },
   "options_page_open_tooltip": {
     "message": "Open page in new tab"
+  },
+  "options_page_annotation_tooltip": {
+    "message": "Annotate screenshot"
+  },
+  "options_page_edit_note_tooltip": {
+    "message": "Edit Note"
+  },
+  "options_page_delete_note_tooltip": {
+    "message": "Delete Note"
+  },
+  "options_page_save_tooltip": {
+    "message": "Save"
+  },
+  "options_page_cancel_tooltip": {
+    "message": "Cancel"
   },
   "options_settings_title": {
     "message": "Settings"
@@ -165,8 +165,8 @@
   "options_settings_seek_generated_url_label": {
     "message": "Apply preset seconds to seek to generated URLs (URLs in generated PDF, notes sent to third party platforms)"
   },
-  "options_settings_screenshot_resolution_label": {
-    "message": "Screenshot Resolution"
+  "options_settings_reload_tab_label": {
+    "message": "Reload tab when url change"
   },
   "options_settings_exportAndImport_title": {
     "message": "Export and Import"
@@ -200,6 +200,9 @@
   },
   "options_settings_exportAndClear_button": {
     "message": "Export and clear data"
+  },
+  "services_send_tooltip": {
+    "message": "Send notes"
   },
   "services_send_title": {
     "message": "Send notes to:"
@@ -244,5 +247,44 @@
   },
   "tagdialog_input_label": {
     "message": "New tag"
+  },
+  "editor_mode_write": {
+    "message": "Write"
+  },
+  "editor_mode_preview": {
+    "message": "Preview"
+  },
+  "editor_markdown_tooltip": {
+    "message": "Styling with Markdown is supported"
+  },
+  "share_title": {
+    "message": "Share"
+  },
+  "share_text": {
+    "message": "Try YiNote, aka Turbonote extension, for taking & sharing notes while watching videos"
+  },
+  "share_copylink_success": {
+    "message": "Link copied!"
+  },
+  "sponsor_title": {
+    "message": "Sponsor"
+  },
+  "sponsor_github": {
+    "message": "github.com/sponsors"
+  },
+  "sponsor_patreon": {
+    "message": "patreon.com/yinote"
+  },
+  "sponsor_paypal": {
+    "message": "Paypal"
+  },
+  "star_title": {
+    "message": "Star YiNote extension on Github"
+  },
+  "star_description": {
+    "message": "Star button can be found on the top-right corner of the repository page"
+  },
+  "star_github": {
+    "message": "github.com/shuowu/yi-note"
   }
 }

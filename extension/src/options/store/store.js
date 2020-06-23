@@ -1,6 +1,6 @@
 import app from './app';
 import bookmarks from './bookmarks';
-import page from './page';
+import page from '../../common/store/page';
 import alerts from '../../common/components/Alerts/store';
 import tagDialog from '../../common/components/TagDialog/store';
 import { thunk } from 'easy-peasy';

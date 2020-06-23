@@ -1,4 +1,4 @@
-import { action, thunk } from 'easy-peasy';
+import { action, thunk, thunkOn } from 'easy-peasy';
 import { StorageFactory } from '../../common/services/storage';
 
 const storage = StorageFactory.getStorage();
@@ -21,7 +21,7 @@ export default {
     ].sort((b1, b2) => b1.createdAt - b2.createdAt);
   }),
   setTags: action((state, payload) => {
-    state.tags = payload.map(tag => ({ tag, selected: false }));
+    state.tags = [...payload];
   }),
   selectTag: action((state, payload) => {
     state.tags = state.tags.map(tag => {
@@ -47,29 +47,38 @@ export default {
     const { bookmarks } = getState();
     actions.setBookmarks(bookmarks.filter(bookmark => bookmark.id !== pageId));
   }),
-  fetchTags: thunk(async actions => {
-    const tags = await storage.getTags();
+  fetchTags: thunk(async (actions, tagsFromUrl) => {
+    let tags = await storage.getTags();
+    tags = tags.map(tag => {
+      if (tagsFromUrl.includes(tag)) {
+        return { tag, selected: true };
+      }
+      return { tag, selected: false };
+    });
     actions.setTags(tags);
-  }),
-  filterBookmarksByTags: thunk(async (actions, _, { getState }) => {
-    const { tags } = getState();
-    const selectedTags = tags
-      .filter(({ selected }) => !!selected)
-      .map(({ tag }) => tag);
-    const bookmarks = await storage.filterBookmarksByTags(selectedTags);
-    actions.setBookmarks(bookmarks);
   }),
   toolbar: {
     exporting: false,
     setExporting: action((state, payload) => {
       state.exporting = payload;
     }),
-    filtering: false,
+    filtering: true,
     setFiltering: action((state, payload) => {
       state.filtering = payload;
     })
   },
   reset: action(state => {
     state.bookmarks = [];
-  })
+  }),
+  onTagsChange: thunkOn(
+    actions => [actions.setTags, actions.selectTag, actions.unSelectTags],
+    async (actions, _, { getState }) => {
+      const { tags = [] } = getState();
+      const selectedTags = tags
+        .filter(({ selected }) => !!selected)
+        .map(({ tag }) => tag);
+      const bookmarks = await storage.filterBookmarksByTags(selectedTags);
+      actions.setBookmarks(bookmarks);
+    }
+  )
 };

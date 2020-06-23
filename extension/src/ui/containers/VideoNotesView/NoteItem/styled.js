@@ -10,8 +10,9 @@ export const StyledMainRow = styled(Grid)`
 export const StyledExpandedSection = styled(Grid)`
   padding: ${props => (props.expanded ? 4 : 0)}px;
   border-top: ${props => props.expanded && '1px solid #d3d3d3'};
-  max-height: ${props => (props.expanded ? 100 : 0)}px;
+  max-height: ${props => (props.expanded ? 400 : 0)}px;
   overflow: hidden;
+  overflow-y: scroll;
   transition: max-height 0.2s ease-in-out;
 `;
 
@@ -28,15 +29,7 @@ export const StyledSummary = styled.div`
 `;
 
 export const StyledNote = styled.div`
-  width: 100%;
-  padding: 2px;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: pre;
-  max-height: 60px;
-  overflow-y: scroll;
+  width: 360px;
 `;
 
 export const StyledTimestamp = styled.div`

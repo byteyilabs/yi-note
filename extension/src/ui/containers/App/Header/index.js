@@ -6,7 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { StyledContainer } from './styled';
 import Search from '../Search';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../../common/components/IconButton';
 
 const Header = () => {
   const history = useHistory();

@@ -2,6 +2,7 @@ import { actionOn } from 'easy-peasy';
 import app from './app';
 import videoNotes, { defaultPage, defaultNote } from './videoNotes';
 import search from './search';
+import page from '../../common/store/page';
 import alerts from '../../common/components/Alerts/store';
 import tagDialog from '../../common/components/TagDialog/store';
 
@@ -11,8 +12,9 @@ const storeModel = {
   tagDialog,
   videoNotes,
   search,
+  page,
   onSetPage: actionOn(
-    actions => actions.videoNotes.setPage,
+    actions => actions.page.setPage,
     state => {
       state.search.bookmarks = [];
       state.search.notes = [];

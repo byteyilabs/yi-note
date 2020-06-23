@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import SettingsIcon from '@material-ui/icons/Settings';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../../common/components/IconButton';
 import { GITHUB_URL } from '../../../../constants';
 
 const StyledContainer = styled(Grid)`

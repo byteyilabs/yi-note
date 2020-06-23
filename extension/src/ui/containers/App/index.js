@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useInterval } from 'react-recipes';
-import { StyledContainer, StyledMain, StyledViewWrapper } from './styled';
+import { Grid } from '@material-ui/core';
+import { StyledDrawer, StyledViewWrapper } from './styled';
 import Header from './Header';
 import Footer from './Footer';
 import VideoNotesView from '../VideoNotesView';
@@ -11,8 +12,9 @@ import ReloadView from '../ReloadView';
 import Spinner from '../../components/Spinner';
 import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
+import { StorageFactory } from '../../../common/services/storage';
 import withTheme from '../../../common/withTheme';
-import { QUERY_AUTO_JUMP } from '../../../constants';
+import { QUERY_AUTO_JUMP, KEY_RELOAD_TAB } from '../../../constants';
 import { delay } from '../../../common/utils';
 
 const App = () => {
@@ -33,8 +35,16 @@ const App = () => {
 
   useInterval(() => {
     if (url !== window.location.href) {
-      PlayerFactory.reset();
-      setUrl(window.location.href);
+      StorageFactory.getStorage()
+        .getSettings()
+        .then(data => {
+          if (data[KEY_RELOAD_TAB]) {
+            window.location.reload();
+          } else {
+            PlayerFactory.reset();
+            setUrl(window.location.href);
+          }
+        });
     }
   }, 100);
 
@@ -87,7 +97,8 @@ const App = () => {
           setProgress(false);
           history.replace(player ? '/video-notes' : '/search');
         })
-        .catch(() => {
+        .catch(err => {
+          logger.info(err);
           setProgress(false);
           history.replace('/search');
         });
@@ -95,8 +106,8 @@ const App = () => {
   }, [getPlayer, history, open, pathname]);
 
   return (
-    <StyledContainer open={open} className={open && 'panel-shadow'}>
-      <StyledMain>
+    <StyledDrawer open={open} className={open && 'panel-shadow'}>
+      <Grid container>
         <Header />
         <StyledViewWrapper>
           {progress ? (
@@ -110,9 +121,9 @@ const App = () => {
           )}
         </StyledViewWrapper>
         <Footer />
-      </StyledMain>
+      </Grid>
       <Alerts />
-    </StyledContainer>
+    </StyledDrawer>
   );
 };
 

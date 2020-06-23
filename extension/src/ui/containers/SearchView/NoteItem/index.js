@@ -10,6 +10,7 @@ import {
   StyledAdditionalInfo
 } from '../styled';
 import { secondsToTime, buildAutoSeekUrl } from '../../../../common/utils';
+import Markdown from '../../../../common/services/markdown';
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },
@@ -22,13 +23,13 @@ const NoteItem = ({
       rel="noopener noreferrer"
     >
       <Grid container direction="column">
-        <Grid item>
+        <Grid item xs={12}>
           <StyledMainLine>
             <StyledTimestamp>{secondsToTime(timestamp)}</StyledTimestamp>
-            <Highlight search={query}>{content}</Highlight>
+            <Highlight search={query}>{Markdown.toText(content)}</Highlight>
           </StyledMainLine>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <StyledAdditionalInfo>
             {icon && <StyledImg src={icon} alt="icon" />}
             <span>{title}</span>

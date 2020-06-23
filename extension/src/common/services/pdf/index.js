@@ -5,12 +5,13 @@ import {
   getFileUrl
 } from '../../../common/utils';
 import { StorageFactory } from '../../../common/services/storage';
+import Markdown from '../../../common/services/markdown';
 import {
   WEBSITE_URL,
   KEY_APPLY_SEEK_SEC_ON_URL,
   KEY_VIDEO_SEEK_SECONDS
 } from '../../../constants';
-import msyh from '../../../fonts/msyh.ttf';
+import msyh from '../../../assets/fonts/msyh.ttf';
 
 export default class PDFGenerator {
   constructor() {
@@ -61,7 +62,8 @@ export default class PDFGenerator {
     this.doc.setFontSize(12);
 
     for (const note of notes) {
-      const content = this.doc.splitTextToSize(note.content, 180);
+      let content = Markdown.toText(note.content);
+      content = this.doc.splitTextToSize(content, 180);
       if (y + 66 + 6 + 6 * content.length > 300) {
         this.doc.addPage();
         y = 20;

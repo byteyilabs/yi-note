@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const StyledDrawer = styled.div`
   display: flex;
   position: fixed;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -20,14 +20,13 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const StyledMain = styled.div`
-  flex: 1;
-`;
-
 export const StyledViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 5px;
+  width: -webkit-fill-available;
+  width: -moz-fill-available;
+  word-break: break-all;
   height: calc(
     100% - ${props => props.theme.header.height}px -
       ${props => props.theme.footer.height}px

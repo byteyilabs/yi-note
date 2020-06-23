@@ -8,6 +8,14 @@ export default class BrowserStorage extends Storage {
     this.storage = browser.storage[area];
   }
 
+  _getPages() {
+    return this.storage.get().then(pages => {
+      return Object.keys(pages)
+        .filter(key => isUuid(key))
+        .map(key => pages[key]);
+    });
+  }
+
   getPage(id) {
     return this.storage.get(id).then(page => page[id]);
   }
@@ -38,7 +46,7 @@ export default class BrowserStorage extends Storage {
       .then(() => note);
   }
 
-  removeNote(noteId, pageId) {
+  removeNote(pageId, noteId) {
     return this.storage.get(pageId).then(page => {
       page = page[pageId];
       page.notes = page.notes.filter(note => note.id !== noteId);
@@ -55,7 +63,7 @@ export default class BrowserStorage extends Storage {
   }
 
   getNotes() {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const notes = Object.values(pages).reduce((acc, curr) => {
         if (!curr.notes) {
           return acc;
@@ -98,7 +106,7 @@ export default class BrowserStorage extends Storage {
   }
 
   getTags() {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const tagsSet = Object.values(pages).reduce((acc, curr) => {
         if (!curr.tags) {
           return acc;
@@ -112,18 +120,16 @@ export default class BrowserStorage extends Storage {
   }
 
   getBookmarks() {
-    return this.storage.get().then(pages => {
-      return Object.keys(pages)
-        .filter(key => isUuid(key))
-        .map(key => {
-          const { id, meta = {}, createdAt } = pages[key];
-          return { id, createdAt, ...meta };
-        });
+    return this._getPages().then(pages => {
+      return Object.values(pages).map(page => {
+        const { id, meta = {}, createdAt } = page;
+        return { id, createdAt, ...meta };
+      });
     });
   }
 
   searchBookmarks(query) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const bookmarks = Object.values(pages)
         .filter(({ meta: { title = '' } }) => {
           const regex = new RegExp(query, 'i');
@@ -138,9 +144,9 @@ export default class BrowserStorage extends Storage {
   }
 
   filterBookmarksByTags(tags) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const bookmarks = Object.values(pages)
-        .filter(({ tags: tagsInPage }) => {
+        .filter(({ tags: tagsInPage = [] }) => {
           return tags.reduce((acc, curr) => {
             return acc && tagsInPage.includes(curr);
           }, true);
@@ -154,7 +160,7 @@ export default class BrowserStorage extends Storage {
   }
 
   searchNotes(query) {
-    return this.storage.get().then(pages => {
+    return this._getPages().then(pages => {
       const notes = Object.values(pages)
         .reduce((acc, curr) => {
           if (!curr.notes) {
@@ -177,7 +183,7 @@ export default class BrowserStorage extends Storage {
   getPagesForExport(ids) {
     let promise;
     if (ids) {
-      promise = this.storage.get().then(data => {
+      promise = this._getPages().then(data => {
         return Object.values(data).reduce((acc, page) => {
           if (ids.includes(page.id)) {
             acc.push(page);
@@ -186,7 +192,7 @@ export default class BrowserStorage extends Storage {
         }, []);
       });
     } else {
-      promise = this.storage.get().then(data => {
+      promise = this._getPages().then(data => {
         return Object.values(data).reduce((acc, curr) => {
           if (curr.id) {
             acc.push(curr);

@@ -11,21 +11,21 @@ import {
 import {
   KEY_VIDEO_SEEK_SECONDS,
   KEY_APPLY_SEEK_SEC_ON_URL,
-  KEY_SCREENSHOT_RESOLUTION
+  KEY_RELOAD_TAB
 } from '../../../../constants';
 
 const Video = () => {
   const { t } = useTranslation('options');
   const [seekSecond, setSeekSecond] = useState(0);
   const [applySeekSecondsOnUrl, setApplySeekSecondsOnUrl] = useState(false);
-  const [resolution, setResolution] = useState(360);
+  const [reloadTab, setReloadTab] = useState(false);
 
   useEffect(() => {
     browser.storage.local.get('settings').then(data => {
       const settings = data.settings || {};
       setSeekSecond(settings[KEY_VIDEO_SEEK_SECONDS] || 0);
       setApplySeekSecondsOnUrl(settings[KEY_APPLY_SEEK_SEC_ON_URL] || false);
-      setResolution(settings[KEY_SCREENSHOT_RESOLUTION] || 360);
+      setReloadTab(settings[KEY_RELOAD_TAB] || false);
     });
   }, []);
 
@@ -57,17 +57,17 @@ const Video = () => {
       });
   };
 
-  const handleResolutionChange = e => {
-    const { value } = e.target;
+  const handleReloadTabChange = e => {
+    const { checked } = e.target;
     browser.storage.local
       .get('settings')
       .then(data => {
         const settings = data.settings || {};
-        settings[KEY_SCREENSHOT_RESOLUTION] = value;
+        settings[KEY_RELOAD_TAB] = checked;
         return browser.storage.local.set({ settings });
       })
       .then(() => {
-        setResolution(value);
+        setReloadTab(checked);
       });
   };
 
@@ -118,14 +118,15 @@ const Video = () => {
       <Grid item container spacing={4} alignItems="center">
         <Grid item>
           <Typography variant="subtitle1">
-            {t('settings.screenshot.resolution.label')}
+            {t('settings.reload.tab.label')}
           </Typography>
         </Grid>
         <Grid item>
-          <Select value={resolution} onChange={handleResolutionChange}>
-            <MenuItem value={360}>640x360</MenuItem>
-            <MenuItem value={720}>1280x720</MenuItem>
-          </Select>
+          <Switch
+            checked={reloadTab}
+            onChange={handleReloadTabChange}
+            name="reloadTab"
+          />
         </Grid>
       </Grid>
     </Grid>

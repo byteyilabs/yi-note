@@ -1,7 +1,5 @@
 import Logger from 'js-logger';
 import migration_v_0_6_4 from './migrations/0.6.4';
-import * as services from './integrations';
-import { capitalize } from '../common/utils';
 
 Logger.useDefaults();
 
@@ -13,8 +11,25 @@ browser.browserAction.onClicked.addListener(tab => {
 });
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  const openOptions = () => {
-    browser.runtime.openOptionsPage();
+  const openOptions = options => {
+    let timer;
+    let counter = 10;
+    const sendMessage = () => {
+      return browser.runtime
+        .sendMessage(options)
+        .then(() => {
+          window.clearTimeout(timer);
+        })
+        .catch(err => {
+          window.clearTimeout(timer);
+          if (counter-- === 0) {
+            logger.error(err);
+            return;
+          }
+          timer = window.setTimeout(sendMessage, 200);
+        });
+    };
+    browser.runtime.openOptionsPage().then(sendMessage);
   };
 
   const exportFile = () => {
@@ -23,22 +38,6 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       url: URL.createObjectURL(message.blob),
       saveAs: false
     });
-  };
-
-  const sendNotesToService = () => {
-    const { data, action } = message;
-    const namespace = action.split('-')[2];
-    const className = capitalize(namespace);
-    const service = new services[className](namespace, data);
-    return service
-      .sendNotes()
-      .then(() => sendResponse({ code: 'success' }))
-      .catch(e =>
-        sendResponse({
-          code: 'error',
-          error: e
-        })
-      );
   };
 
   const copyToClipboard = () => {
@@ -56,15 +55,10 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const { action } = message;
   switch (action) {
     case 'open-options':
-      openOptions();
+      openOptions(message.data);
       return true;
     case 'export-file':
       exportFile();
-      return true;
-    case 'send-to-evernote':
-    case 'send-to-onenote':
-    case 'send-to-googledocs':
-      sendNotesToService();
       return true;
     case 'copy':
       copyToClipboard();

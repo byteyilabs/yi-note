@@ -48,6 +48,10 @@ module.exports = env => {
           }
         },
         {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
           test: /\.png$/,
           loader: 'file-loader',
           options: {
@@ -58,8 +62,22 @@ module.exports = env => {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
           loader: 'file-loader',
           options: {
-            name: 'fonts/[name].[ext]'
+            name: 'assets/fonts/[name].[ext]'
           }
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "babel-loader"
+            },
+            {
+              loader: "react-svg-loader",
+              options: {
+                jsx: true // true outputs JSX tags
+              }
+            }
+          ]
         }
       ]
     },
