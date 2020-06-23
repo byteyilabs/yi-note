@@ -8,6 +8,7 @@ import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
 import { secondsToTime } from '../../../../common/utils';
+import { StorageFactory } from '../../../../common/services/storage';
 import { TYPE_VIDEO_NOTE } from '../../../../constants';
 
 const StyledStatus = styled.span`
@@ -25,7 +26,8 @@ const Editor = () => {
   const {
     videoNotes: {
       editor: { setNote, reset },
-      edit
+      edit,
+      support: { setOpen: setSupportOpen }
     },
     page: { saveNote }
   } = useStoreActions(actions => actions);
@@ -49,6 +51,14 @@ const Editor = () => {
       // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE });
       reset();
+      StorageFactory.getStorage()
+        .getNotes()
+        .then(notes => {
+          const count = notes.length;
+          if (count && count % 50 === 0) {
+            setSupportOpen(true);
+          }
+        });
     }
   };
 
