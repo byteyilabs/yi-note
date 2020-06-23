@@ -44,7 +44,7 @@ const StyledDescription = styled.div`
 const BookmarkItem = ({ id, title, description, url, image, selected }) => {
   const { t } = useTranslation(['bookmark', 'options']);
   const history = useHistory();
-  const { progress } = useStoreState(state => state.bookmarks.toolbar);
+  const { exporting } = useStoreState(state => state.bookmarks.toolbar);
   const {
     bookmarks: { setBookmark, removeBookmark },
     alerts: { show: showAlerts }
@@ -55,7 +55,7 @@ const BookmarkItem = ({ id, title, description, url, image, selected }) => {
   };
 
   const handleOpenPageDetail = () => {
-    if (progress) {
+    if (exporting) {
       setSelect();
       return;
     }
@@ -98,7 +98,7 @@ const BookmarkItem = ({ id, title, description, url, image, selected }) => {
         </Grid>
       </Grid>
       <Grid item md={2} sm={12}>
-        {progress ? (
+        {exporting ? (
           <Checkbox checked={!!selected} onChange={setSelect} />
         ) : (
           <>

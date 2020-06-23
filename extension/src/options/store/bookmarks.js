@@ -13,12 +13,12 @@ export default {
   }),
   setBookmark: action((state, payload) => {
     const { id } = payload;
-    const bookmarkToUpdate =
-      state.bookmarks.find(bookmark => bookmark.id === id) || {};
-    state.bookmarks = [
-      ...state.bookmarks.filter(bookmark => bookmark.id !== id),
-      { ...bookmarkToUpdate, ...payload }
-    ].sort((b1, b2) => b1.createdAt - b2.createdAt);
+    state.bookmarks = state.bookmarks.map(bookmark => {
+      if (bookmark.id === id) {
+        return { ...bookmark, ...payload };
+      }
+      return bookmark;
+    });
   }),
   setTags: action((state, payload) => {
     state.tags = [...payload];
