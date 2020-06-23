@@ -18,8 +18,9 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import { drawerWidth, headerHeight } from '../constants';
-import { APP_ID, GITHUB_URL, FAQ_URL } from '../../../../constants';
+import { APP_ID, GITHUB_URL, FAQ_URL, ISSUE_URL } from '../../../../constants';
 import { getVersion } from '../../../../common/utils';
 
 const version = getVersion();
@@ -105,6 +106,12 @@ const ResponsiveDrawer = () => {
             <HelpIcon />
           </ListItemIcon>
           <ListItemText primary={t('faq')} />
+        </ListItem>
+        <ListItem button onClick={() => window.open(ISSUE_URL, '_blank')}>
+          <ListItemIcon>
+            <BugReportIcon />
+          </ListItemIcon>
+          <ListItemText primary={t('issues')} />
         </ListItem>
         <ListItem button onClick={() => window.open(GITHUB_URL, '_blank')}>
           <ListItemIcon>

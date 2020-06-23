@@ -105,6 +105,9 @@
   "options_faq": {
     "message": "FAQs"
   },
+  "options_issues": {
+    "message": "Report Issues"
+  },
   "options_bookmarks_title": {
     "message": "Bookmarks"
   },

@@ -5,6 +5,7 @@ export const WEBSITE_URL = 'https://www.yinote.co';
 export const INSTALLATION_URL = `${WEBSITE_URL}/#installation`;
 export const GITHUB_URL = 'https://github.com/shuowu/yi-note';
 export const FAQ_URL = `${WEBSITE_URL}/#faqs`;
+export const ISSUE_URL = `${GITHUB_URL}/issues`;
 
 export const TYPE_BOOKMARKS = 'bookmarks';
 export const TYPE_NOTES = 'notes';
