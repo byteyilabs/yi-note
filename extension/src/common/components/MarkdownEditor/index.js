@@ -96,6 +96,7 @@ const MarkdownEditor = ({
         </Grid>
         <Grid item>
           <IconButton
+            size="large"
             tooltip={t('markdown.tooltip')}
             onClick={handleOpenMarkdownGuide}
           >

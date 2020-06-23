@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Modal, CircularProgress } from '@material-ui/core';
+import { Modal } from '@material-ui/core';
 
 export const StyledModal = styled(Modal)`
   display: flex;
@@ -17,4 +17,9 @@ export const StyledPaper = styled.div`
   justify-content: center;
   outline: none;
   width: 350px;
+`;
+
+export const StyledTitle = styled.div`
+  font-size: 1.2em;
+  font-weight: 500;
 `;

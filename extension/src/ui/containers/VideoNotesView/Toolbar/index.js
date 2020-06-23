@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Grid } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
-import ShareIcon from '@material-ui/icons/ShareOutlined';
 import SyncIcon from '@material-ui/icons/Sync';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import SponsorIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '../../../../common/components/IconButton';
 import { useSyncNotes, useLoadScreenshots } from '../../../hooks';
 
@@ -19,7 +19,7 @@ const Toolbar = () => {
   const { id } = useStoreState(state => state.page.data);
   const {
     videoNotes: {
-      share: { setOpen: setShareExtensionOpen }
+      support: { setOpen: setSupportExtensionOpen }
     },
     page: { bookmarkPage, removePage },
     alerts: { show: showAlerts }
@@ -41,8 +41,8 @@ const Toolbar = () => {
     });
   };
 
-  const handleOpenShareExtension = () => {
-    setShareExtensionOpen(true);
+  const handleOpenSupportDialog = () => {
+    setSupportExtensionOpen(true);
   };
 
   const handleSyncNotes = async () => {
@@ -94,10 +94,11 @@ const Toolbar = () => {
       )}
       <StyledIconContainer item>
         <IconButton
-          tooltip={t('share.tooltip')}
-          onClick={handleOpenShareExtension}
+          tooltip={t('support.tooltip')}
+          onClick={handleOpenSupportDialog}
+          color="red"
         >
-          <ShareIcon />
+          <SponsorIcon />
         </IconButton>
       </StyledIconContainer>
     </Grid>

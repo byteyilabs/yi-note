@@ -78,26 +78,11 @@
   "notesView_sync_tooltip": {
     "message": "Sync notes from {{platform}}"
   },
-  "notesView_share_tooltip": {
-    "message": "Share YiNote"
+  "notesView_support_tooltip": {
+    "message": "Support YiNote"
   },
-  "notesView_share_title": {
-    "message": "Share YiNote"
-  },
-  "notesView_share_text": {
-    "message": "Try YiNote, aka Turbonote extension, for taking & sharing notes while watching videos"
-  },
-  "notesView_share_facebook_label": {
-    "message": "Facebook"
-  },
-  "notesView_share_twitter_label": {
-    "message": "Twitter"
-  },
-  "notesView_share_copylink_label": {
-    "message": "Copy link"
-  },
-  "notesView_share_copylink_success": {
-    "message": "Link copied!"
+  "notesView_support_text": {
+    "message": "As an open source project, YiNote extension need your help to grow. Please support this project in following approaches:"
   },
   "searchView_tab_bookmarks": {
     "message": "Bookmarks"
@@ -268,5 +253,35 @@
   },
   "editor_markdown_tooltip": {
     "message": "Styling with Markdown is supported"
+  },
+  "share_title": {
+    "message": "Share"
+  },
+  "share_text": {
+    "message": "Try YiNote, aka Turbonote extension, for taking & sharing notes while watching videos"
+  },
+  "share_copylink_success": {
+    "message": "Link copied!"
+  },
+  "sponsor_title": {
+    "message": "Sponsor"
+  },
+  "sponsor_github": {
+    "message": "github.com/sponsors"
+  },
+  "sponsor_patreon": {
+    "message": "patreon.com/yinote"
+  },
+  "sponsor_paypal": {
+    "message": "Paypal"
+  },
+  "star_title": {
+    "message": "Star YiNote extension on Github"
+  },
+  "star_description": {
+    "message": "Star button can be found on the top-right corner of the repository page"
+  },
+  "star_github": {
+    "message": "github.com/shuowu/yi-note"
   }
 }

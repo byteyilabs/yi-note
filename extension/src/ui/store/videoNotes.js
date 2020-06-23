@@ -40,7 +40,7 @@ const videoNotesModel = {
       state.open = payload;
     })
   },
-  share: {
+  support: {
     open: false,
     setOpen: action((state, payload) => {
       state.open = payload;

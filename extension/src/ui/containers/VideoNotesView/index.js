@@ -3,7 +3,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@material-ui/core';
-import ShareExtension from './ShareExtension';
+import SupportExtension from './SupportExtension';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
 import Toolbar from './Toolbar';
@@ -77,7 +77,7 @@ const NotesView = () => {
           renderItem={note => <NoteItem note={note} />}
         />
       )}
-      <ShareExtension />
+      <SupportExtension />
     </>
   );
 };
