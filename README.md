@@ -209,7 +209,7 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 
 - (Done) Integration with popular note / document platforms, like Evernote, onenote, google doc.
 
-- Sync notes from mooc platforms
+- (Done) Sync notes from mooc platforms
 
 - Web article annotation
 
@@ -223,7 +223,8 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 
 - How to share notes with others?
 
-  YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
+  - YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
+  - You can also export notes as JSON file in options page, then send the exported JSON file out. Whoever get the exported file can then import it via options page.
   
 - What should I prepare if I decide not to use YiNote extension any more?
 
