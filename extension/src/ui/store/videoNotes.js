@@ -1,16 +1,10 @@
-import { action } from 'easy-peasy';
+import { action, thunk } from 'easy-peasy';
 
 export const defaultNote = {
   id: '',
   content: '',
   timestamp: 0,
   image: ''
-};
-
-export const defaultPage = {
-  id: '',
-  notes: [],
-  tags: []
 };
 
 const videoNotesModel = {
@@ -28,18 +22,6 @@ const videoNotesModel = {
       state.note = {};
     })
   },
-  preview: {
-    open: false,
-    setOpen: action((state, payload) => {
-      state.open = payload;
-    })
-  },
-  sendToServices: {
-    open: false,
-    setOpen: action((state, payload) => {
-      state.open = payload;
-    })
-  },
   support: {
     open: false,
     setOpen: action((state, payload) => {
@@ -49,6 +31,9 @@ const videoNotesModel = {
   edit: action((state, note) => {
     state.editor.active = true;
     state.editor.note = { ...note };
+  }),
+  reset: thunk(async (actions) => {
+    actions.editor.reset();
   })
 };
 

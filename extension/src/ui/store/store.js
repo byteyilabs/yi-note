@@ -1,16 +1,14 @@
-import { actionOn } from 'easy-peasy';
+import { actionOn, thunkOn } from 'easy-peasy';
 import app from './app';
-import videoNotes, { defaultPage, defaultNote } from './videoNotes';
+import videoNotes from './videoNotes';
 import search from './search';
 import page from '../../common/store/page';
 import settings from '../../common/store/settings';
 import alerts from '../../common/components/Alerts/store';
-import tagDialog from '../../common/components/TagDialog/store';
 
 const storeModel = {
   app,
   alerts,
-  tagDialog,
   videoNotes,
   search,
   page,
@@ -22,12 +20,11 @@ const storeModel = {
       state.search.notes = [];
     }
   ),
-  onSetUrl: actionOn(
+  onSetUrl: thunkOn(
     actions => actions.app.setUrl,
-    state => {
-      state.videoNotes.page = { ...defaultPage };
-      state.videoNotes.editor.active = false;
-      state.videoNotes.editor.note = { ...defaultNote };
+    async actions => {
+      actions.videoNotes.reset();
+      actions.page.reset();
     }
   )
 };

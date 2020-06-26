@@ -4,13 +4,6 @@ import { fromString } from 'uuidv4';
 import { StorageFactory } from '../services/storage';
 import { generatePageId, addTagToList, addNoteToList } from '../utils';
 
-export const defaultNote = {
-  id: '',
-  content: '',
-  timestamp: 0,
-  image: ''
-};
-
 export const defaultPage = {
   id: '',
   meta: {},
@@ -98,6 +91,9 @@ const pageModel = {
     const { id, tags } = data;
     await storage.removeTag(id, tag);
     actions.setPage({ ...data, tags: tags.filter(t => t !== tag) });
+  }),
+  reset: action(state => {
+    state.data = { ...defaultPage }
   })
 };
 

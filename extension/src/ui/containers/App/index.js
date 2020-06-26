@@ -50,6 +50,7 @@ const App = () => {
       ) {
         window.location.reload();
       } else {
+        // setUrl will trigger side effect UI states reset
         setUrl(window.location.href);
         PlayerFactory.reset();
       }
