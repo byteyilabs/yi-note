@@ -4,6 +4,6 @@ const common = require('./webpack.common');
 module.exports = env =>
   merge(common(env), {
     mode: 'development',
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     watch: true
   });
