@@ -2,12 +2,16 @@ import React from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import { Grid, IconButton, Tooltip } from '@material-ui/core';
-import ExportIcon from '@material-ui/icons/GetApp';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
-import FilterIcon from '@material-ui/icons/FilterList';
-import { StorageFactory } from '../../../../common/services/storage';
-import { exportJsonFile } from '../../../../common/services/file';
+import {
+  GetApp as ExportIcon,
+  Check as CheckIcon,
+  Close as CloseIcon,
+  FilterList as FilterIcon
+} from '@material-ui/icons';
+import {
+  storage as StorageService,
+  file as FileService
+} from '@yi-note/common/services';
 
 const Toolbar = () => {
   const { t } = useTranslation('options');
@@ -31,10 +35,10 @@ const Toolbar = () => {
       }
       return acc;
     }, []);
-    return StorageFactory.getStorage()
+    return StorageService.getStorage()
       .getPagesForExport(ids)
       .then(pages => {
-        exportJsonFile(pages, 'yi-note.json');
+        FileService.exportJsonFile(pages, 'yi-note.json');
       })
       .then(() => setExporting(false));
   };

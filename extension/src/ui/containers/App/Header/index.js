@@ -1,12 +1,14 @@
 import React from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { useHistory, useLocation } from 'react-router-dom';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
+import {
+  ChevronRight as ChevronRightIcon,
+  Close as CloseIcon
+} from '@material-ui/icons';
+import { IconButton } from '@yi-note/common/components';
 import { StyledContainer } from './styled';
 import Search from '../Search';
-import IconButton from '../../../../common/components/IconButton';
 
 const Header = () => {
   const history = useHistory();

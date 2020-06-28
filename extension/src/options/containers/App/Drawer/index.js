@@ -14,14 +14,21 @@ import {
   Hidden,
   Drawer
 } from '@material-ui/core';
-import BookmarksIcon from '@material-ui/icons/Bookmarks';
-import SettingsIcon from '@material-ui/icons/Settings';
-import HelpIcon from '@material-ui/icons/Help';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import BugReportIcon from '@material-ui/icons/BugReport';
+import {
+  Bookmarks as BookmarksIcon,
+  Settings as SettingsIcon,
+  Help as HelpIcon,
+  GitHub as GitHubIcon,
+  BugReport as BugReportIcon
+} from '@material-ui/icons';
+import {
+  APP_ID,
+  GITHUB_URL,
+  FAQ_URL,
+  ISSUE_URL
+} from '@yi-note/common/constants';
+import { getVersion } from '@yi-note/common/utils';
 import { drawerWidth, headerHeight } from '../constants';
-import { APP_ID, GITHUB_URL, FAQ_URL, ISSUE_URL } from '../../../../constants';
-import { getVersion } from '../../../../common/utils';
 
 const version = getVersion();
 

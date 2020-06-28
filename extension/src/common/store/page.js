@@ -1,7 +1,7 @@
 import { action, thunk } from 'easy-peasy';
 import { getMetadata } from 'page-metadata-parser';
 import { fromString } from 'uuidv4';
-import { StorageFactory } from '../services/storage';
+import { storage as StorageService } from '../services';
 import { generatePageId, addTagToList, addNoteToList } from '../utils';
 
 export const defaultPage = {
@@ -11,7 +11,7 @@ export const defaultPage = {
   tags: []
 };
 
-const storage = StorageFactory.getStorage();
+const storage = StorageService.getStorage();
 
 const pageModel = {
   data: { ...defaultPage },

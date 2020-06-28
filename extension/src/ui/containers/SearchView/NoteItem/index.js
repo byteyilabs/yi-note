@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlighter';
 import Grid from '@material-ui/core/Grid';
+import { secondsToTime, buildAutoSeekUrl } from '@yi-note/common/utils';
+import Markdown from '@yi-note/common/services/markdown';
 import { StyledTimestamp } from './styled';
 import {
   StyledImg,
@@ -9,8 +11,6 @@ import {
   StyledMainLine,
   StyledAdditionalInfo
 } from '../styled';
-import { secondsToTime, buildAutoSeekUrl } from '../../../../common/utils';
-import Markdown from '../../../../common/services/markdown';
 
 const NoteItem = ({
   item: { content, timestamp, page: { title, url, icon } = {} },

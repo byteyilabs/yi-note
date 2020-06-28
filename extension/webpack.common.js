@@ -42,6 +42,7 @@ module.exports = env => {
       rules: [
         {
           test: /\.(js|jsx)$/,
+          // include: [/node_modules\/@yi-note/],
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader'

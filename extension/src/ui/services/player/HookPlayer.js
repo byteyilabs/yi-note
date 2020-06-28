@@ -1,5 +1,5 @@
 import Player from './Player';
-import { APP_ID } from '../../../constants';
+import { APP_ID } from '@yi-note/common/constants';
 
 const ACTION_GET_CURRENT_TIME = 'getCurrentTime';
 const ACTION_GET_DURATION = 'getDuration';

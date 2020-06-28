@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Grid, Divider } from '@material-ui/core';
 import MarkdownViewer from '../MarkdownViewer';
 import IconButton from '../IconButton';
-import MarkdownIcon from '../../../assets/icons/markdown.svg';
+import { MarkdownIcon } from '../../icons';
 
 const EDITOR_MIN_WIDTH = 100;
 

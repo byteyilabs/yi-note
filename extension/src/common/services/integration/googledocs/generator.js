@@ -1,7 +1,7 @@
 import { b64toBlob } from '../utils';
 import Markdown from '../../markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
-import { INSTALLATION_URL } from '../../../../constants';
+import { INSTALLATION_URL } from '../../../constants';
 
 const GOOGLE_API_BASE_URL = 'https://www.googleapis.com';
 

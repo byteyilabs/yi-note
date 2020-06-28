@@ -3,6 +3,9 @@ import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useInterval } from 'react-recipes';
 import { Grid } from '@material-ui/core';
+import { Alerts } from '@yi-note/common/components';
+import { withTheme } from '@yi-note/common';
+import { delay } from '@yi-note/common/utils';
 import { StyledDrawer, StyledViewWrapper } from './styled';
 import Header from './Header';
 import Footer from './Footer';
@@ -10,15 +13,12 @@ import VideoNotesView from '../VideoNotesView';
 import SearchView from '../SearchView';
 import ReloadView from '../ReloadView';
 import Spinner from '../../components/Spinner';
-import Alerts from '../../../common/components/Alerts';
 import { PlayerFactory } from '../../services/player';
-import withTheme from '../../../common/withTheme';
 import {
   QUERY_AUTO_JUMP,
   KEY_RELOAD_TAB,
   KEY_RELOAD_TAB_ALLOWED_DOMAINS
-} from '../../../constants';
-import { delay } from '../../../common/utils';
+} from '@yi-note/common/constants';
 
 const App = () => {
   const {

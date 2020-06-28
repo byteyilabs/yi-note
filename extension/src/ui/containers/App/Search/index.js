@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import { debounce } from 'throttle-debounce';
-import SearchIcon from '@material-ui/icons/SearchSharp';
+import { SearchSharp as SearchIcon } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
 import { StyledArrow, StyledInput } from './styled';
 

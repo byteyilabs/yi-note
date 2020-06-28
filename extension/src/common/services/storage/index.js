@@ -1,1 +1,1 @@
-export { default as StorageFactory } from './StorageFactory';
+export default './StorageFactory';

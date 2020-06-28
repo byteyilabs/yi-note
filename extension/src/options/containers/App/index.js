@@ -9,8 +9,8 @@ import Snackbar from './Snackbar';
 import Bookmarks from '../Bookmarks';
 import Page from '../Page';
 import Settings from '../Settings';
-import Alerts from '../../../common/components/Alerts';
-import withTheme from '../../../common/withTheme';
+import { Alerts } from '@yi-note/common/components';
+import { withTheme } from '@yi-note/common';
 import { headerHeight, drawerWidth } from './constants';
 
 const StyledPageContainer = styled(Container)`

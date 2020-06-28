@@ -1,4 +1,4 @@
-import { TYPE_VIDEO_NOTE } from '../../../constants';
+import { TYPE_VIDEO_NOTE } from '@yi-note/common/constants';
 
 export default class SyncBase {
   hasNotes() {

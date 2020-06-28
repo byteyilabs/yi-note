@@ -1,8 +1,8 @@
-import { StorageFactory } from '../../common/services/storage';
+import { storage as StorageService } from '@yi-note/common/services';
 import {
   KEY_SCREENSHOT_RESOLUTION,
   SCREENSHOT_RESOLUTION
-} from '../../constants';
+} from '@yi-note/common/constants';
 
 /**
  * Take screenshot for provided dom element with dimensions
@@ -15,7 +15,8 @@ import {
  * @return image dataUri
  */
 export default async element => {
-  const settings = await StorageFactory.getStorage().getSettings();
+  // TODO: pass in options instead of use settings from storage
+  const settings = await StorageService.getStorage().getSettings();
   const { x, y } = SCREENSHOT_RESOLUTION[
     settings[KEY_SCREENSHOT_RESOLUTION] || 360
   ];

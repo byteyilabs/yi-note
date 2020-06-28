@@ -10,7 +10,7 @@ import {
   useMediaQuery
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Menu as MenuIcon } from '@material-ui/icons';
 import Toolbar from './Toolbar';
 import { drawerWidth, headerHeight } from '../constants';
 

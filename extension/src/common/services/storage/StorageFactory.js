@@ -1,6 +1,6 @@
 import LocalStorage from './LocalStorage';
 import BrowserStorage from './BrowserStorage';
-import { NODE_ENV_PLAYGROUND } from '../../../constants';
+import { NODE_ENV_PLAYGROUND } from '../../constants';
 
 export default class StorageFactory {
   constructor() {}

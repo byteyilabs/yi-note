@@ -2,17 +2,23 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Tooltip, IconButton } from '@material-ui/core';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import PDFIcon from '@material-ui/icons/PictureAsPdfOutlined';
-import TagIcon from '@material-ui/icons/LocalOfferOutlined';
-import EvernoteIcon from '../../../../assets/icons/evernote.svg';
-import GoogleDocsIcon from '../../../../assets/icons/googledocs.svg';
-import OneNoteIcon from '../../../../assets/icons/onenote.svg';
-import PDFGenerator from '../../../../common/services/pdf';
-import { exportFile } from '../../../../common/services/file';
-import * as services from '../../../../common/services/integrations';
-import { capitalize } from '../../../../common/utils';
-import { APP_ID } from '../../../../constants';
+import {
+  OpenInNew as OpenInNewIcon,
+  PictureAsPdfOutlined as PDFIcon,
+  LocalOfferOutlined as TagIcon
+} from '@material-ui/icons';
+import {
+  EvernoteIcon,
+  GoogleDocsIcon,
+  OneNoteIcon
+} from '@yi-note/common/icons';
+import {
+  pdf as PDFService,
+  file as FileService,
+  integration as IntegrationService
+} from '@yi-note/common/services';
+import { capitalize } from '@yi-note/common/utils';
+import { APP_ID } from '@yi-note/common/constants';
 
 const Toolbar = () => {
   const { t } = useTranslation('options');
@@ -33,18 +39,22 @@ const Toolbar = () => {
   };
 
   const handleGeneratePDF = async () => {
-    const generator = new PDFGenerator();
+    const generator = new PDFService();
     const blob = await generator.getBlobOutput({
       url: meta.url,
       title: meta.title,
       notes
     });
-    await exportFile(blob, `${APP_ID}_${id}.pdf`);
+    await FileService.exportFile(blob, `${APP_ID}_${id}.pdf`);
   };
 
   const handleSendNotesToService = namespace => {
     const className = capitalize(namespace);
-    const service = new services[className](namespace, { id, meta, notes });
+    const service = new IntegrationService[className](namespace, {
+      id,
+      meta,
+      notes
+    });
 
     const send = () => {
       setProgress(true);

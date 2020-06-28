@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Grid, Link } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { GitHub as GitHubIcon } from '@material-ui/icons';
 import { StyledTitle } from '../styled';
-import { GITHUB_URL } from '../../../../../constants';
+import { GITHUB_URL } from '@yi-note/common/constants';
 
 const Star = () => {
   const { t } = useTranslation('star');

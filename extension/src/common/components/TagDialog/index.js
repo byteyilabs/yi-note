@@ -9,7 +9,7 @@ import {
   TextField,
   Chip
 } from '@material-ui/core';
-import { APP_ID } from '../../../constants';
+import { APP_ID } from '../../constants';
 
 const TagDialog = ({ tags, onAddTag, onRemoveTag }) => {
   const { t } = useTranslation('tagdialog');

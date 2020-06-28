@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
-import PlayIcon from '@material-ui/icons/PlayCircleOutlineOutlined';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import {
+  PlayCircleOutlineOutlined as PlayIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon
+} from '@material-ui/icons';
+import { IconButton, MarkdownViewer } from '@yi-note/common/components';
+import { secondsToTime } from '@yi-note/common/utils';
+import Markdown from '@yi-note/common/services/markdown';
 import {
   StyledMainRow,
   StyledSummary,
@@ -14,11 +19,7 @@ import {
   StyledExpandedSection,
   StyledNote
 } from './styled';
-import IconButton from '../../../../common/components/IconButton';
 import { usePlayer } from '../../../hooks';
-import { secondsToTime } from '../../../../common/utils';
-import Markdown from '../../../../common/services/markdown';
-import MarkdownViewer from '../../../../common/components/MarkdownViewer';
 
 const NoteItem = ({ note }) => {
   const { id, content, timestamp } = note;

@@ -3,7 +3,7 @@ import md5 from 'md5';
 import { getBinaryFromBase64 } from '../utils';
 import Markdown from '../../markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
-import { INSTALLATION_URL } from '../../../../constants';
+import { INSTALLATION_URL } from '../../../constants';
 
 const escape = url => {
   var tagsToReplace = {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Grid, Link } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { GitHub as GitHubIcon } from '@material-ui/icons';
+import { PatreonIcon, PaypalIcon } from '@yi-note/common/icons';
 import { StyledTitle } from '../styled';
-import PatreonIcon from '../../../../../assets/icons/patreon.svg';
-import PaypalIcon from '../../../../../assets/icons/paypal.svg';
 
 const SPONSOR_GITHUB_URL = 'https://github.com/sponsors/shuowu';
 const SPONSOR_PATREON_URL = 'https://www.patreon.com/yinote';

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Grid, IconButton } from '@material-ui/core';
+import { getFileUrl } from '@yi-note/common/utils';
+import { INSTALLATION_URL } from '@yi-note/common/constants';
 import { StyledTitle } from '../styled';
-import { getFileUrl } from '../../../../../common/utils';
-import { INSTALLATION_URL } from '../../../../../constants';
 import * as icons from './icons';
 
 const StyledImg = styled.img`

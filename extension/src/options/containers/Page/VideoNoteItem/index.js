@@ -2,17 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useStoreActions } from 'easy-peasy';
-import { Grid, Link, IconButton, Tooltip } from '@material-ui/core';
-import DrawIcon from '@material-ui/icons/GestureOutlined';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DoneIcon from '@material-ui/icons/Done';
-import CloseIcon from '@material-ui/icons/Close';
-import { StyledImgContainer, StyledImg, StyledNoteContainer } from './styled';
-import MarkdownViewer from '../../../../common/components/MarkdownViewer';
-import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { MarkerArea } from 'markerjs';
-import { secondsToTime, buildAutoSeekUrl } from '../../../../common/utils';
+import { Grid, Link, IconButton, Tooltip } from '@material-ui/core';
+import {
+  GestureOutlined as DrawIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Done as DoneIcon,
+  Close as CloseIcon
+} from '@material-ui/icons';
+import { MarkdownViewer, MarkdownEditor } from '@yi-note/common/components';
+import { secondsToTime, buildAutoSeekUrl } from '@yi-note/common/utils';
+import { StyledImgContainer, StyledImg, StyledNoteContainer } from './styled';
 
 const ACTION_EDIT = 'EDIT';
 const ACTION_ANNOTATE = 'ANNOTATE';

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import styled from 'styled-components';
 import { Grid, IconButton, Tooltip, Checkbox } from '@material-ui/core';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import { useTranslation } from 'react-i18next';
+import {
+  OpenInNew as OpenInNewIcon,
+  DeleteOutlineOutlined as DeleteIcon
+} from '@material-ui/icons';
 
 const StyledContainer = styled(Grid)`
   cursor: pointer;

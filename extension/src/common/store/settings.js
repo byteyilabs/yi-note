@@ -1,7 +1,7 @@
 import { action, thunk } from 'easy-peasy';
-import { StorageFactory } from '../services/storage';
+import { storage as StorageService } from '../services';
 
-const storage = StorageFactory.getStorage();
+const storage = StorageService.getStorage();
 
 const settingsModel = {
   data: {},

@@ -45,3 +45,9 @@ export const exportFile = async (blob, filename) => {
     saveAs(blob, filename);
   }
 };
+
+export default {
+  readAsJson,
+  exportJsonFile,
+  exportFile
+};

@@ -2,9 +2,7 @@ import { actionOn, thunkOn } from 'easy-peasy';
 import app from './app';
 import videoNotes from './videoNotes';
 import search from './search';
-import page from '../../common/store/page';
-import settings from '../../common/store/settings';
-import alerts from '../../common/components/Alerts/store';
+import { page, settings, alerts } from '@yi-note/common/store';
 
 const storeModel = {
   app,

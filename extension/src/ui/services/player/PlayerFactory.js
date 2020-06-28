@@ -1,10 +1,10 @@
 import videoUrlParser from 'js-video-url-parser';
+import { retry } from '@yi-note/common/utils';
 import YoutubePlayer from './YoutubePlayer';
 import YoutubeIframePlayer from './YoutubeIframePlayer';
 import EmbedlyPlayer from './EmbedlyPlayer';
 import HTML5Player from './HTML5Player';
 import HookPlayer from './HookPlayer';
-import { retry } from '../../../common/utils';
 import isHidden from '../dom/isHidden';
 
 const playersToTry = [

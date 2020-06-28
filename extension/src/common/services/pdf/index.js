@@ -1,17 +1,13 @@
 import jsPDF from 'jspdf';
-import {
-  secondsToTime,
-  buildAutoSeekUrl,
-  getFileUrl
-} from '../../../common/utils';
-import { StorageFactory } from '../../../common/services/storage';
-import Markdown from '../../../common/services/markdown';
+import { secondsToTime, buildAutoSeekUrl, getFileUrl } from '../../utils';
+import StorageService from '../storage';
+import Markdown from '../markdown';
 import {
   WEBSITE_URL,
   KEY_APPLY_SEEK_SEC_ON_URL,
   KEY_VIDEO_SEEK_SECONDS
-} from '../../../constants';
-import msyh from '../../../assets/fonts/msyh.ttf';
+} from '../../constants';
+import msyh from '../../fonts/msyh.ttf';
 
 export default class PDFGenerator {
   constructor() {
@@ -38,7 +34,8 @@ export default class PDFGenerator {
   }
 
   async getBlobOutput({ url, title, notes }) {
-    const settings = await StorageFactory.getStorage().getSettings();
+    // TODO: pass in options instead of use settings from storage
+    const settings = await StorageService.getStorage().getSettings();
     this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
     this.shouldApplySeekSecondsOnUrl = settings[KEY_APPLY_SEEK_SEC_ON_URL];
 

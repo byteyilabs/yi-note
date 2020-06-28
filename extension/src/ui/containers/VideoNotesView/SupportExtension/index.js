@@ -7,7 +7,7 @@ import { StyledModal, StyledPaper } from './styled';
 import Sponsor from './Sponsor';
 import Star from './Star';
 import Share from './Share';
-import { APP_ID } from '../../../../constants';
+import { APP_ID } from '@yi-note/common/constants';
 
 const SupportExtension = () => {
   const { t } = useTranslation('notesView');

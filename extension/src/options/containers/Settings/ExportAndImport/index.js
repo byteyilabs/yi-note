@@ -3,19 +3,21 @@ import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Button, Divider } from '@material-ui/core';
-import { readAsJson, exportJsonFile } from '../../../../common/services/file';
+import {
+  storage as StorageService,
+  file as FileService
+} from '@yi-note/common/services';
 import importData from '../../../services/importData';
-import { StorageFactory } from '../../../../common/services/storage';
 
 const StyledImportInput = styled.input`
   display: none;
 `;
 
 const exportData = () => {
-  return StorageFactory.getStorage()
+  return StorageService.getStorage()
     .getPagesForExport()
     .then(pages => {
-      exportJsonFile(pages, 'yi-note.json');
+      FileService.exportJsonFile(pages, 'yi-note.json');
     });
 };
 
@@ -27,7 +29,7 @@ const ExportAndImport = () => {
   } = useStoreActions(actions => actions);
 
   const handleImportFile = e => {
-    readAsJson(e.target.files[0])
+    FileService.readAsJson(e.target.files[0])
       .then(({ version, data }) => {
         if (version !== '1.0.0') {
           throw new Error(t('settings.import.version.error'));
@@ -53,7 +55,7 @@ const ExportAndImport = () => {
   const handleExportAndClear = () => {
     exportData()
       .then(() => {
-        return StorageFactory.getStorage().clearAll();
+        return StorageService.getStorage().clearAll();
       })
       .then(() => reset());
   };

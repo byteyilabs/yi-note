@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Grid } from '@material-ui/core';
-import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined';
-import SyncIcon from '@material-ui/icons/Sync';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import SponsorIcon from '@material-ui/icons/FavoriteBorder';
-import IconButton from '../../../../common/components/IconButton';
+import {
+  BookmarkBorderOutlined as BookmarkIcon,
+  Sync as SyncIcon,
+  OpenInNew as OpenInNewIcon,
+  FavoriteBorder as SponsorIcon
+} from '@material-ui/icons';
+import { IconButton } from '@yi-note/common/components';
 import { useSyncNotes, useLoadScreenshots } from '../../../hooks';
 
 export const StyledIconContainer = styled(Grid)`

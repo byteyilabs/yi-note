@@ -1,9 +1,9 @@
-import { StorageFactory } from '../../../common/services/storage';
-import { KEY_VIDEO_SEEK_SECONDS } from '../../../constants';
+import { storage as StorageService } from '@yi-note/common/services';
+import { KEY_VIDEO_SEEK_SECONDS } from '@yi-note/common/constants';
 
 export default class Player {
   constructor() {
-    StorageFactory.getStorage()
+    StorageService.getStorage()
       .getSettings()
       .then(settings => {
         this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;

@@ -1,9 +1,9 @@
 // IMPORTANT: update import logic if storage or data structure changed
 
-import { StorageFactory } from '../../common/services/storage';
+import { storage as StorageService } from '@yi-note/common/services';
 
 export default async pages => {
-  const storage = StorageFactory.getStorage();
+  const storage = StorageService.getStorage();
 
   if (!Array.isArray(pages)) {
     throw new Error('Incorrect data formart: pages should be an array');

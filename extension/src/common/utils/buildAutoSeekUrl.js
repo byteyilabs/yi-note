@@ -1,5 +1,5 @@
 import videoUrlParser from 'js-video-url-parser';
-import { QUERY_AUTO_JUMP } from '../../constants';
+import { QUERY_AUTO_JUMP } from '../constants';
 
 export default (url, timestamp) => {
   if (timestamp < 0) {

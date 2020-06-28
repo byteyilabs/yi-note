@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import NoteItem from './NoteItem';
 import BookmarkItem from './BookmarkItem';
 import ScrollableList from '../../components/ScrollableList';
-import { TYPE_BOOKMARKS, TYPE_NOTES } from '../../../constants';
+import { TYPE_BOOKMARKS, TYPE_NOTES } from '@yi-note/common/constants';
 
 const StyledItemWrapper = styled.div`
   background: #f6f6f6;

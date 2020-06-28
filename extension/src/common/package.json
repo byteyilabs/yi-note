@@ -1,0 +1,9 @@
+{
+  "name": "@yi-note/common",
+  "version": "1.0.0",
+  "description": "YiNote extension internal common module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

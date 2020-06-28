@@ -3,13 +3,13 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
+import { secondsToTime } from '@yi-note/common/utils';
+import { MarkdownEditor } from '@yi-note/common/components';
+import { storage as StorageService } from '@yi-note/common/services';
+import { TYPE_VIDEO_NOTE } from '@yi-note/common/constants';
 import TextButton from '../../../components/TextButton';
-import MarkdownEditor from '../../../../common/components/MarkdownEditor';
 import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
-import { secondsToTime } from '../../../../common/utils';
-import { StorageFactory } from '../../../../common/services/storage';
-import { TYPE_VIDEO_NOTE } from '../../../../constants';
 
 const StyledStatus = styled.span`
   font-weight: bold;
@@ -51,7 +51,8 @@ const Editor = () => {
       // Upsert note
       saveNote({ ...note, type: TYPE_VIDEO_NOTE });
       reset();
-      StorageFactory.getStorage()
+      // TODO: load count from state store
+      StorageService.getStorage()
         .getNotes()
         .then(notes => {
           const count = notes.length;

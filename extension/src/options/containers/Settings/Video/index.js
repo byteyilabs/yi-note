@@ -11,13 +11,13 @@ import {
   TextField,
   IconButton
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { Close as CloseIcon } from '@material-ui/icons';
 import {
   KEY_VIDEO_SEEK_SECONDS,
   KEY_APPLY_SEEK_SEC_ON_URL,
   KEY_RELOAD_TAB,
   KEY_RELOAD_TAB_ALLOWED_DOMAINS
-} from '../../../../constants';
+} from '@yi-note/common/constants';
 
 const Video = () => {
   const { t } = useTranslation('options');
@@ -66,7 +66,7 @@ const Video = () => {
   const handleDeleteDomain = domain => {
     const domains = reloadTabDomains.filter(d => d !== domain);
     setSetting({ [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: domains });
-  }
+  };
 
   return (
     <Grid container direction="column" spacing={3}>

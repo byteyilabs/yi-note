@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { APP_ID } from '../constants';
+import { APP_ID } from '@yi-note/common/constants';
 
 export default createGlobalStyle`
   html, body {

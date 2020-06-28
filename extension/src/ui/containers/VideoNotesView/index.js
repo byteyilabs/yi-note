@@ -3,6 +3,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@material-ui/core';
+import { generatePageId } from '@yi-note/common/utils';
 import SupportExtension from './SupportExtension';
 import NoteItem from './NoteItem';
 import Editor from './Editor';
@@ -10,7 +11,6 @@ import Toolbar from './Toolbar';
 import Tags from './Tags';
 import ScrollableList from '../../components/ScrollableList';
 import Spinner from '../../components/Spinner';
-import { generatePageId } from '../../../common/utils';
 import { useLoadScreenshots } from '../../hooks';
 
 export const StyledEditorContainer = styled.div`

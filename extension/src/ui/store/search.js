@@ -1,8 +1,8 @@
 import { action, thunk, actionOn } from 'easy-peasy';
-import { StorageFactory } from '../../common/services/storage';
-import { TYPE_BOOKMARKS, TYPE_NOTES } from '../../constants';
+import { storage as StorageService } from '@yi-note/common/services';
+import { TYPE_BOOKMARKS, TYPE_NOTES } from '@yi-note/common/constants';
 
-const storage = StorageFactory.getStorage();
+const storage = StorageService.getStorage();
 
 const searchModel = {
   query: '',

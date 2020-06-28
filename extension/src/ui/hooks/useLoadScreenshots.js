@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import { useStoreActions } from 'easy-peasy';
+import { delay } from '@yi-note/common/utils';
 import usePlayer from './usePlayer';
 import { takeScreenshot } from '../utils';
-import { delay } from '../../common/utils';
 
 export default () => {
   const [loading, setLoading] = useState(false);

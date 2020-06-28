@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import SettingsIcon from '@material-ui/icons/Settings';
-import IconButton from '../../../../common/components/IconButton';
-import { GITHUB_URL } from '../../../../constants';
+import {
+  GitHub as GitHubIcon,
+  Settings as SettingsIcon
+} from '@material-ui/icons';
+import { IconButton } from '@yi-note/common/components';
+import { GITHUB_URL } from '@yi-note/common/constants';
 
 const StyledContainer = styled(Grid)`
   padding: 10px 5px;

@@ -1,7 +1,7 @@
 import { action, thunk, thunkOn } from 'easy-peasy';
-import { StorageFactory } from '../../common/services/storage';
+import { storage as StorageService } from '@yi-note/common/services';
 
-const storage = StorageFactory.getStorage();
+const storage = StorageService.getStorage();
 
 export default {
   bookmarks: [],

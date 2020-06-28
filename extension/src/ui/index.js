@@ -6,9 +6,9 @@ import Logger from 'js-logger';
 import { storeModel } from './store';
 import App from './containers/App';
 import GlobalStyle from './globalStyle';
-import PDFGenerator from '../common/services/pdf';
-import i18n from '../common/i18n';
-import { APP_ID } from '../constants';
+import PDFGenerator from '@yi-note/common/services/pdf';
+import { i18n } from '@yi-note/common';
+import { APP_ID } from '@yi-note/common/constants';
 
 export default class YiNote {
   #store;

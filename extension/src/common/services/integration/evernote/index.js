@@ -3,7 +3,7 @@ import { enhancedFetch } from 'browser-extension-oauth2';
 import { getRedirectUrl } from '../utils';
 import Service from '../service';
 import Generator from './generator';
-import { REST_BASE_URL } from '../../../../constants';
+import { REST_BASE_URL } from '../../../constants';
 
 class Evernote extends Service {
   constructor(namespace, data) {
