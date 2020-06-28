@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+
+- [#42](https://github.com/shuowu/yi-note/issues/42) Fix UI states reset when url change in host page
+
 ## 1.4.0
 
 ### Features
