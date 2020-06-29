@@ -3,3 +3,5 @@ dist/
 *.zip
 .env
 .serverless/
+
+lerna-debug.log

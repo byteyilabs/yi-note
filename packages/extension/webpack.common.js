@@ -34,7 +34,7 @@ const getManifestPlugin = env => {
 module.exports = env => {
   return {
     entry: {
-      content: './src/content.js',
+      content: './src/ui/content-script.js',
       background: './src/background/index.js',
       options: './src/options/index.js'
     },
@@ -42,10 +42,12 @@ module.exports = env => {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          // include: [/node_modules\/@yi-note/],
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              rootMode: 'upward'
+            }
           }
         },
         {
@@ -70,7 +72,10 @@ module.exports = env => {
           test: /\.svg$/,
           use: [
             {
-              loader: "babel-loader"
+              loader: "babel-loader",
+              options: {
+                rootMode: 'upward'
+              }
             },
             {
               loader: "react-svg-loader",

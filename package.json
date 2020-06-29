@@ -1,0 +1,58 @@
+{
+  "name": "yi-note",
+  "version": "1.0.0",
+  "description": "YiNote monorepo",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "lerna run start:dev --parallel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuowu/yi-note.git"
+  },
+  "author": "Shuo Wu <wushuo2010@gmail.com>",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/shuowu/yi-note/issues"
+  },
+  "homepage": "https://www.yinote.co",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-private-methods": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.0-rc4",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-js-logger": "^1.0.17",
+    "babel-plugin-styled-components": "^1.10.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.6.0",
+    "dotenv-webpack": "^1.7.0",
+    "eslint": "^6.7.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "file-loader": "^5.0.2",
+    "filemanager-webpack-plugin": "^2.0.5",
+    "html-webpack-plugin": "^4.2.1",
+    "lerna": "^3.22.1",
+    "prettier": "1.19.1",
+    "react-svg-loader": "^3.0.3",
+    "style-loader": "^1.0.1",
+    "uglify-js": "*",
+    "web-ext": "^4.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-manifest-plugin": "^2.2.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
+  }
+}

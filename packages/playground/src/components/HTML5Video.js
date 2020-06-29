@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import mov from '../mov_bbb.mp4';
+import mov from '../../mov_bbb.mp4';
 
 const HTML5Video = ({ onRender }) => {
   useLayoutEffect(() => {

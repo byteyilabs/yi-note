@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 import { StoreProvider, createStore } from 'easy-peasy';
 import Logger from 'js-logger';
-import { i18n } from '@yi-note/common';
 import PDFGenerator from '@yi-note/common/services/pdf';
 import { APP_ID } from '@yi-note/common/constants';
 import { storeModel } from './store';
 import App from './containers/App';
 import GlobalStyle from './globalStyle';
+import i18n from '../i18n';
 
 i18n.init();
 Logger.useDefaults();

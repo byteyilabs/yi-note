@@ -10,7 +10,7 @@ module.exports = env => {
 
   return {
     entry: {
-      dev: './playground/index.js'
+      dev: './src/index.js'
     },
     module: {
       rules: [
@@ -18,7 +18,10 @@ module.exports = env => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
+            loader: "babel-loader",
+            options: {
+              rootMode: 'upward'
+            }
           }
         },
         {
@@ -35,7 +38,10 @@ module.exports = env => {
           test: /\.svg$/,
           use: [
             {
-              loader: "babel-loader"
+              loader: "babel-loader",
+              options: {
+                rootMode: 'upward'
+              }
             },
             {
               loader: "react-svg-loader",
@@ -49,9 +55,9 @@ module.exports = env => {
     },
     plugins: [
       new HtmlWebPackPlugin({
-        template: './playground/index.html',
+        template: './index.html',
         filename: './index.html',
-        favicon: './playground/favicon.ico'
+        favicon: './favicon.ico'
       }),
       new webpack.DefinePlugin(envKeys)
     ],

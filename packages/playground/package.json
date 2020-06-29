@@ -1,0 +1,16 @@
+{
+  "name": "@yi-note/playground",
+  "version": "1.0.0",
+  "description": "Playground for extension UI widgets",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "webpack-dev-server --env.NODE_ENV=playground --mode development"
+  },
+  "author": "Shuo Wu <wushuo2010@gmail.com>",
+  "license": "GNU GPLv3",
+  "dependencies": {
+    "@yi-note/extension": "^1.4.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

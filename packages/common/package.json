@@ -1,0 +1,35 @@
+{
+  "name": "@yi-note/common",
+  "version": "1.0.0",
+  "description": "YiNote extension internal common module",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.9.12",
+    "@material-ui/icons": "^4.5.1",
+    "easy-peasy": "^3.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-i18next": "^11.2.6",
+    "styled-components": "^5.0.0-rc.2",
+    "prop-types": "^15.7.2"
+  },
+  "dependencies": {
+    "atob": "^2.1.2",
+    "browser-extension-oauth2": "^1.1.0",
+    "buffer-from": "^1.1.1",
+    "compose-function": "^3.0.3",
+    "deepmerge": "^4.2.2",
+    "evernote": "^2.0.5",
+    "file-saver": "^2.0.2",
+    "js-logger": "^1.6.0",
+    "js-video-url-parser": "^0.4.0",
+    "jspdf": "^1.5.3",
+    "marked": "^1.1.0",
+    "md5": "^2.2.1",
+    "page-metadata-parser": "^1.1.4",
+    "uuidv4": "^6.0.0"
+  }
+}
