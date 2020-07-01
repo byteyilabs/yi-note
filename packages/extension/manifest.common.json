@@ -19,7 +19,7 @@
   ],
   "background": {
     "scripts": [
-      "browser-polyfill.js",
+      "vendors/browser-polyfill.js",
       "background.js"
     ],
     "persistent": true
@@ -34,7 +34,7 @@
       "js": [
         "vendors/youtube-iframe-api.js",
         "vendors/embedly.js",
-        "browser-polyfill.js",
+        "vendors/browser-polyfill.js",
         "content.js"
       ],
       "run_at": "document_end"

@@ -2,9 +2,10 @@
   "name": "yi-note",
   "version": "1.0.0",
   "description": "YiNote monorepo",
-  "main": "index.js",
   "scripts": {
-    "start:dev": "lerna run start:dev --parallel"
+    "start": "lerna run start:dev --parallel",
+    "build": "lerna run build",
+    "bootstrap": "lerna bootstrap --hoist"
   },
   "repository": {
     "type": "git",

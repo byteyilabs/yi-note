@@ -21,11 +21,12 @@ module.exports = env =>
               { source: 'installed.png', destination: 'dist' }
             ]
           },
+          { mkdir: ['../../artifactory'] },
           {
             archive: [
               {
                 source: 'dist',
-                destination: `${pkg.name}_${env}_${pkg.version}.zip`
+                destination: `../../artifactory/yi-note-extension_${env}_${pkg.version}.zip`
               }
             ]
           }

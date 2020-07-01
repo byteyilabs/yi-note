@@ -45,7 +45,6 @@
     "prop-types": "^15.7.2",
     "styled-components": "^5.0.0-rc.2",
     "throttle-debounce": "^2.1.0",
-    "uuidv4": "^6.0.0",
-    "webextension-polyfill": "^0.6.0"
+    "uuidv4": "^6.0.0"
   }
 }

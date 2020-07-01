@@ -5,3 +5,5 @@ dist/
 .serverless/
 
 lerna-debug.log
+
+artifactory

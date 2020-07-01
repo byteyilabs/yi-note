@@ -94,13 +94,12 @@ module.exports = env => {
       getManifestPlugin(env),
       new Dotenv(),
       new CopyWebpackPlugin([
-        { from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js' },
         { from: 'src/vendors', to: 'vendors' }
       ]),
       new HtmlWebPackPlugin({
         template: 'src/options/index.html',
         filename: 'options.html',
-        browserPolyfill: 'browser-polyfill.js',
+        browserPolyfill: 'vendors/browser-polyfill.js',
         chunks: ['options']
       }),
       new FileManagerPlugin({
