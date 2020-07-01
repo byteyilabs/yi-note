@@ -6,4 +6,4 @@ dist/
 
 lerna-debug.log
 
-artifactory
+artifactory/
