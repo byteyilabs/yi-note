@@ -4,7 +4,7 @@ const getClient = () => {
   return new Evernote.Client({
     consumerKey: process.env.EVERNOTE_CONSUMER_KEY,
     consumerSecret: process.env.EVERNOTE_CONSUMER_SECRET,
-    sandbox: false,
+    sandbox: false
   });
 };
 
@@ -12,12 +12,12 @@ const getAuthorizeUrl = (event, context, callback) => {
   let { redirect_url: redirectUrl } = event.queryStringParameters || {};
   redirectUrl = decodeURIComponent(redirectUrl);
   const callbackUrlsWhitelist = Object.keys(process.env)
-    .filter((key) => key.includes('ALLOWED_REDIRECT_URL'))
-    .map((key) => process.env[key]);
+    .filter(key => key.includes('ALLOWED_REDIRECT_URL'))
+    .map(key => process.env[key]);
   if (!callbackUrlsWhitelist.includes(redirectUrl)) {
     return callback(null, {
       statusCode: 401,
-      body: JSON.stringify({ message: 'Unauthorized redirect url.' }),
+      body: JSON.stringify({ message: 'Unauthorized redirect url.' })
     });
   }
 
@@ -27,7 +27,7 @@ const getAuthorizeUrl = (event, context, callback) => {
       console.log(err);
       return callback(null, {
         statusCode: 500,
-        body: JSON.stringify({ message: err.message }),
+        body: JSON.stringify({ message: err.message })
       });
     }
 
@@ -37,8 +37,8 @@ const getAuthorizeUrl = (event, context, callback) => {
       body: JSON.stringify({
         oauthUrl,
         oauthToken,
-        oauthSecret,
-      }),
+        oauthSecret
+      })
     };
     callback(null, response);
   });
@@ -51,7 +51,7 @@ const getAccessToken = (event, context, callback) => {
   } catch (e) {
     return callback(null, {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid input' }),
+      body: JSON.stringify({ message: 'Invalid input' })
     });
   }
 
@@ -65,13 +65,13 @@ const getAccessToken = (event, context, callback) => {
       if (err) {
         return callback(null, {
           statusCode: 500,
-          body: JSON.stringify({ message: err.message }),
+          body: JSON.stringify({ message: err.message })
         });
       }
 
       callback(null, {
         statusCode: 200,
-        body: JSON.stringify({ accessToken }),
+        body: JSON.stringify({ accessToken })
       });
     }
   );
@@ -79,5 +79,5 @@ const getAccessToken = (event, context, callback) => {
 
 module.exports = {
   getAuthorizeUrl,
-  getAccessToken,
+  getAccessToken
 };

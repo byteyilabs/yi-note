@@ -99,29 +99,17 @@ npm install
 
 ##### Start development
 
-To develop `content script`, `background` and `options` page in watch mode. Please run
+YiNote leverages [Lerna](https://github.com/lerna/lerna) to manage the monorepo.
 
-Start development for chromium platform:
+Please run `npm run bootstrap` to setup dependecies for each sub_modules before start.
 
-```bash
-npm run dev:chromium
-```
-
-Start development for firefox platform (**Recommended** since better support in linking sourcemap):
-
-```bash
-npm run dev:firefox
-```
+Then run `npm start` will start both `extension` and `playground` in development mode.
 
 For `content script` change, you need to reload the extension in `chrome://extensions` tab.
 
 For `background` and `options` changes, just refresh the page should be able to load the changes.
 
-`playground` mode is also provided for easy `content script` development. This mode simulates `content script` to inject UI widget in page served from `webpack dev server`
-
-```bash
-npm run playground
-```
+`playground` mode is also provided to easy `content script` development. This mode simulates `content script` to inject UI widget in page served from `webpack dev server`
 
 For more information about how to develop browser extensions, please refer to [Chrome extension get started](https://developer.chrome.com/extensions/getstarted)
 
