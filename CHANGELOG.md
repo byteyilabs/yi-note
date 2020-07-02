@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.2
+
+- [e74dc40](https://github.com/shuowu/yi-note/commit/e74dc40293b356b80031b77afa0cebc6061d84c7) Fix player reset issue when url change
+
 ## 1.4.1
 
 - [#42](https://github.com/shuowu/yi-note/issues/42) Fix UI states reset when url change in host page

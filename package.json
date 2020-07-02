@@ -6,6 +6,8 @@
     "start": "lerna run start:dev --parallel",
     "dev:firefox": "lerna run dev:firefox --parallel",
     "build": "lerna run build",
+    "build:ext:chromium": "lerna run --scope=@yi-note/extension build:chromium",
+    "build:ext:firefox": "lerna run --scope=@yi-note/extension build:firefox",
     "bootstrap": "lerna bootstrap --hoist"
   },
   "repository": {
