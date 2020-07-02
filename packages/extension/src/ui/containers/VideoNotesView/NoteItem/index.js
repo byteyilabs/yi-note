@@ -19,7 +19,7 @@ import {
   StyledExpandedSection,
   StyledNote
 } from './styled';
-import { usePlayer } from '../../../hooks';
+import { PlayerFactory } from '../../../services/player';
 
 const NoteItem = ({ note }) => {
   const { id, content, timestamp } = note;
@@ -30,12 +30,12 @@ const NoteItem = ({ note }) => {
     page: { removeNote }
   } = useStoreActions(actions => actions);
   const [expanded, setExpanded] = useState(false);
-  const playerRef = usePlayer();
 
   const handleExpand = () => setExpanded(!expanded);
 
-  const handlePlay = () => {
-    playerRef.current.seek(timestamp);
+  const handlePlay = async () => {
+    const player = await PlayerFactory.getPlayer();
+    player.seek(timestamp);
   };
 
   const handleEdit = () => edit(note);

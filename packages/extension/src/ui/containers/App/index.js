@@ -50,28 +50,27 @@ const App = () => {
       ) {
         window.location.reload();
       } else {
+        PlayerFactory.reset();
         // setUrl will trigger side effect UI states reset
         setUrl(window.location.href);
-        PlayerFactory.reset();
       }
     }
   }, 300);
 
   useEffect(() => {
-    const jumpToTimestamp = async t => {
-      getPlayer().then(async player => {
+    const maybeSeekToTimestamp = async () => {
+      // Make sure to get new player when url change
+      const player = await getPlayer();
+      const urlCompinents = new URL(window.location.href);
+      const params = new URLSearchParams(urlCompinents.search);
+      if (params.has(QUERY_AUTO_JUMP)) {
+        const timestamp = +params.get(QUERY_AUTO_JUMP);
         await delay(1500);
-        await player.seek(t);
+        await player.seek(timestamp);
         await player.play();
-      });
+      }
     };
-
-    const urlCompinents = new URL(window.location.href);
-    const params = new URLSearchParams(urlCompinents.search);
-    if (params.has(QUERY_AUTO_JUMP)) {
-      const timestamp = +params.get(QUERY_AUTO_JUMP);
-      jumpToTimestamp(timestamp);
-    }
+    maybeSeekToTimestamp();
   }, [getPlayer, url]);
 
   useEffect(() => {

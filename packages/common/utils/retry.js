@@ -2,8 +2,8 @@ export default (
   predicate,
   resolve,
   reject = () => {},
-  maxTimes = 30,
-  interval = 200
+  maxTimes = 15,
+  interval = 300
 ) => {
   if (predicate()) {
     resolve();

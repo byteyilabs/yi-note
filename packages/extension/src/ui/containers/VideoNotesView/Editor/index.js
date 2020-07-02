@@ -8,8 +8,8 @@ import { MarkdownEditor } from '@yi-note/common/components';
 import { storage as StorageService } from '@yi-note/common/services';
 import { TYPE_VIDEO_NOTE } from '@yi-note/common/constants';
 import TextButton from '../../../components/TextButton';
-import { usePlayer } from '../../../hooks';
 import { takeScreenshot } from '../../../utils';
+import { PlayerFactory } from '../../../services/player';
 
 const StyledStatus = styled.span`
   font-weight: bold;
@@ -31,15 +31,14 @@ const Editor = () => {
     },
     page: { saveNote }
   } = useStoreActions(actions => actions);
-  const playerRef = usePlayer();
 
   const handleFocus = async () => {
     if (active) {
       return;
     }
 
-    const player = playerRef.current;
-    const timestamp = await playerRef.current.getCurrentTime();
+    const player = await PlayerFactory.getPlayer();
+    const timestamp = await player.getCurrentTime();
     const videoEl = player.getVideoElement();
     const dataUri = await takeScreenshot(videoEl);
     edit({ timestamp, image: dataUri });

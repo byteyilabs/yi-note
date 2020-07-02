@@ -1,18 +1,17 @@
 import { useState, useCallback } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { delay } from '@yi-note/common/utils';
-import usePlayer from './usePlayer';
 import { takeScreenshot } from '../utils';
+import { PlayerFactory } from '../services/player';
 
 export default () => {
   const [loading, setLoading] = useState(false);
   const { saveNote } = useStoreActions(actions => actions.page);
-  const playerRef = usePlayer();
 
   const loadScreenshots = useCallback(
     async (notes, forceLoad = false) => {
       setLoading(true);
-      const player = playerRef.current;
+      const player = await PlayerFactory.getPlayer();
       const currentTime = await player.getCurrentTime();
       const videoEl = player.getVideoElement();
       // Take screenshots
@@ -27,10 +26,10 @@ export default () => {
       }
       // Resume back to start time and pause video
       player.seek(currentTime);
-      playerRef.current.pause();
+      player.pause();
       setLoading(false);
     },
-    [playerRef, saveNote]
+    [saveNote]
   );
 
   return { loading, loadScreenshots };
