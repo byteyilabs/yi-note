@@ -8,6 +8,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  memorySize: 128
 
 functions:
   evernoteAuthorizeUrl:

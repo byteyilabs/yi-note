@@ -2,5 +2,8 @@
   "packages": [
     "packages/*"
   ],
+  "bootstrap": {
+    "ignore": ["@yi-note/oauth-api"]
+  },
   "version": "independent"
 }
