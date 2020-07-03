@@ -10,15 +10,15 @@
     "@material-ui/core": "^4.9.12",
     "@material-ui/icons": "^4.5.1",
     "easy-peasy": "^3.3.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.2.6",
-    "styled-components": "^5.0.0-rc.2",
-    "prop-types": "^15.7.2"
+    "styled-components": "^5.0.0-rc.2"
   },
   "dependencies": {
+    "@yi-note/browser-extension-oauth2": "^1.1.0",
     "atob": "^2.1.2",
-    "browser-extension-oauth2": "^1.1.0",
     "buffer-from": "^1.1.1",
     "compose-function": "^3.0.3",
     "deepmerge": "^4.2.2",

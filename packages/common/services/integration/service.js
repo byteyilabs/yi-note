@@ -1,4 +1,4 @@
-import { Storage } from 'browser-extension-oauth2';
+import { Storage } from '@yi-note/browser-extension-oauth2';
 
 class Service {
   static KEY_ACCESS_TOKEN = 'accessToken';

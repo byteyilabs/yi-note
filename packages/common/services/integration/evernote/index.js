@@ -1,5 +1,5 @@
 import EvernoteSDK from 'evernote';
-import { enhancedFetch } from 'browser-extension-oauth2';
+import { enhancedFetch } from '@yi-note/browser-extension-oauth2';
 import { getRedirectUrl } from '../utils';
 import Service from '../service';
 import Generator from './generator';

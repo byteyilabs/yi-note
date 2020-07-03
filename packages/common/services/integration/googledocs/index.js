@@ -1,4 +1,4 @@
-import Oauth2 from 'browser-extension-oauth2';
+import Oauth2 from '@yi-note/browser-extension-oauth2';
 import Service from '../service';
 import Generator from './generator';
 
