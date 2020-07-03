@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+- [78328ff](https://github.com/shuowu/yi-note/commit/78328ffd668ae5edbde14b543f01c021a4d06096) Add setting to pause video when editing note
+
 ## 1.4.2
 
 - [e74dc40](https://github.com/shuowu/yi-note/commit/e74dc40293b356b80031b77afa0cebc6061d84c7) Fix player reset issue when url change
