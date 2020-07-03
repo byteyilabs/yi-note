@@ -6,7 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import { secondsToTime } from '@yi-note/common/utils';
 import { MarkdownEditor } from '@yi-note/common/components';
 import { storage as StorageService } from '@yi-note/common/services';
-import { TYPE_VIDEO_NOTE } from '@yi-note/common/constants';
+import {
+  TYPE_VIDEO_NOTE,
+  KEY_PAUSE_VIDEO_WHEN_EDITING
+} from '@yi-note/common/constants';
 import TextButton from '../../../components/TextButton';
 import { takeScreenshot } from '../../../utils';
 import { PlayerFactory } from '../../../services/player';
@@ -21,7 +24,8 @@ const Editor = () => {
     videoNotes: {
       editor: { active, note }
     },
-    app: { showingAd: disabled }
+    app: { showingAd: disabled },
+    settings: { data: settings }
   } = useStoreState(state => state);
   const {
     videoNotes: {
@@ -38,6 +42,9 @@ const Editor = () => {
     }
 
     const player = await PlayerFactory.getPlayer();
+    if (settings[KEY_PAUSE_VIDEO_WHEN_EDITING]) {
+      player.pause();
+    }
     const timestamp = await player.getCurrentTime();
     const videoEl = player.getVideoElement();
     const dataUri = await takeScreenshot(videoEl);

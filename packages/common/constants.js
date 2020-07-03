@@ -23,6 +23,7 @@ export const KEY_APPLY_SEEK_SEC_ON_URL = 'apply_seek_sec_on_url';
 export const KEY_SCREENSHOT_RESOLUTION = 'screenshot_resolution';
 export const KEY_RELOAD_TAB = 'reload_tab';
 export const KEY_RELOAD_TAB_ALLOWED_DOMAINS = 'reload_tab_allowed_domains';
+export const KEY_PAUSE_VIDEO_WHEN_EDITING = 'pause_video_when_editing';
 
 export const SCREENSHOT_RESOLUTION = {
   360: { x: 640, y: 360 },

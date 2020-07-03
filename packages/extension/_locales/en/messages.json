@@ -171,6 +171,9 @@
   "options_settings_reload_tab_label": {
     "message": "Reload tab when url change"
   },
+  "options_settings_pause_when_editing_label": {
+    "message": "Pause video when editing note"
+  },
   "options_settings_exportAndImport_title": {
     "message": "Export and Import"
   },

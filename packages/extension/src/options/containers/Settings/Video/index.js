@@ -16,7 +16,8 @@ import {
   KEY_VIDEO_SEEK_SECONDS,
   KEY_APPLY_SEEK_SEC_ON_URL,
   KEY_RELOAD_TAB,
-  KEY_RELOAD_TAB_ALLOWED_DOMAINS
+  KEY_RELOAD_TAB_ALLOWED_DOMAINS,
+  KEY_PAUSE_VIDEO_WHEN_EDITING
 } from '@yi-note/common/constants';
 
 const Video = () => {
@@ -26,7 +27,8 @@ const Video = () => {
       [KEY_VIDEO_SEEK_SECONDS]: seekSecond = 0,
       [KEY_APPLY_SEEK_SEC_ON_URL]: applySeekSecondsOnUrl = false,
       [KEY_RELOAD_TAB]: reloadTab = false,
-      [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: reloadTabDomains = []
+      [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: reloadTabDomains = [],
+      [KEY_PAUSE_VIDEO_WHEN_EDITING]: pauseWhenEditing = false
     }
   } = useStoreState(state => state.settings);
   const { setSetting } = useStoreActions(actions => actions.settings);
@@ -66,6 +68,11 @@ const Video = () => {
   const handleDeleteDomain = domain => {
     const domains = reloadTabDomains.filter(d => d !== domain);
     setSetting({ [KEY_RELOAD_TAB_ALLOWED_DOMAINS]: domains });
+  };
+
+  const handlePauseWhenEditingChange = e => {
+    const { checked } = e.target;
+    setSetting({ [KEY_PAUSE_VIDEO_WHEN_EDITING]: checked });
   };
 
   return (
@@ -109,6 +116,20 @@ const Video = () => {
             checked={applySeekSecondsOnUrl}
             onChange={handleApplySeekSecondsOnUrlChange}
             name="applySeekSecondsOnUrl"
+          />
+        </Grid>
+      </Grid>
+      <Grid item container spacing={4} alignItems="center">
+        <Grid item>
+          <Typography variant="subtitle1">
+            {t('settings.pause.when.editing.label')}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Switch
+            checked={pauseWhenEditing}
+            onChange={handlePauseWhenEditingChange}
+            name="pauseWhenEditing"
           />
         </Grid>
       </Grid>
