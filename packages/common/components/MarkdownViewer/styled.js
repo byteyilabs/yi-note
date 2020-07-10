@@ -5,6 +5,7 @@ export const StyledMarkdownBody = styled.div`
   width: -webkit-fill-available;
   width: -moz-available;
   word-break: break-all;
+  word-break: break-word;
 
   &.markdown-body .octicon {
     display: inline-block;

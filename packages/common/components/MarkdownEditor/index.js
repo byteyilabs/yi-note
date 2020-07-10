@@ -25,6 +25,7 @@ export const StyledTextArea = styled(Grid)`
     min-height: ${EDITOR_MIN_WIDTH}px;
     border: none;
     outline: none;
+    word-break: break-word;
   }
 
   & div.markdown-body {
