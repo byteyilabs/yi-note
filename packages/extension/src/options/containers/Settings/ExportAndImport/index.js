@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
 import { useTranslation } from 'react-i18next';
+import cmp from 'semver-compare';
 import { Grid, Typography, Button, Divider } from '@material-ui/core';
 import {
   storage as StorageService,
@@ -31,7 +32,7 @@ const ExportAndImport = () => {
   const handleImportFile = e => {
     FileService.readAsJson(e.target.files[0])
       .then(({ version, data }) => {
-        if (version !== '1.0.0') {
+        if (cmp(version, '1.0.0') === -1) {
           throw new Error(t('settings.import.version.error'));
         }
         return importData(data);
