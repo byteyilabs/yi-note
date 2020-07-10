@@ -42,9 +42,12 @@ export default class PDFGenerator {
     this.doc.setFont('msyh');
     this.doc.setFontType('normal');
     let y = 20;
-    this.doc.setFontSize(18);
-    this.doc.text(20, y, this.doc.splitTextToSize(title, 180));
-    y += Math.ceil(title.length / 50) * 18;
+
+    if (title) {
+      this.doc.setFontSize(18);
+      this.doc.text(20, y, this.doc.splitTextToSize(title, 180));
+      y += Math.ceil(title.length / 50) * 18;
+    }
 
     this.doc.setFontSize(12);
     this.doc.text(20, y, 'Generated from ');

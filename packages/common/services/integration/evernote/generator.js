@@ -31,7 +31,9 @@ class Generator {
       `<a style="padding-bottom: 20px;" href="${INSTALLATION_URL}">YiNote</a>`
     )}</span>`;
     nBody += '<br/>';
-    nBody += `<div>${description}</div>`;
+    if (description) {
+      nBody += `<div>${description}</div>`;
+    }
     nBody += '<br/>';
     const resources = [];
     notes.forEach(note => {
@@ -66,7 +68,7 @@ class Generator {
     // Create note object
     const note = new EvernoteSDK.Types.Note();
     note.notebookGuid = notebook.guid;
-    note.title = title;
+    note.title = title || browser.i18n.getMessage('title_default');
     note.content = nBody;
     note.resources = resources;
 

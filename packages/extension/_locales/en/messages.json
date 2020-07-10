@@ -292,5 +292,8 @@
   },
   "star_github": {
     "message": "github.com/shuowu/yi-note"
+  },
+  "title_default": {
+    "message": "Notes sent from YiNote"
   }
 }
