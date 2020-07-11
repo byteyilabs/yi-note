@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.1
+
+### Bug fixes
+
+- [#47](https://github.com/shuowu/yi-note/issues/47) Fix word break issue in editor
+- [#48](https://github.com/shuowu/yi-note/issues/48) Fix generating PDF issue when no title available
+- [#49](https://github.com/shuowu/yi-note/issues/49) Fix data import issue for version above 1.0.0
+
 ## 1.5.0
 
 - [78328ff](https://github.com/shuowu/yi-note/commit/78328ffd668ae5edbde14b543f01c021a4d06096) Add setting to pause video when editing note
