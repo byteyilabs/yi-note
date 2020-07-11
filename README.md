@@ -28,6 +28,7 @@ YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share n
 - [Contribute](#contribute)
   - [As a community](#as-a-community)
   - [As a developer](#as-a-developer)
+  - [Translate YiNote](#translate-yinote)
 - [Support YiNote in your website](#support-yinote-in-your-website)
 - [Roadmap](#roadmap)
 - [FAQs](#faqs)
@@ -148,11 +149,14 @@ YiNote leverages mozilla's [Web extension polyfill](https://github.com/mozilla/w
 - Expose YiNote to more people, share it via blog post, facebook, twitter etc.
 - Answer questions in [the issue tracker](https://www.github.com/shuowu/yi-note/issues)
 - Support financially on [Patreon](https://www.patreon.com/yinote) and [GitHub Sponsor](https://github.com/sponsors/shuowu)
-- Translate the extension. YiNote only supports English currently, please help translate YiNote to make it accessible to more users. To translate please follow the [English message json file](https://github.com/shuowu/yi-note/blob/master/extension/_locales/en/messages.json) and translate the content in `message` field into other languages. For detailed information, please follow this [Browser extension i18n doc](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization)
 
 ### As a developer
 
 Please read the [Contribution Guide](/CONTRIBUTING.md)
+
+### Translate YiNote
+
+YiNote only supports English currently, please help translate YiNote to make it accessible to more users. To translate please follow the [English message json file](https://github.com/shuowu/yi-note/blob/master/extension/_locales/en/messages.json) and translate the content in `message` field into other languages. For detailed information, please follow this [Browser extension i18n doc](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization)
 
 All kinds of contributions from anyone are always welcomed!
 
