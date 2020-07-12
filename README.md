@@ -228,7 +228,7 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 
 - Why I bookmarked same title and thumbnail for different videos on Youtube?
 
-  Youtube don't update page metas, like title and thumbnails, when video changed in page. So reload page is needed to make sure YiNote can capture proper metadata for the video. YiNote also enabled settings in options page to enable auto reload when video change.
+  Youtube don't update page metas, like title and thumbnails, when video changed in page. So reload page is needed to make sure YiNote can capture proper metadata for the video. YiNote also enabled settings in options page to enable auto reload when video change. Page domain, like `www.youtube.com`, need to be added when enable this setting. YiNote only applys reload behaviour to listed domains in the settings page.
 
 ## License
 
