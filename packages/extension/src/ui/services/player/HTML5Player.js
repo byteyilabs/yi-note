@@ -17,6 +17,10 @@ export default class HTML5Player extends Player {
     if (!this.video) {
       throw new Error('Player initial error');
     }
+
+    // Set crossorigin attribute to enable screenshot
+    this.video.setAttribute('crossorigin', 'anonymous');
+    this.video.load();
   }
 
   getVideoElement() {

@@ -70,6 +70,11 @@ class Generator {
 
   addDescription() {
     const { description } = this.data.meta;
+    if (!description) {
+      logger.info('No description in notes.');
+      return;
+    }
+
     this.requests.push({
       insertText: {
         text: description + '\n\n',
@@ -164,6 +169,11 @@ class Generator {
 
   async addScreenshot(note, screenshotsFolderId, pageId) {
     const { image, timestamp } = note;
+    if (!image) {
+      logger.info(`No screenshot for note ${note.id}`);
+      return;
+    }
+
     const { id: screenshotId } = await this.uploadScreenshot(
       image,
       `${pageId}_${timestamp}.jpg`,

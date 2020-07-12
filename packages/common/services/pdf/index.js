@@ -68,8 +68,10 @@ export default class PDFGenerator {
         this.doc.addPage();
         y = 20;
       }
-      this.doc.addImage(note.image, 'PNG', 20, y, 160, 90, null, 'NONE');
-      y += 100;
+      if (note.image) {
+        this.doc.addImage(note.image, 'PNG', 20, y, 160, 90, null, 'NONE');
+        y += 100;
+      }
 
       this.doc.setTextColor(71, 99, 255);
       this.doc.textWithLink(secondsToTime(note.timestamp), 20, y, {

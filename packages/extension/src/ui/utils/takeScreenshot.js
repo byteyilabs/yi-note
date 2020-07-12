@@ -21,6 +21,11 @@ export default async element => {
     settings[KEY_SCREENSHOT_RESOLUTION] || 360
   ];
 
+  if (!element) {
+    logger.error('Missing element');
+    return;
+  }
+
   const canvas = document.createElement('canvas');
   canvas.width = x;
   canvas.height = y;
@@ -32,5 +37,6 @@ export default async element => {
   } catch (e) {
     logger.error(e);
   }
+
   return imageUri;
 };
