@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.2
+
+### Bug fixes
+
+- [#50](https://github.com/shuowu/yi-note/issues/50)
+  - Fix failed to send notes to googledocs when missing title or description
+  - Fix html5 video cross origin screenshot issue
+
 ## 1.5.1
 
 ### Bug fixes
