@@ -16,7 +16,7 @@ const Snackbar = () => {
 
   const handleClose = () => {
     setStates({ open: false, message: '' });
-  }
+  };
 
   return (
     <MuiSnackbar

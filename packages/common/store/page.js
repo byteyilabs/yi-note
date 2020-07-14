@@ -93,7 +93,7 @@ const pageModel = {
     actions.setPage({ ...data, tags: tags.filter(t => t !== tag) });
   }),
   reset: action(state => {
-    state.data = { ...defaultPage }
+    state.data = { ...defaultPage };
   })
 };
 

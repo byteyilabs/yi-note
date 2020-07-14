@@ -1,4 +1,3 @@
-/* eslint-disable */
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -12,14 +11,14 @@ const getManifestPlugin = env => {
   const seed = commonManifest;
   if (env === 'chromium') {
     seed.options_page = 'options.html';
-    seed.browser = "chromium";
+    seed.browser = 'chromium';
   } else {
     // Use web extension standard as fallback
     seed.options_ui = {
-      page: "options.html",
+      page: 'options.html',
       browser_style: true
     };
-    seed.browser = "firefox";
+    seed.browser = 'firefox';
     seed.permissions.push('downloads');
     seed.permissions.push('<all_urls>');
   }
@@ -28,8 +27,8 @@ const getManifestPlugin = env => {
     fileName: 'manifest.json',
     seed,
     generate: seed => seed
-  })
-}
+  });
+};
 
 module.exports = env => {
   return {
@@ -72,13 +71,13 @@ module.exports = env => {
           test: /\.svg$/,
           use: [
             {
-              loader: "babel-loader",
+              loader: 'babel-loader',
               options: {
                 rootMode: 'upward'
               }
             },
             {
-              loader: "react-svg-loader",
+              loader: 'react-svg-loader',
               options: {
                 jsx: true // true outputs JSX tags
               }
@@ -88,14 +87,12 @@ module.exports = env => {
       ]
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'dist')
     },
     plugins: [
       getManifestPlugin(env),
       new Dotenv(),
-      new CopyWebpackPlugin([
-        { from: 'src/vendors', to: 'vendors' }
-      ]),
+      new CopyWebpackPlugin([{ from: 'src/vendors', to: 'vendors' }]),
       new HtmlWebPackPlugin({
         template: 'src/options/index.html',
         filename: 'options.html',
@@ -106,13 +103,13 @@ module.exports = env => {
         onEnd: [
           {
             copy: [
-              { source: "icons/**/*", destination: "dist/icons" },
-              { source: "_locales/**/*", destination: "dist/_locales" },
-              { source: "installed.png", destination: "dist" }
+              { source: 'icons/**/*', destination: 'dist/icons' },
+              { source: '_locales/**/*', destination: 'dist/_locales' },
+              { source: 'installed.png', destination: 'dist' }
             ]
           }
         ]
       })
     ]
-  };  
+  };
 };

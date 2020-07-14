@@ -1,34 +1,18 @@
 {
+  "root": true,
   "env": {
-    "es6": true,
-    "node": true
+    "es2020": true
   },
-  "extends": [
-    "eslint:recommended", 
-    "plugin:react/recommended"
-  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "parser": "babel-eslint",
-  "plugins": [
-    "react-hooks",
-    "prettier"
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
   ],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
-    "prettier/prettier": "error",
-    "no-extra-semi": "off"
-  },
   "globals": {
-    "browser": "readonly",
-    "window": "readonly",
-    "document": "readonly",
     "logger": "readonly",
-    "Promise": "readonly",
-    "URL": "readonly",
-    "URLSearchParams": "readonly",
-    "fetch": "readonly",
-    "process": "readonly",
-    "FileReader": "readonly",
-    "Set": "readonly"
+    "process": "readonly"
   }
 }

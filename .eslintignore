@@ -1,0 +1,6 @@
+rollup.*.js
+webpack.*.js
+
+dist
+node_modules
+vendors

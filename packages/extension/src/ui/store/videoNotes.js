@@ -32,7 +32,7 @@ const videoNotesModel = {
     state.editor.active = true;
     state.editor.note = { ...note };
   }),
-  reset: thunk(async (actions) => {
+  reset: thunk(async actions => {
     actions.editor.reset();
   })
 };
