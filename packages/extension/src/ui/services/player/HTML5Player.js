@@ -18,9 +18,10 @@ export default class HTML5Player extends Player {
       throw new Error('Player initial error');
     }
 
+    // TODO: move to InstagramPlayer class
     // Set crossorigin attribute to enable screenshot
-    this.video.setAttribute('crossorigin', 'anonymous');
-    this.video.load();
+    // this.video.setAttribute('crossorigin', 'anonymous');
+    // this.video.load();
   }
 
   getVideoElement() {

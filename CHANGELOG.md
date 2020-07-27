@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.3
+
+### Bug fixes
+
+- [#53](https://github.com/shuowu/yi-note/issues/53) Fix timestamp catching issue
+
 ## 1.5.2
 
 ### Bug fixes
