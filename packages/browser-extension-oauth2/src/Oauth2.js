@@ -47,6 +47,9 @@ class Oauth2 {
         if (params.state !== state) {
           throw new Error('Invalid state.');
         }
+        if (params.error) {
+          throw new Error(params.error);
+        }
         return this.storage
           .set(ACESS_TOKEN_KEY, accessToken)
           .then(() => accessToken);

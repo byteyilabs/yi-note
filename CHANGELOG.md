@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.4
+
+### Bug fixes
+
+- Fixes MS OneNote export issue
+
 ## 1.5.3
 
 ### Bug fixes

@@ -10,7 +10,7 @@ class OneNote extends Service {
     const clientId =
       manifest.browser === 'firefox'
         ? '5a06bf8d-6526-4b65-a85b-221f6dde2639'
-        : 'ab2e71d8-340a-4889-8039-26b70504871c';
+        : '24fa7402-009b-4526-b067-e6de468fbcc0';
     this.oauth2 = new Oauth2({
       provider: this.namespace,
       authorization_endpoint:
