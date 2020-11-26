@@ -217,18 +217,18 @@ If you have a video website and want to make it work with YiNote, but unfortunat
 
 ## FAQs
 
-- How to share notes with others?
+### How to share notes with others?
 
-  - YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
-  - You can also export notes as JSON file in options page, then send the exported JSON file out. Whoever get the exported file can then import it via options page.
+- YiNote can send notes to Evernote, MS OneNote, Google Docs since v1.2.0. You can firstly send notes to one of the supported services, then generate share link from there.
+- You can also export notes as JSON file in options page, then send the exported JSON file out. Whoever get the exported file can then import it via options page.
   
-- What should I prepare if I decide not to use YiNote extension any more?
+### What should I prepare if I decide not to use YiNote extension any more?
 
-  YiNote save users data in chrome local storage (per extension), which means delete the extension will also erase saved notes from your browser. YiNote provides a backup strategy in options page to export local data into a json file. Please make sure you backup your data before delete the extension. Cloud support will be provided in the future to achieve better sync and backup.
+YiNote save users data in chrome local storage (per extension), which means delete the extension will also erase saved notes from your browser. YiNote provides a backup strategy in options page to export local data into a json file. Please make sure you backup your data before delete the extension. Cloud support will be provided in the future to achieve better sync and backup.
 
-- Why I bookmarked same title and thumbnail for different videos on Youtube?
+### Why I bookmarked same title and thumbnail for different videos on Youtube?
 
-  Youtube don't update page metas, like title and thumbnails, when video changed in page. So reload page is needed to make sure YiNote can capture proper metadata for the video. YiNote also enabled settings in options page to enable auto reload when video change. Page domain, like `www.youtube.com`, need to be added when enable this setting. YiNote only applys reload behaviour to listed domains in the settings page.
+Youtube don't update page metas, like title and thumbnails, when video changed in page. So reload page is needed to make sure YiNote can capture proper metadata for the video. YiNote also enabled settings in options page to enable auto reload when video change. Page domain, like `www.youtube.com`, need to be added when enable this setting. YiNote only applys reload behaviour to listed domains in the settings page.
 
 ## License
 
