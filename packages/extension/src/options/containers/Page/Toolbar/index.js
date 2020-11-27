@@ -10,12 +10,14 @@ import {
 import {
   EvernoteIcon,
   GoogleDocsIcon,
-  OneNoteIcon
+  OneNoteIcon,
+  MarkdownIcon
 } from '@yi-note/common/icons';
 import {
   pdf as PDFService,
   file as FileService,
-  integration as IntegrationService
+  integration as IntegrationService,
+  markdown as MarkdownService
 } from '@yi-note/common/services';
 import { capitalize } from '@yi-note/common/utils';
 import { APP_ID } from '@yi-note/common/constants';
@@ -94,6 +96,11 @@ const Toolbar = () => {
     });
   };
 
+  const handleExportMarkdown = () => {
+    const data = MarkdownService.pagesToMarkdown([{ meta, notes }]);
+    return FileService.exportMarkdownFile(data, `yinote_${meta.title}.md`);
+  };
+
   const handleOpenPage = () => {
     window.open(meta.url, '_blank');
   };
@@ -132,6 +139,11 @@ const Toolbar = () => {
           onClick={handleSendNotesToService.bind(null, 'onenote')}
         >
           <OneNoteIcon fill="#ffffff" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('page.export.markdown.tooltip')}>
+        <IconButton color="inherit" onClick={handleExportMarkdown}>
+          <MarkdownIcon fill="#ffffff" />
         </IconButton>
       </Tooltip>
       <Tooltip title={t('page.open.tooltip')}>

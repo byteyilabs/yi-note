@@ -65,6 +65,10 @@ export default {
     filtering: true,
     setFiltering: action((state, payload) => {
       state.filtering = payload;
+    }),
+    exportFormat: 'json',
+    setExportFormat: action((state, payload) => {
+      state.exportFormat = payload;
     })
   },
   reset: action(state => {

@@ -1,7 +1,6 @@
 import EvernoteSDK from 'evernote';
 import md5 from 'md5';
 import { getBinaryFromBase64 } from '../utils';
-import Markdown from '../../markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
 import { INSTALLATION_URL } from '../../../constants';
 
@@ -58,9 +57,9 @@ class Generator {
       }
       nBody += `<div><span style="padding-right: 20px;"><a href="${escape(
         timestampedUrl
-      )}">${secondsToTime(note.timestamp)}</a></span><p>${Markdown.toText(
+      )}">${secondsToTime(note.timestamp)}</a></span><p>${
         note.content
-      )}</p></div>`;
+      }</p></div>`;
     });
 
     nBody += '</en-note>';

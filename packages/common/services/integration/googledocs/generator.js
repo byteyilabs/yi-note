@@ -1,5 +1,4 @@
 import { b64toBlob } from '../utils';
-import Markdown from '../../markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
 import { INSTALLATION_URL } from '../../../constants';
 
@@ -217,7 +216,7 @@ class Generator {
   }
 
   addNoteContent(note) {
-    const content = Markdown.toText(note.content);
+    const content = note.content;
     this.requests.push({
       insertText: {
         text: content + '\n',

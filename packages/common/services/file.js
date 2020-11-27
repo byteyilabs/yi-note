@@ -33,6 +33,14 @@ export const exportJsonFile = async (data, filename, version) => {
   await exportFile(blob, filename);
 };
 
+export const exportMarkdownFile = async (data, filename) => {
+  // eslint-disable-next-line no-undef
+  const blob = new Blob([data], {
+    type: 'text/markdown;charset=utf-8'
+  });
+  await exportFile(blob, filename);
+};
+
 export const exportFile = async (blob, filename) => {
   const manifest = await browser.runtime.getManifest();
   if (typeof browser !== 'undefined' && manifest.browser === 'firefox') {
@@ -49,5 +57,6 @@ export const exportFile = async (blob, filename) => {
 export default {
   readAsJson,
   exportJsonFile,
+  exportMarkdownFile,
   exportFile
 };

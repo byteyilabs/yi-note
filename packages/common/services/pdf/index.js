@@ -1,7 +1,6 @@
 import jsPDF from 'jspdf';
 import { secondsToTime, buildAutoSeekUrl, getFileUrl } from '../../utils';
 import StorageService from '../storage';
-import Markdown from '../markdown';
 import {
   WEBSITE_URL,
   KEY_APPLY_SEEK_SEC_ON_URL,
@@ -36,8 +35,8 @@ export default class PDFGenerator {
   async getBlobOutput({ url, title, notes }) {
     // TODO: pass in options instead of use settings from storage
     const settings = await StorageService.getStorage().getSettings();
-    this.seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
-    this.shouldApplySeekSecondsOnUrl = settings[KEY_APPLY_SEEK_SEC_ON_URL];
+    const seekSeconds = +settings[KEY_VIDEO_SEEK_SECONDS] || 0;
+    const shouldApplySeekSecondsOnUrl = settings[KEY_APPLY_SEEK_SEC_ON_URL];
 
     this.doc.setFont('msyh');
     this.doc.setFontType('normal');
@@ -62,7 +61,7 @@ export default class PDFGenerator {
     this.doc.setFontSize(12);
 
     for (const note of notes) {
-      let content = Markdown.toText(note.content);
+      let content = note.content;
       content = this.doc.splitTextToSize(content, 180);
       if (y + 66 + 6 + 6 * content.length > 300) {
         this.doc.addPage();
@@ -77,8 +76,8 @@ export default class PDFGenerator {
       this.doc.textWithLink(secondsToTime(note.timestamp), 20, y, {
         url: buildAutoSeekUrl(
           url,
-          this.shouldApplySeekSecondsOnUrl
-            ? note.timestamp - this.seekSeconds
+          shouldApplySeekSecondsOnUrl
+            ? note.timestamp - seekSeconds
             : note.timestamp
         )
       });

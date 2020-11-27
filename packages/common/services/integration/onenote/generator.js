@@ -1,4 +1,3 @@
-import Markdown from '../../markdown';
 import { secondsToTime, buildAutoSeekUrl } from '../../../utils';
 import { INSTALLATION_URL } from '../../../constants';
 
@@ -36,7 +35,7 @@ class Generator {
                     ${secondsToTime(note.timestamp)}
                   </a>
                 </span>
-                <p>${Markdown.toText(note.content)}</p>
+                <p>${note.content}</p>
               </div>
             `;
           })}

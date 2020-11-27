@@ -12,11 +12,12 @@ import {
   storage as StorageService,
   file as FileService
 } from '@yi-note/common/services';
+import Markdown from '@yi-note/common/services/markdown';
 
 const Toolbar = () => {
   const { t } = useTranslation('options');
   const {
-    toolbar: { exporting, filtering },
+    toolbar: { exporting, filtering, exportFormat },
     bookmarks
   } = useStoreState(state => state.bookmarks);
   const {
@@ -38,7 +39,11 @@ const Toolbar = () => {
     return StorageService.getStorage()
       .getPagesForExport(ids)
       .then(pages => {
-        FileService.exportJsonFile(pages, 'yi-note.json');
+        if (exportFormat === 'markdown') {
+          const data = Markdown.pagesToMarkdown(pages);
+          return FileService.exportMarkdownFile(data, 'yi-note.md');
+        }
+        return FileService.exportJsonFile(pages, 'yi-note.json');
       })
       .then(() => setExporting(false));
   };
