@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+- [782e805](https://github.com/shuowu/yi-note/commit/782e80572c0ee11b644859c4ae59ea06a8924654)
+  - Supports export markdown file in options page
+  - Keeps markdown structure in generated PDF and other services integration.
+
 ## 1.5.4
 
 ### Bug fixes
