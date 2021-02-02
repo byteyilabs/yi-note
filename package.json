@@ -9,7 +9,8 @@
     "build": "lerna run build",
     "ext:build:chromium": "lerna run --scope=@yi-note/extension build:chromium",
     "ext:build:firefox": "lerna run --scope=@yi-note/extension build:firefox",
-    "ext:dev:firefox": "lerna run dev:firefox --parallel"
+    "ext:dev:firefox": "lerna run dev:firefox --parallel",
+    "start:landing": "lerna run --scope=@yi-note/landing develop"
   },
   "repository": {
     "type": "git",

@@ -2,8 +2,13 @@
   "packages": [
     "packages/*"
   ],
-  "bootstrap": {
-    "ignore": ["@yi-note/oauth-api"]
+  "command": {
+    "bootstrap": {
+      "ignore": [
+        "@yi-note/oauth-api",
+        "@yi-note/landing"
+      ]
+    }
   },
   "version": "independent"
 }
