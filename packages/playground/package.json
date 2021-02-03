@@ -4,7 +4,7 @@
   "description": "Playground for extension UI widgets",
   "main": "index.js",
   "scripts": {
-    "start:dev": "webpack-dev-server --env.NODE_ENV=playground --mode development"
+    "start": "webpack-dev-server --env.NODE_ENV=playground --mode development"
   },
   "author": "Shuo Wu <wushuo2010@gmail.com>",
   "license": "GNU GPLv3",
