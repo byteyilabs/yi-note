@@ -37,7 +37,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start:dev": "npm run develop",
+    "start": "npm run develop",
     "serve": "gatsby serve"
   },
   "prettier": {

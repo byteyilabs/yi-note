@@ -1,16 +1,17 @@
 {
   "name": "yi-note",
+  "private": true,
   "version": "1.0.0",
   "description": "YiNote monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
-    "clean": "lerna clean",
-    "start": "lerna run start:dev --parallel",
-    "build": "lerna run build",
-    "ext:build:chromium": "lerna run --scope=@yi-note/extension build:chromium",
-    "ext:build:firefox": "lerna run --scope=@yi-note/extension build:firefox",
-    "ext:dev:firefox": "lerna run dev:firefox --parallel",
-    "start:landing": "lerna run --scope=@yi-note/landing develop"
+    "start:landing": "yarn workspace @yi-note/landing start",
+    "build:landing": "yarn workspace @yi-note/landing build",
+    "start:playground": "yarn workspace @yi-note/playground start",
+    "start:ext": "yarn workspace @yi-note/extension start:dev",
+    "build:ext": "yarn workspace @yi-note/extension build"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,6 @@
     "eslint": "^6.7.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "lerna": "^3.22.1",
     "prettier": "1.19.1"
   },
   "prettier": {
