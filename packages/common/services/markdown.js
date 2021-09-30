@@ -21,13 +21,13 @@ class Markdown {
 
     for (let page of pages) {
       const { meta, notes } = page;
-      data += `<!-- # [${meta.title}](${meta.url}) -->\n\n`;
+      data += `# [${meta.title}](${meta.url})\n\n`;
 
       for (let note of notes) {
-        data += `<!-- ## [${secondsToTime(note.timestamp)}](${buildAutoSeekUrl(
+        data += `## [${secondsToTime(note.timestamp)}](${buildAutoSeekUrl(
           meta.url,
           note.timestamp
-        )}) -->\n\n`;
+        )})\n\n`;
         data += note.content + '\n\n';
       }
     }
