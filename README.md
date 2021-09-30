@@ -234,4 +234,4 @@ Youtube don't update page metas, like title and thumbnails, when video changed i
 
 Copyright (c) 2016 - 2020
 
-Licensed under the GUN GPL3.0 License. [View license](/LICENSE)
+Licensed under the GNU GPL3.0 License. [View license](/LICENSE)
