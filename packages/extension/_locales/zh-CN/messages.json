@@ -1,0 +1,305 @@
+{
+  "failedToConnect": {
+    "message": "插件可能已升级或重新加载，请刷新当前页面。",
+    "description": "Show in alert when extension disconnected with page"
+  },
+  "bookmark_open_tooltip": {
+    "message": "在新标签页打开书签"
+  },
+  "bookmark_remove_tooltip": {
+    "message": "删除书签"
+  },
+  "bookmark_add_tooltip": {
+    "message": "添加为书签"
+  },
+  "bookmark_remove_alert": {
+    "message": "删除书签会同时删除当前页面的所有笔记，请确认以继续操作。"
+  },
+  "bookmark_nobookmark": {
+    "message": "没有书签"
+  },
+  "note_edit_tooltip": {
+    "message": "编辑笔记"
+  },
+  "note_remove_tooltip": {
+    "message": "删除笔记"
+  },
+  "note_remove_alert": {
+    "message": "请确认要删除笔记。"
+  },
+  "note_nonote": {
+    "message": "没有笔记"
+  },
+  "note_empty": {
+    "message": "书签"
+  },
+  "alert_primary": {
+    "message": "确定"
+  },
+  "alert_secondary": {
+    "message": "取消"
+  },
+  "reloadView_reload": {
+    "message": "重新加载"
+  },
+  "search_placeholder": {
+    "message": "搜索..."
+  },
+  "notesView_title": {
+    "message": "笔记"
+  },
+  "notesView_editor_placeholder": {
+    "message": "请在此输入笔记..."
+  },
+  "notesView_editor_saveButton": {
+    "message": "保存"
+  },
+  "notesView_editor_cancelButton": {
+    "message": "取消"
+  },
+  "notesView_editor_statusExisting": {
+    "message": "已存在"
+  },
+  "notesView_editor_statusNew": {
+    "message": "新建"
+  },
+  "notesView_note_play_tooltip": {
+    "message": "播放视频在 {{formattedTime}}"
+  },
+  "notesView_note_expand_tooltip": {
+    "message": "展开笔记"
+  },
+  "notesView_note_collapse_tooltip": {
+    "message": "折叠笔记"
+  },
+  "notesView_detail_tooltip": {
+    "message": "在设置页面管理笔记"
+  },
+  "notesView_sync_tooltip": {
+    "message": "从 {{platform}} 同步笔记"
+  },
+  "notesView_support_tooltip": {
+    "message": "赞助 YiNote"
+  },
+  "notesView_support_text": {
+    "message": "作为一个开源项目，YiNote需要你的帮助才能成长。请通过以下途径支持本项目："
+  },
+  "searchView_tab_bookmarks": {
+    "message": "书签"
+  },
+  "searchView_tab_notes": {
+    "message": "笔记"
+  },
+  "footer_github_tooltip": {
+    "message": "访问 GitHub 仓库"
+  },
+  "footer_management_tooltip": {
+    "message": "打开管理页面"
+  },
+  "options_appName": {
+    "message": "YiNote"
+  },
+  "options_github": {
+    "message": "访问仓库"
+  },
+  "options_faq": {
+    "message": "FAQs"
+  },
+  "options_issues": {
+    "message": "反馈问题"
+  },
+  "options_bookmarks_title": {
+    "message": "书签"
+  },
+  "options_bookmarks_tag_tooltip": {
+    "message": "通过标签筛选"
+  },
+  "options_bookmarks_export_tooltip": {
+    "message": "选择书签以导出"
+  },
+  "options_bookmarks_export_format_label": {
+    "message": "导出格式:"
+  },
+  "options_page_title": {
+    "message": "页面详情"
+  },
+  "options_page_tag_tooltip": {
+    "message": "添加标签"
+  },
+  "options_page_pdf_tooltip": {
+    "message": "生成 PDF"
+  },
+  "options_page_evernote_tooltip": {
+    "message": "发送到 Evernote"
+  },
+  "options_page_googledocs_tooltip": {
+    "message": "发送到 Google Docs"
+  },
+  "options_page_onenote_tooltip": {
+    "message": "发送到 OneNote"
+  },
+  "options_page_export_markdown_tooltip": {
+    "message": "导出为 markdown"
+  },
+  "options_page_open_tooltip": {
+    "message": "在新标签页打开页面"
+  },
+  "options_page_annotation_tooltip": {
+    "message": "注释截图"
+  },
+  "options_page_edit_note_tooltip": {
+    "message": "编辑笔记"
+  },
+  "options_page_delete_note_tooltip": {
+    "message": "删除笔记"
+  },
+  "options_page_save_tooltip": {
+    "message": "保存"
+  },
+  "options_page_cancel_tooltip": {
+    "message": "取消"
+  },
+  "options_settings_title": {
+    "message": "设置"
+  },
+  "options_settings_video_title": {
+    "message": "视频"
+  },
+  "options_settings_video_description": {
+    "message": "自定义视频播放行为的设置"
+  },
+  "options_settings_seek_label": {
+    "message": "预测播放的提前时间(单位为秒)"
+  },
+  "options_settings_seek_generated_url_label": {
+    "message": "将预测播放的提前时间应用到链接中 (生成的PDF、发送到第三方软件的笔记中的链接中)"
+  },
+  "options_settings_reload_tab_label": {
+    "message": "当网址变化时重新加载面板"
+  },
+  "options_settings_pause_when_editing_label": {
+    "message": "当编辑笔记时暂停视频播放"
+  },
+  "options_settings_exportAndImport_title": {
+    "message": "导出与导入"
+  },
+  "options_settings_exportAndImport_description": {
+    "message": "你可以将书签和笔记导出为JSON作为备份，然后通过导入数据进行恢复。该功能也可以作为简易版的数据共享功能。"
+  },
+  "options_settings_export_title": {
+    "message": "将所有数据导出为JSON"
+  },
+  "options_settings_export_button": {
+    "message": "导出"
+  },
+  "options_settings_import_title": {
+    "message": "导入(导入的数据将会和当前数据合并)"
+  },
+  "options_settings_import_button": {
+    "message": "导入"
+  },
+  "options_settings_import_success": {
+    "message": "数据导入成功。"
+  },
+  "options_settings_import_general_error": {
+    "message": "无法处理导入的数据"
+  },
+  "options_settings_import_version_error": {
+    "message": "不支持的版本。"
+  },
+  "options_settings_exportAndClear_title": {
+    "message": "导出并清空数据 (注意: 该动作会清空当前的存储数据!)"
+  },
+  "options_settings_exportAndClear_button": {
+    "message": "导出并清空数据"
+  },
+  "services_send_tooltip": {
+    "message": "发送笔记"
+  },
+  "services_send_title": {
+    "message": "发送笔记到:"
+  },
+  "services_success": {
+    "message": "发送笔记成功!"
+  },
+  "services_error": {
+    "message": "发送笔记失败!"
+  },
+  "services_template_origin": {
+    "message": "在原页面浏览笔记"
+  },
+  "services_evernote": {
+    "message": "Evernote"
+  },
+  "services_googledocs": {
+    "message": "Google Docs"
+  },
+  "services_onenote": {
+    "message": "OneNote"
+  },
+  "services_exist_message": {
+    "message": "看起来你似乎已经将该笔记发送到{{service}}. 通过处理当前笔记, 一个新笔记将在{{service}}中被创建。"
+  },
+  "services_proceed_button": {
+    "message": "处理"
+  },
+  "services_cancel_button": {
+    "message": "取消"
+  },
+  "services_template_signature": {
+    "message": "由$INSTALLATION$生成",
+    "placeholders": {
+      "installation": {
+        "content": "$1"
+      }
+    }
+  },
+  "services_template_description": {
+    "message": "描述:"
+  },
+  "tagdialog_input_label": {
+    "message": "新标签"
+  },
+  "editor_mode_write": {
+    "message": "编辑"
+  },
+  "editor_mode_preview": {
+    "message": "预览"
+  },
+  "editor_markdown_tooltip": {
+    "message": "支持Markdown格式"
+  },
+  "share_title": {
+    "message": "分享"
+  },
+  "share_text": {
+    "message": "体验YiNote, 在看视频时做笔记。"
+  },
+  "share_copylink_success": {
+    "message": "链接已复制!"
+  },
+  "sponsor_title": {
+    "message": "赞助"
+  },
+  "sponsor_github": {
+    "message": "github.com/sponsors"
+  },
+  "sponsor_patreon": {
+    "message": "patreon.com/yinote"
+  },
+  "sponsor_paypal": {
+    "message": "Paypal"
+  },
+  "star_title": {
+    "message": "为YiNote在Github点亮一颗星"
+  },
+  "star_description": {
+    "message": "点亮星星的按钮在仓库页面的右上角"
+  },
+  "star_github": {
+    "message": "github.com/shuowu/yi-note"
+  },
+  "title_default": {
+    "message": "来自YiNote的笔记"
+  }
+}
