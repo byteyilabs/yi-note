@@ -13,6 +13,7 @@ export const TYPE_NOTES = 'notes';
 export const TYPE_VIDEO_NOTE = 'video';
 
 export const PROVIDER_YOUTUBE = 'youtube';
+export const PROVIDER_GOOGLEDRIVE = 'googledrive';
 
 export const NODE_ENV_PLAYGROUND = 'playground';
 

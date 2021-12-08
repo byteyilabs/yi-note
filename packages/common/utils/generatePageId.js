@@ -1,7 +1,7 @@
 import { fromString } from 'uuidv4';
 import compose from 'compose-function';
 import videoUrlParser from 'js-video-url-parser';
-import { PROVIDER_YOUTUBE } from '../constants';
+import { PROVIDER_GOOGLEDRIVE, PROVIDER_YOUTUBE } from '../constants';
 
 const getUrlWithoutHash = url => {
   const parsedUrl = new URL(url);
@@ -20,6 +20,8 @@ export default url => {
     getUrlWithoutHash
   )(url);
   if (provider === PROVIDER_YOUTUBE) {
+    return fromString(`${provider}-${id}`);
+  } else if (provider === PROVIDER_GOOGLEDRIVE) {
     return fromString(`${provider}-${id}`);
   }
 
