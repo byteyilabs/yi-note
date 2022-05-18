@@ -86,25 +86,13 @@ Suggested environment:
 
 ##### Install dependencies
 
-For NPM v6 or above:
-
 ```bash
-npm ci
-```
-
-For NPM before v6
-
-```bash
-npm install
+yarn install
 ```
 
 ##### Start development
 
-YiNote leverages [Lerna](https://github.com/lerna/lerna) to manage the monorepo.
-
-Please run `npm run bootstrap` to setup dependecies for each sub_modules before start.
-
-Then run `npm start` will start both `extension` and `playground` in development mode.
+Run `yarn start:ext`.
 
 For `content script` change, you need to reload the extension in `chrome://extensions` tab.
 
