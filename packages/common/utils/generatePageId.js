@@ -2,8 +2,7 @@ import { v5 } from 'uuid';
 import compose from 'compose-function';
 import videoUrlParser from 'js-video-url-parser';
 import { PROVIDER_YOUTUBE } from '../constants';
-
-const NAMESPACE = 'e1433c8f-bc34-431d-99b1-2a78abdd7f35';
+import uuidNamespace from './uuid-namespace';
 
 const getUrlWithoutHash = url => {
   const parsedUrl = new URL(url);
@@ -22,8 +21,8 @@ export default url => {
     getUrlWithoutHash
   )(url);
   if (provider === PROVIDER_YOUTUBE) {
-    return v5(`${provider}-${id}`, NAMESPACE);
+    return v5(`${provider}-${id}`, uuidNamespace);
   }
 
-  return v5(urlWithoutHash, NAMESPACE);
+  return v5(urlWithoutHash, uuidNamespace);
 };
