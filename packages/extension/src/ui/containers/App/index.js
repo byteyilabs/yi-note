@@ -118,7 +118,13 @@ const App = () => {
   }, [getPlayer, history, open, pathname]);
 
   return (
-    <StyledDrawer open={open} className={open && 'panel-shadow'}>
+    <StyledDrawer
+      // fixes toggling the drawer open and closed.
+      // For some reason passing `open` doesn't update the component's styles
+      style={{ transform: open ? 'translateX(0)' : 'translateX(100%)' }}
+      open={open}
+      className={open && 'panel-shadow'}
+    >
       <Grid container>
         <Header />
         <StyledViewWrapper>
