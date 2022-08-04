@@ -98,7 +98,13 @@ const Toolbar = () => {
 
   const handleExportMarkdown = () => {
     const data = MarkdownService.pagesToMarkdown([{ meta, notes }]);
-    return FileService.exportMarkdownFile(data, `yinote_${meta.title}.md`);
+
+    // Removing notifications count and " - Youtube" at the end
+    const fileName = meta.title
+      .replace(/^\(.*\) /g, '')
+      .replace(/ - YouTube$/g, '');
+
+    return FileService.exportMarkdownFile(data, `${fileName}.md`);
   };
 
   const handleOpenPage = () => {
