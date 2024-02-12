@@ -100,7 +100,7 @@ const Toolbar = () => {
     const data = MarkdownService.pagesToMarkdown([{ meta, notes }]);
 
     // Removing notifications count and " - Youtube" at the end
-    const fileName = meta.title
+    const fileName = 'yinote_' + meta.title
       .replace(/^\(.*\) /g, '')
       .replace(/ - YouTube$/g, '');
 
