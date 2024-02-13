@@ -1,3 +1,5 @@
+**NOTE**: YiNote has been acquired by [ByteYi Labs Inc.](https://byteyilabs.com/) For the next step, we will work together to publish `YiNote Pro` to add cloud support and more exciting features (The published extension will keep unchanged). Stay tuned!
+
 # YiNote Browser Extension
 
 YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share notes while watching online videos.
