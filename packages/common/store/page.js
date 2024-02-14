@@ -1,8 +1,9 @@
 import { action, thunk } from 'easy-peasy';
 import { getMetadata } from 'page-metadata-parser';
-import { fromString } from 'uuidv4';
+import { v5 } from 'uuid';
 import { storage as StorageService } from '../services';
 import { generatePageId, addTagToList, addNoteToList } from '../utils';
+import uuidNamespace from '../utils/uuid-namespace';
 
 export const defaultPage = {
   id: '',
@@ -45,7 +46,7 @@ const pageModel = {
   }),
   saveNote: thunk(async (actions, note, { getState, getStoreState }) => {
     const { url } = getStoreState().app;
-    const id = note.id || fromString(note.content + note.timestamp);
+    const id = note.id || v5(note.content + note.timestamp, uuidNamespace);
     let { data: page } = getState();
 
     if (!page.id) {

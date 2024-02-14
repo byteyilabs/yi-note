@@ -1,7 +1,8 @@
-import { fromString } from 'uuidv4';
+import { v5 } from 'uuid';
 import compose from 'compose-function';
 import videoUrlParser from 'js-video-url-parser';
 import { PROVIDER_YOUTUBE } from '../constants';
+import uuidNamespace from './uuid-namespace';
 
 const getUrlWithoutHash = url => {
   const parsedUrl = new URL(url);
@@ -20,8 +21,8 @@ export default url => {
     getUrlWithoutHash
   )(url);
   if (provider === PROVIDER_YOUTUBE) {
-    return fromString(`${provider}-${id}`);
+    return v5(`${provider}-${id}`, uuidNamespace);
   }
 
-  return fromString(urlWithoutHash);
+  return v5(urlWithoutHash, uuidNamespace);
 };
