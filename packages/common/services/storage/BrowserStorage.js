@@ -1,4 +1,4 @@
-import { isUuid } from 'uuidv4';
+import { validate } from 'uuid';
 import Storage from './Storage';
 import { addNoteToList, addTagToList } from '../../utils';
 
@@ -11,7 +11,7 @@ export default class BrowserStorage extends Storage {
   _getPages() {
     return this.storage.get().then(pages => {
       return Object.keys(pages)
-        .filter(key => isUuid(key))
+        .filter(key => validate(key))
         .map(key => pages[key]);
     });
   }
