@@ -1,4 +1,4 @@
-**NOTE**: YiNote has been acquired by [ByteYi Labs Inc.](https://byteyilabs.com/) For the next step, we will work together to publish `YiNote Pro` to add cloud support and more exciting features (The published extension will keep unchanged). Stay tuned!
+**YiNote 2.0 Release Note**: We are excited to announce the release of YiNote 2.0. This release brings a host of new features, improvements, and bug fixes. Get started with [YiNote 2.0](https://yinote.co/) to explore the enhance note-taking experience.
 
 # YiNote Browser Extension
 
@@ -9,7 +9,6 @@ YiNote, aka TurboNote Chrome Extension, is an effective tool to take and share n
 ## Installation
 
 <a href="https://chrome.google.com/webstore/detail/yinote/fhpgggnmdlmekfdpkdgeiccfkignhkdf"><img src="assets/chrome-48.png"></a>
-<a href="https://addons.mozilla.org/en-CA/firefox/addon/yinote/"><img src="assets/firefox-48.png"></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gieehphfgjfjmeejdohpdiajmicjnfbh"><img src="assets/microsoft-edge-48.png"></a>
 
 ## Table of Contents
